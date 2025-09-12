@@ -5,8 +5,10 @@ import '../../../core/constants/dimensions.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../core/utils/formatters.dart';
 import '../../../domain/entities/expense.dart';
+import '../../../domain/entities/income.dart';
 import '../../../domain/entities/category.dart';
 import '../../providers/expense_provider.dart';
+import '../../providers/income_provider.dart';
 import '../../providers/category_provider.dart';
 
 enum TransactionType { income, expense }
@@ -414,13 +416,28 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
       final category = _selectedCategory!;
 
       if (_selectedType == TransactionType.income) {
-        // TODO: Implement income saving when income provider is created
+        // Save income
+        final income = Income(
+          id: DateTime.now().millisecondsSinceEpoch.toString(),
+          amount: amount,
+          description: description,
+          categoryId: category.id,
+          categoryName: category.name,
+          date: _selectedDate,
+          createdAt: DateTime.now(),
+          updatedAt: DateTime.now(),
+        );
+
+        await context.read<IncomeProvider>().addIncome(income);
+        
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
-            content: Text('Income saving not implemented yet'),
-            backgroundColor: AppColors.warning,
+            content: Text('Income added successfully!'),
+            backgroundColor: AppColors.success,
           ),
         );
+        
+        Navigator.pop(context);
       } else {
         // Save expense
         final expense = Expense(

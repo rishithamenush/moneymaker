@@ -4,6 +4,7 @@ import '../presentation/providers/theme_provider.dart';
 import '../presentation/providers/expense_provider.dart';
 import '../presentation/providers/budget_provider.dart';
 import '../presentation/providers/category_provider.dart';
+import '../presentation/providers/income_provider.dart';
 import '../presentation/navigation/app_router.dart';
 import '../core/theme/app_theme.dart';
 import '../domain/usecases/expense/get_expenses.dart';
@@ -15,9 +16,14 @@ import '../domain/usecases/budget/create_budget.dart';
 import '../domain/usecases/budget/update_budget.dart';
 import '../domain/usecases/category/get_categories.dart';
 import '../domain/usecases/category/add_category.dart';
+import '../domain/usecases/income/get_incomes.dart';
+import '../domain/usecases/income/add_income.dart';
+import '../domain/usecases/income/update_income.dart';
+import '../domain/usecases/income/delete_income.dart';
 import '../data/repositories/expense_repository_impl.dart';
 import '../data/repositories/budget_repository_impl.dart';
 import '../data/repositories/category_repository_impl.dart';
+import '../data/repositories/income_repository_impl.dart';
 
 class MoneyMakerApp extends StatelessWidget {
   const MoneyMakerApp({super.key});
@@ -46,6 +52,14 @@ class MoneyMakerApp extends StatelessWidget {
                 create: (_) => CategoryProvider(
                   getCategories: GetCategories(CategoryRepositoryImpl()),
                   addCategory: AddCategory(CategoryRepositoryImpl()),
+                ),
+              ),
+              ChangeNotifierProvider(
+                create: (_) => IncomeProvider(
+                  getIncomes: GetIncomes(IncomeRepositoryImpl()),
+                  addIncome: AddIncome(IncomeRepositoryImpl()),
+                  updateIncome: UpdateIncome(IncomeRepositoryImpl()),
+                  deleteIncome: DeleteIncome(IncomeRepositoryImpl()),
                 ),
               ),
       ],

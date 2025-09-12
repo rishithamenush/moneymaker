@@ -3,11 +3,14 @@ import 'package:provider/provider.dart';
 import '../../../core/constants/strings.dart';
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/dimensions.dart';
+import '../../../core/utils/formatters.dart';
+import '../../../domain/entities/expense.dart';
+import '../../../domain/entities/income.dart';
 import '../../providers/expense_provider.dart';
 import '../../providers/budget_provider.dart';
+import '../../providers/income_provider.dart';
 import '../../widgets/common/custom_app_bar.dart';
-import '../../widgets/common/budget_summary_card.dart';
-import '../../widgets/common/expense_list_item.dart';
+import '../../widgets/common/transaction_list_item.dart';
 import '../../widgets/common/monthly_selector.dart';
 import '../../navigation/bottom_nav_bar.dart';
 import '../../../app/routes.dart';
@@ -28,6 +31,7 @@ class _HomePageState extends State<HomePage> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       context.read<ExpenseProvider>().loadExpenses();
       context.read<BudgetProvider>().loadBudgets();
+      context.read<IncomeProvider>().loadIncomes();
     });
   }
 
@@ -39,9 +43,9 @@ class _HomePageState extends State<HomePage> {
         title: AppStrings.thisMonth,
         showBackButton: false,
       ),
-      body: Consumer2<ExpenseProvider, BudgetProvider>(
-        builder: (context, expenseProvider, budgetProvider, child) {
-          if (expenseProvider.isLoading || budgetProvider.isLoading) {
+      body: Consumer3<ExpenseProvider, BudgetProvider, IncomeProvider>(
+        builder: (context, expenseProvider, budgetProvider, incomeProvider, child) {
+          if (expenseProvider.isLoading || budgetProvider.isLoading || incomeProvider.isLoading) {
             return const Center(
               child: CircularProgressIndicator(
                 color: AppColors.primary,
@@ -50,7 +54,9 @@ class _HomePageState extends State<HomePage> {
           }
 
           final monthlyExpenses = expenseProvider.getExpensesByMonth(_selectedMonth);
+          final monthlyIncomes = incomeProvider.getIncomesByMonth(_selectedMonth);
           final totalSpent = expenseProvider.getTotalExpensesByMonth(_selectedMonth);
+          final totalIncome = incomeProvider.getTotalIncomeByMonth(_selectedMonth);
           final totalBudget = budgetProvider.getTotalBudgetAmountByMonth(_selectedMonth);
 
           return Column(
@@ -65,56 +71,121 @@ class _HomePageState extends State<HomePage> {
                 },
               ),
               
-              // Total Expenses
-              Padding(
-                padding: const EdgeInsets.all(AppDimensions.paddingM),
-                child: Text(
-                  'LKR ${totalSpent.toStringAsFixed(0)}',
-                  style: const TextStyle(
-                    fontSize: 48,
-                    fontWeight: FontWeight.bold,
-                    color: AppColors.textPrimary,
-                  ),
-                ),
-              ),
-              
-              // Budget Summary Card
+              // Financial Summary - Compact Row Layout
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: AppDimensions.paddingM),
-                child: BudgetSummaryCard(
-                  totalBudget: totalBudget,
-                  totalSpent: totalSpent,
-                  remainingAmount: totalBudget - totalSpent,
+                child: Row(
+                  children: [
+                    // Total Income
+                    Expanded(
+                      child: Container(
+                        padding: const EdgeInsets.all(AppDimensions.paddingS),
+                        decoration: BoxDecoration(
+                          color: AppColors.success.withOpacity(0.1),
+                          borderRadius: BorderRadius.circular(AppDimensions.radiusM),
+                          border: Border.all(color: AppColors.success.withOpacity(0.3)),
+                        ),
+                        child: Column(
+                          children: [
+                            const Text(
+                              'Income',
+                              style: TextStyle(
+                                fontSize: 12,
+                                color: AppColors.textSecondary,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                            const SizedBox(height: 4),
+                            Text(
+                              'LKR ${totalIncome.toStringAsFixed(0)}',
+                              style: const TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: AppColors.success,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: AppDimensions.paddingS),
+                    // Total Expenses
+                    Expanded(
+                      child: Container(
+                        padding: const EdgeInsets.all(AppDimensions.paddingS),
+                        decoration: BoxDecoration(
+                          color: AppColors.error.withOpacity(0.1),
+                          borderRadius: BorderRadius.circular(AppDimensions.radiusM),
+                          border: Border.all(color: AppColors.error.withOpacity(0.3)),
+                        ),
+                        child: Column(
+                          children: [
+                            const Text(
+                              'Expenses',
+                              style: TextStyle(
+                                fontSize: 12,
+                                color: AppColors.textSecondary,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                            const SizedBox(height: 4),
+                            Text(
+                              'LKR ${totalSpent.toStringAsFixed(0)}',
+                              style: const TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: AppColors.error,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: AppDimensions.paddingS),
+                    // Net Amount
+                    Expanded(
+                      child: Container(
+                        padding: const EdgeInsets.all(AppDimensions.paddingS),
+                        decoration: BoxDecoration(
+                          color: (totalIncome - totalSpent >= 0 ? AppColors.success : AppColors.error).withOpacity(0.1),
+                          borderRadius: BorderRadius.circular(AppDimensions.radiusM),
+                          border: Border.all(color: (totalIncome - totalSpent >= 0 ? AppColors.success : AppColors.error).withOpacity(0.3)),
+                        ),
+                        child: Column(
+                          children: [
+                            const Text(
+                              'Net',
+                              style: TextStyle(
+                                fontSize: 12,
+                                color: AppColors.textSecondary,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                            const SizedBox(height: 4),
+                            Text(
+                              'LKR ${(totalIncome - totalSpent).toStringAsFixed(0)}',
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: totalIncome - totalSpent >= 0 ? AppColors.success : AppColors.error,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
               
               const SizedBox(height: AppDimensions.paddingM),
               
-              // Expenses List
+              // Transactions List (Expenses + Income)
               Expanded(
-                child: monthlyExpenses.isEmpty
-                    ? const Center(
-                        child: Text(
-                          'No expenses this month',
-                          style: TextStyle(
-                            color: AppColors.textSecondary,
-                            fontSize: 16,
-                          ),
-                        ),
-                      )
-                    : ListView.builder(
-                        padding: const EdgeInsets.symmetric(horizontal: AppDimensions.paddingM),
-                        itemCount: monthlyExpenses.length,
-                        itemBuilder: (context, index) {
-                          final expense = monthlyExpenses[index];
-                          return ExpenseListItem(
-                            expense: expense,
-                            onTap: () {
-                              // Navigate to expense details
-                            },
-                          );
-                        },
-                      ),
+                child: _buildTransactionsList(monthlyExpenses, monthlyIncomes),
               ),
             ],
           );
@@ -129,6 +200,72 @@ class _HomePageState extends State<HomePage> {
         child: const Icon(Icons.add),
       ),
       bottomNavigationBar: const CustomBottomNavBar(currentIndex: 1),
+    );
+  }
+
+  Widget _buildTransactionsList(List<Expense> expenses, List<Income> incomes) {
+    // Combine and sort transactions by date (newest first)
+    final allTransactions = <dynamic>[];
+    allTransactions.addAll(expenses);
+    allTransactions.addAll(incomes);
+    
+    allTransactions.sort((a, b) => b.date.compareTo(a.date));
+
+    if (allTransactions.isEmpty) {
+      return const Center(
+        child: Text(
+          'No transactions this month',
+          style: TextStyle(
+            color: AppColors.textSecondary,
+            fontSize: 16,
+          ),
+        ),
+      );
+    }
+
+    // Group transactions by date
+    final Map<String, List<dynamic>> groupedTransactions = {};
+    for (final transaction in allTransactions) {
+      final dateKey = Formatters.formatDate(transaction.date);
+      if (!groupedTransactions.containsKey(dateKey)) {
+        groupedTransactions[dateKey] = [];
+      }
+      groupedTransactions[dateKey]!.add(transaction);
+    }
+
+    return ListView.builder(
+      padding: const EdgeInsets.symmetric(horizontal: AppDimensions.paddingM),
+      itemCount: groupedTransactions.length,
+      itemBuilder: (context, index) {
+        final dateKey = groupedTransactions.keys.elementAt(index);
+        final dayTransactions = groupedTransactions[dateKey]!;
+        
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Date header
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: AppDimensions.paddingS),
+              child: Text(
+                dateKey,
+                style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.textPrimary,
+                ),
+              ),
+            ),
+            // Transactions for this date
+            ...dayTransactions.map((transaction) => TransactionListItem(
+              transaction: transaction,
+              onTap: () {
+                // Navigate to transaction details
+              },
+            )),
+            const SizedBox(height: AppDimensions.paddingM),
+          ],
+        );
+      },
     );
   }
 }

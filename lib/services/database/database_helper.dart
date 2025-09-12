@@ -3,6 +3,7 @@ import 'package:path/path.dart';
 import '../../data/database/tables/categories_table.dart';
 import '../../data/database/tables/expenses_table.dart';
 import '../../data/database/tables/budgets_table.dart';
+import '../../data/database/tables/incomes_table.dart';
 
 class DatabaseHelper {
   static const String _databaseName = 'moneymaker.db';
@@ -35,6 +36,9 @@ class DatabaseHelper {
     
     // Create budgets table
     await db.execute(BudgetsTable.createTable);
+    
+    // Create incomes table
+    await db.execute(IncomesTable.createTableQuery);
     
     // Insert default categories
     await _insertDefaultCategories(db);
