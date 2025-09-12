@@ -1,5 +1,6 @@
 import 'database_helper.dart';
 import 'data_seeder.dart';
+import 'package:sqflite/sqflite.dart';
 
 class DatabaseService {
   static bool _isInitialized = false;
@@ -21,6 +22,7 @@ class DatabaseService {
       rethrow;
     }
   }
+
   
   static Future<void> clearAllData() async {
     await DatabaseHelper.clearAllData();

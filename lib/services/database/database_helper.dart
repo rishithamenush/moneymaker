@@ -7,7 +7,7 @@ import '../../data/database/tables/incomes_table.dart';
 
 class DatabaseHelper {
   static const String _databaseName = 'moneymaker.db';
-  static const int _databaseVersion = 1;
+  static const int _databaseVersion = 2;
   
   static Database? _database;
   
@@ -45,9 +45,9 @@ class DatabaseHelper {
   }
   
   static Future<void> _onUpgrade(Database db, int oldVersion, int newVersion) async {
-    // Handle database upgrades here
     if (oldVersion < 2) {
-      // Example: Add new columns or tables for version 2
+      // Add incomes table for version 2
+      await db.execute(IncomesTable.createTableQuery);
     }
   }
   
@@ -90,6 +90,22 @@ class DatabaseHelper {
         'name': 'Entertainment',
         'color_value': 0xFFE91E63,
         'icon_name': 'movie',
+        'created_at': DateTime.now().toIso8601String(),
+        'updated_at': DateTime.now().toIso8601String(),
+      },
+      {
+        'id': 'salary',
+        'name': 'Salary',
+        'color_value': 0xFF4CAF50,
+        'icon_name': 'work',
+        'created_at': DateTime.now().toIso8601String(),
+        'updated_at': DateTime.now().toIso8601String(),
+      },
+      {
+        'id': 'income_others',
+        'name': 'Others',
+        'color_value': 0xFF9C27B0,
+        'icon_name': 'more_horiz',
         'created_at': DateTime.now().toIso8601String(),
         'updated_at': DateTime.now().toIso8601String(),
       },

@@ -7,11 +7,13 @@ import '../../../domain/entities/income.dart';
 class TransactionListItem extends StatelessWidget {
   final dynamic transaction; // Can be Expense or Income
   final VoidCallback? onTap;
+  final VoidCallback? onDelete;
 
   const TransactionListItem({
     super.key,
     required this.transaction,
     this.onTap,
+    this.onDelete,
   });
 
   @override
@@ -72,25 +74,44 @@ class TransactionListItem extends StatelessWidget {
             ),
           ],
         ),
-        trailing: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.end,
+        trailing: Row(
+          mainAxisSize: MainAxisSize.min,
           children: [
-            Text(
-              '${isIncome ? '+' : '-'}LKR ${amount.toStringAsFixed(0)}',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                color: color,
-                fontSize: 16,
-              ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Text(
+                  '${isIncome ? '+' : '-'}LKR ${amount.toStringAsFixed(0)}',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: color,
+                    fontSize: 16,
+                  ),
+                ),
+                Text(
+                  isIncome ? 'Income' : 'Expense',
+                  style: TextStyle(
+                    color: color,
+                    fontSize: 10,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ],
             ),
-            Text(
-              isIncome ? 'Income' : 'Expense',
-              style: TextStyle(
-                color: color,
-                fontSize: 10,
-                fontWeight: FontWeight.w500,
+            const SizedBox(width: 8),
+            IconButton(
+              onPressed: onDelete,
+              icon: const Icon(
+                Icons.delete_outline,
+                color: AppColors.error,
+                size: 20,
               ),
+              constraints: const BoxConstraints(
+                minWidth: 32,
+                minHeight: 32,
+              ),
+              padding: EdgeInsets.zero,
             ),
           ],
         ),

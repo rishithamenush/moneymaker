@@ -88,6 +88,17 @@ class IncomeProvider with ChangeNotifier {
     return monthlyIncomes.fold<double>(0.0, (sum, income) => sum + income.amount);
   }
 
+  List<Income> getIncomesByCategory(String categoryId) {
+    return _incomes.where((income) => income.categoryId == categoryId).toList();
+  }
+
+  List<Income> getIncomesByDateRange(DateTime startDate, DateTime endDate) {
+    return _incomes.where((income) {
+      return income.date.isAfter(startDate.subtract(const Duration(days: 1))) &&
+             income.date.isBefore(endDate.add(const Duration(days: 1)));
+    }).toList();
+  }
+
   void _setLoading(bool loading) {
     _isLoading = loading;
     notifyListeners();

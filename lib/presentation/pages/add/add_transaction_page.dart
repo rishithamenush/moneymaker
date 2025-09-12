@@ -244,7 +244,7 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
                 ),
               ),
               hint: const Text('Select category'),
-              items: categoryProvider.categories.map((category) {
+              items: _getFilteredCategories(categoryProvider.categories).map((category) {
                 return DropdownMenuItem<Category>(
                   value: category,
                   child: Row(
@@ -473,6 +473,20 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
       setState(() {
         _isLoading = false;
       });
+    }
+  }
+
+  List<Category> _getFilteredCategories(List<Category> allCategories) {
+    if (_selectedType == TransactionType.income) {
+      // For income, only show salary and others categories
+      return allCategories.where((category) => 
+        category.id == 'salary' || category.id == 'income_others'
+      ).toList();
+    } else {
+      // For expenses, show all categories except income-specific ones
+      return allCategories.where((category) => 
+        category.id != 'salary' && category.id != 'income_others'
+      ).toList();
     }
   }
 }

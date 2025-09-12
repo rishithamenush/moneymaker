@@ -29,19 +29,35 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      context.read<ExpenseProvider>().loadExpenses();
-      context.read<BudgetProvider>().loadBudgets();
-      context.read<IncomeProvider>().loadIncomes();
+      _loadData();
     });
+  }
+
+  Future<void> _loadData() async {
+    await Future.wait([
+      context.read<ExpenseProvider>().loadExpenses(),
+      context.read<BudgetProvider>().loadBudgets(),
+      context.read<IncomeProvider>().loadIncomes(),
+    ]);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.background,
-      appBar: const CustomAppBar(
+      appBar: CustomAppBar(
         title: AppStrings.thisMonth,
         showBackButton: false,
+        actions: [
+          IconButton(
+            onPressed: _loadData,
+            icon: const Icon(
+              Icons.refresh,
+              color: AppColors.textPrimary,
+              size: AppDimensions.iconM,
+            ),
+          ),
+        ],
       ),
       body: Consumer3<ExpenseProvider, BudgetProvider, IncomeProvider>(
         builder: (context, expenseProvider, budgetProvider, incomeProvider, child) {
@@ -57,7 +73,6 @@ class _HomePageState extends State<HomePage> {
           final monthlyIncomes = incomeProvider.getIncomesByMonth(_selectedMonth);
           final totalSpent = expenseProvider.getTotalExpensesByMonth(_selectedMonth);
           final totalIncome = incomeProvider.getTotalIncomeByMonth(_selectedMonth);
-          final totalBudget = budgetProvider.getTotalBudgetAmountByMonth(_selectedMonth);
 
           return Column(
             children: [
@@ -261,11 +276,80 @@ class _HomePageState extends State<HomePage> {
               onTap: () {
                 // Navigate to transaction details
               },
+              onDelete: () => _showDeleteConfirmation(context, transaction),
             )),
             const SizedBox(height: AppDimensions.paddingM),
           ],
         );
       },
     );
+  }
+
+  void _showDeleteConfirmation(BuildContext context, dynamic transaction) {
+    final isIncome = transaction is Income;
+    final transactionType = isIncome ? 'Income' : 'Expense';
+    
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Delete $transactionType?'),
+          content: Text(
+            'Are you sure you want to delete this $transactionType transaction?\n\n'
+            '${transaction.description}\n'
+            'LKR ${transaction.amount.toStringAsFixed(0)}',
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: const Text(
+                'Cancel',
+                style: TextStyle(color: AppColors.textSecondary),
+              ),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+                _deleteTransaction(transaction);
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: AppColors.error,
+                foregroundColor: Colors.white,
+              ),
+              child: const Text('Delete'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Future<void> _deleteTransaction(dynamic transaction) async {
+    try {
+      if (transaction is Income) {
+        await context.read<IncomeProvider>().deleteIncome(transaction.id);
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Income deleted successfully'),
+            backgroundColor: AppColors.success,
+          ),
+        );
+      } else if (transaction is Expense) {
+        await context.read<ExpenseProvider>().deleteExpense(transaction.id);
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Expense deleted successfully'),
+            backgroundColor: AppColors.success,
+          ),
+        );
+      }
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Failed to delete transaction: $e'),
+          backgroundColor: AppColors.error,
+        ),
+      );
+    }
   }
 }

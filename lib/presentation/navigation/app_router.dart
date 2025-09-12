@@ -3,6 +3,7 @@ import '../pages/home/home_page.dart';
 import '../pages/overview/overview_page.dart';
 import '../pages/splash/splash_page.dart';
 import '../pages/add/add_transaction_page.dart';
+import '../pages/settings/settings_page.dart';
 import '../../app/routes.dart';
 
 class AppRouter {
@@ -51,9 +52,7 @@ class AppRouter {
         );
       case AppRoutes.settings:
         return MaterialPageRoute(
-          builder: (_) => const Scaffold(
-            body: Center(child: Text('Settings Page')),
-          ),
+          builder: (_) => const SettingsPage(),
           settings: settings,
         );
       default:
