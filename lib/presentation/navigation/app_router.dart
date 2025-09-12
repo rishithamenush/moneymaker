@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../pages/home/home_page.dart';
 import '../pages/overview/overview_page.dart';
 import '../pages/splash/splash_page.dart';
+import '../pages/add/add_transaction_page.dart';
 import '../../app/routes.dart';
 
 class AppRouter {
@@ -27,6 +28,18 @@ class AppRouter {
           builder: (_) => const Scaffold(
             body: Center(child: Text('Expenses Page')),
           ),
+          settings: settings,
+        );
+      case AppRoutes.addExpense:
+        return MaterialPageRoute(
+          builder: (_) => const Scaffold(
+            body: Center(child: Text('Add Expense Page')),
+          ),
+          settings: settings,
+        );
+      case AppRoutes.addTransaction:
+        return MaterialPageRoute(
+          builder: (_) => const AddTransactionPage(),
           settings: settings,
         );
       case AppRoutes.budget:

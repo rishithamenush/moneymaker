@@ -10,6 +10,7 @@ import '../../widgets/common/budget_summary_card.dart';
 import '../../widgets/common/expense_list_item.dart';
 import '../../widgets/common/monthly_selector.dart';
 import '../../navigation/bottom_nav_bar.dart';
+import '../../../app/routes.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -37,13 +38,6 @@ class _HomePageState extends State<HomePage> {
       appBar: const CustomAppBar(
         title: AppStrings.thisMonth,
         showBackButton: false,
-        actions: [
-          Icon(
-            Icons.add,
-            color: AppColors.textPrimary,
-            size: AppDimensions.iconM,
-          ),
-        ],
       ),
       body: Consumer2<ExpenseProvider, BudgetProvider>(
         builder: (context, expenseProvider, budgetProvider, child) {
@@ -125,6 +119,14 @@ class _HomePageState extends State<HomePage> {
             ],
           );
         },
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.pushNamed(context, AppRoutes.addTransaction);
+        },
+        backgroundColor: AppColors.primary,
+        foregroundColor: Colors.white,
+        child: const Icon(Icons.add),
       ),
       bottomNavigationBar: const CustomBottomNavBar(currentIndex: 1),
     );
