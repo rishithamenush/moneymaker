@@ -1,0 +1,67 @@
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../presentation/providers/theme_provider.dart';
+import '../presentation/providers/expense_provider.dart';
+import '../presentation/providers/budget_provider.dart';
+import '../presentation/providers/category_provider.dart';
+import '../presentation/navigation/app_router.dart';
+import '../core/theme/app_theme.dart';
+import '../domain/usecases/expense/get_expenses.dart';
+import '../domain/usecases/expense/add_expense.dart';
+import '../domain/usecases/expense/update_expense.dart';
+import '../domain/usecases/expense/delete_expense.dart';
+import '../domain/usecases/budget/get_budget.dart';
+import '../domain/usecases/budget/create_budget.dart';
+import '../domain/usecases/budget/update_budget.dart';
+import '../domain/usecases/category/get_categories.dart';
+import '../domain/usecases/category/add_category.dart';
+import '../data/repositories/expense_repository_impl.dart';
+import '../data/repositories/budget_repository_impl.dart';
+import '../data/repositories/category_repository_impl.dart';
+
+class MoneyMakerApp extends StatelessWidget {
+  const MoneyMakerApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => ThemeProvider()),
+              ChangeNotifierProvider(
+                create: (_) => ExpenseProvider(
+                  getExpenses: GetExpenses(ExpenseRepositoryImpl()),
+                  addExpense: AddExpense(ExpenseRepositoryImpl()),
+                  updateExpense: UpdateExpense(ExpenseRepositoryImpl()),
+                  deleteExpense: DeleteExpense(ExpenseRepositoryImpl()),
+                ),
+              ),
+              ChangeNotifierProvider(
+                create: (_) => BudgetProvider(
+                  getBudget: GetBudget(BudgetRepositoryImpl()),
+                  createBudget: CreateBudget(BudgetRepositoryImpl()),
+                  updateBudget: UpdateBudget(BudgetRepositoryImpl()),
+                ),
+              ),
+              ChangeNotifierProvider(
+                create: (_) => CategoryProvider(
+                  getCategories: GetCategories(CategoryRepositoryImpl()),
+                  addCategory: AddCategory(CategoryRepositoryImpl()),
+                ),
+              ),
+      ],
+      child: Consumer<ThemeProvider>(
+        builder: (context, themeProvider, child) {
+          return MaterialApp(
+            title: 'Money Maker',
+            theme: AppTheme.lightTheme,
+            darkTheme: AppTheme.darkTheme,
+            themeMode: themeProvider.themeMode,
+            onGenerateRoute: AppRouter.generateRoute,
+            debugShowCheckedModeBanner: false,
+          );
+        },
+      ),
+    );
+  }
+}
+
