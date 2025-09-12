@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
-  // Primary Colors
-  static const Color primary = Color(0xFF6C5CE7);
-  static const Color primaryDark = Color(0xFF5B4BCF);
-  static const Color primaryLight = Color(0xFF8B7ED8);
+  // Primary Colors - Orange Theme
+  static const Color primary = Color(0xFFFF6B35);
+  static const Color primaryDark = Color(0xFFE55A2B);
+  static const Color primaryLight = Color(0xFFFF8E53);
   
-  // Secondary Colors
-  static const Color secondary = Color(0xFF00CEC9);
-  static const Color secondaryDark = Color(0xFF00B4B1);
-  static const Color secondaryLight = Color(0xFF33D3CE);
+  // Secondary Colors - Complementary Orange
+  static const Color secondary = Color(0xFFFFA726);
+  static const Color secondaryDark = Color(0xFFF57C00);
+  static const Color secondaryLight = Color(0xFFFFB74D);
   
   // Background Colors
   static const Color background = Color(0xFF1A1A1A);
@@ -27,15 +27,15 @@ class AppColors {
   static const Color error = Color(0xFFE17055);
   static const Color info = Color(0xFF74B9FF);
   
-  // Category Colors
-  static const Color autoTransport = Color(0xFF6C5CE7);
-  static const Color billsUtilities = Color(0xFF00CEC9);
-  static const Color foodDining = Color(0xFFE17055);
-  static const Color entertainment = Color(0xFFFDCB6E);
-  static const Color shopping = Color(0xFF74B9FF);
+  // Category Colors - Orange Theme
+  static const Color autoTransport = Color(0xFFFF6B35);
+  static const Color billsUtilities = Color(0xFFFF8E53);
+  static const Color foodDining = Color(0xFFE55A2B);
+  static const Color entertainment = Color(0xFFFFA726);
+  static const Color shopping = Color(0xFFFFB74D);
   static const Color healthcare = Color(0xFF00B894);
-  static const Color education = Color(0xFF9B59B6);
-  static const Color travel = Color(0xFFE84393);
+  static const Color education = Color(0xFFFF7043);
+  static const Color travel = Color(0xFFFFAB40);
   
   // Gradient Colors
   static const LinearGradient primaryGradient = LinearGradient(
