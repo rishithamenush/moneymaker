@@ -399,13 +399,13 @@ class _SplashPageState extends State<SplashPage>
           animation: _fadeController,
           builder: (context, child) {
             return Opacity(
-              opacity: _fadeAnimation.value * 0.6,
+              opacity: _fadeAnimation.value * 0.8,
               child: Transform.rotate(
                 angle: _logoController.value * 2 * 3.14159,
                 child: const Icon(
                   Icons.monetization_on,
                   color: Color(0xFFFF8E53), // Light orange
-                  size: 30,
+                  size: 35,
                 ),
               ),
             );
@@ -420,13 +420,13 @@ class _SplashPageState extends State<SplashPage>
           animation: _fadeController,
           builder: (context, child) {
             return Opacity(
-              opacity: _fadeAnimation.value * 0.4,
+              opacity: _fadeAnimation.value * 0.7,
               child: Transform.rotate(
                 angle: -_logoController.value * 2 * 3.14159,
                 child: const Icon(
                   Icons.savings,
                   color: Color(0xFFFF8E53), // Light orange
-                  size: 25,
+                  size: 30,
                 ),
               ),
             );
@@ -441,13 +441,13 @@ class _SplashPageState extends State<SplashPage>
           animation: _fadeController,
           builder: (context, child) {
             return Opacity(
-              opacity: _fadeAnimation.value * 0.5,
+              opacity: _fadeAnimation.value * 0.8,
               child: Transform.rotate(
                 angle: _logoController.value * 3.14159,
                 child: const Icon(
                   Icons.trending_up,
                   color: Color(0xFFFF8E53), // Light orange
-                  size: 28,
+                  size: 32,
                 ),
               ),
             );
@@ -462,13 +462,13 @@ class _SplashPageState extends State<SplashPage>
           animation: _fadeController,
           builder: (context, child) {
             return Opacity(
-              opacity: _fadeAnimation.value * 0.3,
+              opacity: _fadeAnimation.value * 0.6,
               child: Transform.rotate(
                 angle: -_logoController.value * 1.5 * 3.14159,
                 child: const Icon(
                   Icons.account_balance,
                   color: Color(0xFFFF8E53), // Light orange
-                  size: 32,
+                  size: 38,
                 ),
               ),
             );
