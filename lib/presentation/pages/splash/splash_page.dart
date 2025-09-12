@@ -143,9 +143,9 @@ class _SplashPageState extends State<SplashPage>
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
             colors: [
-              AppColors.primary,
-              AppColors.secondary,
-              AppColors.primary,
+              Color(0xFFFF6B35), // Bright orange
+              Color(0xFFFF8E53), // Light orange
+              Color(0xFFE55A2B), // Dark orange
             ],
             stops: [0.0, 0.6, 1.0],
           ),
@@ -155,70 +155,65 @@ class _SplashPageState extends State<SplashPage>
             // Floating elements
             ..._buildFloatingElements(),
             
-            // Main content
-            Column(
-              children: [
-                // Status bar spacing
-                SizedBox(height: MediaQuery.of(context).padding.top),
-                const Spacer(flex: 2),
-              
-              // Logo Section
-              AnimatedBuilder(
-                animation: _logoController,
-                builder: (context, child) {
-                  return Transform.scale(
-                    scale: _logoScaleAnimation.value,
-                    child: Transform.rotate(
-                      angle: _logoRotationAnimation.value * 2 * 3.14159,
-                      child: _buildLogo(),
-                    ),
-                  );
-                },
+            // Main content - properly centered
+            Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  // Logo Section
+                  AnimatedBuilder(
+                    animation: _logoController,
+                    builder: (context, child) {
+                      return Transform.scale(
+                        scale: _logoScaleAnimation.value,
+                        child: Transform.rotate(
+                          angle: _logoRotationAnimation.value * 2 * 3.14159,
+                          child: _buildLogo(),
+                        ),
+                      );
+                    },
+                  ),
+                  
+                  const SizedBox(height: AppDimensions.paddingXL),
+                  
+                  // App Name
+                  AnimatedBuilder(
+                    animation: _textController,
+                    builder: (context, child) {
+                      return Transform.translate(
+                        offset: Offset(0, _textSlideAnimation.value),
+                        child: _buildAppName(),
+                      );
+                    },
+                  ),
+                  
+                  const SizedBox(height: AppDimensions.paddingS),
+                  
+                  // Tagline
+                  AnimatedBuilder(
+                    animation: _fadeController,
+                    builder: (context, child) {
+                      return Opacity(
+                        opacity: _fadeAnimation.value,
+                        child: _buildTagline(),
+                      );
+                    },
+                  ),
+                  
+                  const SizedBox(height: AppDimensions.paddingXL * 2),
+                  
+                  // Progress Section
+                  AnimatedBuilder(
+                    animation: _fadeController,
+                    builder: (context, child) {
+                      return Opacity(
+                        opacity: _fadeAnimation.value,
+                        child: _buildProgressSection(),
+                      );
+                    },
+                  ),
+                ],
               ),
-              
-              const SizedBox(height: AppDimensions.paddingXL),
-              
-              // App Name
-              AnimatedBuilder(
-                animation: _textController,
-                builder: (context, child) {
-                  return Transform.translate(
-                    offset: Offset(0, _textSlideAnimation.value),
-                    child: _buildAppName(),
-                  );
-                },
-              ),
-              
-              const SizedBox(height: AppDimensions.paddingS),
-              
-              // Tagline
-              AnimatedBuilder(
-                animation: _fadeController,
-                builder: (context, child) {
-                  return Opacity(
-                    opacity: _fadeAnimation.value,
-                    child: _buildTagline(),
-                  );
-                },
-              ),
-              
-              const Spacer(flex: 2),
-              
-              // Progress Section
-              AnimatedBuilder(
-                animation: _fadeController,
-                builder: (context, child) {
-                  return Opacity(
-                    opacity: _fadeAnimation.value,
-                    child: _buildProgressSection(),
-                  );
-                },
-              ),
-              
-              const SizedBox(height: AppDimensions.paddingXL),
-              // Bottom navigation bar spacing
-              SizedBox(height: MediaQuery.of(context).padding.bottom),
-              ],
             ),
           ],
         ),
@@ -255,7 +250,10 @@ class _SplashPageState extends State<SplashPage>
             height: 100,
             decoration: BoxDecoration(
               gradient: const LinearGradient(
-                colors: [AppColors.primary, AppColors.secondary],
+                colors: [
+                  Color(0xFFFFFFFF), // White
+                  Color(0xFFF5F5F5), // Light gray
+                ],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
               ),
@@ -266,7 +264,7 @@ class _SplashPageState extends State<SplashPage>
           const Icon(
             Icons.account_balance_wallet,
             size: 50,
-            color: Colors.white,
+            color: Color(0xFFFF6B35), // Orange color
           ),
           // Animated rings
           AnimatedBuilder(
@@ -293,17 +291,33 @@ class _SplashPageState extends State<SplashPage>
           style: AppTheme.lightTheme.textTheme.headlineLarge?.copyWith(
             color: Colors.white,
             fontWeight: FontWeight.bold,
-            fontSize: 32,
-            letterSpacing: 1.2,
+            fontSize: 36,
+            letterSpacing: 1.5,
+            shadows: [
+              Shadow(
+                color: Colors.black.withOpacity(0.3),
+                offset: const Offset(0, 2),
+                blurRadius: 4,
+              ),
+            ],
           ),
         ),
-        const SizedBox(height: 8),
+        const SizedBox(height: 12),
         Container(
-          height: 3,
-          width: 60,
+          height: 4,
+          width: 80,
           decoration: BoxDecoration(
-            color: Colors.white,
+            gradient: const LinearGradient(
+              colors: [Colors.white, Colors.white70],
+            ),
             borderRadius: BorderRadius.circular(2),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.white.withOpacity(0.3),
+                blurRadius: 4,
+                offset: const Offset(0, 1),
+              ),
+            ],
           ),
         ),
       ],
@@ -323,14 +337,15 @@ class _SplashPageState extends State<SplashPage>
 
   Widget _buildProgressSection() {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         // Progress bar
         Container(
-          width: 200,
-          height: 4,
+          width: 250,
+          height: 6,
           decoration: BoxDecoration(
-            color: Colors.white.withOpacity(0.3),
-            borderRadius: BorderRadius.circular(2),
+            color: Colors.white.withOpacity(0.2),
+            borderRadius: BorderRadius.circular(3),
           ),
           child: AnimatedBuilder(
             animation: _progressAnimation,
@@ -340,8 +355,17 @@ class _SplashPageState extends State<SplashPage>
                 widthFactor: _progressAnimation.value,
                 child: Container(
                   decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(2),
+                    gradient: const LinearGradient(
+                      colors: [Colors.white, Colors.white70],
+                    ),
+                    borderRadius: BorderRadius.circular(3),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.white.withOpacity(0.3),
+                        blurRadius: 4,
+                        offset: const Offset(0, 1),
+                      ),
+                    ],
                   ),
                 ),
               );
@@ -355,8 +379,10 @@ class _SplashPageState extends State<SplashPage>
         Text(
           'Loading...',
           style: AppTheme.lightTheme.textTheme.bodyMedium?.copyWith(
-            color: Colors.white.withOpacity(0.8),
-            fontSize: 14,
+            color: Colors.white.withOpacity(0.9),
+            fontSize: 16,
+            fontWeight: FontWeight.w500,
+            letterSpacing: 0.5,
           ),
         ),
       ],
@@ -378,7 +404,7 @@ class _SplashPageState extends State<SplashPage>
                 angle: _logoController.value * 2 * 3.14159,
                 child: const Icon(
                   Icons.monetization_on,
-                  color: Colors.white,
+                  color: Color(0xFFFF8E53), // Light orange
                   size: 30,
                 ),
               ),
@@ -399,7 +425,7 @@ class _SplashPageState extends State<SplashPage>
                 angle: -_logoController.value * 2 * 3.14159,
                 child: const Icon(
                   Icons.savings,
-                  color: Colors.white,
+                  color: Color(0xFFFF8E53), // Light orange
                   size: 25,
                 ),
               ),
@@ -420,7 +446,7 @@ class _SplashPageState extends State<SplashPage>
                 angle: _logoController.value * 3.14159,
                 child: const Icon(
                   Icons.trending_up,
-                  color: Colors.white,
+                  color: Color(0xFFFF8E53), // Light orange
                   size: 28,
                 ),
               ),
@@ -441,7 +467,7 @@ class _SplashPageState extends State<SplashPage>
                 angle: -_logoController.value * 1.5 * 3.14159,
                 child: const Icon(
                   Icons.account_balance,
-                  color: Colors.white,
+                  color: Color(0xFFFF8E53), // Light orange
                   size: 32,
                 ),
               ),
