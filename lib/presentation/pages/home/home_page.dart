@@ -75,7 +75,7 @@ class _HomePageState extends State<HomePage> {
               Padding(
                 padding: const EdgeInsets.all(AppDimensions.paddingM),
                 child: Text(
-                  '\$${totalSpent.toStringAsFixed(0)}',
+                  'LKR ${totalSpent.toStringAsFixed(0)}',
                   style: const TextStyle(
                     fontSize: 48,
                     fontWeight: FontWeight.bold,

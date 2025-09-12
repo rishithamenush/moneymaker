@@ -41,15 +41,9 @@ class CustomBottomNavBar extends StatelessWidget {
             context: context,
           ),
           _buildNavItem(
-            icon: Icons.local_offer,
-            label: AppStrings.offers,
-            index: 2,
-            context: context,
-          ),
-          _buildNavItem(
             icon: Icons.settings,
             label: AppStrings.settings,
-            index: 3,
+            index: 2,
             context: context,
           ),
         ],
@@ -124,13 +118,6 @@ class CustomBottomNavBar extends StatelessWidget {
         );
         break;
       case 2:
-        Navigator.pushNamedAndRemoveUntil(
-          context,
-          AppRoutes.offers,
-          (route) => false,
-        );
-        break;
-      case 3:
         Navigator.pushNamedAndRemoveUntil(
           context,
           AppRoutes.settings,

@@ -36,13 +36,6 @@ class AppRouter {
           ),
           settings: settings,
         );
-      case AppRoutes.offers:
-        return MaterialPageRoute(
-          builder: (_) => const Scaffold(
-            body: Center(child: Text('Offers Page')),
-          ),
-          settings: settings,
-        );
       case AppRoutes.settings:
         return MaterialPageRoute(
           builder: (_) => const Scaffold(

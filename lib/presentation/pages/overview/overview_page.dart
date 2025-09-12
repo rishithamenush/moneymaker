@@ -306,7 +306,7 @@ class _OverviewPageState extends State<OverviewPage> with TickerProviderStateMix
                     ),
                   ),
                   Text(
-                    '\$${categoryTotal.toStringAsFixed(0)}',
+                    'LKR ${categoryTotal.toStringAsFixed(0)}',
                     style: const TextStyle(
                       color: AppColors.textPrimary,
                       fontSize: 14,
@@ -342,7 +342,7 @@ class _OverviewPageState extends State<OverviewPage> with TickerProviderStateMix
         Expanded(
           child: _buildStatCard(
             title: 'Daily Average',
-            value: '\$${avgDailySpending.toStringAsFixed(0)}',
+            value: 'LKR ${avgDailySpending.toStringAsFixed(0)}',
             icon: Icons.trending_up,
             color: AppColors.success,
           ),

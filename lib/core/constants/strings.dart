@@ -5,7 +5,6 @@ class AppStrings {
   // Navigation
   static const String overview = 'Overview';
   static const String thisMonth = 'This Month';
-  static const String offers = 'Offers';
   static const String settings = 'Settings';
   
   // Common
