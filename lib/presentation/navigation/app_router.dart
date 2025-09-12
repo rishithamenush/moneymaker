@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 import '../pages/home/home_page.dart';
 import '../pages/overview/overview_page.dart';
+import '../pages/splash/splash_page.dart';
 import '../../app/routes.dart';
 
 class AppRouter {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
+      case AppRoutes.splash:
+        return MaterialPageRoute(
+          builder: (_) => const SplashPage(),
+          settings: settings,
+        );
       case AppRoutes.overview:
         return MaterialPageRoute(
           builder: (_) => const OverviewPage(),
@@ -46,9 +52,7 @@ class AppRouter {
         );
       default:
         return MaterialPageRoute(
-          builder: (_) => const Scaffold(
-            body: Center(child: Text('Page not found')),
-          ),
+          builder: (_) => const SplashPage(),
           settings: settings,
         );
     }
