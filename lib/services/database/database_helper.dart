@@ -149,7 +149,8 @@ class DatabaseHelper {
     final db = await database;
     await db.delete(ExpensesTable.tableName);
     await db.delete(BudgetsTable.tableName);
-    await db.delete(CategoriesTable.tableName);
-    await _insertDefaultCategories(db);
+    await db.delete(IncomesTable.tableName);
+    // Keep categories - don't delete them
+    print('All transaction data cleared successfully');
   }
 }

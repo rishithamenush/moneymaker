@@ -6,6 +6,12 @@ import '../../data/repositories/category_repository_impl.dart';
 
 class DataSeeder {
   static Future<void> seedInitialData() async {
+    // Sample data seeding disabled - app will start fresh
+    print('Sample data seeding disabled - starting with fresh app');
+    return;
+    
+    // Commented out sample data seeding
+    /*
     final expenseRepo = ExpenseRepositoryImpl();
     final incomeRepo = IncomeRepositoryImpl();
     final categoryRepo = CategoryRepositoryImpl();
@@ -97,5 +103,6 @@ class DataSeeder {
     }
     
     print('Sample data seeded successfully');
+    */
   }
 }

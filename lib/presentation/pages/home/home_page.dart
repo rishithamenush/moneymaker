@@ -227,13 +227,34 @@ class _HomePageState extends State<HomePage> {
     allTransactions.sort((a, b) => b.date.compareTo(a.date));
 
     if (allTransactions.isEmpty) {
-      return const Center(
-        child: Text(
-          'No transactions this month',
-          style: TextStyle(
-            color: AppColors.textSecondary,
-            fontSize: 16,
-          ),
+      return Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              Icons.add_circle_outline,
+              size: 64,
+              color: AppColors.textSecondary.withOpacity(0.5),
+            ),
+            const SizedBox(height: AppDimensions.paddingM),
+            const Text(
+              'No transactions yet',
+              style: TextStyle(
+                color: AppColors.textSecondary,
+                fontSize: 18,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            const SizedBox(height: AppDimensions.paddingS),
+            const Text(
+              'Tap the + button to add your first transaction',
+              style: TextStyle(
+                color: AppColors.textSecondary,
+                fontSize: 14,
+              ),
+              textAlign: TextAlign.center,
+            ),
+          ],
         ),
       );
     }
