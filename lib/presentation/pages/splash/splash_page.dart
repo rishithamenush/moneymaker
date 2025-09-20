@@ -119,7 +119,7 @@ class _SplashPageState extends State<SplashPage>
   }
 
   void _navigateToHome() {
-    Navigator.pushReplacementNamed(context, AppRoutes.overview);
+    Navigator.pushReplacementNamed(context, AppRoutes.login);
   }
 
   @override

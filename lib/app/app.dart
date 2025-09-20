@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../presentation/providers/theme_provider.dart';
+import '../presentation/providers/auth_provider.dart';
 import '../presentation/providers/expense_provider.dart';
 import '../presentation/providers/budget_provider.dart';
 import '../presentation/providers/category_provider.dart';
@@ -33,6 +34,7 @@ class MoneyMakerApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => ThemeProvider()),
+        ChangeNotifierProvider(create: (_) => AuthProvider()),
               ChangeNotifierProvider(
                 create: (_) => ExpenseProvider(
                   getExpenses: GetExpenses(ExpenseRepositoryImpl()),

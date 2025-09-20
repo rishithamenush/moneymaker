@@ -4,6 +4,8 @@ import '../pages/overview/overview_page.dart';
 import '../pages/splash/splash_page.dart';
 import '../pages/add/add_transaction_page.dart';
 import '../pages/settings/settings_page.dart';
+import '../pages/auth/login_page.dart';
+import '../pages/auth/register_page.dart';
 import '../../app/routes.dart';
 
 class AppRouter {
@@ -53,6 +55,16 @@ class AppRouter {
       case AppRoutes.settings:
         return MaterialPageRoute(
           builder: (_) => const SettingsPage(),
+          settings: settings,
+        );
+      case AppRoutes.login:
+        return MaterialPageRoute(
+          builder: (_) => const LoginPage(),
+          settings: settings,
+        );
+      case AppRoutes.register:
+        return MaterialPageRoute(
+          builder: (_) => const RegisterPage(),
           settings: settings,
         );
       default:
