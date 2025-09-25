@@ -122,9 +122,8 @@ class _SplashPageState extends State<SplashPage>
 
   void _navigateToHome() {
     final authProvider = context.read<AuthProvider>();
-    
-    // Check if user is already authenticated
-    if (authProvider.isAuthenticated) {
+    // Check if a user session exists (from Firebase or cached in provider)
+    if (authProvider.isLoggedIn) {
       Navigator.pushReplacementNamed(context, AppRoutes.home);
     } else {
       Navigator.pushReplacementNamed(context, AppRoutes.login);

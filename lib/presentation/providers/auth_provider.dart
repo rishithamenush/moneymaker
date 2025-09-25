@@ -20,6 +20,7 @@ class AuthProvider extends ChangeNotifier {
   String? get error => _error;
   bool get isAuthenticated => _user != null;
   bool get firebaseAvailable => _firebaseAvailable;
+  bool get isLoggedIn => (_auth?.currentUser != null) || _user != null;
 
   AuthProvider() {
     _initializeFirebase();
