@@ -61,7 +61,7 @@ class CustomBottomNavBar extends StatelessWidget {
     
     return GestureDetector(
       onTap: () {
-        // Handle navigation
+        if (isSelected) return; // Avoid redundant navigation causing flicker
         _navigateToPage(context, index);
       },
       child: Container(
@@ -102,26 +102,26 @@ class CustomBottomNavBar extends StatelessWidget {
   }
 
   void _navigateToPage(BuildContext context, int index) {
+    // Remove any pending focus to avoid keyboard flicker
+    FocusScope.of(context).unfocus();
+
     switch (index) {
       case 0:
-        Navigator.pushNamedAndRemoveUntil(
+        Navigator.pushReplacementNamed(
           context,
           AppRoutes.overview,
-          (route) => false,
         );
         break;
       case 1:
-        Navigator.pushNamedAndRemoveUntil(
+        Navigator.pushReplacementNamed(
           context,
           AppRoutes.home,
-          (route) => false,
         );
         break;
       case 2:
-        Navigator.pushNamedAndRemoveUntil(
+        Navigator.pushReplacementNamed(
           context,
           AppRoutes.settings,
-          (route) => false,
         );
         break;
     }
