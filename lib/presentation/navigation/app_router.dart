@@ -17,15 +17,9 @@ class AppRouter {
           settings: settings,
         );
       case AppRoutes.overview:
-        return MaterialPageRoute(
-          builder: (_) => const OverviewPage(),
-          settings: settings,
-        );
+        return _fadeRoute(const OverviewPage(), settings);
       case AppRoutes.home:
-        return MaterialPageRoute(
-          builder: (_) => const HomePage(),
-          settings: settings,
-        );
+        return _fadeRoute(const HomePage(), settings);
       case AppRoutes.expenses:
         return MaterialPageRoute(
           builder: (_) => const Scaffold(
@@ -53,10 +47,7 @@ class AppRouter {
           settings: settings,
         );
       case AppRoutes.settings:
-        return MaterialPageRoute(
-          builder: (_) => const SettingsPage(),
-          settings: settings,
-        );
+        return _fadeRoute(const SettingsPage(), settings);
       case AppRoutes.login:
         return MaterialPageRoute(
           builder: (_) => const LoginPage(),
@@ -73,5 +64,23 @@ class AppRouter {
           settings: settings,
         );
     }
+  }
+
+  static PageRoute _fadeRoute(Widget page, RouteSettings settings) {
+    return PageRouteBuilder(
+      settings: settings,
+      pageBuilder: (_, __, ___) => page,
+      transitionDuration: const Duration(milliseconds: 180),
+      reverseTransitionDuration: const Duration(milliseconds: 180),
+      transitionsBuilder: (_, animation, secondaryAnimation, child) {
+        final fade = CurvedAnimation(parent: animation, curve: Curves.easeOutCubic);
+        final slide = Tween<Offset>(begin: const Offset(0, 0.02), end: Offset.zero)
+            .animate(CurvedAnimation(parent: animation, curve: Curves.easeOutCubic));
+        return FadeTransition(
+          opacity: fade,
+          child: SlideTransition(position: slide, child: child),
+        );
+      },
+    );
   }
 }
