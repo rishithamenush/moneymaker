@@ -89,12 +89,18 @@ class _OverviewPageState extends State<OverviewPage> with TickerProviderStateMix
                   color: AppColors.surface,
                   borderRadius: BorderRadius.circular(AppDimensions.radiusM),
                 ),
+                clipBehavior: Clip.antiAlias,
                 child: TabBar(
                   controller: _tabController,
+                  isScrollable: false,
                   indicator: BoxDecoration(
                     color: AppColors.primary,
                     borderRadius: BorderRadius.circular(AppDimensions.radiusM),
                   ),
+                  indicatorSize: TabBarIndicatorSize.tab,
+                  indicatorPadding: EdgeInsets.zero,
+                  dividerColor: Colors.transparent,
+                  labelPadding: EdgeInsets.zero,
                   labelColor: AppColors.textPrimary,
                   unselectedLabelColor: AppColors.textSecondary,
                   labelStyle: const TextStyle(
