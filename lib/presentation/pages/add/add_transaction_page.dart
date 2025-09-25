@@ -478,14 +478,14 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
 
   List<Category> _getFilteredCategories(List<Category> allCategories) {
     if (_selectedType == TransactionType.income) {
-      // For income, only show salary and others categories
-      return allCategories.where((category) => 
-        category.id == 'salary' || category.id == 'income_others'
+      // Treat categories with id prefix 'income_' or specific defaults as income
+      return allCategories.where((category) =>
+        category.id == 'salary' || category.id.startsWith('income_')
       ).toList();
     } else {
-      // For expenses, show all categories except income-specific ones
-      return allCategories.where((category) => 
-        category.id != 'salary' && category.id != 'income_others'
+      // Everything else is expense (exclude income prefixed ones)
+      return allCategories.where((category) =>
+        category.id != 'salary' && !category.id.startsWith('income_')
       ).toList();
     }
   }

@@ -179,6 +179,11 @@ class _SettingsPageState extends State<SettingsPage> {
     );
   }
 
+  bool _isIncomeCategory(Category category) {
+    // Heuristic: ids we seeded for income start with 'salary' or 'income_' prefix
+    return category.id == 'salary' || category.id.startsWith('income_');
+  }
+
   Widget _buildSectionHeader(String title) {
     return Padding(
       padding: const EdgeInsets.only(bottom: AppDimensions.paddingS),
@@ -571,6 +576,7 @@ class _CategoryManagerSheet extends StatefulWidget {
 class _CategoryManagerSheetState extends State<_CategoryManagerSheet> {
   final TextEditingController _nameController = TextEditingController();
   Color _selectedColor = const Color(0xFFFF6B35);
+  bool _isIncome = false;
 
   @override
   void dispose() {
@@ -620,20 +626,18 @@ class _CategoryManagerSheetState extends State<_CategoryManagerSheet> {
                           return _buildAddRow(context);
                         }
                         final category = categories[index - 1];
-                        final isDefault = category.isDefault;
+                        final isIncome = _isIncomeCategory(category);
                         return ListTile(
                           leading: CircleAvatar(
                             backgroundColor: Color(category.colorValue),
                             child: const Icon(Icons.label, color: Colors.white, size: 18),
                           ),
                           title: Text(category.name, style: const TextStyle(color: AppColors.textPrimary)),
-                          subtitle: Text(isDefault ? 'Default' : 'Custom', style: const TextStyle(color: AppColors.textSecondary, fontSize: 12)),
-                          trailing: isDefault
-                              ? null
-                              : IconButton(
-                                  icon: const Icon(Icons.delete_outline, color: AppColors.error),
-                                  onPressed: () => context.read<CategoryProvider>().deleteCategory(category.id),
-                                ),
+                          subtitle: Text(isIncome ? 'Income' : 'Expense', style: const TextStyle(color: AppColors.textSecondary, fontSize: 12)),
+                          trailing: IconButton(
+                            icon: const Icon(Icons.delete_outline, color: AppColors.error),
+                            onPressed: () => context.read<CategoryProvider>().deleteCategory(category.id),
+                          ),
                         );
                       },
                     );
@@ -647,11 +651,33 @@ class _CategoryManagerSheetState extends State<_CategoryManagerSheet> {
     );
   }
 
+  // Determine if a category is an income category
+  bool _isIncomeCategory(Category category) {
+    return category.id == 'salary' || category.id.startsWith('income_');
+  }
+
   Widget _buildAddRow(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
       child: Row(
         children: [
+          ToggleButtons(
+            isSelected: [_isIncome == false, _isIncome == true],
+            borderRadius: BorderRadius.circular(8),
+            constraints: const BoxConstraints(minHeight: 36, minWidth: 72),
+            selectedColor: Colors.white,
+            fillColor: AppColors.primary,
+            onPressed: (index) {
+              setState(() {
+                _isIncome = index == 1;
+              });
+            },
+            children: const [
+              Padding(padding: EdgeInsets.symmetric(horizontal: 8), child: Text('Expense')),
+              Padding(padding: EdgeInsets.symmetric(horizontal: 8), child: Text('Income')),
+            ],
+          ),
+          const SizedBox(width: 8),
           Expanded(
             child: TextField(
               controller: _nameController,
@@ -692,8 +718,9 @@ class _CategoryManagerSheetState extends State<_CategoryManagerSheet> {
               onPressed: () {
               final name = _nameController.text.trim();
               if (name.isEmpty) return;
+              final prefix = _isIncome ? 'income_' : 'expense_';
               final category = Category(
-                id: DateTime.now().millisecondsSinceEpoch.toString(),
+                id: '${prefix}${DateTime.now().millisecondsSinceEpoch}',
                 name: name,
                 iconName: 'label',
                 colorValue: _selectedColor.value,
