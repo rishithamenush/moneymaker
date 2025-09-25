@@ -659,88 +659,133 @@ class _CategoryManagerSheetState extends State<_CategoryManagerSheet> {
   Widget _buildAddRow(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
-      child: Row(
-        children: [
-          ToggleButtons(
-            isSelected: [_isIncome == false, _isIncome == true],
-            borderRadius: BorderRadius.circular(8),
-            constraints: const BoxConstraints(minHeight: 36, minWidth: 72),
-            selectedColor: Colors.white,
-            fillColor: AppColors.primary,
-            onPressed: (index) {
-              setState(() {
-                _isIncome = index == 1;
-              });
-            },
-            children: const [
-              Padding(padding: EdgeInsets.symmetric(horizontal: 8), child: Text('Expense')),
-              Padding(padding: EdgeInsets.symmetric(horizontal: 8), child: Text('Income')),
+      child: Card(
+        elevation: 2,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        child: Padding(
+          padding: const EdgeInsets.all(12.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                'Create new category',
+                style: TextStyle(fontWeight: FontWeight.w700, color: AppColors.textPrimary),
+              ),
+              const SizedBox(height: 10),
+              Wrap(
+                crossAxisAlignment: WrapCrossAlignment.center,
+                spacing: 12,
+                runSpacing: 12,
+                children: [
+                  // Type selector (modern chips)
+                  StatefulBuilder(
+                    builder: (context, setStateChips) {
+                      return Wrap(
+                        spacing: 8,
+                        children: [
+                          ChoiceChip(
+                            label: const Text('Expense'),
+                            selected: !_isIncome,
+                            onSelected: (v) {
+                              setState(() { _isIncome = false; });
+                              setStateChips(() {});
+                            },
+                            selectedColor: AppColors.primary,
+                            labelStyle: TextStyle(color: !_isIncome ? Colors.white : AppColors.textPrimary),
+                          ),
+                          ChoiceChip(
+                            label: const Text('Income'),
+                            selected: _isIncome,
+                            onSelected: (v) {
+                              setState(() { _isIncome = true; });
+                              setStateChips(() {});
+                            },
+                            selectedColor: AppColors.primary,
+                            labelStyle: TextStyle(color: _isIncome ? Colors.white : AppColors.textPrimary),
+                          ),
+                        ],
+                      );
+                    },
+                  ),
+                  // Name field (take available width)
+                  ConstrainedBox(
+                    constraints: const BoxConstraints(minWidth: 200, maxWidth: 280),
+                    child: TextField(
+                      controller: _nameController,
+                      decoration: InputDecoration(
+                        hintText: 'Category name',
+                        filled: true,
+                        fillColor: AppColors.surface,
+                        contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: const BorderSide(color: AppColors.surfaceLight),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: const BorderSide(color: AppColors.surfaceLight),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: const BorderSide(color: AppColors.primary),
+                        ),
+                      ),
+                    ),
+                  ),
+                  // Color picker
+                  OutlinedButton.icon(
+                    onPressed: () async {
+                      final color = await showDialog<Color>(
+                        context: context,
+                        builder: (context) => _SimpleColorPicker(initial: _selectedColor),
+                      );
+                      if (color != null) {
+                        setState(() { _selectedColor = color; });
+                      }
+                    },
+                    icon: Container(
+                      width: 16,
+                      height: 16,
+                      decoration: BoxDecoration(color: _selectedColor, shape: BoxShape.circle),
+                    ),
+                    style: OutlinedButton.styleFrom(
+                      side: const BorderSide(color: AppColors.surfaceLight),
+                      foregroundColor: AppColors.textPrimary,
+                    ),
+                    label: const Text('Pick color'),
+                  ),
+                  // Add button
+                  ElevatedButton.icon(
+                    onPressed: () {
+                      final name = _nameController.text.trim();
+                      if (name.isEmpty) return;
+                      final prefix = _isIncome ? 'income_' : 'expense_';
+                      final category = Category(
+                        id: '${prefix}${DateTime.now().millisecondsSinceEpoch}',
+                        name: name,
+                        iconName: 'label',
+                        colorValue: _selectedColor.value,
+                        isDefault: false,
+                        createdAt: DateTime.now(),
+                        updatedAt: DateTime.now(),
+                      );
+                      context.read<CategoryProvider>().addCategory(category);
+                      _nameController.clear();
+                    },
+                    icon: const Icon(Icons.add, size: 18),
+                    label: const Text('Add'),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColors.primary,
+                      foregroundColor: Colors.white,
+                      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                    ),
+                  ),
+                ],
+              ),
             ],
           ),
-          const SizedBox(width: 8),
-          Expanded(
-            child: TextField(
-              controller: _nameController,
-              decoration: const InputDecoration(
-                hintText: 'New category name',
-              ),
-            ),
-          ),
-          const SizedBox(width: 8),
-          SizedBox(
-            width: 32,
-            height: 32,
-            child: GestureDetector(
-            onTap: () async {
-              final color = await showDialog<Color>(
-                context: context,
-                builder: (context) => _SimpleColorPicker(initial: _selectedColor),
-              );
-              if (color != null) {
-                setState(() {
-                  _selectedColor = color;
-                });
-              }
-            },
-            child: Container(
-              decoration: BoxDecoration(
-                color: _selectedColor,
-                borderRadius: BorderRadius.circular(6),
-                border: Border.all(color: AppColors.surfaceLight),
-              ),
-            ),
-          )),
-          const SizedBox(width: 8),
-          SizedBox(
-            height: 40,
-            width: 72,
-            child: ElevatedButton(
-              onPressed: () {
-              final name = _nameController.text.trim();
-              if (name.isEmpty) return;
-              final prefix = _isIncome ? 'income_' : 'expense_';
-              final category = Category(
-                id: '${prefix}${DateTime.now().millisecondsSinceEpoch}',
-                name: name,
-                iconName: 'label',
-                colorValue: _selectedColor.value,
-                isDefault: false,
-                createdAt: DateTime.now(),
-                updatedAt: DateTime.now(),
-              );
-              context.read<CategoryProvider>().addCategory(category);
-              _nameController.clear();
-              },
-              style: ElevatedButton.styleFrom(
-                minimumSize: const Size(72, 40),
-                padding: EdgeInsets.zero,
-                backgroundColor: AppColors.primary,
-                foregroundColor: Colors.white,
-              ),
-              child: const Text('Add'),
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }
