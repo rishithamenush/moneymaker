@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/dimensions.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../app/routes.dart';
+import '../../providers/auth_provider.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -119,7 +121,14 @@ class _SplashPageState extends State<SplashPage>
   }
 
   void _navigateToHome() {
-    Navigator.pushReplacementNamed(context, AppRoutes.login);
+    final authProvider = context.read<AuthProvider>();
+    
+    // Check if user is already authenticated
+    if (authProvider.isAuthenticated) {
+      Navigator.pushReplacementNamed(context, AppRoutes.home);
+    } else {
+      Navigator.pushReplacementNamed(context, AppRoutes.login);
+    }
   }
 
   @override

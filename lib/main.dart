@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'app/app.dart';
 import 'services/database/database_service.dart';
 
@@ -21,6 +22,18 @@ void main() async {
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
+  
+  // Initialize Firebase
+  bool firebaseInitialized = false;
+  try {
+    await Firebase.initializeApp();
+    firebaseInitialized = true;
+    print('Firebase initialized successfully');
+  } catch (e) {
+    print('Firebase initialization failed: $e');
+    print('Continuing without Firebase - authentication features will be limited');
+    firebaseInitialized = false;
+  }
   
   // Initialize database
   await DatabaseService.initialize();

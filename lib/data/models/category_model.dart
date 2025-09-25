@@ -7,6 +7,7 @@ class CategoryModel extends Category {
     required super.name,
     required super.colorValue,
     required super.iconName,
+    super.isDefault = false,
     required super.createdAt,
     required super.updatedAt,
   });
@@ -17,6 +18,7 @@ class CategoryModel extends Category {
       name: json[CategoriesTable.name] as String,
       colorValue: json[CategoriesTable.colorValue] as int,
       iconName: json[CategoriesTable.iconName] as String,
+      isDefault: (json[CategoriesTable.isDefault] as int? ?? 0) == 1,
       createdAt: DateTime.parse(json[CategoriesTable.createdAt] as String),
       updatedAt: DateTime.parse(json[CategoriesTable.updatedAt] as String),
     );
@@ -28,6 +30,7 @@ class CategoryModel extends Category {
       CategoriesTable.name: name,
       CategoriesTable.colorValue: colorValue,
       CategoriesTable.iconName: iconName,
+      CategoriesTable.isDefault: isDefault ? 1 : 0,
       CategoriesTable.createdAt: createdAt.toIso8601String(),
       CategoriesTable.updatedAt: updatedAt.toIso8601String(),
     };
@@ -39,6 +42,7 @@ class CategoryModel extends Category {
       name: category.name,
       colorValue: category.colorValue,
       iconName: category.iconName,
+      isDefault: category.isDefault,
       createdAt: category.createdAt,
       updatedAt: category.updatedAt,
     );
@@ -50,6 +54,7 @@ class CategoryModel extends Category {
       name: name,
       colorValue: colorValue,
       iconName: iconName,
+      isDefault: isDefault,
       createdAt: createdAt,
       updatedAt: updatedAt,
     );

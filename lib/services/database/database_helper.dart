@@ -7,7 +7,7 @@ import '../../data/database/tables/incomes_table.dart';
 
 class DatabaseHelper {
   static const String _databaseName = 'moneymaker.db';
-  static const int _databaseVersion = 2;
+  static const int _databaseVersion = 3;
   
   static Database? _database;
   
@@ -49,6 +49,10 @@ class DatabaseHelper {
       // Add incomes table for version 2
       await db.execute(IncomesTable.createTableQuery);
     }
+    if (oldVersion < 3) {
+      // Add is_default column to categories table for version 3
+      await db.execute('ALTER TABLE ${CategoriesTable.tableName} ADD COLUMN is_default INTEGER NOT NULL DEFAULT 0');
+    }
   }
   
   static Future<void> _insertDefaultCategories(Database db) async {
@@ -58,6 +62,7 @@ class DatabaseHelper {
         'name': 'Food & Dining',
         'color_value': 0xFF4CAF50,
         'icon_name': 'restaurant',
+        'is_default': 1,
         'created_at': DateTime.now().toIso8601String(),
         'updated_at': DateTime.now().toIso8601String(),
       },
@@ -66,6 +71,7 @@ class DatabaseHelper {
         'name': 'Auto & Transport',
         'color_value': 0xFF2196F3,
         'icon_name': 'directions_car',
+        'is_default': 1,
         'created_at': DateTime.now().toIso8601String(),
         'updated_at': DateTime.now().toIso8601String(),
       },
@@ -74,6 +80,7 @@ class DatabaseHelper {
         'name': 'Bills & Utilities',
         'color_value': 0xFFFF9800,
         'icon_name': 'receipt',
+        'is_default': 1,
         'created_at': DateTime.now().toIso8601String(),
         'updated_at': DateTime.now().toIso8601String(),
       },
@@ -82,6 +89,7 @@ class DatabaseHelper {
         'name': 'Shopping',
         'color_value': 0xFF9C27B0,
         'icon_name': 'shopping_bag',
+        'is_default': 1,
         'created_at': DateTime.now().toIso8601String(),
         'updated_at': DateTime.now().toIso8601String(),
       },
@@ -90,6 +98,7 @@ class DatabaseHelper {
         'name': 'Entertainment',
         'color_value': 0xFFE91E63,
         'icon_name': 'movie',
+        'is_default': 1,
         'created_at': DateTime.now().toIso8601String(),
         'updated_at': DateTime.now().toIso8601String(),
       },
@@ -98,6 +107,7 @@ class DatabaseHelper {
         'name': 'Salary',
         'color_value': 0xFF4CAF50,
         'icon_name': 'work',
+        'is_default': 1,
         'created_at': DateTime.now().toIso8601String(),
         'updated_at': DateTime.now().toIso8601String(),
       },
@@ -106,6 +116,7 @@ class DatabaseHelper {
         'name': 'Others',
         'color_value': 0xFF9C27B0,
         'icon_name': 'more_horiz',
+        'is_default': 1,
         'created_at': DateTime.now().toIso8601String(),
         'updated_at': DateTime.now().toIso8601String(),
       },
@@ -114,6 +125,7 @@ class DatabaseHelper {
         'name': 'Health & Fitness',
         'color_value': 0xFF00BCD4,
         'icon_name': 'favorite',
+        'is_default': 1,
         'created_at': DateTime.now().toIso8601String(),
         'updated_at': DateTime.now().toIso8601String(),
       },
@@ -122,6 +134,7 @@ class DatabaseHelper {
         'name': 'Education',
         'color_value': 0xFF795548,
         'icon_name': 'school',
+        'is_default': 1,
         'created_at': DateTime.now().toIso8601String(),
         'updated_at': DateTime.now().toIso8601String(),
       },
@@ -130,6 +143,7 @@ class DatabaseHelper {
         'name': 'Other',
         'color_value': 0xFF607D8B,
         'icon_name': 'more_horiz',
+        'is_default': 1,
         'created_at': DateTime.now().toIso8601String(),
         'updated_at': DateTime.now().toIso8601String(),
       },

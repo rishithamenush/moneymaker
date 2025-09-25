@@ -3,8 +3,10 @@ import 'package:provider/provider.dart';
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/dimensions.dart';
 import '../../providers/theme_provider.dart';
+import '../../providers/auth_provider.dart';
 import '../../widgets/common/custom_app_bar.dart';
 import '../../navigation/bottom_nav_bar.dart';
+import '../../../app/routes.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
@@ -25,6 +27,20 @@ class _SettingsPageState extends State<SettingsPage> {
       body: ListView(
         padding: const EdgeInsets.all(AppDimensions.paddingM),
         children: [
+          // Account Section
+          _buildSectionHeader('Account'),
+          _buildSettingsCard([
+            _buildSettingsItem(
+              icon: Icons.logout,
+              title: 'Logout',
+              subtitle: 'Sign out of your account',
+              onTap: () => _showLogoutDialog(),
+              isDestructive: true,
+            ),
+          ]),
+          
+          const SizedBox(height: AppDimensions.paddingL),
+          
           // Appearance Section
           _buildSectionHeader('Appearance'),
           _buildSettingsCard([
@@ -460,5 +476,61 @@ class _SettingsPageState extends State<SettingsPage> {
         ],
       ),
     );
+  }
+
+  void _showLogoutDialog() {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Logout'),
+        content: const Text('Are you sure you want to logout?'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('Cancel'),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context);
+              _logout();
+            },
+            style: TextButton.styleFrom(foregroundColor: AppColors.error),
+            child: const Text('Logout'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _logout() async {
+    try {
+      final authProvider = context.read<AuthProvider>();
+      await authProvider.logout();
+      
+      if (mounted) {
+        // Navigate to login screen and clear all previous routes
+        Navigator.pushNamedAndRemoveUntil(
+          context,
+          AppRoutes.login,
+          (route) => false,
+        );
+        
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Logged out successfully'),
+            backgroundColor: AppColors.success,
+          ),
+        );
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Logout failed: ${e.toString()}'),
+            backgroundColor: AppColors.error,
+          ),
+        );
+      }
+    }
   }
 }

@@ -8,6 +8,7 @@ import '../presentation/providers/category_provider.dart';
 import '../presentation/providers/income_provider.dart';
 import '../presentation/navigation/app_router.dart';
 import '../core/theme/app_theme.dart';
+import 'routes.dart';
 import '../domain/usecases/expense/get_expenses.dart';
 import '../domain/usecases/expense/add_expense.dart';
 import '../domain/usecases/expense/update_expense.dart';
@@ -72,6 +73,7 @@ class MoneyMakerApp extends StatelessWidget {
             theme: AppTheme.lightTheme,
             darkTheme: AppTheme.darkTheme,
             themeMode: themeProvider.themeMode,
+            initialRoute: AppRoutes.splash,
             onGenerateRoute: AppRouter.generateRoute,
             debugShowCheckedModeBanner: false,
           );

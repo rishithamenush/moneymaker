@@ -396,9 +396,7 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
               child: _buildSocialButton(
                 icon: Icons.g_mobiledata,
                 label: 'Google',
-                onPressed: () {
-                  // TODO: Implement Google Sign In
-                },
+                onPressed: _handleGoogleSignIn,
               ),
             ),
             const SizedBox(width: AppDimensions.paddingM),
@@ -496,6 +494,23 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
       );
     } else if (mounted) {
       _showErrorSnackBar(authProvider.error ?? 'Login failed');
+    }
+  }
+
+  Future<void> _handleGoogleSignIn() async {
+    final authProvider = context.read<AuthProvider>();
+    authProvider.clearError();
+
+    final success = await authProvider.signInWithGoogle();
+
+    if (success && mounted) {
+      Navigator.pushNamedAndRemoveUntil(
+        context,
+        AppRoutes.home,
+        (route) => false,
+      );
+    } else if (mounted && authProvider.error != null) {
+      _showErrorSnackBar(authProvider.error!);
     }
   }
 

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "340098329644",
+    "project_id": "moneymaker-e0ceb",
+    "storage_bucket": "moneymaker-e0ceb.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:340098329644:android:2bbf39181a1f7d9ea63589",
+        "android_client_info": {
+          "package_name": "com.example.moneymaker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "340098329644-fu6un0ton23gmtes9fp3o4a90vqea4ig.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZ1BObGJEQHm7TpDnVjW9lvh94KdnYScM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "340098329644-fu6un0ton23gmtes9fp3o4a90vqea4ig.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
