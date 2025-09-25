@@ -2,16 +2,20 @@ import 'package:flutter/material.dart';
 import '../../domain/entities/category.dart';
 import '../../domain/usecases/category/get_categories.dart';
 import '../../domain/usecases/category/add_category.dart';
+import '../../domain/usecases/category/delete_category.dart';
 
 class CategoryProvider extends ChangeNotifier {
   final GetCategories _getCategories;
   final AddCategory _addCategory;
+  final DeleteCategory? _deleteCategory;
 
   CategoryProvider({
     required GetCategories getCategories,
     required AddCategory addCategory,
+    DeleteCategory? deleteCategory,
   })  : _getCategories = getCategories,
-        _addCategory = addCategory;
+        _addCategory = addCategory,
+        _deleteCategory = deleteCategory;
 
   List<Category> _categories = [];
   bool _isLoading = false;
@@ -39,6 +43,18 @@ class CategoryProvider extends ChangeNotifier {
     try {
       await _addCategory(category);
       _categories.add(category);
+      notifyListeners();
+    } catch (e) {
+      _setError(e.toString());
+    }
+  }
+
+  Future<void> deleteCategory(String id) async {
+    try {
+      if (_deleteCategory != null) {
+        await _deleteCategory!(id);
+      }
+      _categories.removeWhere((c) => c.id == id);
       notifyListeners();
     } catch (e) {
       _setError(e.toString());

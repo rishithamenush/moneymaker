@@ -4,6 +4,8 @@ import '../../../core/constants/colors.dart';
 import '../../../core/constants/dimensions.dart';
 import '../../providers/theme_provider.dart';
 import '../../providers/auth_provider.dart';
+import '../../providers/category_provider.dart';
+import '../../../domain/entities/category.dart';
 import '../../widgets/common/custom_app_bar.dart';
 import '../../navigation/bottom_nav_bar.dart';
 import '../../../app/routes.dart';
@@ -41,6 +43,19 @@ class _SettingsPageState extends State<SettingsPage> {
           
           const SizedBox(height: AppDimensions.paddingL),
           
+          // Categories Section
+          _buildSectionHeader('Categories'),
+          _buildSettingsCard([
+            _buildSettingsItem(
+              icon: Icons.category,
+              title: 'Customize Categories',
+              subtitle: 'Add, rename, or delete your own categories',
+              onTap: () => _openCategoryManager(),
+            ),
+          ]),
+
+          const SizedBox(height: AppDimensions.paddingL),
+
           // Appearance Section
           _buildSectionHeader('Appearance'),
           _buildSettingsCard([
@@ -307,6 +322,17 @@ class _SettingsPageState extends State<SettingsPage> {
     );
   }
 
+  void _openCategoryManager() {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (context) {
+        return const _CategoryManagerSheet();
+      },
+    );
+  }
+
   void _showCurrencyDialog() {
     showDialog(
       context: context,
@@ -532,5 +558,217 @@ class _SettingsPageState extends State<SettingsPage> {
         );
       }
     }
+  }
+}
+
+class _CategoryManagerSheet extends StatefulWidget {
+  const _CategoryManagerSheet();
+
+  @override
+  State<_CategoryManagerSheet> createState() => _CategoryManagerSheetState();
+}
+
+class _CategoryManagerSheetState extends State<_CategoryManagerSheet> {
+  final TextEditingController _nameController = TextEditingController();
+  Color _selectedColor = const Color(0xFFFF6B35);
+
+  @override
+  void dispose() {
+    _nameController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return DraggableScrollableSheet(
+      initialChildSize: 0.85,
+      minChildSize: 0.6,
+      maxChildSize: 0.95,
+      builder: (context, controller) {
+        return Container(
+          decoration: BoxDecoration(
+            color: AppColors.background,
+            borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
+          ),
+          child: Column(
+            children: [
+              Container(
+                width: 36,
+                height: 4,
+                margin: const EdgeInsets.only(top: 8, bottom: 12),
+                decoration: BoxDecoration(
+                  color: AppColors.surfaceLight,
+                  borderRadius: BorderRadius.circular(2),
+                ),
+              ),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
+                child: Text(
+                  'Customize Categories',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700, color: AppColors.textPrimary),
+                ),
+              ),
+              Expanded(
+                child: Consumer<CategoryProvider>(
+                  builder: (context, provider, _) {
+                    final categories = provider.categories;
+                    return ListView.builder(
+                      controller: controller,
+                      itemCount: categories.length + 1,
+                      itemBuilder: (context, index) {
+                        if (index == 0) {
+                          return _buildAddRow(context);
+                        }
+                        final category = categories[index - 1];
+                        final isDefault = category.isDefault;
+                        return ListTile(
+                          leading: CircleAvatar(
+                            backgroundColor: Color(category.colorValue),
+                            child: const Icon(Icons.label, color: Colors.white, size: 18),
+                          ),
+                          title: Text(category.name, style: const TextStyle(color: AppColors.textPrimary)),
+                          subtitle: Text(isDefault ? 'Default' : 'Custom', style: const TextStyle(color: AppColors.textSecondary, fontSize: 12)),
+                          trailing: isDefault
+                              ? null
+                              : IconButton(
+                                  icon: const Icon(Icons.delete_outline, color: AppColors.error),
+                                  onPressed: () => context.read<CategoryProvider>().deleteCategory(category.id),
+                                ),
+                        );
+                      },
+                    );
+                  },
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _buildAddRow(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
+      child: Row(
+        children: [
+          Expanded(
+            child: TextField(
+              controller: _nameController,
+              decoration: const InputDecoration(
+                hintText: 'New category name',
+              ),
+            ),
+          ),
+          const SizedBox(width: 8),
+          SizedBox(
+            width: 32,
+            height: 32,
+            child: GestureDetector(
+            onTap: () async {
+              final color = await showDialog<Color>(
+                context: context,
+                builder: (context) => _SimpleColorPicker(initial: _selectedColor),
+              );
+              if (color != null) {
+                setState(() {
+                  _selectedColor = color;
+                });
+              }
+            },
+            child: Container(
+              decoration: BoxDecoration(
+                color: _selectedColor,
+                borderRadius: BorderRadius.circular(6),
+                border: Border.all(color: AppColors.surfaceLight),
+              ),
+            ),
+          )),
+          const SizedBox(width: 8),
+          SizedBox(
+            height: 40,
+            width: 72,
+            child: ElevatedButton(
+              onPressed: () {
+              final name = _nameController.text.trim();
+              if (name.isEmpty) return;
+              final category = Category(
+                id: DateTime.now().millisecondsSinceEpoch.toString(),
+                name: name,
+                iconName: 'label',
+                colorValue: _selectedColor.value,
+                isDefault: false,
+                createdAt: DateTime.now(),
+                updatedAt: DateTime.now(),
+              );
+              context.read<CategoryProvider>().addCategory(category);
+              _nameController.clear();
+              },
+              style: ElevatedButton.styleFrom(
+                minimumSize: const Size(72, 40),
+                padding: EdgeInsets.zero,
+                backgroundColor: AppColors.primary,
+                foregroundColor: Colors.white,
+              ),
+              child: const Text('Add'),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _SimpleColorPicker extends StatelessWidget {
+  final Color initial;
+  const _SimpleColorPicker({required this.initial});
+
+  @override
+  Widget build(BuildContext context) {
+    final colors = [
+      const Color(0xFFFF6B35),
+      const Color(0xFFFF8E53),
+      const Color(0xFF4CAF50),
+      const Color(0xFF2196F3),
+      const Color(0xFF9C27B0),
+      const Color(0xFFE91E63),
+      const Color(0xFF00BCD4),
+      const Color(0xFF795548),
+      const Color(0xFF607D8B),
+    ];
+    Color selected = initial;
+    return AlertDialog(
+      title: const Text('Pick a color'),
+      content: StatefulBuilder(
+        builder: (context, setState) {
+          return Wrap(
+            spacing: 8,
+            runSpacing: 8,
+            children: colors.map((c) {
+              final isSel = c.value == selected.value;
+              return GestureDetector(
+                onTap: () => setState(() => selected = c),
+                child: Container(
+                  width: 36,
+                  height: 36,
+                  decoration: BoxDecoration(
+                    color: c,
+                    shape: BoxShape.circle,
+                    border: Border.all(color: isSel ? Colors.white : Colors.transparent, width: 2),
+                    boxShadow: [
+                      BoxShadow(color: Colors.black.withOpacity(0.1), blurRadius: 4, offset: const Offset(0, 2)),
+                    ],
+                  ),
+                ),
+              );
+            }).toList(),
+          );
+        },
+      ),
+      actions: [
+        TextButton(onPressed: () => Navigator.pop(context), child: const Text('Cancel')),
+        TextButton(onPressed: () => Navigator.pop(context, selected), child: const Text('Select')),
+      ],
+    );
   }
 }

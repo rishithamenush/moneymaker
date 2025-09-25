@@ -18,6 +18,7 @@ import '../domain/usecases/budget/create_budget.dart';
 import '../domain/usecases/budget/update_budget.dart';
 import '../domain/usecases/category/get_categories.dart';
 import '../domain/usecases/category/add_category.dart';
+import '../domain/usecases/category/delete_category.dart';
 import '../domain/usecases/income/get_incomes.dart';
 import '../domain/usecases/income/add_income.dart';
 import '../domain/usecases/income/update_income.dart';
@@ -55,6 +56,7 @@ class MoneyMakerApp extends StatelessWidget {
                 create: (_) => CategoryProvider(
                   getCategories: GetCategories(CategoryRepositoryImpl()),
                   addCategory: AddCategory(CategoryRepositoryImpl()),
+                  deleteCategory: DeleteCategory(CategoryRepositoryImpl()),
                 ),
               ),
               ChangeNotifierProvider(
