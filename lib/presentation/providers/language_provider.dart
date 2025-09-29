@@ -15,6 +15,7 @@ class LanguageProvider extends ChangeNotifier {
     Locale('de', ''), // German
     Locale('zh', ''), // Chinese
     Locale('ja', ''), // Japanese
+    Locale('si', ''), // Sinhala
   ];
   
   // Language names for display
@@ -25,6 +26,7 @@ class LanguageProvider extends ChangeNotifier {
     'de': 'Deutsch',
     'zh': '中文',
     'ja': '日本語',
+    'si': 'සිංහල',
   };
   
   Locale get locale => _locale;

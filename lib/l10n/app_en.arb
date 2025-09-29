@@ -483,5 +483,10 @@
   "japanese": "Japanese",
   "@japanese": {
     "description": "Japanese language option"
+  },
+  
+  "sinhala": "සිංහල",
+  "@sinhala": {
+    "description": "Sinhala language option"
   }
 }
