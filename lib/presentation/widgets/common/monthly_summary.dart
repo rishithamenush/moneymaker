@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/dimensions.dart';
 import '../../../core/utils/formatters.dart';
+import '../../../core/utils/theme_colors.dart';
 
 class MonthlySummary extends StatelessWidget {
   final double totalSpent;
@@ -25,7 +26,7 @@ class MonthlySummary extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(AppDimensions.paddingL),
       decoration: BoxDecoration(
-        color: AppColors.surface,
+        color: ThemeColors.getSurface(context),
         borderRadius: BorderRadius.circular(AppDimensions.radiusL),
         boxShadow: [
           BoxShadow(
@@ -41,10 +42,10 @@ class MonthlySummary extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text(
+              Text(
                 'Monthly Summary',
                 style: TextStyle(
-                  color: AppColors.textPrimary,
+                  color: ThemeColors.getTextPrimary(context),
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
                 ),
@@ -79,18 +80,18 @@ class MonthlySummary extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
+                    Text(
                       'Total Spent',
                       style: TextStyle(
-                        color: AppColors.textSecondary,
+                        color: ThemeColors.getTextSecondary(context),
                         fontSize: 14,
                       ),
                     ),
                     const SizedBox(height: AppDimensions.paddingXS),
                     Text(
                       Formatters.formatCurrency(totalSpent),
-                      style: const TextStyle(
-                        color: AppColors.textPrimary,
+                      style: TextStyle(
+                        color: ThemeColors.getTextPrimary(context),
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
                       ),
@@ -102,10 +103,10 @@ class MonthlySummary extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    const Text(
+                    Text(
                       'Remaining',
                       style: TextStyle(
-                        color: AppColors.textSecondary,
+                        color: ThemeColors.getTextSecondary(context),
                         fontSize: 14,
                       ),
                     ),
@@ -113,7 +114,7 @@ class MonthlySummary extends StatelessWidget {
                     Text(
                       Formatters.formatCurrency(remainingAmount),
                       style: TextStyle(
-                        color: isOverBudget ? AppColors.error : AppColors.textPrimary,
+                        color: isOverBudget ? AppColors.error : ThemeColors.getTextPrimary(context),
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
                       ),
@@ -133,17 +134,17 @@ class MonthlySummary extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text(
+                  Text(
                     'Budget Progress',
                     style: TextStyle(
-                      color: AppColors.textSecondary,
+                      color: ThemeColors.getTextSecondary(context),
                       fontSize: 12,
                     ),
                   ),
                   Text(
                     '${Formatters.formatCurrency(totalSpent)} / ${Formatters.formatCurrency(totalBudget)}',
-                    style: const TextStyle(
-                      color: AppColors.textSecondary,
+                    style: TextStyle(
+                      color: ThemeColors.getTextSecondary(context),
                       fontSize: 12,
                     ),
                   ),
@@ -154,7 +155,7 @@ class MonthlySummary extends StatelessWidget {
                 borderRadius: BorderRadius.circular(AppDimensions.radiusS),
                 child: LinearProgressIndicator(
                   value: spentPercentage.clamp(0.0, 1.0),
-                  backgroundColor: AppColors.surfaceLight,
+                  backgroundColor: ThemeColors.getSurfaceLight(context),
                   valueColor: AlwaysStoppedAnimation<Color>(progressColor),
                   minHeight: 8,
                 ),

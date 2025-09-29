@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../../../core/constants/strings.dart';
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/dimensions.dart';
+import '../../../core/utils/theme_colors.dart';
 import '../../app/routes.dart';
 
 class CustomBottomNavBar extends StatelessWidget {
@@ -16,11 +17,11 @@ class CustomBottomNavBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: AppDimensions.bottomNavHeight,
-      decoration: const BoxDecoration(
-        color: AppColors.surface,
+      decoration: BoxDecoration(
+        color: ThemeColors.getSurface(context),
         border: Border(
           top: BorderSide(
-            color: AppColors.surfaceLight,
+            color: ThemeColors.getSurfaceLight(context),
             width: 0.5,
           ),
         ),
@@ -78,7 +79,7 @@ class CustomBottomNavBar extends StatelessWidget {
           children: [
             Icon(
               icon,
-              color: isSelected ? AppColors.primary : AppColors.textSecondary,
+              color: isSelected ? AppColors.primary : ThemeColors.getTextSecondary(context),
               size: AppDimensions.iconS,
             ),
             const SizedBox(height: 2),
@@ -86,7 +87,7 @@ class CustomBottomNavBar extends StatelessWidget {
               child: Text(
                 label,
                 style: TextStyle(
-                  color: isSelected ? AppColors.primary : AppColors.textSecondary,
+                  color: isSelected ? AppColors.primary : ThemeColors.getTextSecondary(context),
                   fontSize: 10,
                   fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
                 ),

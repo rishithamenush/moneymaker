@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/dimensions.dart';
 import '../../../core/utils/formatters.dart';
+import '../../../core/utils/theme_colors.dart';
 import '../../../domain/entities/expense.dart';
 import '../../../domain/entities/budget.dart';
 
@@ -23,16 +24,16 @@ class SpendingTrends extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(AppDimensions.paddingM),
       decoration: BoxDecoration(
-        color: AppColors.surface,
+        color: ThemeColors.getSurface(context),
         borderRadius: BorderRadius.circular(AppDimensions.radiusL),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
+          Text(
             'Spending Trends',
             style: TextStyle(
-              color: AppColors.textPrimary,
+              color: ThemeColors.getTextPrimary(context),
               fontSize: 18,
               fontWeight: FontWeight.bold,
             ),
@@ -40,30 +41,30 @@ class SpendingTrends extends StatelessWidget {
           const SizedBox(height: AppDimensions.paddingL),
           
           // Weekly Breakdown
-          _buildWeeklyBreakdown(weeklyData),
+          _buildWeeklyBreakdown(weeklyData, context),
           
           const SizedBox(height: AppDimensions.paddingL),
           
           // Monthly Comparison
-          _buildMonthlyComparison(monthlyComparison),
+          _buildMonthlyComparison(monthlyComparison, context),
           
           const SizedBox(height: AppDimensions.paddingL),
           
           // Insights
-          _buildInsights(),
+          _buildInsights(context),
         ],
       ),
     );
   }
 
-  Widget _buildWeeklyBreakdown(List<WeeklyData> weeklyData) {
+  Widget _buildWeeklyBreakdown(List<WeeklyData> weeklyData, BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
+        Text(
           'This Week',
           style: TextStyle(
-            color: AppColors.textPrimary,
+            color: ThemeColors.getTextPrimary(context),
             fontSize: 16,
             fontWeight: FontWeight.w600,
           ),
@@ -78,8 +79,8 @@ class SpendingTrends extends StatelessWidget {
                   width: 80,
                   child: Text(
                     data.day,
-                    style: const TextStyle(
-                      color: AppColors.textSecondary,
+                    style: TextStyle(
+                      color: ThemeColors.getTextSecondary(context),
                       fontSize: 12,
                     ),
                   ),
@@ -88,7 +89,7 @@ class SpendingTrends extends StatelessWidget {
                   child: Container(
                     height: 8,
                     decoration: BoxDecoration(
-                      color: AppColors.surfaceLight,
+                      color: ThemeColors.getSurfaceLight(context),
                       borderRadius: BorderRadius.circular(AppDimensions.radiusS),
                     ),
                     child: FractionallySizedBox(
@@ -106,8 +107,8 @@ class SpendingTrends extends StatelessWidget {
                 const SizedBox(width: AppDimensions.paddingS),
                 Text(
                   Formatters.formatCurrency(data.amount),
-                  style: const TextStyle(
-                    color: AppColors.textPrimary,
+                  style: TextStyle(
+                    color: ThemeColors.getTextPrimary(context),
                     fontSize: 12,
                     fontWeight: FontWeight.w600,
                   ),
@@ -120,14 +121,14 @@ class SpendingTrends extends StatelessWidget {
     );
   }
 
-  Widget _buildMonthlyComparison(Map<String, double> comparison) {
+  Widget _buildMonthlyComparison(Map<String, double> comparison, BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
+        Text(
           'Monthly Comparison',
           style: TextStyle(
-            color: AppColors.textPrimary,
+            color: ThemeColors.getTextPrimary(context),
             fontSize: 16,
             fontWeight: FontWeight.w600,
           ),
@@ -140,6 +141,7 @@ class SpendingTrends extends StatelessWidget {
                 title: 'This Month',
                 amount: comparison['current'] ?? 0.0,
                 color: AppColors.primary,
+                context: context,
               ),
             ),
             const SizedBox(width: AppDimensions.paddingM),
@@ -147,7 +149,8 @@ class SpendingTrends extends StatelessWidget {
               child: _buildComparisonCard(
                 title: 'Last Month',
                 amount: comparison['previous'] ?? 0.0,
-                color: AppColors.textSecondary,
+                color: ThemeColors.getTextSecondary(context),
+                context: context,
               ),
             ),
           ],
@@ -160,19 +163,20 @@ class SpendingTrends extends StatelessWidget {
     required String title,
     required double amount,
     required Color color,
+    required BuildContext context,
   }) {
     return Container(
       padding: const EdgeInsets.all(AppDimensions.paddingM),
       decoration: BoxDecoration(
-        color: AppColors.surfaceLight,
+        color: ThemeColors.getSurfaceLight(context),
         borderRadius: BorderRadius.circular(AppDimensions.radiusM),
       ),
       child: Column(
         children: [
           Text(
             title,
-            style: const TextStyle(
-              color: AppColors.textSecondary,
+            style: TextStyle(
+              color: ThemeColors.getTextSecondary(context),
               fontSize: 12,
             ),
           ),
@@ -190,7 +194,7 @@ class SpendingTrends extends StatelessWidget {
     );
   }
 
-  Widget _buildInsights() {
+  Widget _buildInsights(BuildContext context) {
     final totalSpent = expenses.fold<double>(0.0, (sum, e) => sum + e.amount);
     final avgDaily = totalSpent / 30;
     final overBudgetCategories = budgets.where((b) => b.isOverBudget).length;
@@ -225,8 +229,8 @@ class SpendingTrends extends StatelessWidget {
           const SizedBox(height: AppDimensions.paddingS),
           Text(
             'Your average daily spending is ${Formatters.formatCurrency(avgDaily)}. ${overBudgetCategories > 0 ? 'You have $overBudgetCategories categories over budget.' : 'Great job staying within budget!'}',
-            style: const TextStyle(
-              color: AppColors.textPrimary,
+            style: TextStyle(
+              color: ThemeColors.getTextPrimary(context),
               fontSize: 12,
             ),
           ),

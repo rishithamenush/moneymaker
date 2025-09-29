@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/dimensions.dart';
+import '../../../core/utils/theme_colors.dart';
 import '../../../domain/entities/expense.dart';
 import '../../../domain/entities/category.dart';
 
@@ -18,11 +19,11 @@ class BarChartWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (expenses.isEmpty) {
-      return const Center(
+      return Center(
         child: Text(
           'No data to display',
           style: TextStyle(
-            color: AppColors.textSecondary,
+            color: ThemeColors.getTextSecondary(context),
             fontSize: 16,
           ),
         ),
@@ -36,10 +37,10 @@ class BarChartWidget extends StatelessWidget {
 
     return Column(
       children: [
-        const Text(
+        Text(
           'Monthly Spending by Category',
           style: TextStyle(
-            color: AppColors.textPrimary,
+            color: ThemeColors.getTextPrimary(context),
             fontSize: 16,
             fontWeight: FontWeight.w600,
           ),
@@ -53,13 +54,13 @@ class BarChartWidget extends StatelessWidget {
               barTouchData: BarTouchData(
                 enabled: true,
                 touchTooltipData: BarTouchTooltipData(
-                  tooltipBgColor: AppColors.surfaceLight,
+                  tooltipBgColor: ThemeColors.getSurfaceLight(context),
                   tooltipRoundedRadius: 8,
                   getTooltipItem: (group, groupIndex, rod, rodIndex) {
                     return BarTooltipItem(
                       'LKR ${rod.toY.toStringAsFixed(0)}',
-                      const TextStyle(
-                        color: AppColors.textPrimary,
+                      TextStyle(
+                        color: ThemeColors.getTextPrimary(context),
                         fontWeight: FontWeight.bold,
                       ),
                     );
@@ -83,8 +84,8 @@ class BarChartWidget extends StatelessWidget {
                           padding: const EdgeInsets.only(top: 8.0),
                           child: Text(
                             categoryData[value.toInt()].name,
-                            style: const TextStyle(
-                              color: AppColors.textSecondary,
+                            style: TextStyle(
+                              color: ThemeColors.getTextSecondary(context),
                               fontSize: 10,
                             ),
                           ),
@@ -101,8 +102,8 @@ class BarChartWidget extends StatelessWidget {
                     getTitlesWidget: (value, meta) {
                       return Text(
                         'LKR ${value.toInt()}',
-                        style: const TextStyle(
-                          color: AppColors.textSecondary,
+                        style: TextStyle(
+                          color: ThemeColors.getTextSecondary(context),
                           fontSize: 10,
                         ),
                       );

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/dimensions.dart';
+import '../../../core/utils/theme_colors.dart';
 import '../../../domain/entities/expense.dart';
 import '../../../domain/entities/category.dart';
 
@@ -18,11 +19,11 @@ class PieChartWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (expenses.isEmpty) {
-      return const Center(
+      return Center(
         child: Text(
           'No data to display',
           style: TextStyle(
-            color: AppColors.textSecondary,
+            color: ThemeColors.getTextSecondary(context),
             fontSize: 16,
           ),
         ),
@@ -33,10 +34,10 @@ class PieChartWidget extends StatelessWidget {
     
     return Column(
       children: [
-        const Text(
+        Text(
           'Spending by Category',
           style: TextStyle(
-            color: AppColors.textPrimary,
+            color: ThemeColors.getTextPrimary(context),
             fontSize: 16,
             fontWeight: FontWeight.w600,
           ),
@@ -53,10 +54,10 @@ class PieChartWidget extends StatelessWidget {
                   value: data.percentage,
                   title: '${(data.percentage * 100).toStringAsFixed(0)}%',
                   radius: 80,
-                  titleStyle: const TextStyle(
+                  titleStyle: TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.bold,
-                    color: AppColors.textPrimary,
+                    color: ThemeColors.getTextPrimary(context),
                   ),
                 );
               }).toList(),
@@ -64,7 +65,7 @@ class PieChartWidget extends StatelessWidget {
           ),
         ),
         const SizedBox(height: AppDimensions.paddingM),
-        _buildLegend(categoryData),
+        _buildLegend(categoryData, context),
       ],
     );
   }
@@ -101,7 +102,7 @@ class PieChartWidget extends StatelessWidget {
     }).toList();
   }
 
-  Widget _buildLegend(List<CategoryData> data) {
+  Widget _buildLegend(List<CategoryData> data, BuildContext context) {
     return Wrap(
       spacing: AppDimensions.paddingM,
       runSpacing: AppDimensions.paddingS,
@@ -120,8 +121,8 @@ class PieChartWidget extends StatelessWidget {
             const SizedBox(width: AppDimensions.paddingXS),
             Text(
               item.name,
-              style: const TextStyle(
-                color: AppColors.textSecondary,
+              style: TextStyle(
+                color: ThemeColors.getTextSecondary(context),
                 fontSize: 12,
               ),
             ),

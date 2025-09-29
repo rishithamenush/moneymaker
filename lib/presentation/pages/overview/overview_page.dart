@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import '../../../core/constants/strings.dart';
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/dimensions.dart';
+import '../../../core/utils/theme_colors.dart';
 import '../../../domain/entities/expense.dart';
 import '../../../domain/entities/budget.dart';
 import '../../../domain/entities/category.dart';
@@ -49,7 +50,7 @@ class _OverviewPageState extends State<OverviewPage> with TickerProviderStateMix
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: ThemeColors.getBackground(context),
       appBar: const CustomAppBar(
         title: AppStrings.overview,
         showBackButton: false,
@@ -86,7 +87,7 @@ class _OverviewPageState extends State<OverviewPage> with TickerProviderStateMix
               Container(
                 margin: const EdgeInsets.symmetric(horizontal: AppDimensions.paddingM),
                 decoration: BoxDecoration(
-                  color: AppColors.surface,
+                  color: ThemeColors.getSurface(context),
                   borderRadius: BorderRadius.circular(AppDimensions.radiusM),
                 ),
                 clipBehavior: Clip.antiAlias,
@@ -101,8 +102,8 @@ class _OverviewPageState extends State<OverviewPage> with TickerProviderStateMix
                   indicatorPadding: EdgeInsets.zero,
                   dividerColor: Colors.transparent,
                   labelPadding: EdgeInsets.zero,
-                  labelColor: AppColors.textPrimary,
-                  unselectedLabelColor: AppColors.textSecondary,
+                  labelColor: ThemeColors.getTextPrimary(context),
+                  unselectedLabelColor: ThemeColors.getTextSecondary(context),
                   labelStyle: const TextStyle(
                     fontWeight: FontWeight.w600,
                     fontSize: 14,
@@ -201,7 +202,7 @@ class _OverviewPageState extends State<OverviewPage> with TickerProviderStateMix
             height: 300,
             padding: const EdgeInsets.all(AppDimensions.paddingM),
             decoration: BoxDecoration(
-              color: AppColors.surface,
+              color: ThemeColors.getSurface(context),
               borderRadius: BorderRadius.circular(AppDimensions.radiusL),
             ),
             child: PieChartWidget(
@@ -217,7 +218,7 @@ class _OverviewPageState extends State<OverviewPage> with TickerProviderStateMix
             height: 300,
             padding: const EdgeInsets.all(AppDimensions.paddingM),
             decoration: BoxDecoration(
-              color: AppColors.surface,
+              color: ThemeColors.getSurface(context),
               borderRadius: BorderRadius.circular(AppDimensions.radiusL),
             ),
             child: BarChartWidget(
@@ -251,7 +252,7 @@ class _OverviewPageState extends State<OverviewPage> with TickerProviderStateMix
             height: 300,
             padding: const EdgeInsets.all(AppDimensions.paddingM),
             decoration: BoxDecoration(
-              color: AppColors.surface,
+              color: ThemeColors.getSurface(context),
               borderRadius: BorderRadius.circular(AppDimensions.radiusL),
             ),
             child: LineChartWidget(
@@ -267,16 +268,16 @@ class _OverviewPageState extends State<OverviewPage> with TickerProviderStateMix
     return Container(
       padding: const EdgeInsets.all(AppDimensions.paddingM),
       decoration: BoxDecoration(
-        color: AppColors.surface,
+        color: ThemeColors.getSurface(context),
         borderRadius: BorderRadius.circular(AppDimensions.radiusL),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
+          Text(
             'Category Breakdown',
             style: TextStyle(
-              color: AppColors.textPrimary,
+              color: ThemeColors.getTextPrimary(context),
               fontSize: 18,
               fontWeight: FontWeight.bold,
             ),
@@ -305,16 +306,16 @@ class _OverviewPageState extends State<OverviewPage> with TickerProviderStateMix
                   Expanded(
                     child: Text(
                       category.name,
-                      style: const TextStyle(
-                        color: AppColors.textPrimary,
+                      style: TextStyle(
+                        color: ThemeColors.getTextPrimary(context),
                         fontSize: 14,
                       ),
                     ),
                   ),
                   Text(
                     'LKR ${categoryTotal.toStringAsFixed(0)}',
-                    style: const TextStyle(
-                      color: AppColors.textPrimary,
+                    style: TextStyle(
+                      color: ThemeColors.getTextPrimary(context),
                       fontSize: 14,
                       fontWeight: FontWeight.w600,
                     ),
@@ -322,8 +323,8 @@ class _OverviewPageState extends State<OverviewPage> with TickerProviderStateMix
                   const SizedBox(width: AppDimensions.paddingS),
                   Text(
                     '${(percentage * 100).toStringAsFixed(0)}%',
-                    style: const TextStyle(
-                      color: AppColors.textSecondary,
+                    style: TextStyle(
+                      color: ThemeColors.getTextSecondary(context),
                       fontSize: 12,
                     ),
                   ),
@@ -384,7 +385,7 @@ class _OverviewPageState extends State<OverviewPage> with TickerProviderStateMix
     return Container(
       padding: const EdgeInsets.all(AppDimensions.paddingM),
       decoration: BoxDecoration(
-        color: AppColors.surface,
+        color: ThemeColors.getSurface(context),
         borderRadius: BorderRadius.circular(AppDimensions.radiusM),
       ),
       child: Column(
@@ -397,8 +398,8 @@ class _OverviewPageState extends State<OverviewPage> with TickerProviderStateMix
           const SizedBox(height: AppDimensions.paddingS),
           Text(
             value,
-            style: const TextStyle(
-              color: AppColors.textPrimary,
+            style: TextStyle(
+              color: ThemeColors.getTextPrimary(context),
               fontSize: 20,
               fontWeight: FontWeight.bold,
             ),
@@ -406,8 +407,8 @@ class _OverviewPageState extends State<OverviewPage> with TickerProviderStateMix
           const SizedBox(height: AppDimensions.paddingXS),
           Text(
             title,
-            style: const TextStyle(
-              color: AppColors.textSecondary,
+            style: TextStyle(
+              color: ThemeColors.getTextSecondary(context),
               fontSize: 12,
             ),
             textAlign: TextAlign.center,

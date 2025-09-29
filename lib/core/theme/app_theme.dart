@@ -10,26 +10,27 @@ class AppTheme {
       colorScheme: const ColorScheme.light(
         primary: AppColors.primary,
         secondary: AppColors.secondary,
-        surface: AppColors.surface,
-        onPrimary: AppColors.textPrimary,
-        onSecondary: AppColors.textPrimary,
-        onSurface: AppColors.textPrimary,
+        surface: LightColors.surface,
+        onPrimary: Colors.white,
+        onSecondary: Colors.white,
+        onSurface: LightColors.textPrimary,
         error: AppColors.error,
       ),
-      scaffoldBackgroundColor: AppColors.background,
+      scaffoldBackgroundColor: LightColors.background,
       appBarTheme: const AppBarTheme(
-        backgroundColor: AppColors.background,
+        backgroundColor: LightColors.background,
         elevation: 0,
         centerTitle: true,
         titleTextStyle: TextStyle(
-          color: AppColors.textPrimary,
+          color: LightColors.textPrimary,
           fontSize: 20,
           fontWeight: FontWeight.w600,
         ),
       ),
       cardTheme: CardTheme(
-        color: AppColors.surface,
-        elevation: 0,
+        color: LightColors.surface,
+        elevation: 2,
+        shadowColor: Colors.black.withOpacity(0.1),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(AppDimensions.radiusL),
         ),
@@ -37,7 +38,7 @@ class AppTheme {
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
           backgroundColor: AppColors.primary,
-          foregroundColor: AppColors.textPrimary,
+          foregroundColor: Colors.white,
           elevation: 0,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(AppDimensions.radiusM),
@@ -55,14 +56,14 @@ class AppTheme {
       ),
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
-        fillColor: AppColors.surface,
+        fillColor: LightColors.surface,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(AppDimensions.radiusM),
-          borderSide: BorderSide.none,
+          borderSide: const BorderSide(color: LightColors.border),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(AppDimensions.radiusM),
-          borderSide: BorderSide.none,
+          borderSide: const BorderSide(color: LightColors.border),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(AppDimensions.radiusM),
@@ -78,11 +79,11 @@ class AppTheme {
         ),
       ),
       bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-        backgroundColor: AppColors.surface,
+        backgroundColor: LightColors.surface,
         selectedItemColor: AppColors.primary,
-        unselectedItemColor: AppColors.textSecondary,
+        unselectedItemColor: LightColors.textSecondary,
         type: BottomNavigationBarType.fixed,
-        elevation: 0,
+        elevation: 8,
       ),
     );
   }
@@ -94,25 +95,25 @@ class AppTheme {
       colorScheme: const ColorScheme.dark(
         primary: AppColors.primary,
         secondary: AppColors.secondary,
-        surface: AppColors.surface,
-        onPrimary: AppColors.textPrimary,
-        onSecondary: AppColors.textPrimary,
-        onSurface: AppColors.textPrimary,
+        surface: DarkColors.surface,
+        onPrimary: Colors.white,
+        onSecondary: Colors.white,
+        onSurface: DarkColors.textPrimary,
         error: AppColors.error,
       ),
-      scaffoldBackgroundColor: AppColors.background,
+      scaffoldBackgroundColor: DarkColors.background,
       appBarTheme: const AppBarTheme(
-        backgroundColor: AppColors.background,
+        backgroundColor: DarkColors.background,
         elevation: 0,
         centerTitle: true,
         titleTextStyle: TextStyle(
-          color: AppColors.textPrimary,
+          color: DarkColors.textPrimary,
           fontSize: 20,
           fontWeight: FontWeight.w600,
         ),
       ),
       cardTheme: CardTheme(
-        color: AppColors.surface,
+        color: DarkColors.surface,
         elevation: 0,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(AppDimensions.radiusL),
@@ -121,7 +122,7 @@ class AppTheme {
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
           backgroundColor: AppColors.primary,
-          foregroundColor: AppColors.textPrimary,
+          foregroundColor: Colors.white,
           elevation: 0,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(AppDimensions.radiusM),
@@ -139,7 +140,7 @@ class AppTheme {
       ),
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
-        fillColor: AppColors.surface,
+        fillColor: DarkColors.surface,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(AppDimensions.radiusM),
           borderSide: BorderSide.none,
@@ -162,9 +163,9 @@ class AppTheme {
         ),
       ),
       bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-        backgroundColor: AppColors.surface,
+        backgroundColor: DarkColors.surface,
         selectedItemColor: AppColors.primary,
-        unselectedItemColor: AppColors.textSecondary,
+        unselectedItemColor: DarkColors.textSecondary,
         type: BottomNavigationBarType.fixed,
         elevation: 0,
       ),

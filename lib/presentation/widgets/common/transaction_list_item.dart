@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/dimensions.dart';
 import '../../../core/utils/formatters.dart';
+import '../../../core/utils/theme_colors.dart';
 import '../../../domain/entities/income.dart';
 
 class TransactionListItem extends StatelessWidget {
@@ -49,9 +50,9 @@ class TransactionListItem extends StatelessWidget {
         ),
         title: Text(
           description,
-          style: const TextStyle(
+          style: TextStyle(
             fontWeight: FontWeight.w600,
-            color: AppColors.textPrimary,
+            color: ThemeColors.getTextPrimary(context),
           ),
         ),
         subtitle: Column(
@@ -59,16 +60,16 @@ class TransactionListItem extends StatelessWidget {
           children: [
             Text(
               categoryName,
-              style: const TextStyle(
-                color: AppColors.textSecondary,
+              style: TextStyle(
+                color: ThemeColors.getTextSecondary(context),
                 fontSize: 12,
               ),
             ),
             const SizedBox(height: 2),
             Text(
               Formatters.formatDate(date),
-              style: const TextStyle(
-                color: AppColors.textSecondary,
+              style: TextStyle(
+                color: ThemeColors.getTextSecondary(context),
                 fontSize: 12,
               ),
             ),

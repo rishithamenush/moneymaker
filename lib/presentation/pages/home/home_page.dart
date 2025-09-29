@@ -4,6 +4,7 @@ import '../../../core/constants/strings.dart';
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/dimensions.dart';
 import '../../../core/utils/formatters.dart';
+import '../../../core/utils/theme_colors.dart';
 import '../../../domain/entities/expense.dart';
 import '../../../domain/entities/income.dart';
 import '../../providers/expense_provider.dart';
@@ -44,16 +45,16 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: ThemeColors.getBackground(context),
       appBar: CustomAppBar(
         title: AppStrings.thisMonth,
         showBackButton: false,
         actions: [
           IconButton(
             onPressed: _loadData,
-            icon: const Icon(
+            icon: Icon(
               Icons.refresh,
-              color: AppColors.textPrimary,
+              color: ThemeColors.getTextPrimary(context),
               size: AppDimensions.iconM,
             ),
           ),
@@ -102,11 +103,11 @@ class _HomePageState extends State<HomePage> {
                         ),
                         child: Column(
                           children: [
-                            const Text(
+                            Text(
                               'Income',
                               style: TextStyle(
                                 fontSize: 12,
-                                color: AppColors.textSecondary,
+                                color: ThemeColors.getTextSecondary(context),
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
@@ -136,11 +137,11 @@ class _HomePageState extends State<HomePage> {
                         ),
                         child: Column(
                           children: [
-                            const Text(
+                            Text(
                               'Expenses',
                               style: TextStyle(
                                 fontSize: 12,
-                                color: AppColors.textSecondary,
+                                color: ThemeColors.getTextSecondary(context),
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
@@ -170,11 +171,11 @@ class _HomePageState extends State<HomePage> {
                         ),
                         child: Column(
                           children: [
-                            const Text(
+                            Text(
                               'Net',
                               style: TextStyle(
                                 fontSize: 12,
-                                color: AppColors.textSecondary,
+                                color: ThemeColors.getTextSecondary(context),
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
@@ -234,22 +235,22 @@ class _HomePageState extends State<HomePage> {
             Icon(
               Icons.add_circle_outline,
               size: 64,
-              color: AppColors.textSecondary.withOpacity(0.5),
+              color: ThemeColors.getTextSecondary(context).withOpacity(0.5),
             ),
             const SizedBox(height: AppDimensions.paddingM),
-            const Text(
+            Text(
               'No transactions yet',
               style: TextStyle(
-                color: AppColors.textSecondary,
+                color: ThemeColors.getTextSecondary(context),
                 fontSize: 18,
                 fontWeight: FontWeight.w500,
               ),
             ),
             const SizedBox(height: AppDimensions.paddingS),
-            const Text(
+            Text(
               'Tap the + button to add your first transaction',
               style: TextStyle(
-                color: AppColors.textSecondary,
+                color: ThemeColors.getTextSecondary(context),
                 fontSize: 14,
               ),
               textAlign: TextAlign.center,
@@ -284,10 +285,10 @@ class _HomePageState extends State<HomePage> {
               padding: const EdgeInsets.symmetric(vertical: AppDimensions.paddingS),
               child: Text(
                 dateKey,
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
-                  color: AppColors.textPrimary,
+                  color: ThemeColors.getTextPrimary(context),
                 ),
               ),
             ),
@@ -323,9 +324,9 @@ class _HomePageState extends State<HomePage> {
           actions: [
             TextButton(
               onPressed: () => Navigator.of(context).pop(),
-              child: const Text(
+              child: Text(
                 'Cancel',
-                style: TextStyle(color: AppColors.textSecondary),
+                style: TextStyle(color: ThemeColors.getTextSecondary(context)),
               ),
             ),
             ElevatedButton(

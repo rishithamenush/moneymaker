@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/dimensions.dart';
+import '../../../core/utils/theme_colors.dart';
 import '../../../domain/entities/expense.dart';
 
 class LineChartWidget extends StatelessWidget {
@@ -15,11 +16,11 @@ class LineChartWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (expenses.isEmpty) {
-      return const Center(
+      return Center(
         child: Text(
           'No data to display',
           style: TextStyle(
-            color: AppColors.textSecondary,
+            color: ThemeColors.getTextSecondary(context),
             fontSize: 16,
           ),
         ),
@@ -33,10 +34,10 @@ class LineChartWidget extends StatelessWidget {
 
     return Column(
       children: [
-        const Text(
+        Text(
           'Daily Spending Trend',
           style: TextStyle(
-            color: AppColors.textPrimary,
+            color: ThemeColors.getTextPrimary(context),
             fontSize: 16,
             fontWeight: FontWeight.w600,
           ),
@@ -51,14 +52,14 @@ class LineChartWidget extends StatelessWidget {
                 horizontalInterval: maxAmount / 5,
                 verticalInterval: 1,
                 getDrawingHorizontalLine: (value) {
-                  return const FlLine(
-                    color: AppColors.surfaceLight,
+                  return FlLine(
+                    color: ThemeColors.getSurfaceLight(context),
                     strokeWidth: 1,
                   );
                 },
                 getDrawingVerticalLine: (value) {
-                  return const FlLine(
-                    color: AppColors.surfaceLight,
+                  return FlLine(
+                    color: ThemeColors.getSurfaceLight(context),
                     strokeWidth: 1,
                   );
                 },
@@ -80,8 +81,8 @@ class LineChartWidget extends StatelessWidget {
                       if (value.toInt() < dailyData.length) {
                         return Text(
                           '${value.toInt() + 1}',
-                          style: const TextStyle(
-                            color: AppColors.textSecondary,
+                          style: TextStyle(
+                            color: ThemeColors.getTextSecondary(context),
                             fontSize: 10,
                           ),
                         );
@@ -98,8 +99,8 @@ class LineChartWidget extends StatelessWidget {
                     getTitlesWidget: (value, meta) {
                       return Text(
                         'LKR ${value.toInt()}',
-                        style: const TextStyle(
-                          color: AppColors.textSecondary,
+                        style: TextStyle(
+                          color: ThemeColors.getTextSecondary(context),
                           fontSize: 10,
                         ),
                       );
@@ -110,7 +111,7 @@ class LineChartWidget extends StatelessWidget {
               borderData: FlBorderData(
                 show: true,
                 border: Border.all(
-                  color: AppColors.surfaceLight,
+                  color: ThemeColors.getSurfaceLight(context),
                   width: 1,
                 ),
               ),
@@ -134,7 +135,7 @@ class LineChartWidget extends StatelessWidget {
                         radius: 4,
                         color: AppColors.primary,
                         strokeWidth: 2,
-                        strokeColor: AppColors.background,
+                        strokeColor: ThemeColors.getBackground(context),
                       );
                     },
                   ),

@@ -4,6 +4,7 @@ import '../../../core/constants/colors.dart';
 import '../../../core/constants/dimensions.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../core/utils/formatters.dart';
+import '../../../core/utils/theme_colors.dart';
 import '../../../domain/entities/expense.dart';
 import '../../../domain/entities/income.dart';
 import '../../../domain/entities/category.dart';
@@ -48,7 +49,7 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: ThemeColors.getBackground(context),
       appBar: AppBar(
         title: const Text('Add Transaction'),
         backgroundColor: AppColors.primary,
@@ -99,7 +100,7 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
           'Transaction Type',
           style: AppTheme.lightTheme.textTheme.titleMedium?.copyWith(
             fontWeight: FontWeight.w600,
-            color: AppColors.textPrimary,
+            color: ThemeColors.getTextPrimary(context),
           ),
         ),
         const SizedBox(height: AppDimensions.paddingS),
@@ -146,9 +147,9 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
       child: Container(
         padding: const EdgeInsets.all(AppDimensions.paddingM),
         decoration: BoxDecoration(
-          color: isSelected ? color.withOpacity(0.1) : AppColors.surface,
+          color: isSelected ? color.withOpacity(0.1) : ThemeColors.getSurface(context),
           border: Border.all(
-            color: isSelected ? color : AppColors.surfaceLight,
+            color: isSelected ? color : ThemeColors.getSurfaceLight(context),
             width: 2,
           ),
           borderRadius: BorderRadius.circular(AppDimensions.radiusM),
@@ -157,14 +158,14 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
           children: [
             Icon(
               icon,
-              color: isSelected ? color : AppColors.textSecondary,
+              color: isSelected ? color : ThemeColors.getTextSecondary(context),
               size: 32,
             ),
             const SizedBox(height: AppDimensions.paddingS),
             Text(
               title,
               style: TextStyle(
-                color: isSelected ? color : AppColors.textSecondary,
+                color: isSelected ? color : ThemeColors.getTextSecondary(context),
                 fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
                 fontSize: 16,
               ),
@@ -183,7 +184,7 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
           'Amount (LKR)',
           style: AppTheme.lightTheme.textTheme.titleMedium?.copyWith(
             fontWeight: FontWeight.w600,
-            color: AppColors.textPrimary,
+            color: ThemeColors.getTextPrimary(context),
           ),
         ),
         const SizedBox(height: AppDimensions.paddingS),
@@ -226,7 +227,7 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
           'Category',
           style: AppTheme.lightTheme.textTheme.titleMedium?.copyWith(
             fontWeight: FontWeight.w600,
-            color: AppColors.textPrimary,
+            color: ThemeColors.getTextPrimary(context),
           ),
         ),
         const SizedBox(height: AppDimensions.paddingS),
@@ -289,7 +290,7 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
           'Date',
           style: AppTheme.lightTheme.textTheme.titleMedium?.copyWith(
             fontWeight: FontWeight.w600,
-            color: AppColors.textPrimary,
+            color: ThemeColors.getTextPrimary(context),
           ),
         ),
         const SizedBox(height: AppDimensions.paddingS),
@@ -298,7 +299,7 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
           child: Container(
             padding: const EdgeInsets.all(AppDimensions.paddingM),
             decoration: BoxDecoration(
-              border: Border.all(color: AppColors.surfaceLight),
+              border: Border.all(color: ThemeColors.getSurfaceLight(context)),
               borderRadius: BorderRadius.circular(AppDimensions.radiusM),
             ),
             child: Row(
@@ -313,9 +314,9 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
                   style: const TextStyle(fontSize: 16),
                 ),
                 const Spacer(),
-                const Icon(
+                Icon(
                   Icons.arrow_drop_down,
-                  color: AppColors.textSecondary,
+                  color: ThemeColors.getTextSecondary(context),
                 ),
               ],
             ),
@@ -333,7 +334,7 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
           'Details',
           style: AppTheme.lightTheme.textTheme.titleMedium?.copyWith(
             fontWeight: FontWeight.w600,
-            color: AppColors.textPrimary,
+            color: ThemeColors.getTextPrimary(context),
           ),
         ),
         const SizedBox(height: AppDimensions.paddingS),

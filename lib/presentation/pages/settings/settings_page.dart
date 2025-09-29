@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/dimensions.dart';
+import '../../../core/utils/theme_colors.dart';
 import '../../providers/theme_provider.dart';
 import '../../providers/auth_provider.dart';
 import '../../providers/category_provider.dart';
@@ -21,7 +22,7 @@ class _SettingsPageState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: ThemeColors.getBackground(context),
       appBar: const CustomAppBar(
         title: 'Settings',
         showBackButton: false,
@@ -189,10 +190,10 @@ class _SettingsPageState extends State<SettingsPage> {
       padding: const EdgeInsets.only(bottom: AppDimensions.paddingS),
       child: Text(
         title,
-        style: const TextStyle(
+        style: TextStyle(
           fontSize: 18,
           fontWeight: FontWeight.bold,
-          color: AppColors.textPrimary,
+          color: ThemeColors.getTextPrimary(context),
         ),
       ),
     );
@@ -226,31 +227,31 @@ class _SettingsPageState extends State<SettingsPage> {
         title,
         style: TextStyle(
           fontWeight: FontWeight.w600,
-          color: isDestructive ? AppColors.error : AppColors.textPrimary,
+          color: isDestructive ? AppColors.error : ThemeColors.getTextPrimary(context),
         ),
       ),
       subtitle: Text(
         subtitle,
-        style: const TextStyle(
-          color: AppColors.textSecondary,
+        style: TextStyle(
+          color: ThemeColors.getTextSecondary(context),
           fontSize: 12,
         ),
       ),
-      trailing: trailing ?? const Icon(
+      trailing: trailing ?? Icon(
         Icons.arrow_forward_ios,
         size: 16,
-        color: AppColors.textSecondary,
+        color: ThemeColors.getTextSecondary(context),
       ),
       onTap: onTap,
     );
   }
 
   Widget _buildDivider() {
-    return const Divider(
+    return Divider(
       height: 1,
       thickness: 1,
       indent: 56,
-      color: AppColors.surfaceLight,
+      color: ThemeColors.getSurfaceLight(context),
     );
   }
 
@@ -265,11 +266,11 @@ class _SettingsPageState extends State<SettingsPage> {
             color: AppColors.primary,
             size: 24,
           ),
-          title: const Text(
+          title: Text(
             'Theme',
             style: TextStyle(
               fontWeight: FontWeight.w600,
-              color: AppColors.textPrimary,
+              color: ThemeColors.getTextPrimary(context),
             ),
           ),
           subtitle: Text(
@@ -278,8 +279,8 @@ class _SettingsPageState extends State<SettingsPage> {
                 : themeProvider.themeMode == ThemeMode.light
                     ? 'Light Mode'
                     : 'System Default',
-            style: const TextStyle(
-              color: AppColors.textSecondary,
+            style: TextStyle(
+              color: ThemeColors.getTextSecondary(context),
               fontSize: 12,
             ),
           ),
@@ -593,7 +594,7 @@ class _CategoryManagerSheetState extends State<_CategoryManagerSheet> {
       builder: (context, controller) {
         return Container(
           decoration: BoxDecoration(
-            color: AppColors.background,
+            color: ThemeColors.getBackground(context),
             borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
           ),
           child: Column(
@@ -603,15 +604,15 @@ class _CategoryManagerSheetState extends State<_CategoryManagerSheet> {
                 height: 4,
                 margin: const EdgeInsets.only(top: 8, bottom: 12),
                 decoration: BoxDecoration(
-                  color: AppColors.surfaceLight,
+                  color: ThemeColors.getSurfaceLight(context),
                   borderRadius: BorderRadius.circular(2),
                 ),
               ),
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
                 child: Text(
                   'Customize Categories',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700, color: AppColors.textPrimary),
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700, color: ThemeColors.getTextPrimary(context)),
                 ),
               ),
               Expanded(
@@ -632,8 +633,8 @@ class _CategoryManagerSheetState extends State<_CategoryManagerSheet> {
                             backgroundColor: Color(category.colorValue),
                             child: const Icon(Icons.label, color: Colors.white, size: 18),
                           ),
-                          title: Text(category.name, style: const TextStyle(color: AppColors.textPrimary)),
-                          subtitle: Text(isIncome ? 'Income' : 'Expense', style: const TextStyle(color: AppColors.textSecondary, fontSize: 12)),
+                          title: Text(category.name, style: TextStyle(color: ThemeColors.getTextPrimary(context))),
+                          subtitle: Text(isIncome ? 'Income' : 'Expense', style: TextStyle(color: ThemeColors.getTextSecondary(context), fontSize: 12)),
                           trailing: IconButton(
                             icon: const Icon(Icons.delete_outline, color: AppColors.error),
                             onPressed: () => context.read<CategoryProvider>().deleteCategory(category.id),
@@ -667,9 +668,9 @@ class _CategoryManagerSheetState extends State<_CategoryManagerSheet> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
+              Text(
                 'Create new category',
-                style: TextStyle(fontWeight: FontWeight.w700, color: AppColors.textPrimary),
+                style: TextStyle(fontWeight: FontWeight.w700, color: ThemeColors.getTextPrimary(context)),
               ),
               const SizedBox(height: 10),
               Wrap(
@@ -691,7 +692,7 @@ class _CategoryManagerSheetState extends State<_CategoryManagerSheet> {
                               setStateChips(() {});
                             },
                             selectedColor: AppColors.primary,
-                            labelStyle: TextStyle(color: !_isIncome ? Colors.white : AppColors.textPrimary),
+                            labelStyle: TextStyle(color: !_isIncome ? Colors.white : ThemeColors.getTextPrimary(context)),
                           ),
                           ChoiceChip(
                             label: const Text('Income'),
@@ -701,7 +702,7 @@ class _CategoryManagerSheetState extends State<_CategoryManagerSheet> {
                               setStateChips(() {});
                             },
                             selectedColor: AppColors.primary,
-                            labelStyle: TextStyle(color: _isIncome ? Colors.white : AppColors.textPrimary),
+                            labelStyle: TextStyle(color: _isIncome ? Colors.white : ThemeColors.getTextPrimary(context)),
                           ),
                         ],
                       );
@@ -715,15 +716,15 @@ class _CategoryManagerSheetState extends State<_CategoryManagerSheet> {
                       decoration: InputDecoration(
                         hintText: 'Category name',
                         filled: true,
-                        fillColor: AppColors.surface,
+                        fillColor: ThemeColors.getSurface(context),
                         contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
-                          borderSide: const BorderSide(color: AppColors.surfaceLight),
+                          borderSide: BorderSide(color: ThemeColors.getSurfaceLight(context)),
                         ),
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
-                          borderSide: const BorderSide(color: AppColors.surfaceLight),
+                          borderSide: BorderSide(color: ThemeColors.getSurfaceLight(context)),
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
@@ -749,8 +750,8 @@ class _CategoryManagerSheetState extends State<_CategoryManagerSheet> {
                       decoration: BoxDecoration(color: _selectedColor, shape: BoxShape.circle),
                     ),
                     style: OutlinedButton.styleFrom(
-                      side: const BorderSide(color: AppColors.surfaceLight),
-                      foregroundColor: AppColors.textPrimary,
+                      side: BorderSide(color: ThemeColors.getSurfaceLight(context)),
+                      foregroundColor: ThemeColors.getTextPrimary(context),
                     ),
                     label: const Text('Pick color'),
                   ),

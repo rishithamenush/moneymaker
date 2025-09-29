@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/dimensions.dart';
 import '../../../core/utils/validators.dart';
+import '../../../core/utils/theme_colors.dart';
 import '../../providers/auth_provider.dart';
 import '../../navigation/app_router.dart';
 import '../../../app/routes.dart';
@@ -233,18 +234,18 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
         prefixIcon: const Icon(Icons.email_outlined, color: AppColors.primary),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: const BorderSide(color: AppColors.border),
+          borderSide: BorderSide(color: ThemeColors.getBorder(context)),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: const BorderSide(color: AppColors.border),
+          borderSide: BorderSide(color: ThemeColors.getBorder(context)),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
           borderSide: const BorderSide(color: AppColors.primary, width: 2),
         ),
         filled: true,
-        fillColor: AppColors.background,
+        fillColor: ThemeColors.getBackground(context),
       ),
       validator: Validators.validateEmail,
     );
@@ -262,7 +263,7 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
         suffixIcon: IconButton(
           icon: Icon(
             _obscurePassword ? Icons.visibility_off : Icons.visibility,
-            color: AppColors.textSecondary,
+            color: ThemeColors.getTextSecondary(context),
           ),
           onPressed: () {
             setState(() {
@@ -272,18 +273,18 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
         ),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: const BorderSide(color: AppColors.border),
+          borderSide: BorderSide(color: ThemeColors.getBorder(context)),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide:  BorderSide(color: AppColors.border),
+          borderSide:  BorderSide(color: ThemeColors.getBorder(context)),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
           borderSide: const BorderSide(color: AppColors.primary, width: 2),
         ),
         filled: true,
-        fillColor: AppColors.background,
+        fillColor: ThemeColors.getBackground(context),
       ),
       validator: Validators.validatePassword,
     );
@@ -305,10 +306,10 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
               },
               activeColor: AppColors.primary,
             ),
-            const Text(
+            Text(
               'Remember me',
               style: TextStyle(
-                color: AppColors.textSecondary,
+                color: ThemeColors.getTextSecondary(context),
                 fontSize: 14,
               ),
             ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/dimensions.dart';
+import '../../../core/utils/theme_colors.dart';
 import '../../../core/utils/formatters.dart';
 
 class MonthlySelector extends StatelessWidget {
@@ -22,7 +23,7 @@ class MonthlySelector extends StatelessWidget {
         vertical: AppDimensions.paddingS,
       ),
       decoration: BoxDecoration(
-        color: AppColors.surface,
+        color: ThemeColors.getSurface(context),
         borderRadius: BorderRadius.circular(AppDimensions.radiusM),
       ),
       child: Row(
@@ -30,8 +31,8 @@ class MonthlySelector extends StatelessWidget {
         children: [
           Text(
             Formatters.formatMonthYear(selectedMonth),
-            style: const TextStyle(
-              color: AppColors.textPrimary,
+            style: TextStyle(
+              color: ThemeColors.getTextPrimary(context),
               fontSize: 18,
               fontWeight: FontWeight.w600,
             ),
@@ -46,9 +47,9 @@ class MonthlySelector extends StatelessWidget {
                   );
                   onMonthChanged(previousMonth);
                 },
-                icon: const Icon(
+                icon: Icon(
                   Icons.chevron_left,
-                  color: AppColors.textSecondary,
+                  color: ThemeColors.getTextSecondary(context),
                 ),
               ),
               IconButton(
@@ -59,9 +60,9 @@ class MonthlySelector extends StatelessWidget {
                   );
                   onMonthChanged(nextMonth);
                 },
-                icon: const Icon(
+                icon: Icon(
                   Icons.chevron_right,
-                  color: AppColors.textSecondary,
+                  color: ThemeColors.getTextSecondary(context),
                 ),
               ),
             ],
