@@ -1,18 +1,33 @@
 import 'package:intl/intl.dart';
+import '../constants/colors.dart';
 
 class Formatters {
-  static final NumberFormat _currencyFormat = NumberFormat.currency(
-    symbol: 'LKR ',
-    decimalDigits: 0,
-  );
-  
   static final DateFormat _dateFormat = DateFormat('MMM dd, yyyy');
   static final DateFormat _monthYearFormat = DateFormat('MMMM yyyy');
   static final DateFormat _dayFormat = DateFormat('dd');
   static final DateFormat _monthFormat = DateFormat('MMM');
   
-  static String formatCurrency(double amount) {
-    return _currencyFormat.format(amount);
+  static String formatCurrency(double amount, {String? currencyCode}) {
+    final code = currencyCode ?? 'LKR';
+    final symbol = CurrencyOptions.getCurrencySymbol(code);
+    
+    // Create currency format based on currency type
+    NumberFormat currencyFormat;
+    if (code == 'JPY' || code == 'KRW') {
+      // No decimal places for JPY and KRW
+      currencyFormat = NumberFormat.currency(
+        symbol: symbol,
+        decimalDigits: 0,
+      );
+    } else {
+      // 2 decimal places for most currencies
+      currencyFormat = NumberFormat.currency(
+        symbol: symbol,
+        decimalDigits: 2,
+      );
+    }
+    
+    return currencyFormat.format(amount);
   }
   
   static String formatDate(DateTime date) {

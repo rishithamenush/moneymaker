@@ -4,10 +4,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 class ThemeProvider extends ChangeNotifier {
   ThemeMode _themeMode = ThemeMode.system;
   String _accentColor = 'Orange';
+  String _currency = 'LKR';
   bool _isInitialized = false;
 
   ThemeMode get themeMode => _themeMode;
   String get accentColor => _accentColor;
+  String get currency => _currency;
   bool get isInitialized => _isInitialized;
 
   bool get isDarkMode {
@@ -31,6 +33,9 @@ class ThemeProvider extends ChangeNotifier {
       
       // Load accent color
       _accentColor = prefs.getString('accent_color') ?? 'Orange';
+      
+      // Load currency
+      _currency = prefs.getString('currency') ?? 'LKR';
       
       _isInitialized = true;
       notifyListeners();
@@ -60,6 +65,18 @@ class ThemeProvider extends ChangeNotifier {
     try {
       final prefs = await SharedPreferences.getInstance();
       await prefs.setString('accent_color', colorName);
+    } catch (e) {
+      // Handle storage error silently
+    }
+  }
+
+  Future<void> setCurrency(String currencyCode) async {
+    _currency = currencyCode;
+    notifyListeners();
+    
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setString('currency', currencyCode);
     } catch (e) {
       // Handle storage error silently
     }

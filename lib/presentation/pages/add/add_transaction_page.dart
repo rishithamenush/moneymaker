@@ -182,7 +182,7 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Amount (LKR)',
+          'Amount (${context.read<ThemeProvider>().currency})',
           style: AppTheme.lightTheme('Orange').textTheme.titleMedium?.copyWith(
             fontWeight: FontWeight.w600,
             color: ThemeColors.getTextPrimary(context),
@@ -194,7 +194,7 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
           keyboardType: TextInputType.number,
           decoration: InputDecoration(
             hintText: 'Enter amount',
-            prefixText: 'LKR ',
+            prefixText: '${CurrencyOptions.getCurrencySymbol(context.read<ThemeProvider>().currency)} ',
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(AppDimensions.radiusM),
             ),

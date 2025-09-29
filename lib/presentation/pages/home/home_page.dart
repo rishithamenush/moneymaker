@@ -114,7 +114,7 @@ class _HomePageState extends State<HomePage> {
                             ),
                             const SizedBox(height: 4),
                             Text(
-                              'LKR ${totalIncome.toStringAsFixed(0)}',
+                              Formatters.formatCurrency(totalIncome, currencyCode: context.read<ThemeProvider>().currency),
                               style: const TextStyle(
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold,
@@ -148,7 +148,7 @@ class _HomePageState extends State<HomePage> {
                             ),
                             const SizedBox(height: 4),
                             Text(
-                              'LKR ${totalSpent.toStringAsFixed(0)}',
+                              Formatters.formatCurrency(totalSpent, currencyCode: context.read<ThemeProvider>().currency),
                               style: const TextStyle(
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold,
@@ -182,7 +182,7 @@ class _HomePageState extends State<HomePage> {
                             ),
                             const SizedBox(height: 4),
                             Text(
-                              'LKR ${(totalIncome - totalSpent).toStringAsFixed(0)}',
+                              Formatters.formatCurrency(totalIncome - totalSpent, currencyCode: context.read<ThemeProvider>().currency),
                               style: TextStyle(
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold,
@@ -320,7 +320,7 @@ class _HomePageState extends State<HomePage> {
           content: Text(
             'Are you sure you want to delete this $transactionType transaction?\n\n'
             '${transaction.description}\n'
-            'LKR ${transaction.amount.toStringAsFixed(0)}',
+            '${Formatters.formatCurrency(transaction.amount, currencyCode: context.read<ThemeProvider>().currency)}',
           ),
           actions: [
             TextButton(

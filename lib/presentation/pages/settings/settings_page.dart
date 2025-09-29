@@ -79,11 +79,15 @@ class _SettingsPageState extends State<SettingsPage> {
           // Currency & Formatting Section
           _buildSectionHeader('Currency & Formatting'),
           _buildSettingsCard([
-            _buildSettingsItem(
-              icon: Icons.attach_money,
-              title: 'Currency',
-              subtitle: 'LKR (Sri Lankan Rupee)',
-              onTap: () => _showCurrencyDialog(),
+            Consumer<ThemeProvider>(
+              builder: (context, themeProvider, child) {
+                return _buildSettingsItem(
+                  icon: Icons.attach_money,
+                  title: 'Currency',
+                  subtitle: '${themeProvider.currency} (${CurrencyOptions.getCurrencyName(themeProvider.currency)})',
+                  onTap: () => _showCurrencyDialog(),
+                );
+              },
             ),
             _buildDivider(),
             _buildSettingsItem(
@@ -408,15 +412,74 @@ class _SettingsPageState extends State<SettingsPage> {
   void _showCurrencyDialog() {
     showDialog(
       context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('Currency Settings'),
-        content: const Text('Currency selection coming soon! Currently using LKR.'),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text('OK'),
-          ),
-        ],
+      builder: (context) => Consumer<ThemeProvider>(
+        builder: (context, themeProvider, child) {
+          return AlertDialog(
+            title: Text(
+              'Choose Currency',
+              style: TextStyle(color: ThemeColors.getTextPrimary(context)),
+            ),
+            backgroundColor: ThemeColors.getSurface(context),
+            content: SizedBox(
+              width: double.maxFinite,
+              height: 400,
+              child: ListView.builder(
+                itemCount: CurrencyOptions.options.length,
+                itemBuilder: (context, index) {
+                  final currencyCode = CurrencyOptions.options.keys.elementAt(index);
+                  final currencySymbol = CurrencyOptions.options.values.elementAt(index);
+                  final currencyName = CurrencyOptions.getCurrencyName(currencyCode);
+                  final isSelected = themeProvider.currency == currencyCode;
+                  
+                  return ListTile(
+                    leading: Text(
+                      currencySymbol,
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: ThemeColors.getTextPrimary(context),
+                      ),
+                    ),
+                    title: Text(
+                      currencyCode,
+                      style: TextStyle(
+                        fontWeight: FontWeight.w600,
+                        color: ThemeColors.getTextPrimary(context),
+                      ),
+                    ),
+                    subtitle: Text(
+                      currencyName,
+                      style: TextStyle(
+                        color: ThemeColors.getTextSecondary(context),
+                        fontSize: 12,
+                      ),
+                    ),
+                    trailing: isSelected
+                        ? Icon(
+                            Icons.check,
+                            color: ThemeColors.getAccentColor(context, themeProvider.accentColor),
+                          )
+                        : null,
+                    selected: isSelected,
+                    onTap: () {
+                      themeProvider.setCurrency(currencyCode);
+                      Navigator.pop(context);
+                    },
+                  );
+                },
+              ),
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: Text(
+                  'Cancel',
+                  style: TextStyle(color: ThemeColors.getTextSecondary(context)),
+                ),
+              ),
+            ],
+          );
+        },
       ),
     );
   }

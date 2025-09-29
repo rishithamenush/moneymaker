@@ -48,7 +48,7 @@ class BudgetSummaryCard extends StatelessWidget {
                   ),
                   const SizedBox(height: AppDimensions.paddingXS),
                   Text(
-                    Formatters.formatCurrency(remainingAmount),
+                    Formatters.formatCurrency(remainingAmount, currencyCode: context.read<ThemeProvider>().currency),
                     style: TextStyle(
                       color: isOverBudget ? AppColors.error : AppColors.textPrimary,
                       fontSize: 24,
@@ -69,7 +69,7 @@ class BudgetSummaryCard extends StatelessWidget {
                   ),
                   const SizedBox(height: AppDimensions.paddingXS),
                   Text(
-                    Formatters.formatCurrency(totalBudget),
+                    Formatters.formatCurrency(totalBudget, currencyCode: context.read<ThemeProvider>().currency),
                     style: const TextStyle(
                       color: AppColors.textPrimary,
                       fontSize: 24,

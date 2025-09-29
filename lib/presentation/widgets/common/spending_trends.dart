@@ -108,7 +108,7 @@ class SpendingTrends extends StatelessWidget {
                 ),
                 const SizedBox(width: AppDimensions.paddingS),
                 Text(
-                  Formatters.formatCurrency(data.amount),
+                  Formatters.formatCurrency(data.amount, currencyCode: context.read<ThemeProvider>().currency),
                   style: TextStyle(
                     color: ThemeColors.getTextPrimary(context),
                     fontSize: 12,
@@ -184,7 +184,7 @@ class SpendingTrends extends StatelessWidget {
           ),
           const SizedBox(height: AppDimensions.paddingXS),
           Text(
-            Formatters.formatCurrency(amount),
+            Formatters.formatCurrency(amount, currencyCode: context.read<ThemeProvider>().currency),
             style: TextStyle(
               color: color,
               fontSize: 18,
@@ -230,7 +230,7 @@ class SpendingTrends extends StatelessWidget {
           ),
           const SizedBox(height: AppDimensions.paddingS),
           Text(
-            'Your average daily spending is ${Formatters.formatCurrency(avgDaily)}. ${overBudgetCategories > 0 ? 'You have $overBudgetCategories categories over budget.' : 'Great job staying within budget!'}',
+            'Your average daily spending is ${Formatters.formatCurrency(avgDaily, currencyCode: context.read<ThemeProvider>().currency)}. ${overBudgetCategories > 0 ? 'You have $overBudgetCategories categories over budget.' : 'Great job staying within budget!'}',
             style: TextStyle(
               color: ThemeColors.getTextPrimary(context),
               fontSize: 12,

@@ -75,7 +75,7 @@ class ExpenseListItem extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Text(
-                      Formatters.formatCurrency(expense.amount),
+                      Formatters.formatCurrency(expense.amount, currencyCode: context.read<ThemeProvider>().currency),
                       style: const TextStyle(
                         color: AppColors.textPrimary,
                         fontSize: 16,

@@ -91,7 +91,7 @@ class MonthlySummary extends StatelessWidget {
                     ),
                     const SizedBox(height: AppDimensions.paddingXS),
                     Text(
-                      Formatters.formatCurrency(totalSpent),
+                      Formatters.formatCurrency(totalSpent, currencyCode: context.read<ThemeProvider>().currency),
                       style: TextStyle(
                         color: ThemeColors.getTextPrimary(context),
                         fontSize: 24,
@@ -114,7 +114,7 @@ class MonthlySummary extends StatelessWidget {
                     ),
                     const SizedBox(height: AppDimensions.paddingXS),
                     Text(
-                      Formatters.formatCurrency(remainingAmount),
+                      Formatters.formatCurrency(remainingAmount, currencyCode: context.read<ThemeProvider>().currency),
                       style: TextStyle(
                         color: isOverBudget ? AppColors.error : ThemeColors.getTextPrimary(context),
                         fontSize: 24,
@@ -144,7 +144,7 @@ class MonthlySummary extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    '${Formatters.formatCurrency(totalSpent)} / ${Formatters.formatCurrency(totalBudget)}',
+                    '${Formatters.formatCurrency(totalSpent, currencyCode: context.read<ThemeProvider>().currency)} / ${Formatters.formatCurrency(totalBudget, currencyCode: context.read<ThemeProvider>().currency)}',
                     style: TextStyle(
                       color: ThemeColors.getTextSecondary(context),
                       fontSize: 12,
@@ -187,7 +187,7 @@ class MonthlySummary extends StatelessWidget {
                   const SizedBox(width: AppDimensions.paddingS),
                   Expanded(
                     child: Text(
-                      'You\'ve exceeded your budget by ${Formatters.formatCurrency(totalSpent - totalBudget)}',
+                      'You\'ve exceeded your budget by ${Formatters.formatCurrency(totalSpent - totalBudget, currencyCode: context.read<ThemeProvider>().currency)}',
                       style: const TextStyle(
                         color: AppColors.error,
                         fontSize: 12,

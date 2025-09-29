@@ -68,6 +68,62 @@ class AccentColors {
   }
 }
 
+// Currency Options
+class CurrencyOptions {
+  static const Map<String, String> options = {
+    'USD': '\$',
+    'EUR': '€',
+    'GBP': '£',
+    'JPY': '¥',
+    'CAD': 'C\$',
+    'AUD': 'A\$',
+    'CHF': 'CHF',
+    'CNY': '¥',
+    'INR': '₹',
+    'LKR': 'Rs',
+    'KRW': '₩',
+    'SGD': 'S\$',
+    'HKD': 'HK\$',
+    'NZD': 'NZ\$',
+    'SEK': 'kr',
+    'NOK': 'kr',
+    'DKK': 'kr',
+    'PLN': 'zł',
+    'CZK': 'Kč',
+    'HUF': 'Ft',
+  };
+  
+  static String getCurrencySymbol(String code) {
+    return options[code] ?? 'Rs';
+  }
+  
+  static String getCurrencyName(String code) {
+    switch (code) {
+      case 'USD': return 'US Dollar';
+      case 'EUR': return 'Euro';
+      case 'GBP': return 'British Pound';
+      case 'JPY': return 'Japanese Yen';
+      case 'CAD': return 'Canadian Dollar';
+      case 'AUD': return 'Australian Dollar';
+      case 'CHF': return 'Swiss Franc';
+      case 'CNY': return 'Chinese Yuan';
+      case 'INR': return 'Indian Rupee';
+      case 'LKR': return 'Sri Lankan Rupee';
+      case 'KRW': return 'South Korean Won';
+      case 'SGD': return 'Singapore Dollar';
+      case 'HKD': return 'Hong Kong Dollar';
+      case 'NZD': return 'New Zealand Dollar';
+      case 'SEK': return 'Swedish Krona';
+      case 'NOK': return 'Norwegian Krone';
+      case 'DKK': return 'Danish Krone';
+      case 'PLN': return 'Polish Zloty';
+      case 'CZK': return 'Czech Koruna';
+      case 'HUF': return 'Hungarian Forint';
+      default: return 'Sri Lankan Rupee';
+    }
+  }
+}
+
 class LightColors {
   // Light Theme Colors
   static const Color background = Color(0xFFFAFAFA);

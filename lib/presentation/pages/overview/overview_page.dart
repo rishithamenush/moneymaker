@@ -4,6 +4,7 @@ import '../../../core/constants/strings.dart';
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/dimensions.dart';
 import '../../../core/utils/theme_colors.dart';
+import '../../../core/utils/formatters.dart';
 import '../../../domain/entities/expense.dart';
 import '../../../domain/entities/budget.dart';
 import '../../../domain/entities/category.dart';
@@ -314,7 +315,7 @@ class _OverviewPageState extends State<OverviewPage> with TickerProviderStateMix
                     ),
                   ),
                   Text(
-                    'LKR ${categoryTotal.toStringAsFixed(0)}',
+                    Formatters.formatCurrency(categoryTotal, currencyCode: context.read<ThemeProvider>().currency),
                     style: TextStyle(
                       color: ThemeColors.getTextPrimary(context),
                       fontSize: 14,
@@ -350,7 +351,7 @@ class _OverviewPageState extends State<OverviewPage> with TickerProviderStateMix
         Expanded(
           child: _buildStatCard(
             title: 'Daily Average',
-            value: 'LKR ${avgDailySpending.toStringAsFixed(0)}',
+            value: Formatters.formatCurrency(avgDailySpending, currencyCode: context.read<ThemeProvider>().currency),
             icon: Icons.trending_up,
             color: AppColors.success,
           ),
