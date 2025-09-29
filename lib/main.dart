@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'app/app.dart';
 import 'services/database/database_service.dart';
 import 'presentation/providers/theme_provider.dart';
+import 'presentation/providers/language_provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -40,13 +43,19 @@ void main() async {
   // Initialize database
   await DatabaseService.initialize();
   
-  // Initialize theme provider
+  // Initialize providers
   final themeProvider = ThemeProvider();
+  final languageProvider = LanguageProvider();
+  
   await themeProvider.initialize();
+  await languageProvider.initialize();
   
   runApp(
-    ChangeNotifierProvider.value(
-      value: themeProvider,
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider.value(value: themeProvider),
+        ChangeNotifierProvider.value(value: languageProvider),
+      ],
       child: const MoneyMakerApp(),
     ),
   );

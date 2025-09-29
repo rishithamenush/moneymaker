@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/dimensions.dart';
 import '../../../core/utils/theme_colors.dart';
 import '../../providers/theme_provider.dart';
+import '../../providers/language_provider.dart';
 import '../../providers/auth_provider.dart';
 import '../../providers/category_provider.dart';
 import '../../../domain/entities/category.dart';
@@ -21,21 +23,23 @@ class SettingsPage extends StatefulWidget {
 class _SettingsPageState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    
     return Scaffold(
       backgroundColor: ThemeColors.getBackground(context),
-      appBar: const CustomAppBar(
-        title: 'Settings',
+      appBar: CustomAppBar(
+        title: l10n.settings,
         showBackButton: false,
       ),
       body: ListView(
         padding: const EdgeInsets.all(AppDimensions.paddingM),
         children: [
           // Account Section
-          _buildSectionHeader('Account'),
+          _buildSectionHeader(l10n.account),
           _buildSettingsCard([
             _buildSettingsItem(
               icon: Icons.logout,
-              title: 'Logout',
+              title: l10n.signOut,
               subtitle: 'Sign out of your account',
               onTap: () => _showLogoutDialog(),
               isDestructive: true,
@@ -45,7 +49,7 @@ class _SettingsPageState extends State<SettingsPage> {
           const SizedBox(height: AppDimensions.paddingL),
           
           // Categories Section
-          _buildSectionHeader('Categories'),
+          _buildSectionHeader(l10n.category),
           _buildSettingsCard([
             _buildSettingsItem(
               icon: Icons.category,
@@ -58,7 +62,7 @@ class _SettingsPageState extends State<SettingsPage> {
           const SizedBox(height: AppDimensions.paddingL),
 
           // Appearance Section
-          _buildSectionHeader('Appearance'),
+          _buildSectionHeader(l10n.appearance),
           _buildSettingsCard([
             _buildThemeToggle(),
             _buildDivider(),
@@ -66,9 +70,20 @@ class _SettingsPageState extends State<SettingsPage> {
               builder: (context, themeProvider, child) {
                 return _buildSettingsItem(
                   icon: Icons.palette,
-                  title: 'Accent Color',
+                  title: l10n.accentColor,
                   subtitle: themeProvider.accentColor,
                   onTap: () => _showAccentColorDialog(),
+                );
+              },
+            ),
+            _buildDivider(),
+            Consumer<LanguageProvider>(
+              builder: (context, languageProvider, child) {
+                return _buildSettingsItem(
+                  icon: Icons.language,
+                  title: l10n.language,
+                  subtitle: languageProvider.currentLanguageName,
+                  onTap: () => _showLanguageDialog(),
                 );
               },
             ),
@@ -83,7 +98,7 @@ class _SettingsPageState extends State<SettingsPage> {
               builder: (context, themeProvider, child) {
                 return _buildSettingsItem(
                   icon: Icons.attach_money,
-                  title: 'Currency',
+                  title: l10n.currency,
                   subtitle: '${themeProvider.currency} (${CurrencyOptions.getCurrencyName(themeProvider.currency)})',
                   onTap: () => _showCurrencyDialog(),
                 );
@@ -105,14 +120,14 @@ class _SettingsPageState extends State<SettingsPage> {
           _buildSettingsCard([
             _buildSettingsItem(
               icon: Icons.download,
-              title: 'Export Data',
+              title: l10n.exportData,
               subtitle: 'Export your transactions to CSV',
               onTap: () => _exportData(),
             ),
             _buildDivider(),
             _buildSettingsItem(
               icon: Icons.upload,
-              title: 'Import Data',
+              title: l10n.importData,
               subtitle: 'Import transactions from CSV',
               onTap: () => _importData(),
             ),
@@ -406,6 +421,75 @@ class _SettingsPageState extends State<SettingsPage> {
       builder: (context) {
         return const _CategoryManagerSheet();
       },
+    );
+  }
+
+  void _showLanguageDialog() {
+    final l10n = AppLocalizations.of(context)!;
+    
+    showDialog(
+      context: context,
+      builder: (context) => Consumer<LanguageProvider>(
+        builder: (context, languageProvider, child) {
+          return AlertDialog(
+            title: Text(
+              l10n.selectLanguage,
+              style: TextStyle(color: ThemeColors.getTextPrimary(context)),
+            ),
+            backgroundColor: ThemeColors.getSurface(context),
+            content: SizedBox(
+              width: double.maxFinite,
+              height: 300,
+              child: ListView.builder(
+                itemCount: LanguageProvider.supportedLocales.length,
+                itemBuilder: (context, index) {
+                  final locale = LanguageProvider.supportedLocales[index];
+                  final languageName = LanguageProvider.getLanguageName(locale.languageCode);
+                  final isSelected = languageProvider.currentLanguageCode == locale.languageCode;
+                  
+                  return ListTile(
+                    title: Text(
+                      languageName,
+                      style: TextStyle(
+                        fontWeight: FontWeight.w600,
+                        color: ThemeColors.getTextPrimary(context),
+                      ),
+                    ),
+                    subtitle: Text(
+                      locale.languageCode.toUpperCase(),
+                      style: TextStyle(
+                        color: ThemeColors.getTextSecondary(context),
+                        fontSize: 12,
+                      ),
+                    ),
+                    trailing: isSelected
+                        ? Icon(
+                            Icons.check_circle,
+                            color: ThemeColors.getAccentColor(context, context.read<ThemeProvider>().accentColor),
+                          )
+                        : null,
+                    onTap: () {
+                      languageProvider.setLanguage(locale.languageCode);
+                      Navigator.of(context).pop();
+                    },
+                  );
+                },
+              ),
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(),
+                child: Text(
+                  l10n.cancel,
+                  style: TextStyle(
+                    color: ThemeColors.getTextSecondary(context),
+                  ),
+                ),
+              ),
+            ],
+          );
+        },
+      ),
     );
   }
 

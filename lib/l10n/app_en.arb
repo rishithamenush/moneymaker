@@ -1,0 +1,487 @@
+{
+  "@@locale": "en",
+  "appTitle": "MoneyMaker",
+  "@appTitle": {
+    "description": "The title of the application"
+  },
+  
+  "home": "Home",
+  "@home": {
+    "description": "Home page title"
+  },
+  
+  "overview": "Overview",
+  "@overview": {
+    "description": "Overview page title"
+  },
+  
+  "addTransaction": "Add Transaction",
+  "@addTransaction": {
+    "description": "Add transaction page title"
+  },
+  
+  "settings": "Settings",
+  "@settings": {
+    "description": "Settings page title"
+  },
+  
+  "account": "Account",
+  "@account": {
+    "description": "Account section title"
+  },
+  
+  "login": "Login",
+  "@login": {
+    "description": "Login page title"
+  },
+  
+  "register": "Register",
+  "@register": {
+    "description": "Register page title"
+  },
+  
+  "email": "Email",
+  "@email": {
+    "description": "Email field label"
+  },
+  
+  "password": "Password",
+  "@password": {
+    "description": "Password field label"
+  },
+  
+  "confirmPassword": "Confirm Password",
+  "@confirmPassword": {
+    "description": "Confirm password field label"
+  },
+  
+  "signIn": "Sign In",
+  "@signIn": {
+    "description": "Sign in button text"
+  },
+  
+  "signUp": "Sign Up",
+  "@signUp": {
+    "description": "Sign up button text"
+  },
+  
+  "signOut": "Sign Out",
+  "@signOut": {
+    "description": "Sign out button text"
+  },
+  
+  "forgotPassword": "Forgot Password?",
+  "@forgotPassword": {
+    "description": "Forgot password link text"
+  },
+  
+  "dontHaveAccount": "Don't have an account?",
+  "@dontHaveAccount": {
+    "description": "Don't have account text"
+  },
+  
+  "alreadyHaveAccount": "Already have an account?",
+  "@alreadyHaveAccount": {
+    "description": "Already have account text"
+  },
+  
+  "amount": "Amount",
+  "@amount": {
+    "description": "Amount field label"
+  },
+  
+  "description": "Description",
+  "@description": {
+    "description": "Description field label"
+  },
+  
+  "category": "Category",
+  "@category": {
+    "description": "Category field label"
+  },
+  
+  "date": "Date",
+  "@date": {
+    "description": "Date field label"
+  },
+  
+  "type": "Type",
+  "@type": {
+    "description": "Type field label"
+  },
+  
+  "income": "Income",
+  "@income": {
+    "description": "Income transaction type"
+  },
+  
+  "expense": "Expense",
+  "@expense": {
+    "description": "Expense transaction type"
+  },
+  
+  "save": "Save",
+  "@save": {
+    "description": "Save button text"
+  },
+  
+  "cancel": "Cancel",
+  "@cancel": {
+    "description": "Cancel button text"
+  },
+  
+  "delete": "Delete",
+  "@delete": {
+    "description": "Delete button text"
+  },
+  
+  "edit": "Edit",
+  "@edit": {
+    "description": "Edit button text"
+  },
+  
+  "totalIncome": "Total Income",
+  "@totalIncome": {
+    "description": "Total income label"
+  },
+  
+  "totalExpenses": "Total Expenses",
+  "@totalExpenses": {
+    "description": "Total expenses label"
+  },
+  
+  "netAmount": "Net Amount",
+  "@netAmount": {
+    "description": "Net amount label"
+  },
+  
+  "recentTransactions": "Recent Transactions",
+  "@recentTransactions": {
+    "description": "Recent transactions label"
+  },
+  
+  "noTransactions": "No transactions found",
+  "@noTransactions": {
+    "description": "No transactions message"
+  },
+  
+  "appearance": "Appearance",
+  "@appearance": {
+    "description": "Appearance section title"
+  },
+  
+  "theme": "Theme",
+  "@theme": {
+    "description": "Theme setting label"
+  },
+  
+  "light": "Light",
+  "@light": {
+    "description": "Light theme option"
+  },
+  
+  "dark": "Dark",
+  "@dark": {
+    "description": "Dark theme option"
+  },
+  
+  "system": "System",
+  "@system": {
+    "description": "System theme option"
+  },
+  
+  "accentColor": "Accent Color",
+  "@accentColor": {
+    "description": "Accent color setting label"
+  },
+  
+  "currency": "Currency",
+  "@currency": {
+    "description": "Currency setting label"
+  },
+  
+  "language": "Language",
+  "@language": {
+    "description": "Language setting label"
+  },
+  
+  "exportData": "Export Data",
+  "@exportData": {
+    "description": "Export data button text"
+  },
+  
+  "importData": "Import Data",
+  "@importData": {
+    "description": "Import data button text"
+  },
+  
+  "about": "About",
+  "@about": {
+    "description": "About section title"
+  },
+  
+  "version": "Version",
+  "@version": {
+    "description": "Version label"
+  },
+  
+  "deleteTransaction": "Delete Transaction",
+  "@deleteTransaction": {
+    "description": "Delete transaction dialog title"
+  },
+  
+  "deleteTransactionMessage": "Are you sure you want to delete this transaction?",
+  "@deleteTransactionMessage": {
+    "description": "Delete transaction confirmation message"
+  },
+  
+  "transactionDeleted": "Transaction deleted successfully",
+  "@transactionDeleted": {
+    "description": "Transaction deleted success message"
+  },
+  
+  "transactionSaved": "Transaction saved successfully",
+  "@transactionSaved": {
+    "description": "Transaction saved success message"
+  },
+  
+  "pleaseFillAllFields": "Please fill all fields",
+  "@pleaseFillAllFields": {
+    "description": "Validation error message"
+  },
+  
+  "invalidEmail": "Please enter a valid email",
+  "@invalidEmail": {
+    "description": "Email validation error"
+  },
+  
+  "passwordTooShort": "Password must be at least 6 characters",
+  "@passwordTooShort": {
+    "description": "Password validation error"
+  },
+  
+  "passwordsDoNotMatch": "Passwords do not match",
+  "@passwordsDoNotMatch": {
+    "description": "Password confirmation error"
+  },
+  
+  "loginFailed": "Login failed. Please check your credentials.",
+  "@loginFailed": {
+    "description": "Login error message"
+  },
+  
+  "registrationFailed": "Registration failed. Please try again.",
+  "@registrationFailed": {
+    "description": "Registration error message"
+  },
+  
+  "welcomeBack": "Welcome back!",
+  "@welcomeBack": {
+    "description": "Welcome back message"
+  },
+  
+  "welcome": "Welcome!",
+  "@welcome": {
+    "description": "Welcome message"
+  },
+  
+  "loading": "Loading...",
+  "@loading": {
+    "description": "Loading indicator text"
+  },
+  
+  "error": "Error",
+  "@error": {
+    "description": "Error title"
+  },
+  
+  "success": "Success",
+  "@success": {
+    "description": "Success title"
+  },
+  
+  "ok": "OK",
+  "@ok": {
+    "description": "OK button text"
+  },
+  
+  "yes": "Yes",
+  "@yes": {
+    "description": "Yes button text"
+  },
+  
+  "no": "No",
+  "@no": {
+    "description": "No button text"
+  },
+  
+  "food": "Food",
+  "@food": {
+    "description": "Food category"
+  },
+  
+  "transport": "Transport",
+  "@transport": {
+    "description": "Transport category"
+  },
+  
+  "entertainment": "Entertainment",
+  "@entertainment": {
+    "description": "Entertainment category"
+  },
+  
+  "shopping": "Shopping",
+  "@shopping": {
+    "description": "Shopping category"
+  },
+  
+  "health": "Health",
+  "@health": {
+    "description": "Health category"
+  },
+  
+  "education": "Education",
+  "@education": {
+    "description": "Education category"
+  },
+  
+  "other": "Other",
+  "@other": {
+    "description": "Other category"
+  },
+  
+  "salary": "Salary",
+  "@salary": {
+    "description": "Salary income type"
+  },
+  
+  "freelance": "Freelance",
+  "@freelance": {
+    "description": "Freelance income type"
+  },
+  
+  "investment": "Investment",
+  "@investment": {
+    "description": "Investment income type"
+  },
+  
+  "gift": "Gift",
+  "@gift": {
+    "description": "Gift income type"
+  },
+  
+  "business": "Business",
+  "@business": {
+    "description": "Business income type"
+  },
+  
+  "rent": "Rent",
+  "@rent": {
+    "description": "Rent income type"
+  },
+  
+  "budget": "Budget",
+  "@budget": {
+    "description": "Budget label"
+  },
+  
+  "spent": "Spent",
+  "@spent": {
+    "description": "Spent label"
+  },
+  
+  "remaining": "Remaining",
+  "@remaining": {
+    "description": "Remaining label"
+  },
+  
+  "overBudget": "Over Budget",
+  "@overBudget": {
+    "description": "Over budget label"
+  },
+  
+  "monthlySummary": "Monthly Summary",
+  "@monthlySummary": {
+    "description": "Monthly summary title"
+  },
+  
+  "spendingTrends": "Spending Trends",
+  "@spendingTrends": {
+    "description": "Spending trends title"
+  },
+  
+  "weeklyBreakdown": "Weekly Breakdown",
+  "@weeklyBreakdown": {
+    "description": "Weekly breakdown title"
+  },
+  
+  "monthlyComparison": "Monthly Comparison",
+  "@monthlyComparison": {
+    "description": "Monthly comparison title"
+  },
+  
+  "thisMonth": "This Month",
+  "@thisMonth": {
+    "description": "This month label"
+  },
+  
+  "lastMonth": "Last Month",
+  "@lastMonth": {
+    "description": "Last month label"
+  },
+  
+  "dailyAverage": "Daily Average",
+  "@dailyAverage": {
+    "description": "Daily average label"
+  },
+  
+  "insights": "Insights",
+  "@insights": {
+    "description": "Insights title"
+  },
+  
+  "categoryTotals": "Category Totals",
+  "@categoryTotals": {
+    "description": "Category totals title"
+  },
+  
+  "noData": "No data available",
+  "@noData": {
+    "description": "No data message"
+  },
+  
+  "selectLanguage": "Select Language",
+  "@selectLanguage": {
+    "description": "Language selection dialog title"
+  },
+  
+  "english": "English",
+  "@english": {
+    "description": "English language option"
+  },
+  
+  "spanish": "Spanish",
+  "@spanish": {
+    "description": "Spanish language option"
+  },
+  
+  "french": "French",
+  "@french": {
+    "description": "French language option"
+  },
+  
+  "german": "German",
+  "@german": {
+    "description": "German language option"
+  },
+  
+  "chinese": "Chinese",
+  "@chinese": {
+    "description": "Chinese language option"
+  },
+  
+  "japanese": "Japanese",
+  "@japanese": {
+    "description": "Japanese language option"
+  }
+}

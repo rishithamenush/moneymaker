@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../presentation/providers/theme_provider.dart';
+import '../presentation/providers/language_provider.dart';
 import '../presentation/providers/auth_provider.dart';
 import '../presentation/providers/expense_provider.dart';
 import '../presentation/providers/budget_provider.dart';
@@ -67,10 +70,10 @@ class MoneyMakerApp extends StatelessWidget {
                 ),
               ),
       ],
-      child: Consumer<ThemeProvider>(
-        builder: (context, themeProvider, child) {
-          // Show loading screen while theme is initializing
-          if (!themeProvider.isInitialized) {
+      child: Consumer2<ThemeProvider, LanguageProvider>(
+        builder: (context, themeProvider, languageProvider, child) {
+          // Show loading screen while providers are initializing
+          if (!themeProvider.isInitialized || !languageProvider.isInitialized) {
             return MaterialApp(
               title: 'Money Maker',
               theme: AppTheme.lightTheme('Orange'),
@@ -89,6 +92,14 @@ class MoneyMakerApp extends StatelessWidget {
             theme: AppTheme.lightTheme(themeProvider.accentColor),
             darkTheme: AppTheme.darkTheme(themeProvider.accentColor),
             themeMode: themeProvider.themeMode,
+            locale: languageProvider.locale,
+            localizationsDelegates: const [
+              AppLocalizations.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            supportedLocales: LanguageProvider.supportedLocales,
             initialRoute: AppRoutes.splash,
             onGenerateRoute: AppRouter.generateRoute,
             debugShowCheckedModeBanner: false,
