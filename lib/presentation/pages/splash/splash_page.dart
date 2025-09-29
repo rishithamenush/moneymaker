@@ -3,8 +3,10 @@ import 'package:provider/provider.dart';
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/dimensions.dart';
 import '../../../core/theme/app_theme.dart';
+import '../../../core/utils/theme_colors.dart';
 import '../../../app/routes.dart';
 import '../../providers/auth_provider.dart';
+import '../../providers/theme_provider.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -142,7 +144,7 @@ class _SplashPageState extends State<SplashPage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.primary,
+      backgroundColor: ThemeColors.getAccentColor(context, context.read<ThemeProvider>().accentColor),
       body: Container(
         width: double.infinity,
         height: double.infinity,
@@ -296,7 +298,7 @@ class _SplashPageState extends State<SplashPage>
       children: [
         Text(
           'Money Maker',
-          style: AppTheme.lightTheme.textTheme.headlineLarge?.copyWith(
+          style: AppTheme.lightTheme('Orange').textTheme.headlineLarge?.copyWith(
             color: Colors.white,
             fontWeight: FontWeight.bold,
             fontSize: 36,
@@ -335,7 +337,7 @@ class _SplashPageState extends State<SplashPage>
   Widget _buildTagline() {
     return Text(
       'Manage Your Finances Smartly',
-      style: AppTheme.lightTheme.textTheme.bodyLarge?.copyWith(
+      style: AppTheme.lightTheme('Orange').textTheme.bodyLarge?.copyWith(
         color: Colors.white.withOpacity(0.9),
         fontSize: 16,
         letterSpacing: 0.5,
@@ -386,7 +388,7 @@ class _SplashPageState extends State<SplashPage>
         // Loading text
         Text(
           'Loading...',
-          style: AppTheme.lightTheme.textTheme.bodyMedium?.copyWith(
+          style: AppTheme.lightTheme('Orange').textTheme.bodyMedium?.copyWith(
             color: Colors.white.withOpacity(0.9),
             fontSize: 16,
             fontWeight: FontWeight.w500,

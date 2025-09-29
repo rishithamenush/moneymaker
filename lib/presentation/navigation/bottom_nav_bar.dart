@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../../../core/constants/strings.dart';
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/dimensions.dart';
 import '../../../core/utils/theme_colors.dart';
 import '../../app/routes.dart';
+import '../providers/theme_provider.dart';
 
 class CustomBottomNavBar extends StatelessWidget {
   final int currentIndex;
@@ -71,7 +73,7 @@ class CustomBottomNavBar extends StatelessWidget {
           vertical: AppDimensions.paddingS,
         ),
         decoration: BoxDecoration(
-          color: isSelected ? AppColors.primary.withOpacity(0.1) : Colors.transparent,
+          color: isSelected ? ThemeColors.getAccentColor(context, context.read<ThemeProvider>().accentColor).withOpacity(0.1) : Colors.transparent,
           borderRadius: BorderRadius.circular(AppDimensions.radiusM),
         ),
         child: Column(
@@ -79,7 +81,7 @@ class CustomBottomNavBar extends StatelessWidget {
           children: [
             Icon(
               icon,
-              color: isSelected ? AppColors.primary : ThemeColors.getTextSecondary(context),
+              color: isSelected ? ThemeColors.getAccentColor(context, context.read<ThemeProvider>().accentColor) : ThemeColors.getTextSecondary(context),
               size: AppDimensions.iconS,
             ),
             const SizedBox(height: 2),
@@ -87,7 +89,7 @@ class CustomBottomNavBar extends StatelessWidget {
               child: Text(
                 label,
                 style: TextStyle(
-                  color: isSelected ? AppColors.primary : ThemeColors.getTextSecondary(context),
+                  color: isSelected ? ThemeColors.getAccentColor(context, context.read<ThemeProvider>().accentColor) : ThemeColors.getTextSecondary(context),
                   fontSize: 10,
                   fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
                 ),

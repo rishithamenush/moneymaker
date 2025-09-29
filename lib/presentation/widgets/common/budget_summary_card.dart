@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/dimensions.dart';
 import '../../../core/constants/strings.dart';
 import '../../../core/utils/formatters.dart';
+import '../../../core/utils/theme_colors.dart';
+import '../../providers/theme_provider.dart';
 
 class BudgetSummaryCard extends StatelessWidget {
   final double totalBudget;
@@ -82,7 +85,7 @@ class BudgetSummaryCard extends StatelessWidget {
             value: spentPercentage.clamp(0.0, 1.0),
             backgroundColor: AppColors.surfaceLight,
             valueColor: AlwaysStoppedAnimation<Color>(
-              isOverBudget ? AppColors.error : AppColors.primary,
+              isOverBudget ? AppColors.error : ThemeColors.getAccentColor(context, context.read<ThemeProvider>().accentColor),
             ),
             minHeight: 8,
           ),

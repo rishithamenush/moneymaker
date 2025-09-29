@@ -62,11 +62,15 @@ class _SettingsPageState extends State<SettingsPage> {
           _buildSettingsCard([
             _buildThemeToggle(),
             _buildDivider(),
-            _buildSettingsItem(
-              icon: Icons.palette,
-              title: 'Accent Color',
-              subtitle: 'Choose your preferred accent color',
-              onTap: () => _showAccentColorDialog(),
+            Consumer<ThemeProvider>(
+              builder: (context, themeProvider, child) {
+                return _buildSettingsItem(
+                  icon: Icons.palette,
+                  title: 'Accent Color',
+                  subtitle: themeProvider.accentColor,
+                  onTap: () => _showAccentColorDialog(),
+                );
+              },
             ),
           ]),
           
@@ -130,7 +134,7 @@ class _SettingsPageState extends State<SettingsPage> {
               trailing: Switch(
                 value: true,
                 onChanged: (value) => _toggleBudgetAlerts(value),
-                activeColor: AppColors.primary,
+                activeColor: ThemeColors.getAccentColor(context, context.read<ThemeProvider>().accentColor),
               ),
             ),
             _buildDivider(),
@@ -141,7 +145,7 @@ class _SettingsPageState extends State<SettingsPage> {
               trailing: Switch(
                 value: false,
                 onChanged: (value) => _toggleDailyReminders(value),
-                activeColor: AppColors.primary,
+                activeColor: ThemeColors.getAccentColor(context, context.read<ThemeProvider>().accentColor),
               ),
             ),
           ]),
@@ -220,7 +224,7 @@ class _SettingsPageState extends State<SettingsPage> {
     return ListTile(
       leading: Icon(
         icon,
-        color: isDestructive ? AppColors.error : AppColors.primary,
+        color: isDestructive ? AppColors.error : ThemeColors.getAccentColor(context, context.read<ThemeProvider>().accentColor),
         size: 24,
       ),
       title: Text(
@@ -263,7 +267,7 @@ class _SettingsPageState extends State<SettingsPage> {
             themeProvider.themeMode == ThemeMode.dark
                 ? Icons.dark_mode
                 : Icons.light_mode,
-            color: AppColors.primary,
+            color: ThemeColors.getAccentColor(context, context.read<ThemeProvider>().accentColor),
             size: 24,
           ),
           title: Text(
@@ -315,15 +319,77 @@ class _SettingsPageState extends State<SettingsPage> {
   void _showAccentColorDialog() {
     showDialog(
       context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('Choose Accent Color'),
-        content: const Text('Accent color selection coming soon!'),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text('OK'),
-          ),
-        ],
+      builder: (context) => Consumer<ThemeProvider>(
+        builder: (context, themeProvider, child) {
+          return AlertDialog(
+            title: Text(
+              'Choose Accent Color',
+              style: TextStyle(color: ThemeColors.getTextPrimary(context)),
+            ),
+            backgroundColor: ThemeColors.getSurface(context),
+            content: SizedBox(
+              width: double.maxFinite,
+              child: GridView.builder(
+                shrinkWrap: true,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 3,
+                  crossAxisSpacing: 12,
+                  mainAxisSpacing: 12,
+                ),
+                itemCount: AccentColors.options.length,
+                itemBuilder: (context, index) {
+                  final colorName = AccentColors.options.keys.elementAt(index);
+                  final color = AccentColors.options.values.elementAt(index);
+                  final isSelected = themeProvider.accentColor == colorName;
+                  
+                  return GestureDetector(
+                    onTap: () {
+                      themeProvider.setAccentColor(colorName);
+                      Navigator.pop(context);
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: color,
+                        shape: BoxShape.circle,
+                        border: isSelected 
+                          ? Border.all(
+                              color: ThemeColors.getTextPrimary(context),
+                              width: 3,
+                            )
+                          : null,
+                        boxShadow: isSelected
+                          ? [
+                              BoxShadow(
+                                color: color.withOpacity(0.3),
+                                blurRadius: 8,
+                                spreadRadius: 2,
+                              ),
+                            ]
+                          : null,
+                      ),
+                      child: isSelected
+                        ? const Icon(
+                            Icons.check,
+                            color: Colors.white,
+                            size: 24,
+                          )
+                        : null,
+                    ),
+                  );
+                },
+              ),
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: Text(
+                  'Cancel',
+                  style: TextStyle(color: ThemeColors.getTextSecondary(context)),
+                ),
+              ),
+            ],
+          );
+        },
       ),
     );
   }
@@ -373,18 +439,18 @@ class _SettingsPageState extends State<SettingsPage> {
 
   void _exportData() {
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('Export feature coming soon!'),
-        backgroundColor: AppColors.primary,
+      SnackBar(
+        content: const Text('Export feature coming soon!'),
+        backgroundColor: ThemeColors.getAccentColor(context, context.read<ThemeProvider>().accentColor),
       ),
     );
   }
 
   void _importData() {
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('Import feature coming soon!'),
-        backgroundColor: AppColors.primary,
+      SnackBar(
+        content: const Text('Import feature coming soon!'),
+        backgroundColor: ThemeColors.getAccentColor(context, context.read<ThemeProvider>().accentColor),
       ),
     );
   }
@@ -428,7 +494,7 @@ class _SettingsPageState extends State<SettingsPage> {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text('Budget alerts ${value ? 'enabled' : 'disabled'}'),
-        backgroundColor: AppColors.primary,
+        backgroundColor: ThemeColors.getAccentColor(context, context.read<ThemeProvider>().accentColor),
       ),
     );
   }
@@ -437,7 +503,7 @@ class _SettingsPageState extends State<SettingsPage> {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text('Daily reminders ${value ? 'enabled' : 'disabled'}'),
-        backgroundColor: AppColors.primary,
+        backgroundColor: ThemeColors.getAccentColor(context, context.read<ThemeProvider>().accentColor),
       ),
     );
   }
@@ -691,7 +757,7 @@ class _CategoryManagerSheetState extends State<_CategoryManagerSheet> {
                               setState(() { _isIncome = false; });
                               setStateChips(() {});
                             },
-                            selectedColor: AppColors.primary,
+                            selectedColor: ThemeColors.getAccentColor(context, context.read<ThemeProvider>().accentColor),
                             labelStyle: TextStyle(color: !_isIncome ? Colors.white : ThemeColors.getTextPrimary(context)),
                           ),
                           ChoiceChip(
@@ -701,7 +767,7 @@ class _CategoryManagerSheetState extends State<_CategoryManagerSheet> {
                               setState(() { _isIncome = true; });
                               setStateChips(() {});
                             },
-                            selectedColor: AppColors.primary,
+                            selectedColor: ThemeColors.getAccentColor(context, context.read<ThemeProvider>().accentColor),
                             labelStyle: TextStyle(color: _isIncome ? Colors.white : ThemeColors.getTextPrimary(context)),
                           ),
                         ],
@@ -728,7 +794,7 @@ class _CategoryManagerSheetState extends State<_CategoryManagerSheet> {
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
-                          borderSide: const BorderSide(color: AppColors.primary),
+                          borderSide: BorderSide(color: ThemeColors.getAccentColor(context, context.read<ThemeProvider>().accentColor)),
                         ),
                       ),
                     ),
@@ -776,7 +842,7 @@ class _CategoryManagerSheetState extends State<_CategoryManagerSheet> {
                     icon: const Icon(Icons.add, size: 18),
                     label: const Text('Add'),
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.primary,
+                      backgroundColor: ThemeColors.getAccentColor(context, context.read<ThemeProvider>().accentColor),
                       foregroundColor: Colors.white,
                       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),

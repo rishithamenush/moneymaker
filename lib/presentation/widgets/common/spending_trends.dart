@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/dimensions.dart';
 import '../../../core/utils/formatters.dart';
 import '../../../core/utils/theme_colors.dart';
 import '../../../domain/entities/expense.dart';
 import '../../../domain/entities/budget.dart';
+import '../../providers/theme_provider.dart';
 
 class SpendingTrends extends StatelessWidget {
   final List<Expense> expenses;
@@ -97,7 +99,7 @@ class SpendingTrends extends StatelessWidget {
                       widthFactor: data.percentage,
                       child: Container(
                         decoration: BoxDecoration(
-                          color: AppColors.primary,
+                          color: ThemeColors.getAccentColor(context, context.read<ThemeProvider>().accentColor),
                           borderRadius: BorderRadius.circular(AppDimensions.radiusS),
                         ),
                       ),
@@ -140,7 +142,7 @@ class SpendingTrends extends StatelessWidget {
               child: _buildComparisonCard(
                 title: 'This Month',
                 amount: comparison['current'] ?? 0.0,
-                color: AppColors.primary,
+                color: ThemeColors.getAccentColor(context, context.read<ThemeProvider>().accentColor),
                 context: context,
               ),
             ),
@@ -202,24 +204,24 @@ class SpendingTrends extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(AppDimensions.paddingM),
       decoration: BoxDecoration(
-        color: AppColors.primary.withOpacity(0.1),
+        color: ThemeColors.getAccentColor(context, context.read<ThemeProvider>().accentColor).withOpacity(0.1),
         borderRadius: BorderRadius.circular(AppDimensions.radiusM),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Row(
+          Row(
             children: [
               Icon(
                 Icons.lightbulb_outline,
-                color: AppColors.primary,
+                color: ThemeColors.getAccentColor(context, context.read<ThemeProvider>().accentColor),
                 size: 20,
               ),
-              SizedBox(width: AppDimensions.paddingS),
+              const SizedBox(width: AppDimensions.paddingS),
               Text(
                 'Insights',
                 style: TextStyle(
-                  color: AppColors.primary,
+                  color: ThemeColors.getAccentColor(context, context.read<ThemeProvider>().accentColor),
                   fontSize: 14,
                   fontWeight: FontWeight.w600,
                 ),

@@ -11,6 +11,7 @@ import '../../../domain/entities/category.dart';
 import '../../providers/expense_provider.dart';
 import '../../providers/income_provider.dart';
 import '../../providers/category_provider.dart';
+import '../../providers/theme_provider.dart';
 
 enum TransactionType { income, expense }
 
@@ -52,7 +53,7 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
       backgroundColor: ThemeColors.getBackground(context),
       appBar: AppBar(
         title: const Text('Add Transaction'),
-        backgroundColor: AppColors.primary,
+        backgroundColor: ThemeColors.getAccentColor(context, context.read<ThemeProvider>().accentColor),
         foregroundColor: Colors.white,
         elevation: 0,
       ),
@@ -98,7 +99,7 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
       children: [
         Text(
           'Transaction Type',
-          style: AppTheme.lightTheme.textTheme.titleMedium?.copyWith(
+          style: AppTheme.lightTheme('Orange').textTheme.titleMedium?.copyWith(
             fontWeight: FontWeight.w600,
             color: ThemeColors.getTextPrimary(context),
           ),
@@ -182,7 +183,7 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
       children: [
         Text(
           'Amount (LKR)',
-          style: AppTheme.lightTheme.textTheme.titleMedium?.copyWith(
+          style: AppTheme.lightTheme('Orange').textTheme.titleMedium?.copyWith(
             fontWeight: FontWeight.w600,
             color: ThemeColors.getTextPrimary(context),
           ),
@@ -199,7 +200,7 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(AppDimensions.radiusM),
-              borderSide: const BorderSide(color: AppColors.primary),
+              borderSide: BorderSide(color: ThemeColors.getAccentColor(context, context.read<ThemeProvider>().accentColor)),
             ),
           ),
           validator: (value) {
@@ -225,7 +226,7 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
       children: [
         Text(
           'Category',
-          style: AppTheme.lightTheme.textTheme.titleMedium?.copyWith(
+          style: AppTheme.lightTheme('Orange').textTheme.titleMedium?.copyWith(
             fontWeight: FontWeight.w600,
             color: ThemeColors.getTextPrimary(context),
           ),
@@ -241,7 +242,7 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(AppDimensions.radiusM),
-                  borderSide: const BorderSide(color: AppColors.primary),
+                  borderSide: BorderSide(color: ThemeColors.getAccentColor(context, context.read<ThemeProvider>().accentColor)),
                 ),
               ),
               hint: const Text('Select category'),
@@ -288,7 +289,7 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
       children: [
         Text(
           'Date',
-          style: AppTheme.lightTheme.textTheme.titleMedium?.copyWith(
+          style: AppTheme.lightTheme('Orange').textTheme.titleMedium?.copyWith(
             fontWeight: FontWeight.w600,
             color: ThemeColors.getTextPrimary(context),
           ),
@@ -304,9 +305,9 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
             ),
             child: Row(
               children: [
-                const Icon(
+                Icon(
                   Icons.calendar_today,
-                  color: AppColors.primary,
+                  color: ThemeColors.getAccentColor(context, context.read<ThemeProvider>().accentColor),
                 ),
                 const SizedBox(width: AppDimensions.paddingS),
                 Text(
@@ -332,7 +333,7 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
       children: [
         Text(
           'Details',
-          style: AppTheme.lightTheme.textTheme.titleMedium?.copyWith(
+          style: AppTheme.lightTheme('Orange').textTheme.titleMedium?.copyWith(
             fontWeight: FontWeight.w600,
             color: ThemeColors.getTextPrimary(context),
           ),
@@ -348,7 +349,7 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(AppDimensions.radiusM),
-              borderSide: const BorderSide(color: AppColors.primary),
+              borderSide: BorderSide(color: ThemeColors.getAccentColor(context, context.read<ThemeProvider>().accentColor)),
             ),
           ),
           validator: (value) {
@@ -369,7 +370,7 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
       child: ElevatedButton(
         onPressed: _isLoading ? null : _saveTransaction,
         style: ElevatedButton.styleFrom(
-          backgroundColor: AppColors.primary,
+          backgroundColor: ThemeColors.getAccentColor(context, context.read<ThemeProvider>().accentColor),
           foregroundColor: Colors.white,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(AppDimensions.radiusM),

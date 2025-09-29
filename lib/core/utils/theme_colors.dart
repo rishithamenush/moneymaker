@@ -71,4 +71,27 @@ class ThemeColors {
         ? LightColors.backgroundGradient 
         : DarkColors.backgroundGradient;
   }
+
+  // Accent Color Methods
+  static Color getAccentColor(BuildContext context, String accentName) {
+    return AccentColors.getAccentColor(accentName);
+  }
+
+  static Color getAccentColorDark(BuildContext context, String accentName) {
+    return AccentColors.getAccentColorDark(accentName);
+  }
+
+  static Color getAccentColorLight(BuildContext context, String accentName) {
+    return AccentColors.getAccentColorLight(accentName);
+  }
+
+  static LinearGradient getAccentGradient(BuildContext context, String accentName) {
+    final color = getAccentColor(context, accentName);
+    final lightColor = getAccentColorLight(context, accentName);
+    return LinearGradient(
+      colors: [color, lightColor],
+      begin: Alignment.topLeft,
+      end: Alignment.bottomRight,
+    );
+  }
 }

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/dimensions.dart';
 import '../../../core/utils/formatters.dart';
 import '../../../core/utils/theme_colors.dart';
+import '../../providers/theme_provider.dart';
 
 class MonthlySummary extends StatelessWidget {
   final double totalSpent;
@@ -21,7 +23,7 @@ class MonthlySummary extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isOverBudget = totalSpent > totalBudget;
-    final progressColor = isOverBudget ? AppColors.error : AppColors.primary;
+    final progressColor = isOverBudget ? AppColors.error : ThemeColors.getAccentColor(context, context.read<ThemeProvider>().accentColor);
     
     return Container(
       padding: const EdgeInsets.all(AppDimensions.paddingL),

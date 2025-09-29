@@ -3,13 +3,14 @@ import '../constants/colors.dart';
 import '../constants/dimensions.dart';
 
 class AppTheme {
-  static ThemeData get lightTheme {
+  static ThemeData lightTheme(String accentColor) {
+    final primaryColor = AccentColors.getAccentColor(accentColor);
     return ThemeData(
       useMaterial3: true,
       brightness: Brightness.light,
-      colorScheme: const ColorScheme.light(
-        primary: AppColors.primary,
-        secondary: AppColors.secondary,
+      colorScheme: ColorScheme.light(
+        primary: primaryColor,
+        secondary: AccentColors.getAccentColorLight(accentColor),
         surface: LightColors.surface,
         onPrimary: Colors.white,
         onSecondary: Colors.white,
@@ -37,7 +38,7 @@ class AppTheme {
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
-          backgroundColor: AppColors.primary,
+          backgroundColor: primaryColor,
           foregroundColor: Colors.white,
           elevation: 0,
           shape: RoundedRectangleBorder(
@@ -48,7 +49,7 @@ class AppTheme {
       ),
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
-          foregroundColor: AppColors.primary,
+          foregroundColor: primaryColor,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(AppDimensions.radiusM),
           ),
@@ -67,7 +68,7 @@ class AppTheme {
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(AppDimensions.radiusM),
-          borderSide: const BorderSide(color: AppColors.primary, width: 2),
+          borderSide: BorderSide(color: primaryColor, width: 2),
         ),
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(AppDimensions.radiusM),
@@ -78,9 +79,9 @@ class AppTheme {
           vertical: AppDimensions.paddingM,
         ),
       ),
-      bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+      bottomNavigationBarTheme: BottomNavigationBarThemeData(
         backgroundColor: LightColors.surface,
-        selectedItemColor: AppColors.primary,
+        selectedItemColor: primaryColor,
         unselectedItemColor: LightColors.textSecondary,
         type: BottomNavigationBarType.fixed,
         elevation: 8,
@@ -88,13 +89,14 @@ class AppTheme {
     );
   }
 
-  static ThemeData get darkTheme {
+  static ThemeData darkTheme(String accentColor) {
+    final primaryColor = AccentColors.getAccentColor(accentColor);
     return ThemeData(
       useMaterial3: true,
       brightness: Brightness.dark,
-      colorScheme: const ColorScheme.dark(
-        primary: AppColors.primary,
-        secondary: AppColors.secondary,
+      colorScheme: ColorScheme.dark(
+        primary: primaryColor,
+        secondary: AccentColors.getAccentColorLight(accentColor),
         surface: DarkColors.surface,
         onPrimary: Colors.white,
         onSecondary: Colors.white,
@@ -121,7 +123,7 @@ class AppTheme {
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
-          backgroundColor: AppColors.primary,
+          backgroundColor: primaryColor,
           foregroundColor: Colors.white,
           elevation: 0,
           shape: RoundedRectangleBorder(
@@ -132,7 +134,7 @@ class AppTheme {
       ),
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
-          foregroundColor: AppColors.primary,
+          foregroundColor: primaryColor,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(AppDimensions.radiusM),
           ),
@@ -151,7 +153,7 @@ class AppTheme {
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(AppDimensions.radiusM),
-          borderSide: const BorderSide(color: AppColors.primary, width: 2),
+          borderSide: BorderSide(color: primaryColor, width: 2),
         ),
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(AppDimensions.radiusM),
@@ -162,9 +164,9 @@ class AppTheme {
           vertical: AppDimensions.paddingM,
         ),
       ),
-      bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+      bottomNavigationBarTheme: BottomNavigationBarThemeData(
         backgroundColor: DarkColors.surface,
-        selectedItemColor: AppColors.primary,
+        selectedItemColor: primaryColor,
         unselectedItemColor: DarkColors.textSecondary,
         type: BottomNavigationBarType.fixed,
         elevation: 0,

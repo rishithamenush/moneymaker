@@ -10,6 +10,7 @@ import '../../../domain/entities/category.dart';
 import '../../providers/expense_provider.dart';
 import '../../providers/budget_provider.dart';
 import '../../providers/category_provider.dart';
+import '../../providers/theme_provider.dart';
 import '../../widgets/common/custom_app_bar.dart';
 import '../../widgets/common/monthly_selector.dart';
 import '../../widgets/charts/pie_chart_widget.dart';
@@ -58,9 +59,9 @@ class _OverviewPageState extends State<OverviewPage> with TickerProviderStateMix
       body: Consumer3<ExpenseProvider, BudgetProvider, CategoryProvider>(
         builder: (context, expenseProvider, budgetProvider, categoryProvider, child) {
           if (expenseProvider.isLoading || budgetProvider.isLoading || categoryProvider.isLoading) {
-            return const Center(
+            return Center(
               child: CircularProgressIndicator(
-                color: AppColors.primary,
+                color: ThemeColors.getAccentColor(context, context.read<ThemeProvider>().accentColor),
               ),
             );
           }
@@ -95,7 +96,7 @@ class _OverviewPageState extends State<OverviewPage> with TickerProviderStateMix
                   controller: _tabController,
                   isScrollable: false,
                   indicator: BoxDecoration(
-                    color: AppColors.primary,
+                    color: ThemeColors.getAccentColor(context, context.read<ThemeProvider>().accentColor),
                     borderRadius: BorderRadius.circular(AppDimensions.radiusM),
                   ),
                   indicatorSize: TabBarIndicatorSize.tab,

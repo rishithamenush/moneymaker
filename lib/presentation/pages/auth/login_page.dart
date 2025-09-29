@@ -5,6 +5,7 @@ import '../../../core/constants/dimensions.dart';
 import '../../../core/utils/validators.dart';
 import '../../../core/utils/theme_colors.dart';
 import '../../providers/auth_provider.dart';
+import '../../providers/theme_provider.dart';
 import '../../navigation/app_router.dart';
 import '../../../app/routes.dart';
 
@@ -71,13 +72,13 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
-          gradient: const LinearGradient(
+          gradient: LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
             colors: [
-              AppColors.primary,
-              AppColors.primaryDark,
-              AppColors.secondary,
+              ThemeColors.getAccentColor(context, context.read<ThemeProvider>().accentColor),
+              ThemeColors.getAccentColorDark(context, context.read<ThemeProvider>().accentColor),
+              ThemeColors.getAccentColorLight(context, context.read<ThemeProvider>().accentColor),
             ],
           ),
         ),
@@ -147,10 +148,10 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
               ),
             ],
           ),
-          child: const Icon(
+          child: Icon(
             Icons.account_balance_wallet,
             size: 50,
-            color: AppColors.primary,
+            color: ThemeColors.getAccentColor(context, context.read<ThemeProvider>().accentColor),
           ),
         ),
         
@@ -231,7 +232,7 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
       decoration: InputDecoration(
         labelText: 'Email',
         hintText: 'Enter your email',
-        prefixIcon: const Icon(Icons.email_outlined, color: AppColors.primary),
+        prefixIcon: Icon(Icons.email_outlined, color: ThemeColors.getAccentColor(context, context.read<ThemeProvider>().accentColor)),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
           borderSide: BorderSide(color: ThemeColors.getBorder(context)),
@@ -242,7 +243,7 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: const BorderSide(color: AppColors.primary, width: 2),
+          borderSide: BorderSide(color: ThemeColors.getAccentColor(context, context.read<ThemeProvider>().accentColor), width: 2),
         ),
         filled: true,
         fillColor: ThemeColors.getBackground(context),
@@ -259,7 +260,7 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
       decoration: InputDecoration(
         labelText: 'Password',
         hintText: 'Enter your password',
-        prefixIcon: const Icon(Icons.lock_outlined, color: AppColors.primary),
+        prefixIcon: Icon(Icons.lock_outlined, color: ThemeColors.getAccentColor(context, context.read<ThemeProvider>().accentColor)),
         suffixIcon: IconButton(
           icon: Icon(
             _obscurePassword ? Icons.visibility_off : Icons.visibility,
@@ -281,7 +282,7 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: const BorderSide(color: AppColors.primary, width: 2),
+          borderSide: BorderSide(color: ThemeColors.getAccentColor(context, context.read<ThemeProvider>().accentColor), width: 2),
         ),
         filled: true,
         fillColor: ThemeColors.getBackground(context),
@@ -304,7 +305,7 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                   _rememberMe = value ?? false;
                 });
               },
-              activeColor: AppColors.primary,
+              activeColor: ThemeColors.getAccentColor(context, context.read<ThemeProvider>().accentColor),
             ),
             Text(
               'Remember me',
@@ -319,10 +320,10 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
         // Forgot Password
         TextButton(
           onPressed: _showForgotPasswordDialog,
-          child: const Text(
+          child: Text(
             'Forgot Password?',
             style: TextStyle(
-              color: AppColors.primary,
+              color: ThemeColors.getAccentColor(context, context.read<ThemeProvider>().accentColor),
               fontSize: 14,
               fontWeight: FontWeight.w500,
             ),
@@ -338,7 +339,7 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
         return ElevatedButton(
           onPressed: authProvider.isLoading ? null : _handleLogin,
           style: ElevatedButton.styleFrom(
-            backgroundColor: AppColors.primary,
+            backgroundColor: ThemeColors.getAccentColor(context, context.read<ThemeProvider>().accentColor),
             foregroundColor: Colors.white,
             padding: const EdgeInsets.symmetric(vertical: 16),
             shape: RoundedRectangleBorder(

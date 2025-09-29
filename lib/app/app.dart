@@ -72,8 +72,8 @@ class MoneyMakerApp extends StatelessWidget {
         builder: (context, themeProvider, child) {
           return MaterialApp(
             title: 'Money Maker',
-            theme: AppTheme.lightTheme,
-            darkTheme: AppTheme.darkTheme,
+            theme: AppTheme.lightTheme(themeProvider.accentColor),
+            darkTheme: AppTheme.darkTheme(themeProvider.accentColor),
             themeMode: themeProvider.themeMode,
             initialRoute: AppRoutes.splash,
             onGenerateRoute: AppRouter.generateRoute,

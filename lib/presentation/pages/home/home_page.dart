@@ -10,6 +10,7 @@ import '../../../domain/entities/income.dart';
 import '../../providers/expense_provider.dart';
 import '../../providers/budget_provider.dart';
 import '../../providers/income_provider.dart';
+import '../../providers/theme_provider.dart';
 import '../../widgets/common/custom_app_bar.dart';
 import '../../widgets/common/transaction_list_item.dart';
 import '../../widgets/common/monthly_selector.dart';
@@ -63,9 +64,9 @@ class _HomePageState extends State<HomePage> {
       body: Consumer3<ExpenseProvider, BudgetProvider, IncomeProvider>(
         builder: (context, expenseProvider, budgetProvider, incomeProvider, child) {
           if (expenseProvider.isLoading || budgetProvider.isLoading || incomeProvider.isLoading) {
-            return const Center(
+            return Center(
               child: CircularProgressIndicator(
-                color: AppColors.primary,
+                color: ThemeColors.getAccentColor(context, context.read<ThemeProvider>().accentColor),
               ),
             );
           }
@@ -211,7 +212,7 @@ class _HomePageState extends State<HomePage> {
         onPressed: () {
           Navigator.pushNamed(context, AppRoutes.addTransaction);
         },
-        backgroundColor: AppColors.primary,
+        backgroundColor: ThemeColors.getAccentColor(context, context.read<ThemeProvider>().accentColor),
         foregroundColor: Colors.white,
         child: const Icon(Icons.add),
       ),

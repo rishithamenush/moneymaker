@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
+import 'package:provider/provider.dart';
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/dimensions.dart';
 import '../../../core/utils/theme_colors.dart';
 import '../../../domain/entities/expense.dart';
+import '../../providers/theme_provider.dart';
 
 class LineChartWidget extends StatelessWidget {
   final List<Expense> expenses;
@@ -125,7 +127,7 @@ class LineChartWidget extends StatelessWidget {
                     return FlSpot(entry.key.toDouble(), entry.value.amount);
                   }).toList(),
                   isCurved: true,
-                  color: AppColors.primary,
+                  color: ThemeColors.getAccentColor(context, context.read<ThemeProvider>().accentColor),
                   barWidth: 3,
                   isStrokeCapRound: true,
                   dotData: FlDotData(
@@ -133,7 +135,7 @@ class LineChartWidget extends StatelessWidget {
                     getDotPainter: (spot, percent, barData, index) {
                       return FlDotCirclePainter(
                         radius: 4,
-                        color: AppColors.primary,
+                        color: ThemeColors.getAccentColor(context, context.read<ThemeProvider>().accentColor),
                         strokeWidth: 2,
                         strokeColor: ThemeColors.getBackground(context),
                       );
@@ -141,7 +143,7 @@ class LineChartWidget extends StatelessWidget {
                   ),
                   belowBarData: BarAreaData(
                     show: true,
-                    color: AppColors.primary.withOpacity(0.1),
+                    color: ThemeColors.getAccentColor(context, context.read<ThemeProvider>().accentColor).withOpacity(0.1),
                   ),
                 ),
               ],

@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../../../domain/entities/expense.dart';
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/dimensions.dart';
 import '../../../core/utils/formatters.dart';
+import '../../../core/utils/theme_colors.dart';
+import '../../providers/theme_provider.dart';
 
 class ExpenseListItem extends StatelessWidget {
   final Expense expense;
@@ -33,12 +36,12 @@ class ExpenseListItem extends StatelessWidget {
                   width: 40,
                   height: 40,
                   decoration: BoxDecoration(
-                    color: AppColors.primary.withOpacity(0.1),
+                    color: ThemeColors.getAccentColor(context, context.read<ThemeProvider>().accentColor).withOpacity(0.1),
                     borderRadius: BorderRadius.circular(AppDimensions.radiusM),
                   ),
-                  child: const Icon(
+                  child: Icon(
                     Icons.category,
-                    color: AppColors.primary,
+                    color: ThemeColors.getAccentColor(context, context.read<ThemeProvider>().accentColor),
                     size: AppDimensions.iconM,
                   ),
                 ),
