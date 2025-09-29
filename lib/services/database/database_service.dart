@@ -12,14 +12,8 @@ class DatabaseService {
       // Initialize the database
       await DatabaseHelper.database;
       
-      // Clear all existing data for fresh start
-      await clearAllData();
-      
-      // Seed initial data (now disabled)
-      await DataSeeder.seedInitialData();
-      
       _isInitialized = true;
-      print('Database initialized successfully with fresh data');
+      print('Database initialized successfully');
     } catch (e) {
       print('Error initializing database: $e');
       rethrow;
