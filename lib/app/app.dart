@@ -35,7 +35,6 @@ class MoneyMakerApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => ThemeProvider()),
         ChangeNotifierProvider(create: (_) => AuthProvider()),
               ChangeNotifierProvider(
                 create: (_) => ExpenseProvider(
@@ -70,6 +69,21 @@ class MoneyMakerApp extends StatelessWidget {
       ],
       child: Consumer<ThemeProvider>(
         builder: (context, themeProvider, child) {
+          // Show loading screen while theme is initializing
+          if (!themeProvider.isInitialized) {
+            return MaterialApp(
+              title: 'Money Maker',
+              theme: AppTheme.lightTheme('Orange'),
+              darkTheme: AppTheme.darkTheme('Orange'),
+              home: const Scaffold(
+                body: Center(
+                  child: CircularProgressIndicator(),
+                ),
+              ),
+              debugShowCheckedModeBanner: false,
+            );
+          }
+          
           return MaterialApp(
             title: 'Money Maker',
             theme: AppTheme.lightTheme(themeProvider.accentColor),

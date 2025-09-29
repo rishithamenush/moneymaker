@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:provider/provider.dart';
 import 'app/app.dart';
 import 'services/database/database_service.dart';
+import 'presentation/providers/theme_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -38,5 +40,14 @@ void main() async {
   // Initialize database
   await DatabaseService.initialize();
   
-  runApp(const MoneyMakerApp());
+  // Initialize theme provider
+  final themeProvider = ThemeProvider();
+  await themeProvider.initialize();
+  
+  runApp(
+    ChangeNotifierProvider.value(
+      value: themeProvider,
+      child: const MoneyMakerApp(),
+    ),
+  );
 }
