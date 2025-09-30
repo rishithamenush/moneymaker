@@ -34,20 +34,6 @@ class _SettingsPageState extends State<SettingsPage> {
       body: ListView(
         padding: const EdgeInsets.all(AppDimensions.paddingM),
         children: [
-          // Account Section
-          _buildSectionHeader(l10n.account),
-          _buildSettingsCard([
-            _buildSettingsItem(
-              icon: Icons.logout,
-              title: l10n.signOut,
-              subtitle: 'Sign out of your account',
-              onTap: () => _showLogoutDialog(),
-              isDestructive: true,
-            ),
-          ]),
-          
-          const SizedBox(height: AppDimensions.paddingL),
-          
           // Categories Section
           _buildSectionHeader(l10n.category),
           _buildSettingsCard([
@@ -193,6 +179,20 @@ class _SettingsPageState extends State<SettingsPage> {
               title: 'Terms of Service',
               subtitle: 'Terms and conditions',
               onTap: () => _showTermsOfService(),
+            ),
+          ]),
+          
+          const SizedBox(height: AppDimensions.paddingL),
+          
+          // Account Section (moved to bottom)
+          _buildSectionHeader(l10n.account),
+          _buildSettingsCard([
+            _buildSettingsItem(
+              icon: Icons.logout,
+              title: l10n.signOut,
+              subtitle: 'Sign out of your account',
+              onTap: () => _showLogoutDialog(),
+              isDestructive: true,
             ),
           ]),
           
