@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/dimensions.dart';
 import '../../../core/theme/app_theme.dart';
@@ -94,11 +95,13 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
   }
 
   Widget _buildTypeSelector() {
+    final l10n = AppLocalizations.of(context)!;
+    
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Transaction Type',
+          l10n.type,
           style: AppTheme.lightTheme('Orange').textTheme.titleMedium?.copyWith(
             fontWeight: FontWeight.w600,
             color: ThemeColors.getTextPrimary(context),
@@ -110,7 +113,7 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
             Expanded(
               child: _buildTypeOption(
                 type: TransactionType.expense,
-                title: 'Expense',
+                title: l10n.expense,
                 icon: Icons.trending_down,
                 color: AppColors.error,
               ),
@@ -119,7 +122,7 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
             Expanded(
               child: _buildTypeOption(
                 type: TransactionType.income,
-                title: 'Income',
+                title: l10n.income,
                 icon: Icons.trending_up,
                 color: AppColors.success,
               ),
@@ -178,11 +181,13 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
   }
 
   Widget _buildAmountField() {
+    final l10n = AppLocalizations.of(context)!;
+    
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Amount (${context.read<ThemeProvider>().currency})',
+          '${l10n.amount} (${context.read<ThemeProvider>().currency})',
           style: AppTheme.lightTheme('Orange').textTheme.titleMedium?.copyWith(
             fontWeight: FontWeight.w600,
             color: ThemeColors.getTextPrimary(context),
@@ -221,11 +226,13 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
   }
 
   Widget _buildCategoryField() {
+    final l10n = AppLocalizations.of(context)!;
+    
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Category',
+          l10n.category,
           style: AppTheme.lightTheme('Orange').textTheme.titleMedium?.copyWith(
             fontWeight: FontWeight.w600,
             color: ThemeColors.getTextPrimary(context),
@@ -284,11 +291,13 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
   }
 
   Widget _buildDateField() {
+    final l10n = AppLocalizations.of(context)!;
+    
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Date',
+          l10n.date,
           style: AppTheme.lightTheme('Orange').textTheme.titleMedium?.copyWith(
             fontWeight: FontWeight.w600,
             color: ThemeColors.getTextPrimary(context),
@@ -328,11 +337,13 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
   }
 
   Widget _buildDescriptionField() {
+    final l10n = AppLocalizations.of(context)!;
+    
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Details',
+          l10n.description,
           style: AppTheme.lightTheme('Orange').textTheme.titleMedium?.copyWith(
             fontWeight: FontWeight.w600,
             color: ThemeColors.getTextPrimary(context),
@@ -364,6 +375,8 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
   }
 
   Widget _buildSaveButton() {
+    final l10n = AppLocalizations.of(context)!;
+    
     return SizedBox(
       width: double.infinity,
       height: 50,
@@ -379,7 +392,7 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
         child: _isLoading
             ? const CircularProgressIndicator(color: Colors.white)
             : Text(
-                'Save ${_selectedType == TransactionType.income ? 'Income' : 'Expense'}',
+                '${l10n.save} ${_selectedType == TransactionType.income ? l10n.income : l10n.expense}',
                 style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w600,

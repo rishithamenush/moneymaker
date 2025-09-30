@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../core/constants/strings.dart';
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/dimensions.dart';
@@ -51,10 +52,12 @@ class _OverviewPageState extends State<OverviewPage> with TickerProviderStateMix
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    
     return Scaffold(
       backgroundColor: ThemeColors.getBackground(context),
-      appBar: const CustomAppBar(
-        title: AppStrings.overview,
+      appBar: CustomAppBar(
+        title: l10n.overview,
         showBackButton: false,
       ),
       body: Consumer3<ExpenseProvider, BudgetProvider, CategoryProvider>(

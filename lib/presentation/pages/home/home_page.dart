@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../core/constants/strings.dart';
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/dimensions.dart';
@@ -45,10 +46,12 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    
     return Scaffold(
       backgroundColor: ThemeColors.getBackground(context),
       appBar: CustomAppBar(
-        title: AppStrings.thisMonth,
+        title: l10n.thisMonth,
         showBackButton: false,
         actions: [
           IconButton(
@@ -105,7 +108,7 @@ class _HomePageState extends State<HomePage> {
                         child: Column(
                           children: [
                             Text(
-                              'Income',
+                              l10n.income,
                               style: TextStyle(
                                 fontSize: 12,
                                 color: ThemeColors.getTextSecondary(context),
@@ -139,7 +142,7 @@ class _HomePageState extends State<HomePage> {
                         child: Column(
                           children: [
                             Text(
-                              'Expenses',
+                              l10n.expense,
                               style: TextStyle(
                                 fontSize: 12,
                                 color: ThemeColors.getTextSecondary(context),
@@ -173,7 +176,7 @@ class _HomePageState extends State<HomePage> {
                         child: Column(
                           children: [
                             Text(
-                              'Net',
+                              l10n.netAmount,
                               style: TextStyle(
                                 fontSize: 12,
                                 color: ThemeColors.getTextSecondary(context),
@@ -221,6 +224,8 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _buildTransactionsList(List<Expense> expenses, List<Income> incomes) {
+    final l10n = AppLocalizations.of(context)!;
+    
     // Combine and sort transactions by date (newest first)
     final allTransactions = <dynamic>[];
     allTransactions.addAll(expenses);
@@ -240,7 +245,7 @@ class _HomePageState extends State<HomePage> {
             ),
             const SizedBox(height: AppDimensions.paddingM),
             Text(
-              'No transactions yet',
+              l10n.noTransactions,
               style: TextStyle(
                 color: ThemeColors.getTextSecondary(context),
                 fontSize: 18,
