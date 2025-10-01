@@ -10,6 +10,7 @@ import '../../providers/auth_provider.dart';
 import '../../providers/category_provider.dart';
 import '../../../domain/entities/category.dart';
 import '../../widgets/common/custom_app_bar.dart';
+import '../../widgets/common/settings_popup.dart';
 import '../../navigation/bottom_nav_bar.dart';
 import '../../../app/routes.dart';
 
@@ -338,77 +339,93 @@ class _SettingsPageState extends State<SettingsPage> {
 
   void _showAccentColorDialog() {
     final l10n = AppLocalizations.of(context)!;
-    showDialog(
+    SettingsSelectionPopup.show(
       context: context,
-      builder: (context) => Consumer<ThemeProvider>(
+      title: l10n.chooseAccentColor,
+      options: Consumer<ThemeProvider>(
         builder: (context, themeProvider, child) {
-          return AlertDialog(
-            title: Text(
-              l10n.chooseAccentColor,
-              style: TextStyle(color: ThemeColors.getTextPrimary(context)),
-            ),
-            backgroundColor: ThemeColors.getSurface(context),
-            content: SizedBox(
-              width: double.maxFinite,
-              child: GridView.builder(
-                shrinkWrap: true,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 3,
-                  crossAxisSpacing: 12,
-                  mainAxisSpacing: 12,
-                ),
-                itemCount: AccentColors.options.length,
-                itemBuilder: (context, index) {
-                  final colorName = AccentColors.options.keys.elementAt(index);
-                  final color = AccentColors.options.values.elementAt(index);
-                  final isSelected = themeProvider.accentColor == colorName;
-                  
-                  return GestureDetector(
+          return ListView(
+            shrinkWrap: true,
+            children: AccentColors.options.keys.map((colorName) {
+              final color = AccentColors.options[colorName]!;
+              final isSelected = themeProvider.accentColor == colorName;
+              
+              return Container(
+                margin: const EdgeInsets.only(bottom: 8),
+                child: Material(
+                  color: Colors.transparent,
+                  child: InkWell(
                     onTap: () {
                       themeProvider.setAccentColor(colorName);
                       Navigator.pop(context);
                     },
+                    borderRadius: BorderRadius.circular(12),
                     child: Container(
+                      padding: const EdgeInsets.all(16),
                       decoration: BoxDecoration(
-                        color: color,
-                        shape: BoxShape.circle,
-                        border: isSelected 
-                          ? Border.all(
-                              color: ThemeColors.getTextPrimary(context),
-                              width: 3,
-                            )
-                          : null,
-                        boxShadow: isSelected
-                          ? [
-                              BoxShadow(
-                                color: color.withOpacity(0.3),
-                                blurRadius: 8,
-                                spreadRadius: 2,
-                              ),
-                            ]
-                          : null,
+                        color: isSelected 
+                            ? color.withOpacity(0.1) 
+                            : ThemeColors.getSurfaceLight(context),
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(
+                          color: isSelected 
+                              ? color 
+                              : ThemeColors.getBorder(context).withOpacity(0.1),
+                          width: isSelected ? 2 : 1,
+                        ),
                       ),
-                      child: isSelected
-                        ? const Icon(
-                            Icons.check,
-                            color: Colors.white,
-                            size: 24,
-                          )
-                        : null,
+                      child: Row(
+                        children: [
+                          Container(
+                            width: 40,
+                            height: 40,
+                            decoration: BoxDecoration(
+                              color: color,
+                              borderRadius: BorderRadius.circular(8),
+                              border: Border.all(
+                                color: isSelected ? Colors.white : Colors.transparent,
+                                width: 2,
+                              ),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: color.withOpacity(0.3),
+                                  blurRadius: 8,
+                                  offset: const Offset(0, 2),
+                                ),
+                              ],
+                            ),
+                            child: isSelected
+                                ? const Icon(
+                                    Icons.check,
+                                    color: Colors.white,
+                                    size: 20,
+                                  )
+                                : null,
+                          ),
+                          const SizedBox(width: 12),
+                          Expanded(
+                            child: Text(
+                              colorName,
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,
+                                color: ThemeColors.getTextPrimary(context),
+                              ),
+                            ),
+                          ),
+                          if (isSelected)
+                            Icon(
+                              Icons.check_circle,
+                              color: color,
+                              size: 20,
+                            ),
+                        ],
+                      ),
                     ),
-                  );
-                },
-              ),
-            ),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.pop(context),
-                child: Text(
-                  'Cancel',
-                  style: TextStyle(color: ThemeColors.getTextSecondary(context)),
+                  ),
                 ),
-              ),
-            ],
+              );
+            }).toList(),
           );
         },
       ),
@@ -428,67 +445,94 @@ class _SettingsPageState extends State<SettingsPage> {
 
   void _showLanguageDialog() {
     final l10n = AppLocalizations.of(context)!;
-    
-    showDialog(
+    SettingsSelectionPopup.show(
       context: context,
-      builder: (context) => Consumer<LanguageProvider>(
+      title: l10n.selectLanguage,
+      maxHeight: 300,
+      options: Consumer<LanguageProvider>(
         builder: (context, languageProvider, child) {
-          return AlertDialog(
-            title: Text(
-              l10n.selectLanguage,
-              style: TextStyle(color: ThemeColors.getTextPrimary(context)),
-            ),
-            backgroundColor: ThemeColors.getSurface(context),
-            content: SizedBox(
-              width: double.maxFinite,
-              height: 300,
-              child: ListView.builder(
-                itemCount: LanguageProvider.supportedLocales.length,
-                itemBuilder: (context, index) {
-                  final locale = LanguageProvider.supportedLocales[index];
-                  final languageName = LanguageProvider.getLanguageName(locale.languageCode);
-                  final isSelected = languageProvider.currentLanguageCode == locale.languageCode;
-                  
-                  return ListTile(
-                    title: Text(
-                      languageName,
-                      style: TextStyle(
-                        fontWeight: FontWeight.w600,
-                        color: ThemeColors.getTextPrimary(context),
-                      ),
-                    ),
-                    subtitle: Text(
-                      locale.languageCode.toUpperCase(),
-                      style: TextStyle(
-                        color: ThemeColors.getTextSecondary(context),
-                        fontSize: 12,
-                      ),
-                    ),
-                    trailing: isSelected
-                        ? Icon(
-                            Icons.check_circle,
-                            color: ThemeColors.getAccentColor(context, context.read<ThemeProvider>().accentColor),
-                          )
-                        : null,
+          return ListView(
+            shrinkWrap: true,
+            children: LanguageProvider.supportedLocales.map((locale) {
+              final languageName = LanguageProvider.getLanguageName(locale.languageCode);
+              final isSelected = languageProvider.currentLanguageCode == locale.languageCode;
+              
+              return Container(
+                margin: const EdgeInsets.only(bottom: 8),
+                child: Material(
+                  color: Colors.transparent,
+                  child: InkWell(
                     onTap: () {
                       languageProvider.setLanguage(locale.languageCode);
-                      Navigator.of(context).pop();
+                      Navigator.pop(context);
                     },
-                  );
-                },
-              ),
-            ),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.of(context).pop(),
-                child: Text(
-                  l10n.cancel,
-                  style: TextStyle(
-                    color: ThemeColors.getTextSecondary(context),
+                    borderRadius: BorderRadius.circular(12),
+                    child: Container(
+                      padding: const EdgeInsets.all(16),
+                      decoration: BoxDecoration(
+                        color: isSelected 
+                            ? ThemeColors.getAccentColor(context, context.read<ThemeProvider>().accentColor).withOpacity(0.1) 
+                            : ThemeColors.getSurfaceLight(context),
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(
+                          color: isSelected 
+                              ? ThemeColors.getAccentColor(context, context.read<ThemeProvider>().accentColor) 
+                              : ThemeColors.getBorder(context).withOpacity(0.1),
+                          width: isSelected ? 2 : 1,
+                        ),
+                      ),
+                      child: Row(
+                        children: [
+                          Container(
+                            width: 40,
+                            height: 40,
+                            decoration: BoxDecoration(
+                              color: ThemeColors.getAccentColor(context, context.read<ThemeProvider>().accentColor).withOpacity(0.1),
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: Icon(
+                              Icons.language,
+                              color: ThemeColors.getAccentColor(context, context.read<ThemeProvider>().accentColor),
+                              size: 20,
+                            ),
+                          ),
+                          const SizedBox(width: 12),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  languageName,
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w600,
+                                    color: ThemeColors.getTextPrimary(context),
+                                  ),
+                                ),
+                                const SizedBox(height: 2),
+                                Text(
+                                  locale.languageCode.toUpperCase(),
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                    color: ThemeColors.getTextSecondary(context),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          if (isSelected)
+                            Icon(
+                              Icons.check_circle,
+                              color: ThemeColors.getAccentColor(context, context.read<ThemeProvider>().accentColor),
+                              size: 20,
+                            ),
+                        ],
+                      ),
+                    ),
                   ),
                 ),
-              ),
-            ],
+              );
+            }).toList(),
           );
         },
       ),
@@ -497,74 +541,100 @@ class _SettingsPageState extends State<SettingsPage> {
 
   void _showCurrencyDialog() {
     final l10n = AppLocalizations.of(context)!;
-    showDialog(
+    SettingsSelectionPopup.show(
       context: context,
-      builder: (context) => Consumer<ThemeProvider>(
+      title: l10n.chooseCurrency,
+      maxHeight: 400,
+      options: Consumer<ThemeProvider>(
         builder: (context, themeProvider, child) {
-          return AlertDialog(
-            title: Text(
-              l10n.chooseCurrency,
-              style: TextStyle(color: ThemeColors.getTextPrimary(context)),
-            ),
-            backgroundColor: ThemeColors.getSurface(context),
-            content: SizedBox(
-              width: double.maxFinite,
-              height: 400,
-              child: ListView.builder(
-                itemCount: CurrencyOptions.options.length,
-                itemBuilder: (context, index) {
-                  final currencyCode = CurrencyOptions.options.keys.elementAt(index);
-                  final currencySymbol = CurrencyOptions.options.values.elementAt(index);
-                  final currencyName = CurrencyOptions.getCurrencyName(currencyCode);
-                  final isSelected = themeProvider.currency == currencyCode;
-                  
-                  return ListTile(
-                    leading: Text(
-                      currencySymbol,
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: ThemeColors.getTextPrimary(context),
-                      ),
-                    ),
-                    title: Text(
-                      currencyCode,
-                      style: TextStyle(
-                        fontWeight: FontWeight.w600,
-                        color: ThemeColors.getTextPrimary(context),
-                      ),
-                    ),
-                    subtitle: Text(
-                      currencyName,
-                      style: TextStyle(
-                        color: ThemeColors.getTextSecondary(context),
-                        fontSize: 12,
-                      ),
-                    ),
-                    trailing: isSelected
-                        ? Icon(
-                            Icons.check,
-                            color: ThemeColors.getAccentColor(context, themeProvider.accentColor),
-                          )
-                        : null,
-                    selected: isSelected,
+          return ListView(
+            shrinkWrap: true,
+            children: CurrencyOptions.options.keys.map((currencyCode) {
+              final currencySymbol = CurrencyOptions.options[currencyCode]!;
+              final currencyName = CurrencyOptions.getCurrencyName(currencyCode);
+              final isSelected = themeProvider.currency == currencyCode;
+              
+              return Container(
+                margin: const EdgeInsets.only(bottom: 8),
+                child: Material(
+                  color: Colors.transparent,
+                  child: InkWell(
                     onTap: () {
                       themeProvider.setCurrency(currencyCode);
                       Navigator.pop(context);
                     },
-                  );
-                },
-              ),
-            ),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.pop(context),
-                child: Text(
-                  'Cancel',
-                  style: TextStyle(color: ThemeColors.getTextSecondary(context)),
+                    borderRadius: BorderRadius.circular(12),
+                    child: Container(
+                      padding: const EdgeInsets.all(16),
+                      decoration: BoxDecoration(
+                        color: isSelected 
+                            ? ThemeColors.getAccentColor(context, themeProvider.accentColor).withOpacity(0.1) 
+                            : ThemeColors.getSurfaceLight(context),
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(
+                          color: isSelected 
+                              ? ThemeColors.getAccentColor(context, themeProvider.accentColor) 
+                              : ThemeColors.getBorder(context).withOpacity(0.1),
+                          width: isSelected ? 2 : 1,
+                        ),
+                      ),
+                      child: Row(
+                        children: [
+                          Container(
+                            width: 40,
+                            height: 40,
+                            decoration: BoxDecoration(
+                              color: ThemeColors.getAccentColor(context, themeProvider.accentColor).withOpacity(0.1),
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: Center(
+                              child: Text(
+                                currencySymbol,
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                  color: ThemeColors.getAccentColor(context, themeProvider.accentColor),
+                                ),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(width: 12),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  currencyCode,
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w600,
+                                    color: ThemeColors.getTextPrimary(context),
+                                  ),
+                                ),
+                                const SizedBox(height: 2),
+                                Text(
+                                  currencyName,
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                    color: ThemeColors.getTextSecondary(context),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          if (isSelected)
+                            Icon(
+                              Icons.check_circle,
+                              color: ThemeColors.getAccentColor(context, themeProvider.accentColor),
+                              size: 20,
+                            ),
+                        ],
+                      ),
+                    ),
+                  ),
                 ),
-              ),
-            ],
+              );
+            }).toList(),
           );
         },
       ),
@@ -573,18 +643,16 @@ class _SettingsPageState extends State<SettingsPage> {
 
   void _showNumberFormatDialog() {
     final l10n = AppLocalizations.of(context)!;
-    showDialog(
+    SettingsPopup.show(
       context: context,
-      builder: (context) => AlertDialog(
-        title: Text(l10n.numberFormat),
-        content: Text(l10n.numberFormattingComingSoon),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: Text(l10n.ok),
-          ),
-        ],
-      ),
+      title: l10n.numberFormat,
+      content: Text(l10n.numberFormattingComingSoon),
+      actions: [
+        SettingsPopupActions.cancelButton(
+          context: context,
+          text: l10n.ok,
+        ),
+      ],
     );
   }
 
@@ -610,28 +678,23 @@ class _SettingsPageState extends State<SettingsPage> {
 
   void _showClearDataDialog() {
     final l10n = AppLocalizations.of(context)!;
-    showDialog(
+    SettingsPopup.show(
       context: context,
-      builder: (context) => AlertDialog(
-        title: Text(l10n.clearAllData),
-        content: Text(
-          'This will permanently delete all your transactions, budgets, and categories. This action cannot be undone.',
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: Text(l10n.cancel),
-          ),
-          TextButton(
-            onPressed: () {
-              Navigator.pop(context);
-              _clearAllData();
-            },
-            style: TextButton.styleFrom(foregroundColor: AppColors.error),
-            child: Text(l10n.deleteAll),
-          ),
-        ],
+      title: l10n.clearAllData,
+      content: Text(
+        'This will permanently delete all your transactions, budgets, and categories. This action cannot be undone.',
       ),
+      actions: [
+        SettingsPopupActions.cancelButton(context: context),
+        SettingsPopupActions.destructiveButton(
+          context: context,
+          text: l10n.deleteAll,
+          onPressed: () {
+            Navigator.pop(context);
+            _clearAllData();
+          },
+        ),
+      ],
     );
   }
 
@@ -688,73 +751,66 @@ class _SettingsPageState extends State<SettingsPage> {
   }
 
   void _showPrivacyPolicy() {
-    showDialog(
+    final l10n = AppLocalizations.of(context)!;
+    SettingsPopup.show(
       context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('Privacy Policy'),
-        content: const SingleChildScrollView(
-          child: Text(
-            'Your privacy is important to us. All your data is stored locally on your device and is not shared with any third parties.\n\n'
-            'We do not collect, store, or transmit any personal information. Your financial data remains private and secure on your device.',
-          ),
+      title: l10n.privacyPolicy,
+      content: const SingleChildScrollView(
+        child: Text(
+          'Your privacy is important to us. All your data is stored locally on your device and is not shared with any third parties.\n\n'
+          'We do not collect, store, or transmit any personal information. Your financial data remains private and secure on your device.',
         ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text('Close'),
-          ),
-        ],
       ),
+      actions: [
+        SettingsPopupActions.cancelButton(
+          context: context,
+          text: l10n.close,
+        ),
+      ],
     );
   }
 
   void _showTermsOfService() {
-    showDialog(
+    final l10n = AppLocalizations.of(context)!;
+    SettingsPopup.show(
       context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('Terms of Service'),
-        content: const SingleChildScrollView(
-          child: Text(
-            'By using Money Maker, you agree to the following terms:\n\n'
-            '1. This app is provided "as is" without warranties.\n'
-            '2. You are responsible for backing up your data.\n'
-            '3. We are not liable for any data loss.\n'
-            '4. You may not reverse engineer or redistribute this app.\n\n'
-            'These terms may be updated from time to time.',
-          ),
+      title: l10n.termsOfService,
+      content: const SingleChildScrollView(
+        child: Text(
+          'By using Money Maker, you agree to the following terms:\n\n'
+          '1. This app is provided "as is" without warranties.\n'
+          '2. You are responsible for backing up your data.\n'
+          '3. We are not liable for any data loss.\n'
+          '4. You may not reverse engineer or redistribute this app.\n\n'
+          'These terms may be updated from time to time.',
         ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text('Close'),
-          ),
-        ],
       ),
+      actions: [
+        SettingsPopupActions.cancelButton(
+          context: context,
+          text: l10n.close,
+        ),
+      ],
     );
   }
 
   void _showLogoutDialog() {
     final l10n = AppLocalizations.of(context)!;
-    showDialog(
+    SettingsPopup.show(
       context: context,
-      builder: (context) => AlertDialog(
-        title: Text(l10n.logout),
-        content: Text(l10n.sureWantLogout),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: Text(l10n.cancel),
-          ),
-          TextButton(
-            onPressed: () {
-              Navigator.pop(context);
-              _logout();
-            },
-            style: TextButton.styleFrom(foregroundColor: AppColors.error),
-            child: Text(l10n.logout),
-          ),
-        ],
-      ),
+      title: l10n.logout,
+      content: Text(l10n.sureWantLogout),
+      actions: [
+        SettingsPopupActions.cancelButton(context: context),
+        SettingsPopupActions.destructiveButton(
+          context: context,
+          text: l10n.logout,
+          onPressed: () {
+            Navigator.pop(context);
+            _logout();
+          },
+        ),
+      ],
     );
   }
 
@@ -1023,6 +1079,7 @@ class _SimpleColorPicker extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final colors = [
       const Color(0xFFFF6B35),
       const Color(0xFFFF8E53),
@@ -1035,28 +1092,43 @@ class _SimpleColorPicker extends StatelessWidget {
       const Color(0xFF607D8B),
     ];
     Color selected = initial;
-    return AlertDialog(
-      title: const Text('Pick a color'),
+    
+    return SettingsPopup(
+      title: l10n.pickColor,
       content: StatefulBuilder(
         builder: (context, setState) {
           return Wrap(
-            spacing: 8,
-            runSpacing: 8,
+            spacing: 12,
+            runSpacing: 12,
             children: colors.map((c) {
               final isSel = c.value == selected.value;
               return GestureDetector(
                 onTap: () => setState(() => selected = c),
                 child: Container(
-                  width: 36,
-                  height: 36,
+                  width: 40,
+                  height: 40,
                   decoration: BoxDecoration(
                     color: c,
                     shape: BoxShape.circle,
-                    border: Border.all(color: isSel ? Colors.white : Colors.transparent, width: 2),
+                    border: Border.all(
+                      color: isSel ? Colors.white : Colors.transparent, 
+                      width: 3,
+                    ),
                     boxShadow: [
-                      BoxShadow(color: Colors.black.withOpacity(0.1), blurRadius: 4, offset: const Offset(0, 2)),
+                      BoxShadow(
+                        color: c.withOpacity(0.3), 
+                        blurRadius: 8, 
+                        offset: const Offset(0, 2),
+                      ),
                     ],
                   ),
+                  child: isSel
+                      ? const Icon(
+                          Icons.check,
+                          color: Colors.white,
+                          size: 20,
+                        )
+                      : null,
                 ),
               );
             }).toList(),
@@ -1064,8 +1136,12 @@ class _SimpleColorPicker extends StatelessWidget {
         },
       ),
       actions: [
-        TextButton(onPressed: () => Navigator.pop(context), child: const Text('Cancel')),
-        TextButton(onPressed: () => Navigator.pop(context, selected), child: const Text('Select')),
+        SettingsPopupActions.cancelButton(context: context),
+        SettingsPopupActions.confirmButton(
+          context: context,
+          text: l10n.select,
+          onPressed: () => Navigator.pop(context, selected),
+        ),
       ],
     );
   }
