@@ -99,13 +99,15 @@ class _HomePageState extends State<HomePage> {
                     // Total Income
                     Expanded(
                       child: Container(
-                        padding: const EdgeInsets.all(AppDimensions.paddingS),
+                        height: 75, // Optimized height to reduce empty space
+                        padding: const EdgeInsets.symmetric(horizontal: AppDimensions.paddingS, vertical: 8),
                         decoration: BoxDecoration(
                           color: AppColors.success.withOpacity(0.1),
                           borderRadius: BorderRadius.circular(AppDimensions.radiusM),
                           border: Border.all(color: AppColors.success.withOpacity(0.3)),
                         ),
                         child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
                               l10n.income,
@@ -115,15 +117,19 @@ class _HomePageState extends State<HomePage> {
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
-                            const SizedBox(height: 4),
-                            Text(
-                              Formatters.formatCurrency(totalIncome, currencyCode: context.read<ThemeProvider>().currency),
-                              style: const TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                                color: AppColors.success,
+                            const SizedBox(height: 2),
+                            Flexible(
+                              child: Text(
+                                Formatters.formatCurrency(totalIncome, currencyCode: context.read<ThemeProvider>().currency),
+                                style: const TextStyle(
+                                  fontSize: 14, // Smaller font to fit more text
+                                  fontWeight: FontWeight.bold,
+                                  color: AppColors.success,
+                                ),
+                                textAlign: TextAlign.center,
+                                maxLines: 2, // Allow 2 lines for larger numbers
+                                overflow: TextOverflow.visible,
                               ),
-                              textAlign: TextAlign.center,
                             ),
                           ],
                         ),
@@ -133,13 +139,15 @@ class _HomePageState extends State<HomePage> {
                     // Total Expenses
                     Expanded(
                       child: Container(
-                        padding: const EdgeInsets.all(AppDimensions.paddingS),
+                        height: 75, // Optimized height to reduce empty space
+                        padding: const EdgeInsets.symmetric(horizontal: AppDimensions.paddingS, vertical: 8),
                         decoration: BoxDecoration(
                           color: AppColors.error.withOpacity(0.1),
                           borderRadius: BorderRadius.circular(AppDimensions.radiusM),
                           border: Border.all(color: AppColors.error.withOpacity(0.3)),
                         ),
                         child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
                               l10n.expense,
@@ -149,15 +157,19 @@ class _HomePageState extends State<HomePage> {
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
-                            const SizedBox(height: 4),
-                            Text(
-                              Formatters.formatCurrency(totalSpent, currencyCode: context.read<ThemeProvider>().currency),
-                              style: const TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                                color: AppColors.error,
+                            const SizedBox(height: 2),
+                            Flexible(
+                              child: Text(
+                                Formatters.formatCurrency(totalSpent, currencyCode: context.read<ThemeProvider>().currency),
+                                style: const TextStyle(
+                                  fontSize: 14, // Smaller font to fit more text
+                                  fontWeight: FontWeight.bold,
+                                  color: AppColors.error,
+                                ),
+                                textAlign: TextAlign.center,
+                                maxLines: 2, // Allow 2 lines for larger numbers
+                                overflow: TextOverflow.visible,
                               ),
-                              textAlign: TextAlign.center,
                             ),
                           ],
                         ),
@@ -167,13 +179,15 @@ class _HomePageState extends State<HomePage> {
                     // Net Amount
                     Expanded(
                       child: Container(
-                        padding: const EdgeInsets.all(AppDimensions.paddingS),
+                        height: 75, // Optimized height to reduce empty space
+                        padding: const EdgeInsets.symmetric(horizontal: AppDimensions.paddingS, vertical: 8),
                         decoration: BoxDecoration(
                           color: (totalIncome - totalSpent >= 0 ? AppColors.success : AppColors.error).withOpacity(0.1),
                           borderRadius: BorderRadius.circular(AppDimensions.radiusM),
                           border: Border.all(color: (totalIncome - totalSpent >= 0 ? AppColors.success : AppColors.error).withOpacity(0.3)),
                         ),
                         child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
                               l10n.netAmount,
@@ -183,15 +197,19 @@ class _HomePageState extends State<HomePage> {
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
-                            const SizedBox(height: 4),
-                            Text(
-                              Formatters.formatCurrency(totalIncome - totalSpent, currencyCode: context.read<ThemeProvider>().currency),
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                                color: totalIncome - totalSpent >= 0 ? AppColors.success : AppColors.error,
+                            const SizedBox(height: 2),
+                            Flexible(
+                              child: Text(
+                                Formatters.formatCurrency(totalIncome - totalSpent, currencyCode: context.read<ThemeProvider>().currency),
+                                style: TextStyle(
+                                  fontSize: 14, // Smaller font to fit more text
+                                  fontWeight: FontWeight.bold,
+                                  color: totalIncome - totalSpent >= 0 ? AppColors.success : AppColors.error,
+                                ),
+                                textAlign: TextAlign.center,
+                                maxLines: 2, // Allow 2 lines for larger numbers
+                                overflow: TextOverflow.visible,
                               ),
-                              textAlign: TextAlign.center,
                             ),
                           ],
                         ),
