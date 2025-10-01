@@ -6,6 +6,8 @@ import '../../../core/theme/app_theme.dart';
 import '../../../core/utils/theme_colors.dart';
 import '../../../app/routes.dart';
 import '../../providers/theme_provider.dart';
+import '../../providers/pin_auth_provider.dart';
+import '../auth/pin_verification_page.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -122,8 +124,21 @@ class _SplashPageState extends State<SplashPage>
   }
 
   void _navigateToHome() {
-    // Navigate directly to home page without authentication
-    Navigator.pushReplacementNamed(context, AppRoutes.home);
+    final pinProvider = context.read<PinAuthProvider>();
+    
+    // Check if PIN authentication is enabled
+    if (pinProvider.isEnabled) {
+      // Navigate to PIN verification page
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const PinVerificationPage(),
+        ),
+      );
+    } else {
+      // Navigate directly to home page
+      Navigator.pushReplacementNamed(context, AppRoutes.home);
+    }
   }
 
   @override

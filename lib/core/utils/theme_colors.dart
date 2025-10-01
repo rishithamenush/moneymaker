@@ -94,4 +94,18 @@ class ThemeColors {
       end: Alignment.bottomRight,
     );
   }
+
+  static Color getCardBackground(BuildContext context) {
+    final brightness = Theme.of(context).brightness;
+    return brightness == Brightness.light 
+        ? LightColors.surface 
+        : DarkColors.surface;
+  }
+
+  static Color getBorderColor(BuildContext context) {
+    final brightness = Theme.of(context).brightness;
+    return brightness == Brightness.light 
+        ? LightColors.border 
+        : DarkColors.border;
+  }
 }

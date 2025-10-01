@@ -6,6 +6,7 @@ import 'app/app.dart';
 import 'services/database/database_service.dart';
 import 'presentation/providers/theme_provider.dart';
 import 'presentation/providers/language_provider.dart';
+import 'presentation/providers/pin_auth_provider.dart';
 import 'l10n/app_localizations.dart';
 
 void main() async {
@@ -33,15 +34,18 @@ void main() async {
   // Initialize providers
   final themeProvider = ThemeProvider();
   final languageProvider = LanguageProvider();
+  final pinAuthProvider = PinAuthProvider();
   
   await themeProvider.initialize();
   await languageProvider.initialize();
+  await pinAuthProvider.initialize();
   
   runApp(
     MultiProvider(
       providers: [
         ChangeNotifierProvider.value(value: themeProvider),
         ChangeNotifierProvider.value(value: languageProvider),
+        ChangeNotifierProvider.value(value: pinAuthProvider),
       ],
       child: const MoneyMakerApp(),
     ),

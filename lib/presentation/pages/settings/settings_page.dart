@@ -7,12 +7,15 @@ import '../../../core/utils/theme_colors.dart';
 import '../../providers/theme_provider.dart';
 import '../../providers/language_provider.dart';
 import '../../providers/category_provider.dart';
+import '../../providers/pin_auth_provider.dart';
 import '../../../domain/entities/category.dart';
 import '../../widgets/common/custom_app_bar.dart';
 import '../../widgets/common/settings_popup.dart';
 import '../../widgets/common/modern_popup.dart';
 import '../../navigation/bottom_nav_bar.dart';
 import '../../../app/routes.dart';
+import '../auth/pin_setup_page.dart';
+import '../auth/pin_verification_page.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
@@ -192,12 +195,37 @@ class _SettingsPageState extends State<SettingsPage> {
           // Account Section (moved to bottom)
           _buildSectionHeader(l10n.account),
           _buildSettingsCard([
-            _buildSettingsItem(
-              icon: Icons.logout,
-              title: l10n.signOut,
-              subtitle: l10n.signOutAccount,
-              onTap: () => _showLogoutDialog(),
-              isDestructive: true,
+            Consumer<PinAuthProvider>(
+              builder: (context, pinProvider, child) {
+                return _buildSettingsItem(
+                  icon: Icons.security,
+                  title: 'Authentication',
+                  subtitle: pinProvider.isEnabled 
+                    ? 'PIN protection enabled' 
+                    : 'PIN protection disabled',
+                  trailing: Switch(
+                    value: pinProvider.isEnabled,
+                    onChanged: (value) => _togglePinAuth(value),
+                    activeColor: ThemeColors.getAccentColor(context, context.read<ThemeProvider>().accentColor),
+                  ),
+                );
+              },
+            ),
+            Consumer<PinAuthProvider>(
+              builder: (context, pinProvider, child) {
+                if (!pinProvider.isEnabled) return const SizedBox.shrink();
+                return Column(
+                  children: [
+                    _buildDivider(),
+                    _buildSettingsItem(
+                      icon: Icons.lock_reset,
+                      title: 'Change PIN',
+                      subtitle: 'Update your PIN',
+                      onTap: () => _changePin(),
+                    ),
+                  ],
+                );
+              },
             ),
           ]),
           
@@ -935,7 +963,7 @@ class _SettingsPageState extends State<SettingsPage> {
             text: l10n.logout,
             onPressed: () {
               Navigator.pop(context);
-              _logout();
+              // Logout functionality removed - replaced with PIN authentication
             },
           ),
         ),
@@ -943,26 +971,407 @@ class _SettingsPageState extends State<SettingsPage> {
     );
   }
 
-  void _logout() async {
-    final l10n = AppLocalizations.of(context)!;
-    try {
-      // Since we're not using authentication, just show a message
-      if (mounted) {
-        PopupUtils.showInfo(
+  void _togglePinAuth(bool enable) async {
+    final pinProvider = context.read<PinAuthProvider>();
+    
+    if (enable) {
+      // Enable PIN auth - navigate to PIN setup
+      final result = await Navigator.push<bool>(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const PinSetupPage(),
+        ),
+      );
+      
+      if (result == true && mounted) {
+        PopupUtils.showSuccess(
           context: context,
-          title: 'Info',
-          message: 'Logout functionality not available in this version',
+          title: 'Success',
+          message: 'PIN authentication has been enabled',
         );
       }
-    } catch (e) {
-      if (mounted) {
-        PopupUtils.showError(
-          context: context,
-          title: 'Error',
-          message: '${e.toString()}',
-        );
+    } else {
+      // Disable PIN auth - show confirmation dialog
+      _showDisablePinDialog();
+    }
+  }
+
+  void _showDisablePinDialog() {
+    final themeProvider = context.read<ThemeProvider>();
+    final accentColor = ThemeColors.getAccentColor(context, themeProvider.accentColor);
+    
+    SettingsPopup.show(
+      context: context,
+      title: 'Disable PIN Authentication',
+      subtitle: 'Enter your PIN to disable authentication',
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          // Warning Icon
+          Container(
+            width: 64,
+            height: 64,
+            margin: const EdgeInsets.only(bottom: 20),
+            decoration: BoxDecoration(
+              color: AppColors.warning.withOpacity(0.1),
+              borderRadius: BorderRadius.circular(16),
+              border: Border.all(
+                color: AppColors.warning.withOpacity(0.2),
+                width: 1,
+              ),
+            ),
+            child: Icon(
+              Icons.security,
+              color: AppColors.warning,
+              size: 32,
+            ),
+          ),
+          
+          // Confirmation Message
+          Text(
+            'Enter your current PIN to disable authentication',
+            style: TextStyle(
+              fontSize: 16,
+              color: ThemeColors.getTextPrimary(context),
+              height: 1.5,
+            ),
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: 8),
+          Text(
+            'This will remove PIN protection from your app.',
+            style: TextStyle(
+              fontSize: 14,
+              color: ThemeColors.getTextSecondary(context),
+              height: 1.4,
+            ),
+            textAlign: TextAlign.center,
+          ),
+        ],
+      ),
+      actions: [
+        Expanded(
+          child: SettingsPopupActions.cancelButton(
+            context: context,
+            text: 'Cancel',
+            onPressed: () => Navigator.pop(context),
+          ),
+        ),
+        const SizedBox(width: 12),
+        Expanded(
+          child: SettingsPopupActions.confirmButton(
+            context: context,
+            text: 'Enter PIN',
+            onPressed: () {
+              Navigator.pop(context);
+              _showPinVerificationForDisable();
+            },
+          ),
+        ),
+      ],
+    );
+  }
+
+  void _showPinVerificationForDisable() {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => _PinVerificationDialog(
+        onVerified: (pin) async {
+          final pinProvider = context.read<PinAuthProvider>();
+          final success = await pinProvider.disablePinAuth(pin);
+          
+          if (success && mounted) {
+            Navigator.pop(context);
+            PopupUtils.showSuccess(
+              context: context,
+              title: 'Success',
+              message: 'PIN authentication has been disabled',
+            );
+          } else {
+            PopupUtils.showError(
+              context: context,
+              title: 'Error',
+              message: 'Incorrect PIN. Please try again.',
+            );
+          }
+        },
+        onCancel: () => Navigator.pop(context),
+      ),
+    );
+  }
+
+  void _changePin() async {
+    final result = await Navigator.push<bool>(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const PinSetupPage(isChangingPin: true),
+      ),
+    );
+    
+    if (result == true && mounted) {
+      PopupUtils.showSuccess(
+        context: context,
+        title: 'Success',
+        message: 'PIN has been changed successfully',
+      );
+    }
+  }
+}
+
+class _PinVerificationDialog extends StatefulWidget {
+  final Function(String) onVerified;
+  final VoidCallback onCancel;
+
+  const _PinVerificationDialog({
+    required this.onVerified,
+    required this.onCancel,
+  });
+
+  @override
+  State<_PinVerificationDialog> createState() => _PinVerificationDialogState();
+}
+
+class _PinVerificationDialogState extends State<_PinVerificationDialog> {
+  final List<TextEditingController> _controllers = List.generate(
+    4,
+    (index) => TextEditingController(),
+  );
+  final List<FocusNode> _focusNodes = List.generate(
+    4,
+    (index) => FocusNode(),
+  );
+  
+  String _pin = '';
+  String? _errorMessage;
+
+  @override
+  void initState() {
+    super.initState();
+    _focusNodes[0].requestFocus();
+  }
+
+  @override
+  void dispose() {
+    for (var controller in _controllers) {
+      controller.dispose();
+    }
+    for (var focusNode in _focusNodes) {
+      focusNode.dispose();
+    }
+    super.dispose();
+  }
+
+  void _onDigitEntered(String digit, int index) {
+    if (digit.isEmpty) return;
+    
+    setState(() {
+      _pin += digit;
+      _errorMessage = null;
+    });
+
+    if (index < 3) {
+      _focusNodes[index + 1].requestFocus();
+    } else {
+      _focusNodes[index].unfocus();
+      if (_pin.length == 4) {
+        widget.onVerified(_pin);
       }
     }
+  }
+
+  void _onDigitDeleted(int index) {
+    if (index > 0) {
+      _focusNodes[index - 1].requestFocus();
+    }
+    
+    setState(() {
+      if (_pin.isNotEmpty) {
+        _pin = _pin.substring(0, _pin.length - 1);
+      }
+      _errorMessage = null;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final themeProvider = context.read<ThemeProvider>();
+    final accentColor = ThemeColors.getAccentColor(context, themeProvider.accentColor);
+    
+    return Dialog(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: Container(
+        padding: const EdgeInsets.all(24),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            // Title
+            Text(
+              'Enter PIN',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: ThemeColors.getTextPrimary(context),
+              ),
+            ),
+            
+            const SizedBox(height: 16),
+            
+            // PIN Input Fields
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: List.generate(4, (index) {
+                final isFilled = index < _pin.length;
+                
+                return Container(
+                  width: 50,
+                  height: 50,
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: _errorMessage != null 
+                        ? AppColors.error
+                        : isFilled 
+                          ? accentColor 
+                          : ThemeColors.getTextSecondary(context),
+                      width: 2,
+                    ),
+                    borderRadius: BorderRadius.circular(10),
+                    color: isFilled 
+                      ? accentColor.withOpacity(0.1)
+                      : Colors.transparent,
+                  ),
+                  child: Center(
+                    child: Text(
+                      isFilled ? '●' : '',
+                      style: TextStyle(
+                        fontSize: 20,
+                        color: _errorMessage != null 
+                          ? AppColors.error
+                          : accentColor,
+                      ),
+                    ),
+                  ),
+                );
+              }),
+            ),
+            
+            if (_errorMessage != null) ...[
+              const SizedBox(height: 16),
+              Text(
+                _errorMessage!,
+                style: TextStyle(
+                  color: AppColors.error,
+                  fontSize: 14,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ],
+            
+            const SizedBox(height: 24),
+            
+            // Number Pad
+            GridView.count(
+              shrinkWrap: true,
+              crossAxisCount: 3,
+              mainAxisSpacing: 12,
+              crossAxisSpacing: 12,
+              childAspectRatio: 1.5,
+              children: [
+                // Numbers 1-9
+                ...List.generate(9, (index) {
+                  final number = (index + 1).toString();
+                  return _buildNumberButton(number, accentColor);
+                }),
+                
+                // Empty space
+                const SizedBox(),
+                
+                // Number 0
+                _buildNumberButton('0', accentColor),
+                
+                // Delete button
+                _buildDeleteButton(accentColor),
+              ],
+            ),
+            
+            const SizedBox(height: 24),
+            
+            // Cancel button
+            SizedBox(
+              width: double.infinity,
+              child: TextButton(
+                onPressed: widget.onCancel,
+                child: Text(
+                  'Cancel',
+                  style: TextStyle(
+                    color: ThemeColors.getTextSecondary(context),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildNumberButton(String number, Color accentColor) {
+    return GestureDetector(
+      onTap: () {
+        if (_pin.length < 4) {
+          _onDigitEntered(number, _pin.length);
+        }
+      },
+      child: Container(
+        decoration: BoxDecoration(
+          color: ThemeColors.getCardBackground(context),
+          borderRadius: BorderRadius.circular(8),
+          border: Border.all(
+            color: ThemeColors.getBorderColor(context),
+            width: 1,
+          ),
+        ),
+        child: Center(
+          child: Text(
+            number,
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.w600,
+              color: ThemeColors.getTextPrimary(context),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildDeleteButton(Color accentColor) {
+    return GestureDetector(
+      onTap: () {
+        if (_pin.isNotEmpty) {
+          _onDigitDeleted(_pin.length - 1);
+        }
+      },
+      child: Container(
+        decoration: BoxDecoration(
+          color: ThemeColors.getCardBackground(context),
+          borderRadius: BorderRadius.circular(8),
+          border: Border.all(
+            color: ThemeColors.getBorderColor(context),
+            width: 1,
+          ),
+        ),
+        child: Center(
+          child: Icon(
+            Icons.backspace_outlined,
+            size: 20,
+            color: ThemeColors.getTextPrimary(context),
+          ),
+        ),
+      ),
+    );
   }
 }
 
