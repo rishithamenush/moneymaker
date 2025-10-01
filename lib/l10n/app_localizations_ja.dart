@@ -18,6 +18,15 @@ class AppLocalizationsJa extends AppLocalizations {
   String get overview => '概要';
 
   @override
+  String get summary => '要約';
+
+  @override
+  String get charts => 'チャート';
+
+  @override
+  String get trends => 'トレンド';
+
+  @override
   String get addTransaction => '取引を追加';
 
   @override

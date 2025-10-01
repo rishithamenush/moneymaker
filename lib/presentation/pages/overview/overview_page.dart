@@ -117,10 +117,10 @@ class _OverviewPageState extends State<OverviewPage> with TickerProviderStateMix
                     fontWeight: FontWeight.normal,
                     fontSize: 14,
                   ),
-                  tabs: const [
-                    Tab(text: 'Summary'),
-                    Tab(text: 'Charts'),
-                    Tab(text: 'Trends'),
+                  tabs: [
+                    Tab(text: l10n.summary),
+                    Tab(text: l10n.charts),
+                    Tab(text: l10n.trends),
                   ],
                 ),
               ),

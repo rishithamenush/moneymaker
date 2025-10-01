@@ -18,6 +18,15 @@ class AppLocalizationsSi extends AppLocalizations {
   String get overview => 'දළ විශ්ලේෂණය';
 
   @override
+  String get summary => 'සාරාංශය';
+
+  @override
+  String get charts => 'ප්‍රස්ථාර';
+
+  @override
+  String get trends => 'ප්‍රවණතා';
+
+  @override
   String get addTransaction => 'ගනුදෙනුවක් එකතු කරන්න';
 
   @override

@@ -18,6 +18,15 @@ class AppLocalizationsFr extends AppLocalizations {
   String get overview => 'Aperçu';
 
   @override
+  String get summary => 'Résumé';
+
+  @override
+  String get charts => 'Graphiques';
+
+  @override
+  String get trends => 'Tendances';
+
+  @override
   String get addTransaction => 'Ajouter une Transaction';
 
   @override

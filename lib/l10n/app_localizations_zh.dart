@@ -18,6 +18,15 @@ class AppLocalizationsZh extends AppLocalizations {
   String get overview => '概览';
 
   @override
+  String get summary => '摘要';
+
+  @override
+  String get charts => '图表';
+
+  @override
+  String get trends => '趋势';
+
+  @override
   String get addTransaction => '添加交易';
 
   @override

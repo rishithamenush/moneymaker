@@ -15,6 +15,21 @@
     "description": "Overview page title"
   },
   
+  "summary": "Summary",
+  "@summary": {
+    "description": "Summary tab title"
+  },
+  
+  "charts": "Charts",
+  "@charts": {
+    "description": "Charts tab title"
+  },
+  
+  "trends": "Trends",
+  "@trends": {
+    "description": "Trends tab title"
+  },
+  
   "addTransaction": "Add Transaction",
   "@addTransaction": {
     "description": "Add transaction page title"

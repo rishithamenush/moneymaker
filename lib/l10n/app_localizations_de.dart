@@ -18,6 +18,15 @@ class AppLocalizationsDe extends AppLocalizations {
   String get overview => 'Übersicht';
 
   @override
+  String get summary => 'Zusammenfassung';
+
+  @override
+  String get charts => 'Diagramme';
+
+  @override
+  String get trends => 'Trends';
+
+  @override
   String get addTransaction => 'Transaktion Hinzufügen';
 
   @override

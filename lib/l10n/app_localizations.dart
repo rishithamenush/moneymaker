@@ -126,6 +126,24 @@ abstract class AppLocalizations {
   /// **'Overview'**
   String get overview;
 
+  /// Summary tab title
+  ///
+  /// In en, this message translates to:
+  /// **'Summary'**
+  String get summary;
+
+  /// Charts tab title
+  ///
+  /// In en, this message translates to:
+  /// **'Charts'**
+  String get charts;
+
+  /// Trends tab title
+  ///
+  /// In en, this message translates to:
+  /// **'Trends'**
+  String get trends;
+
   /// Add transaction page title
   ///
   /// In en, this message translates to:
