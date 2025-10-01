@@ -52,7 +52,7 @@ class BarChartWidget extends StatelessWidget {
           child: BarChart(
             BarChartData(
               alignment: BarChartAlignment.spaceAround,
-              maxY: maxAmount * 1.2,
+              maxY: maxAmount > 0 ? (maxAmount * 1.1).ceilToDouble() : 1000,
               barTouchData: BarTouchData(
                 enabled: true,
                 touchTooltipData: BarTouchTooltipData(
@@ -100,13 +100,18 @@ class BarChartWidget extends StatelessWidget {
                 leftTitles: AxisTitles(
                   sideTitles: SideTitles(
                     showTitles: true,
-                    reservedSize: 40,
+                    reservedSize: 60,
+                    interval: maxAmount > 0 ? (maxAmount / 5).ceilToDouble() : 1000,
                     getTitlesWidget: (value, meta) {
-                      return Text(
-                        'LKR ${value.toInt()}',
-                        style: TextStyle(
-                          color: ThemeColors.getTextSecondary(context),
-                          fontSize: 10,
+                      return Padding(
+                        padding: const EdgeInsets.only(right: 8.0),
+                        child: Text(
+                          'LKR ${value.toInt()}',
+                          style: TextStyle(
+                            color: ThemeColors.getTextSecondary(context),
+                            fontSize: 10,
+                          ),
+                          textAlign: TextAlign.right,
                         ),
                       );
                     },

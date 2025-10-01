@@ -36,26 +36,30 @@ class PieChartWidget extends StatelessWidget {
     
     return Column(
       children: [
-        Text(
-          'Spending by Category',
-          style: TextStyle(
-            color: ThemeColors.getTextPrimary(context),
-            fontSize: 16,
-            fontWeight: FontWeight.w600,
+        // Title
+        Padding(
+          padding: const EdgeInsets.only(bottom: AppDimensions.paddingM),
+          child: Text(
+            'Spending Summary',
+            style: TextStyle(
+              color: ThemeColors.getTextPrimary(context),
+              fontSize: 16,
+              fontWeight: FontWeight.w600,
+            ),
           ),
         ),
-        const SizedBox(height: AppDimensions.paddingM),
+        // Chart
         Expanded(
           child: PieChart(
             PieChartData(
               sectionsSpace: 2,
-              centerSpaceRadius: 60,
+              centerSpaceRadius: 50,
               sections: categoryData.map((data) {
                 return PieChartSectionData(
                   color: data.color,
                   value: data.percentage,
                   title: '${(data.percentage * 100).toStringAsFixed(0)}%',
-                  radius: 80,
+                  radius: 70,
                   titleStyle: TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.bold,
@@ -66,8 +70,11 @@ class PieChartWidget extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(height: AppDimensions.paddingM),
-        _buildLegend(categoryData, context),
+        // Legend
+        Padding(
+          padding: const EdgeInsets.only(top: AppDimensions.paddingM),
+          child: _buildLegend(categoryData, context),
+        ),
       ],
     );
   }
@@ -106,26 +113,32 @@ class PieChartWidget extends StatelessWidget {
 
   Widget _buildLegend(List<CategoryData> data, BuildContext context) {
     return Wrap(
-      spacing: AppDimensions.paddingM,
-      runSpacing: AppDimensions.paddingS,
+      spacing: AppDimensions.paddingL,
+      runSpacing: AppDimensions.paddingM,
+      alignment: WrapAlignment.center,
       children: data.map((item) {
         return Row(
           mainAxisSize: MainAxisSize.min,
           children: [
             Container(
-              width: 12,
-              height: 12,
+              width: 14,
+              height: 14,
               decoration: BoxDecoration(
                 color: item.color,
                 shape: BoxShape.circle,
+                border: Border.all(
+                  color: ThemeColors.getBorder(context).withOpacity(0.2),
+                  width: 1,
+                ),
               ),
             ),
-            const SizedBox(width: AppDimensions.paddingXS),
+            const SizedBox(width: AppDimensions.paddingS),
             Text(
               item.name,
               style: TextStyle(
                 color: ThemeColors.getTextSecondary(context),
                 fontSize: 12,
+                fontWeight: FontWeight.w500,
               ),
             ),
           ],
