@@ -365,6 +365,26 @@
     "description": "Invalid amount error message"
   },
   
+  "editBudget": "Edit Budget",
+  "@editBudget": {
+    "description": "Edit budget button tooltip"
+  },
+  
+  "editMonthlyBudget": "Edit Monthly Budget",
+  "@editMonthlyBudget": {
+    "description": "Edit monthly budget dialog title"
+  },
+  
+  "editMonthlyBudgetDescription": "Update your monthly spending limit.",
+  "@editMonthlyBudgetDescription": {
+    "description": "Edit monthly budget dialog description"
+  },
+  
+  "budgetUpdatedSuccessfully": "Budget updated successfully!",
+  "@budgetUpdatedSuccessfully": {
+    "description": "Budget updated success message"
+  },
+  
   "addTransaction": "Add Transaction",
   "@addTransaction": {
     "description": "Add transaction page title"

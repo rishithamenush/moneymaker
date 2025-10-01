@@ -15,6 +15,7 @@ class MonthlySummary extends StatelessWidget {
   final double remainingAmount;
   final double spentPercentage;
   final DateTime selectedMonth;
+  final Budget? existingBudget;
 
   const MonthlySummary({
     super.key,
@@ -23,6 +24,7 @@ class MonthlySummary extends StatelessWidget {
     required this.remainingAmount,
     required this.spentPercentage,
     required this.selectedMonth,
+    this.existingBudget,
   });
 
   @override
@@ -171,16 +173,41 @@ class MonthlySummary extends StatelessWidget {
             ],
           ),
           
-          // Set Budget Button (when no budget is set or when over budget)
-          if (totalBudget == 0 || isOverBudget) ...[
-            const SizedBox(height: AppDimensions.paddingM),
+          // Budget Action Buttons
+          const SizedBox(height: AppDimensions.paddingM),
+          if (existingBudget != null) ...[
+            // Edit Budget Button (when budget exists)
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton.icon(
+                onPressed: () => _showEditBudgetDialog(context),
+                icon: const Icon(Icons.edit_outlined, size: 18),
+                label: Text(
+                  l10n.editBudget,
+                  style: const TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: ThemeColors.getAccentColor(context, context.read<ThemeProvider>().accentColor),
+                  foregroundColor: Colors.white,
+                  padding: const EdgeInsets.symmetric(vertical: AppDimensions.paddingM),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(AppDimensions.radiusM),
+                  ),
+                ),
+              ),
+            ),
+          ] else ...[
+            // Set Budget Button (when no budget exists)
             SizedBox(
               width: double.infinity,
               child: ElevatedButton.icon(
                 onPressed: () => _showSetBudgetDialog(context),
                 icon: const Icon(Icons.account_balance_wallet_outlined, size: 18),
                 label: Text(
-                  totalBudget == 0 ? l10n.setBudget : l10n.updateBudget,
+                  l10n.setBudget,
                   style: const TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w600,
@@ -238,6 +265,14 @@ class MonthlySummary extends StatelessWidget {
   }
 
   void _showSetBudgetDialog(BuildContext context) {
+    _showBudgetDialog(context, isEditing: false);
+  }
+
+  void _showEditBudgetDialog(BuildContext context) {
+    _showBudgetDialog(context, isEditing: true);
+  }
+
+  void _showBudgetDialog(BuildContext context, {required bool isEditing}) {
     final l10n = AppLocalizations.of(context)!;
     final budgetProvider = context.read<BudgetProvider>();
     final themeProvider = context.read<ThemeProvider>();
@@ -245,6 +280,11 @@ class MonthlySummary extends StatelessWidget {
     
     final TextEditingController amountController = TextEditingController();
     final FocusNode amountFocusNode = FocusNode();
+    
+    // Pre-fill amount if editing
+    if (isEditing && existingBudget != null) {
+      amountController.text = existingBudget!.amount.toStringAsFixed(2);
+    }
 
     showDialog(
       context: context,
@@ -282,7 +322,7 @@ class MonthlySummary extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      l10n.setMonthlyBudget,
+                      isEditing ? l10n.editMonthlyBudget : l10n.setMonthlyBudget,
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
@@ -297,7 +337,7 @@ class MonthlySummary extends StatelessWidget {
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  l10n.setMonthlyBudgetDescription,
+                  isEditing ? l10n.editMonthlyBudgetDescription : l10n.setMonthlyBudgetDescription,
                   style: TextStyle(
                     fontSize: 14,
                     color: ThemeColors.getTextSecondary(context),
@@ -396,27 +436,46 @@ class MonthlySummary extends StatelessWidget {
                             onTap: () async {
                               final amount = double.tryParse(amountController.text);
                               if (amount != null && amount > 0) {
-                                // Create a general monthly budget
-                                final budget = Budget(
-                                  id: DateTime.now().millisecondsSinceEpoch.toString(),
-                                  amount: amount,
-                                  categoryId: 'general', // General monthly budget
-                                  categoryName: 'Monthly Budget',
-                                  month: selectedMonth,
-                                  spentAmount: 0.0,
-                                  createdAt: DateTime.now(),
-                                  updatedAt: DateTime.now(),
-                                );
-                                
-                                await budgetProvider.createBudget(budget);
-                                if (context.mounted) {
-                                  Navigator.pop(context);
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                      content: Text(l10n.budgetSetSuccessfully),
-                                      backgroundColor: accentColor,
-                                    ),
+                                if (isEditing && existingBudget != null) {
+                                  // Update existing budget
+                                  final updatedBudget = existingBudget!.copyWith(
+                                    amount: amount,
+                                    updatedAt: DateTime.now(),
                                   );
+                                  
+                                  await budgetProvider.updateBudget(updatedBudget);
+                                  if (context.mounted) {
+                                    Navigator.pop(context);
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text(l10n.budgetUpdatedSuccessfully),
+                                        backgroundColor: accentColor,
+                                      ),
+                                    );
+                                  }
+                                } else {
+                                  // Create new budget
+                                  final budget = Budget(
+                                    id: DateTime.now().millisecondsSinceEpoch.toString(),
+                                    amount: amount,
+                                    categoryId: 'general', // General monthly budget
+                                    categoryName: 'Monthly Budget',
+                                    month: selectedMonth,
+                                    spentAmount: 0.0,
+                                    createdAt: DateTime.now(),
+                                    updatedAt: DateTime.now(),
+                                  );
+                                  
+                                  await budgetProvider.createBudget(budget);
+                                  if (context.mounted) {
+                                    Navigator.pop(context);
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text(l10n.budgetSetSuccessfully),
+                                        backgroundColor: accentColor,
+                                      ),
+                                    );
+                                  }
                                 }
                               } else {
                                 ScaffoldMessenger.of(context).showSnackBar(
@@ -430,7 +489,7 @@ class MonthlySummary extends StatelessWidget {
                             borderRadius: BorderRadius.circular(12),
                             child: Center(
                               child: Text(
-                                l10n.setBudget,
+                                isEditing ? l10n.updateBudget : l10n.setBudget,
                                 style: const TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w600,

@@ -234,6 +234,19 @@ class AppLocalizationsDe extends AppLocalizations {
   String get pleaseEnterValidAmount => 'Please enter a valid amount';
 
   @override
+  String get editBudget => 'Edit Budget';
+
+  @override
+  String get editMonthlyBudget => 'Edit Monthly Budget';
+
+  @override
+  String get editMonthlyBudgetDescription =>
+      'Update your monthly spending limit.';
+
+  @override
+  String get budgetUpdatedSuccessfully => 'Budget updated successfully!';
+
+  @override
   String get addTransaction => 'Transaktion Hinzufügen';
 
   @override

@@ -546,6 +546,30 @@ abstract class AppLocalizations {
   /// **'Please enter a valid amount'**
   String get pleaseEnterValidAmount;
 
+  /// Edit budget button tooltip
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Budget'**
+  String get editBudget;
+
+  /// Edit monthly budget dialog title
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Monthly Budget'**
+  String get editMonthlyBudget;
+
+  /// Edit monthly budget dialog description
+  ///
+  /// In en, this message translates to:
+  /// **'Update your monthly spending limit.'**
+  String get editMonthlyBudgetDescription;
+
+  /// Budget updated success message
+  ///
+  /// In en, this message translates to:
+  /// **'Budget updated successfully!'**
+  String get budgetUpdatedSuccessfully;
+
   /// Add transaction page title
   ///
   /// In en, this message translates to:

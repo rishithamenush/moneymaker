@@ -168,30 +168,39 @@ class _OverviewPageState extends State<OverviewPage> with TickerProviderStateMix
     required double totalBudget,
     required List<Category> categories,
   }) {
-    return SingleChildScrollView(
-      padding: const EdgeInsets.all(AppDimensions.paddingM),
-      child: Column(
-        children: [
-          // Monthly Summary Card
-          MonthlySummary(
-            totalSpent: totalSpent,
-            totalBudget: totalBudget,
-            remainingAmount: totalBudget - totalSpent,
-            spentPercentage: totalBudget > 0 ? totalSpent / totalBudget : 0.0,
-            selectedMonth: _selectedMonth,
+    return Consumer<BudgetProvider>(
+      builder: (context, budgetProvider, child) {
+        // Get the general monthly budget specifically
+        final generalBudget = budgetProvider.getBudgetByCategoryAndMonth('general', _selectedMonth);
+        final updatedTotalBudget = generalBudget?.amount ?? 0.0;
+        
+        return SingleChildScrollView(
+          padding: const EdgeInsets.all(AppDimensions.paddingM),
+          child: Column(
+            children: [
+              // Monthly Summary Card
+              MonthlySummary(
+                totalSpent: totalSpent,
+                totalBudget: updatedTotalBudget,
+                remainingAmount: updatedTotalBudget - totalSpent,
+                spentPercentage: updatedTotalBudget > 0 ? totalSpent / updatedTotalBudget : 0.0,
+                selectedMonth: _selectedMonth,
+                existingBudget: generalBudget,
+              ),
+          
+              const SizedBox(height: AppDimensions.paddingL),
+              
+              // Category Breakdown
+              _buildCategoryBreakdown(monthlyExpenses, categories),
+              
+              const SizedBox(height: AppDimensions.paddingL),
+              
+              // Quick Stats
+              _buildQuickStats(monthlyExpenses, monthlyBudgets),
+            ],
           ),
-          
-          const SizedBox(height: AppDimensions.paddingL),
-          
-          // Category Breakdown
-          _buildCategoryBreakdown(monthlyExpenses, categories),
-          
-          const SizedBox(height: AppDimensions.paddingL),
-          
-          // Quick Stats
-          _buildQuickStats(monthlyExpenses, monthlyBudgets),
-        ],
-      ),
+        );
+      },
     );
   }
 
