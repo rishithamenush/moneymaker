@@ -18,87 +18,120 @@ class CustomBottomNavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: AppDimensions.bottomNavHeight,
       decoration: BoxDecoration(
         color: ThemeColors.getSurface(context),
         border: Border(
           top: BorderSide(
-            color: ThemeColors.getSurfaceLight(context),
+            color: ThemeColors.getBorder(context).withOpacity(0.1),
             width: 0.5,
           ),
         ),
       ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          _buildNavItem(
-            icon: Icons.bar_chart,
-            label: AppStrings.overview,
-            index: 0,
-            context: context,
+      child: SafeArea(
+        minimum: EdgeInsets.zero,
+        child: Container(
+          height: 70.0, // WhatsApp-style height
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              _buildNavItem(
+                icon: Icons.analytics_outlined,
+                activeIcon: Icons.analytics,
+                label: AppStrings.overview,
+                index: 0,
+                context: context,
+              ),
+              _buildNavItem(
+                icon: Icons.calendar_month_outlined,
+                activeIcon: Icons.calendar_month,
+                label: AppStrings.thisMonth,
+                index: 1,
+                context: context,
+              ),
+              _buildNavItem(
+                icon: Icons.settings_outlined,
+                activeIcon: Icons.settings,
+                label: AppStrings.settings,
+                index: 2,
+                context: context,
+              ),
+            ],
           ),
-          _buildNavItem(
-            icon: Icons.calendar_today,
-            label: AppStrings.thisMonth,
-            index: 1,
-            context: context,
-          ),
-          _buildNavItem(
-            icon: Icons.settings,
-            label: AppStrings.settings,
-            index: 2,
-            context: context,
-          ),
-        ],
+        ),
       ),
     );
   }
 
   Widget _buildNavItem({
     required IconData icon,
+    required IconData activeIcon,
     required String label,
     required int index,
     required BuildContext context,
   }) {
     final isSelected = currentIndex == index;
+    final accentColor = ThemeColors.getAccentColor(context, context.read<ThemeProvider>().accentColor);
     
-    return GestureDetector(
-      onTap: () {
-        if (isSelected) return; // Avoid redundant navigation causing flicker
-        _navigateToPage(context, index);
-      },
-      child: Container(
-        padding: const EdgeInsets.symmetric(
-          horizontal: AppDimensions.paddingM,
-          vertical: AppDimensions.paddingS,
-        ),
-        decoration: BoxDecoration(
-          color: isSelected ? ThemeColors.getAccentColor(context, context.read<ThemeProvider>().accentColor).withOpacity(0.1) : Colors.transparent,
-          borderRadius: BorderRadius.circular(AppDimensions.radiusM),
-        ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Icon(
-              icon,
-              color: isSelected ? ThemeColors.getAccentColor(context, context.read<ThemeProvider>().accentColor) : ThemeColors.getTextSecondary(context),
-              size: AppDimensions.iconS,
-            ),
-            const SizedBox(height: 2),
-            Flexible(
-              child: Text(
-                label,
-                style: TextStyle(
-                  color: isSelected ? ThemeColors.getAccentColor(context, context.read<ThemeProvider>().accentColor) : ThemeColors.getTextSecondary(context),
-                  fontSize: 10,
-                  fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
+    return Expanded(
+      child: GestureDetector(
+        onTap: () {
+          if (isSelected) return;
+          _navigateToPage(context, index);
+        },
+        child: Container(
+          height: 70.0,
+          padding: const EdgeInsets.symmetric(horizontal: 6.0, vertical: 8.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              AnimatedContainer(
+                duration: const Duration(milliseconds: 200),
+                curve: Curves.easeInOut,
+                padding: EdgeInsets.all(isSelected ? 6.0 : 4.0),
+                decoration: BoxDecoration(
+                  color: isSelected 
+                      ? accentColor 
+                      : Colors.transparent,
+                  borderRadius: BorderRadius.circular(6.0),
                 ),
-                textAlign: TextAlign.center,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
+                child: AnimatedSwitcher(
+                  duration: const Duration(milliseconds: 200),
+                  transitionBuilder: (child, animation) {
+                    return ScaleTransition(
+                      scale: animation,
+                      child: child,
+                    );
+                  },
+                  child: Icon(
+                    isSelected ? activeIcon : icon,
+                    key: ValueKey(isSelected ? 'active_$index' : 'inactive_$index'),
+                    color: isSelected 
+                        ? Colors.white 
+                        : ThemeColors.getTextSecondary(context),
+                    size: 24.0,
+                  ),
+                ),
               ),
-            ),
-          ],
+              const SizedBox(height: 3.0),
+              AnimatedDefaultTextStyle(
+                duration: const Duration(milliseconds: 200),
+                style: TextStyle(
+                  color: isSelected 
+                      ? accentColor 
+                      : ThemeColors.getTextSecondary(context),
+                  fontSize: 11.0,
+                  fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,
+                ),
+                child: Text(
+                  label,
+                  textAlign: TextAlign.center,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
