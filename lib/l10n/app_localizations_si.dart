@@ -30,23 +30,23 @@ class AppLocalizationsSi extends AppLocalizations {
   String get appearance => 'පෙනුම';
 
   @override
-  String get customizeCategories => 'Customize Categories';
+  String get customizeCategories => 'ප්‍රවර්ග අභිරුචිකරණය';
 
   @override
   String get addRenameDeleteCategories =>
-      'Add, rename, or delete your own categories';
+      'ඔබේම ප්‍රවර්ග එකතු කරන්න, නම් වෙනස් කරන්න, හෝ මකන්න';
 
   @override
   String get theme => 'තේමාව';
 
   @override
-  String get darkMode => 'Dark Mode';
+  String get darkMode => 'අඳුරු ප්‍රකාරය';
 
   @override
-  String get lightMode => 'Light Mode';
+  String get lightMode => 'ලා ප්‍රකාරය';
 
   @override
-  String get systemDefault => 'System Default';
+  String get systemDefault => 'පද්ධති පෙරනිමිය';
 
   @override
   String get light => 'ලා';
@@ -58,105 +58,104 @@ class AppLocalizationsSi extends AppLocalizations {
   String get system => 'පද්ධතිය';
 
   @override
-  String get chooseAccentColor => 'Choose Accent Color';
+  String get chooseAccentColor => 'වර්ණය තෝරන්න';
 
   @override
-  String get chooseCurrency => 'Choose Currency';
+  String get chooseCurrency => 'ව්‍යවහාර මුදල් තෝරන්න';
 
   @override
-  String get currencyFormatting => 'Currency & Formatting';
+  String get currencyFormatting => 'ව්‍යවහාර මුදල් සහ ආකෘතිකරණය';
 
   @override
-  String get numberFormat => 'Number Format';
+  String get numberFormat => 'අංක ආකෘතිය';
 
   @override
-  String get decimalPlacesSeparators => 'Decimal places and separators';
+  String get decimalPlacesSeparators => 'දශම ස්ථාන සහ වෙන්කරන්නන්';
 
   @override
-  String get dataManagement => 'Data Management';
+  String get dataManagement => 'දත්ත කළමනාකරණය';
 
   @override
-  String get exportTransactionsCSV => 'Export your transactions to CSV';
+  String get exportTransactionsCSV => 'ඔබේ ගනුදෙනු CSV වෙත අපනයනය කරන්න';
 
   @override
-  String get importTransactionsCSV => 'Import transactions from CSV';
+  String get importTransactionsCSV => 'CSV වෙතින් ගනුදෙනු ආනයනය කරන්න';
 
   @override
-  String get clearAllData => 'Clear All Data';
+  String get clearAllData => 'සියලු දත්ත මකන්න';
 
   @override
-  String get permanentlyDeleteTransactions =>
-      'Permanently delete all transactions';
+  String get permanentlyDeleteTransactions => 'සියලු ගනුදෙනු ස්ථිරව මකන්න';
 
   @override
-  String get notifications => 'Notifications';
+  String get notifications => 'දැනුම්දීම්';
 
   @override
-  String get budgetAlerts => 'Budget Alerts';
+  String get budgetAlerts => 'අයවැය අනතුරු ඇඟවීම්';
 
   @override
   String get notifiedApproachingBudget =>
-      'Get notified when approaching budget limits';
+      'අයවැය සීමාවන්ට ළඟා වන විට දැනුම් දෙන්න';
 
   @override
-  String get dailyReminders => 'Daily Reminders';
+  String get dailyReminders => 'දෛනික මතක් කිරීම්';
 
   @override
-  String get remindLogDailyExpenses => 'Remind me to log daily expenses';
+  String get remindLogDailyExpenses => 'දෛනික වියදම් ලොග් කිරීමට මට මතක් කරන්න';
 
   @override
   String get about => 'පිළිබඳව';
 
   @override
-  String get appVersion => 'App Version';
+  String get appVersion => 'යෙදුමේ ප්‍රභේදය';
 
   @override
-  String get privacyPolicy => 'Privacy Policy';
+  String get privacyPolicy => 'පෞද්ගලිකත්ව ප්‍රතිපත්තිය';
 
   @override
-  String get howWeHandleData => 'How we handle your data';
+  String get howWeHandleData => 'අපි ඔබේ දත්ත හැසිරවීමේ ආකාරය';
 
   @override
-  String get termsOfService => 'Terms of Service';
+  String get termsOfService => 'සේවා නියමයන්';
 
   @override
-  String get termsAndConditions => 'Terms and conditions';
+  String get termsAndConditions => 'නියමයන් සහ කොන්දේසි';
 
   @override
-  String get signOutAccount => 'Sign out of your account';
+  String get signOutAccount => 'ඔබේ ගිණුමෙන් ඉවත් වන්න';
 
   @override
-  String get logout => 'Logout';
+  String get logout => 'ඉවත් වන්න';
 
   @override
-  String get sureWantLogout => 'Are you sure you want to logout?';
+  String get sureWantLogout => 'ඔබට ඉවත් වීමට අවශ්‍ය බවට විශ්වාසද?';
 
   @override
-  String get deleteAll => 'Delete All';
+  String get deleteAll => 'සියල්ල මකන්න';
 
   @override
-  String get close => 'Close';
+  String get close => 'වසන්න';
 
   @override
   String get ok => 'හරි';
 
   @override
-  String get select => 'Select';
+  String get select => 'තෝරන්න';
 
   @override
-  String get pickColor => 'Pick a color';
+  String get pickColor => 'වර්ණයක් තෝරන්න';
 
   @override
-  String get createNewCategory => 'Create new category';
+  String get createNewCategory => 'නව ප්‍රවර්ගයක් සාදන්න';
 
   @override
-  String get categoryName => 'Category name';
+  String get categoryName => 'ප්‍රවර්ග නම';
 
   @override
-  String get pickColorButton => 'Pick color';
+  String get pickColorButton => 'වර්ණය තෝරන්න';
 
   @override
-  String get add => 'Add';
+  String get add => 'එකතු කරන්න';
 
   @override
   String get expense => 'වියදම';
@@ -165,35 +164,36 @@ class AppLocalizationsSi extends AppLocalizations {
   String get income => 'ආදායම';
 
   @override
-  String get exportFeatureComingSoon => 'Export feature coming soon!';
+  String get exportFeatureComingSoon => 'අපනයන විශේෂාංගය ඉක්මනින් පැමිණෙනු ඇත!';
 
   @override
-  String get importFeatureComingSoon => 'Import feature coming soon!';
+  String get importFeatureComingSoon => 'ආනයන විශේෂාංගය ඉක්මනින් පැමිණෙනු ඇත!';
 
   @override
   String get numberFormattingComingSoon =>
-      'Number formatting options coming soon!';
+      'අංක ආකෘතිකරණ විකල්ප ඉක්මනින් පැමිණෙනු ඇත!';
 
   @override
-  String get clearDataFeatureComingSoon => 'Clear data feature coming soon!';
+  String get clearDataFeatureComingSoon =>
+      'දත්ත මැකීමේ විශේෂාංගය ඉක්මනින් පැමිණෙනු ඇත!';
 
   @override
-  String get budgetAlertsEnabled => 'Budget alerts enabled';
+  String get budgetAlertsEnabled => 'අයවැය අනතුරු ඇඟවීම් සක්‍රියයි';
 
   @override
-  String get budgetAlertsDisabled => 'Budget alerts disabled';
+  String get budgetAlertsDisabled => 'අයවැය අනතුරු ඇඟවීම් අක්‍රියයි';
 
   @override
-  String get dailyRemindersEnabled => 'Daily reminders enabled';
+  String get dailyRemindersEnabled => 'දෛනික මතක් කිරීම් සක්‍රියයි';
 
   @override
-  String get dailyRemindersDisabled => 'Daily reminders disabled';
+  String get dailyRemindersDisabled => 'දෛනික මතක් කිරීම් අක්‍රියයි';
 
   @override
-  String get loggedOutSuccessfully => 'Logged out successfully';
+  String get loggedOutSuccessfully => 'සාර්ථකව ඉවත් විය';
 
   @override
-  String get logoutFailed => 'Logout failed';
+  String get logoutFailed => 'ඉවත් වීම අසාර්ථකයි';
 
   @override
   String get addTransaction => 'ගනුදෙනුවක් එකතු කරන්න';

@@ -279,6 +279,7 @@ class _SettingsPageState extends State<SettingsPage> {
   }
 
   Widget _buildThemeToggle() {
+    final l10n = AppLocalizations.of(context)!;
     return Consumer<ThemeProvider>(
       builder: (context, themeProvider, child) {
         return ListTile(
@@ -336,6 +337,7 @@ class _SettingsPageState extends State<SettingsPage> {
   }
 
   void _showAccentColorDialog() {
+    final l10n = AppLocalizations.of(context)!;
     showDialog(
       context: context,
       builder: (context) => Consumer<ThemeProvider>(
@@ -494,6 +496,7 @@ class _SettingsPageState extends State<SettingsPage> {
   }
 
   void _showCurrencyDialog() {
+    final l10n = AppLocalizations.of(context)!;
     showDialog(
       context: context,
       builder: (context) => Consumer<ThemeProvider>(
@@ -569,6 +572,7 @@ class _SettingsPageState extends State<SettingsPage> {
   }
 
   void _showNumberFormatDialog() {
+    final l10n = AppLocalizations.of(context)!;
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
@@ -585,6 +589,7 @@ class _SettingsPageState extends State<SettingsPage> {
   }
 
   void _exportData() {
+    final l10n = AppLocalizations.of(context)!;
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(l10n.exportFeatureComingSoon),
@@ -594,6 +599,7 @@ class _SettingsPageState extends State<SettingsPage> {
   }
 
   void _importData() {
+    final l10n = AppLocalizations.of(context)!;
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(l10n.importFeatureComingSoon),
@@ -603,6 +609,7 @@ class _SettingsPageState extends State<SettingsPage> {
   }
 
   void _showClearDataDialog() {
+    final l10n = AppLocalizations.of(context)!;
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
@@ -629,6 +636,7 @@ class _SettingsPageState extends State<SettingsPage> {
   }
 
   void _clearAllData() {
+    final l10n = AppLocalizations.of(context)!;
     ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(l10n.clearDataFeatureComingSoon),
@@ -638,6 +646,7 @@ class _SettingsPageState extends State<SettingsPage> {
   }
 
   void _toggleBudgetAlerts(bool value) {
+    final l10n = AppLocalizations.of(context)!;
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(value ? l10n.budgetAlertsEnabled : l10n.budgetAlertsDisabled),
@@ -647,6 +656,7 @@ class _SettingsPageState extends State<SettingsPage> {
   }
 
   void _toggleDailyReminders(bool value) {
+    final l10n = AppLocalizations.of(context)!;
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(value ? l10n.dailyRemindersEnabled : l10n.dailyRemindersDisabled),
@@ -724,6 +734,7 @@ class _SettingsPageState extends State<SettingsPage> {
   }
 
   void _showLogoutDialog() {
+    final l10n = AppLocalizations.of(context)!;
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
@@ -748,6 +759,7 @@ class _SettingsPageState extends State<SettingsPage> {
   }
 
   void _logout() async {
+    final l10n = AppLocalizations.of(context)!;
     try {
       final authProvider = context.read<AuthProvider>();
       await authProvider.logout();

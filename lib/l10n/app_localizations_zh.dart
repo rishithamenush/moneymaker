@@ -30,23 +30,22 @@ class AppLocalizationsZh extends AppLocalizations {
   String get appearance => '外观';
 
   @override
-  String get customizeCategories => 'Customize Categories';
+  String get customizeCategories => '自定义类别';
 
   @override
-  String get addRenameDeleteCategories =>
-      'Add, rename, or delete your own categories';
+  String get addRenameDeleteCategories => '添加、重命名或删除您自己的类别';
 
   @override
   String get theme => '主题';
 
   @override
-  String get darkMode => 'Dark Mode';
+  String get darkMode => '深色模式';
 
   @override
-  String get lightMode => 'Light Mode';
+  String get lightMode => '浅色模式';
 
   @override
-  String get systemDefault => 'System Default';
+  String get systemDefault => '系统默认';
 
   @override
   String get light => '浅色';
@@ -58,105 +57,103 @@ class AppLocalizationsZh extends AppLocalizations {
   String get system => '系统';
 
   @override
-  String get chooseAccentColor => 'Choose Accent Color';
+  String get chooseAccentColor => '选择强调色';
 
   @override
-  String get chooseCurrency => 'Choose Currency';
+  String get chooseCurrency => '选择货币';
 
   @override
-  String get currencyFormatting => 'Currency & Formatting';
+  String get currencyFormatting => '货币和格式';
 
   @override
-  String get numberFormat => 'Number Format';
+  String get numberFormat => '数字格式';
 
   @override
-  String get decimalPlacesSeparators => 'Decimal places and separators';
+  String get decimalPlacesSeparators => '小数位和分隔符';
 
   @override
-  String get dataManagement => 'Data Management';
+  String get dataManagement => '数据管理';
 
   @override
-  String get exportTransactionsCSV => 'Export your transactions to CSV';
+  String get exportTransactionsCSV => '将您的交易导出到CSV';
 
   @override
-  String get importTransactionsCSV => 'Import transactions from CSV';
+  String get importTransactionsCSV => '从CSV导入交易';
 
   @override
-  String get clearAllData => 'Clear All Data';
+  String get clearAllData => '清除所有数据';
 
   @override
-  String get permanentlyDeleteTransactions =>
-      'Permanently delete all transactions';
+  String get permanentlyDeleteTransactions => '永久删除所有交易';
 
   @override
-  String get notifications => 'Notifications';
+  String get notifications => '通知';
 
   @override
-  String get budgetAlerts => 'Budget Alerts';
+  String get budgetAlerts => '预算提醒';
 
   @override
-  String get notifiedApproachingBudget =>
-      'Get notified when approaching budget limits';
+  String get notifiedApproachingBudget => '接近预算限制时收到通知';
 
   @override
-  String get dailyReminders => 'Daily Reminders';
+  String get dailyReminders => '每日提醒';
 
   @override
-  String get remindLogDailyExpenses => 'Remind me to log daily expenses';
+  String get remindLogDailyExpenses => '提醒我记录每日支出';
 
   @override
   String get about => '关于';
 
   @override
-  String get appVersion => 'App Version';
+  String get appVersion => '应用版本';
 
   @override
-  String get privacyPolicy => 'Privacy Policy';
+  String get privacyPolicy => '隐私政策';
 
   @override
-  String get howWeHandleData => 'How we handle your data';
+  String get howWeHandleData => '我们如何处理您的数据';
 
   @override
-  String get termsOfService => 'Terms of Service';
+  String get termsOfService => '服务条款';
 
   @override
-  String get termsAndConditions => 'Terms and conditions';
+  String get termsAndConditions => '条款和条件';
 
   @override
-  String get signOutAccount => 'Sign out of your account';
+  String get signOutAccount => '退出您的账户';
 
   @override
-  String get logout => 'Logout';
+  String get logout => '退出登录';
 
   @override
-  String get sureWantLogout => 'Are you sure you want to logout?';
+  String get sureWantLogout => '您确定要退出登录吗？';
 
   @override
-  String get deleteAll => 'Delete All';
+  String get deleteAll => '删除全部';
 
   @override
-  String get close => 'Close';
+  String get close => '关闭';
 
   @override
   String get ok => '确定';
 
   @override
-  String get select => 'Select';
+  String get select => '选择';
 
   @override
-  String get pickColor => 'Pick a color';
+  String get pickColor => '选择颜色';
 
   @override
-  String get createNewCategory => 'Create new category';
+  String get createNewCategory => '创建新类别';
 
   @override
-  String get categoryName => 'Category name';
+  String get categoryName => '类别名称';
 
   @override
-  String get pickColorButton => 'Pick color';
+  String get pickColorButton => '选择颜色';
 
   @override
-  String get add => 'Add';
+  String get add => '添加';
 
   @override
   String get expense => '支出';
@@ -165,35 +162,34 @@ class AppLocalizationsZh extends AppLocalizations {
   String get income => '收入';
 
   @override
-  String get exportFeatureComingSoon => 'Export feature coming soon!';
+  String get exportFeatureComingSoon => '导出功能即将推出！';
 
   @override
-  String get importFeatureComingSoon => 'Import feature coming soon!';
+  String get importFeatureComingSoon => '导入功能即将推出！';
 
   @override
-  String get numberFormattingComingSoon =>
-      'Number formatting options coming soon!';
+  String get numberFormattingComingSoon => '数字格式选项即将推出！';
 
   @override
-  String get clearDataFeatureComingSoon => 'Clear data feature coming soon!';
+  String get clearDataFeatureComingSoon => '清除数据功能即将推出！';
 
   @override
-  String get budgetAlertsEnabled => 'Budget alerts enabled';
+  String get budgetAlertsEnabled => '预算提醒已启用';
 
   @override
-  String get budgetAlertsDisabled => 'Budget alerts disabled';
+  String get budgetAlertsDisabled => '预算提醒已禁用';
 
   @override
-  String get dailyRemindersEnabled => 'Daily reminders enabled';
+  String get dailyRemindersEnabled => '每日提醒已启用';
 
   @override
-  String get dailyRemindersDisabled => 'Daily reminders disabled';
+  String get dailyRemindersDisabled => '每日提醒已禁用';
 
   @override
-  String get loggedOutSuccessfully => 'Logged out successfully';
+  String get loggedOutSuccessfully => '成功退出登录';
 
   @override
-  String get logoutFailed => 'Logout failed';
+  String get logoutFailed => '退出登录失败';
 
   @override
   String get addTransaction => '添加交易';

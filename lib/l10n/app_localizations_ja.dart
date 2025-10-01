@@ -30,23 +30,22 @@ class AppLocalizationsJa extends AppLocalizations {
   String get appearance => '外観';
 
   @override
-  String get customizeCategories => 'Customize Categories';
+  String get customizeCategories => 'カテゴリをカスタマイズ';
 
   @override
-  String get addRenameDeleteCategories =>
-      'Add, rename, or delete your own categories';
+  String get addRenameDeleteCategories => '独自のカテゴリを追加、名前変更、または削除';
 
   @override
   String get theme => 'テーマ';
 
   @override
-  String get darkMode => 'Dark Mode';
+  String get darkMode => 'ダークモード';
 
   @override
-  String get lightMode => 'Light Mode';
+  String get lightMode => 'ライトモード';
 
   @override
-  String get systemDefault => 'System Default';
+  String get systemDefault => 'システムデフォルト';
 
   @override
   String get light => 'ライト';
@@ -58,105 +57,103 @@ class AppLocalizationsJa extends AppLocalizations {
   String get system => 'システム';
 
   @override
-  String get chooseAccentColor => 'Choose Accent Color';
+  String get chooseAccentColor => 'アクセントカラーを選択';
 
   @override
-  String get chooseCurrency => 'Choose Currency';
+  String get chooseCurrency => '通貨を選択';
 
   @override
-  String get currencyFormatting => 'Currency & Formatting';
+  String get currencyFormatting => '通貨とフォーマット';
 
   @override
-  String get numberFormat => 'Number Format';
+  String get numberFormat => '数値フォーマット';
 
   @override
-  String get decimalPlacesSeparators => 'Decimal places and separators';
+  String get decimalPlacesSeparators => '小数点と区切り文字';
 
   @override
-  String get dataManagement => 'Data Management';
+  String get dataManagement => 'データ管理';
 
   @override
-  String get exportTransactionsCSV => 'Export your transactions to CSV';
+  String get exportTransactionsCSV => '取引をCSVにエクスポート';
 
   @override
-  String get importTransactionsCSV => 'Import transactions from CSV';
+  String get importTransactionsCSV => 'CSVから取引をインポート';
 
   @override
-  String get clearAllData => 'Clear All Data';
+  String get clearAllData => 'すべてのデータをクリア';
 
   @override
-  String get permanentlyDeleteTransactions =>
-      'Permanently delete all transactions';
+  String get permanentlyDeleteTransactions => 'すべての取引を永続的に削除';
 
   @override
-  String get notifications => 'Notifications';
+  String get notifications => '通知';
 
   @override
-  String get budgetAlerts => 'Budget Alerts';
+  String get budgetAlerts => '予算アラート';
 
   @override
-  String get notifiedApproachingBudget =>
-      'Get notified when approaching budget limits';
+  String get notifiedApproachingBudget => '予算制限に近づいたときに通知を受信';
 
   @override
-  String get dailyReminders => 'Daily Reminders';
+  String get dailyReminders => '日次リマインダー';
 
   @override
-  String get remindLogDailyExpenses => 'Remind me to log daily expenses';
+  String get remindLogDailyExpenses => '日次支出を記録するようリマインド';
 
   @override
   String get about => 'について';
 
   @override
-  String get appVersion => 'App Version';
+  String get appVersion => 'アプリバージョン';
 
   @override
-  String get privacyPolicy => 'Privacy Policy';
+  String get privacyPolicy => 'プライバシーポリシー';
 
   @override
-  String get howWeHandleData => 'How we handle your data';
+  String get howWeHandleData => 'データの取り扱い方法';
 
   @override
-  String get termsOfService => 'Terms of Service';
+  String get termsOfService => '利用規約';
 
   @override
-  String get termsAndConditions => 'Terms and conditions';
+  String get termsAndConditions => '利用条件';
 
   @override
-  String get signOutAccount => 'Sign out of your account';
+  String get signOutAccount => 'アカウントからサインアウト';
 
   @override
-  String get logout => 'Logout';
+  String get logout => 'ログアウト';
 
   @override
-  String get sureWantLogout => 'Are you sure you want to logout?';
+  String get sureWantLogout => 'ログアウトしてもよろしいですか？';
 
   @override
-  String get deleteAll => 'Delete All';
+  String get deleteAll => 'すべて削除';
 
   @override
-  String get close => 'Close';
+  String get close => '閉じる';
 
   @override
   String get ok => 'OK';
 
   @override
-  String get select => 'Select';
+  String get select => '選択';
 
   @override
-  String get pickColor => 'Pick a color';
+  String get pickColor => '色を選択';
 
   @override
-  String get createNewCategory => 'Create new category';
+  String get createNewCategory => '新しいカテゴリを作成';
 
   @override
-  String get categoryName => 'Category name';
+  String get categoryName => 'カテゴリ名';
 
   @override
-  String get pickColorButton => 'Pick color';
+  String get pickColorButton => '色を選択';
 
   @override
-  String get add => 'Add';
+  String get add => '追加';
 
   @override
   String get expense => '支出';
@@ -165,35 +162,34 @@ class AppLocalizationsJa extends AppLocalizations {
   String get income => '収入';
 
   @override
-  String get exportFeatureComingSoon => 'Export feature coming soon!';
+  String get exportFeatureComingSoon => 'エクスポート機能が近日公開予定！';
 
   @override
-  String get importFeatureComingSoon => 'Import feature coming soon!';
+  String get importFeatureComingSoon => 'インポート機能が近日公開予定！';
 
   @override
-  String get numberFormattingComingSoon =>
-      'Number formatting options coming soon!';
+  String get numberFormattingComingSoon => '数値フォーマットオプションが近日公開予定！';
 
   @override
-  String get clearDataFeatureComingSoon => 'Clear data feature coming soon!';
+  String get clearDataFeatureComingSoon => 'データクリア機能が近日公開予定！';
 
   @override
-  String get budgetAlertsEnabled => 'Budget alerts enabled';
+  String get budgetAlertsEnabled => '予算アラートが有効';
 
   @override
-  String get budgetAlertsDisabled => 'Budget alerts disabled';
+  String get budgetAlertsDisabled => '予算アラートが無効';
 
   @override
-  String get dailyRemindersEnabled => 'Daily reminders enabled';
+  String get dailyRemindersEnabled => '日次リマインダーが有効';
 
   @override
-  String get dailyRemindersDisabled => 'Daily reminders disabled';
+  String get dailyRemindersDisabled => '日次リマインダーが無効';
 
   @override
-  String get loggedOutSuccessfully => 'Logged out successfully';
+  String get loggedOutSuccessfully => '正常にログアウトしました';
 
   @override
-  String get logoutFailed => 'Logout failed';
+  String get logoutFailed => 'ログアウトに失敗しました';
 
   @override
   String get addTransaction => '取引を追加';

@@ -30,23 +30,23 @@ class AppLocalizationsFr extends AppLocalizations {
   String get appearance => 'Apparence';
 
   @override
-  String get customizeCategories => 'Customize Categories';
+  String get customizeCategories => 'Personnaliser les Catégories';
 
   @override
   String get addRenameDeleteCategories =>
-      'Add, rename, or delete your own categories';
+      'Ajouter, renommer ou supprimer vos propres catégories';
 
   @override
   String get theme => 'Thème';
 
   @override
-  String get darkMode => 'Dark Mode';
+  String get darkMode => 'Mode Sombre';
 
   @override
-  String get lightMode => 'Light Mode';
+  String get lightMode => 'Mode Clair';
 
   @override
-  String get systemDefault => 'System Default';
+  String get systemDefault => 'Par Défaut du Système';
 
   @override
   String get light => 'Clair';
@@ -58,105 +58,106 @@ class AppLocalizationsFr extends AppLocalizations {
   String get system => 'Système';
 
   @override
-  String get chooseAccentColor => 'Choose Accent Color';
+  String get chooseAccentColor => 'Choisir la Couleur d\'Accent';
 
   @override
-  String get chooseCurrency => 'Choose Currency';
+  String get chooseCurrency => 'Choisir la Devise';
 
   @override
-  String get currencyFormatting => 'Currency & Formatting';
+  String get currencyFormatting => 'Devise et Formatage';
 
   @override
-  String get numberFormat => 'Number Format';
+  String get numberFormat => 'Format de Nombre';
 
   @override
-  String get decimalPlacesSeparators => 'Decimal places and separators';
+  String get decimalPlacesSeparators => 'Décimales et séparateurs';
 
   @override
-  String get dataManagement => 'Data Management';
+  String get dataManagement => 'Gestion des Données';
 
   @override
-  String get exportTransactionsCSV => 'Export your transactions to CSV';
+  String get exportTransactionsCSV => 'Exporter vos transactions vers CSV';
 
   @override
-  String get importTransactionsCSV => 'Import transactions from CSV';
+  String get importTransactionsCSV => 'Importer des transactions depuis CSV';
 
   @override
-  String get clearAllData => 'Clear All Data';
+  String get clearAllData => 'Effacer Toutes les Données';
 
   @override
   String get permanentlyDeleteTransactions =>
-      'Permanently delete all transactions';
+      'Supprimer définitivement toutes les transactions';
 
   @override
   String get notifications => 'Notifications';
 
   @override
-  String get budgetAlerts => 'Budget Alerts';
+  String get budgetAlerts => 'Alertes de Budget';
 
   @override
   String get notifiedApproachingBudget =>
-      'Get notified when approaching budget limits';
+      'Être notifié en approchant des limites du budget';
 
   @override
-  String get dailyReminders => 'Daily Reminders';
+  String get dailyReminders => 'Rappels Quotidiens';
 
   @override
-  String get remindLogDailyExpenses => 'Remind me to log daily expenses';
+  String get remindLogDailyExpenses =>
+      'Me rappeler d\'enregistrer les dépenses quotidiennes';
 
   @override
   String get about => 'À propos';
 
   @override
-  String get appVersion => 'App Version';
+  String get appVersion => 'Version de l\'App';
 
   @override
-  String get privacyPolicy => 'Privacy Policy';
+  String get privacyPolicy => 'Politique de Confidentialité';
 
   @override
-  String get howWeHandleData => 'How we handle your data';
+  String get howWeHandleData => 'Comment nous gérons vos données';
 
   @override
-  String get termsOfService => 'Terms of Service';
+  String get termsOfService => 'Conditions d\'Utilisation';
 
   @override
-  String get termsAndConditions => 'Terms and conditions';
+  String get termsAndConditions => 'Termes et conditions';
 
   @override
-  String get signOutAccount => 'Sign out of your account';
+  String get signOutAccount => 'Se déconnecter de votre compte';
 
   @override
-  String get logout => 'Logout';
+  String get logout => 'Se Déconnecter';
 
   @override
-  String get sureWantLogout => 'Are you sure you want to logout?';
+  String get sureWantLogout => 'Êtes-vous sûr de vouloir vous déconnecter ?';
 
   @override
-  String get deleteAll => 'Delete All';
+  String get deleteAll => 'Tout Supprimer';
 
   @override
-  String get close => 'Close';
+  String get close => 'Fermer';
 
   @override
   String get ok => 'OK';
 
   @override
-  String get select => 'Select';
+  String get select => 'Sélectionner';
 
   @override
-  String get pickColor => 'Pick a color';
+  String get pickColor => 'Choisir une couleur';
 
   @override
-  String get createNewCategory => 'Create new category';
+  String get createNewCategory => 'Créer une nouvelle catégorie';
 
   @override
-  String get categoryName => 'Category name';
+  String get categoryName => 'Nom de catégorie';
 
   @override
-  String get pickColorButton => 'Pick color';
+  String get pickColorButton => 'Choisir la couleur';
 
   @override
-  String get add => 'Add';
+  String get add => 'Ajouter';
 
   @override
   String get expense => 'Dépense';
@@ -165,35 +166,38 @@ class AppLocalizationsFr extends AppLocalizations {
   String get income => 'Revenu';
 
   @override
-  String get exportFeatureComingSoon => 'Export feature coming soon!';
+  String get exportFeatureComingSoon =>
+      'La fonction d\'exportation arrive bientôt !';
 
   @override
-  String get importFeatureComingSoon => 'Import feature coming soon!';
+  String get importFeatureComingSoon =>
+      'La fonction d\'importation arrive bientôt !';
 
   @override
   String get numberFormattingComingSoon =>
-      'Number formatting options coming soon!';
+      'Les options de formatage de nombre arrivent bientôt !';
 
   @override
-  String get clearDataFeatureComingSoon => 'Clear data feature coming soon!';
+  String get clearDataFeatureComingSoon =>
+      'La fonction d\'effacement de données arrive bientôt !';
 
   @override
-  String get budgetAlertsEnabled => 'Budget alerts enabled';
+  String get budgetAlertsEnabled => 'Alertes de budget activées';
 
   @override
-  String get budgetAlertsDisabled => 'Budget alerts disabled';
+  String get budgetAlertsDisabled => 'Alertes de budget désactivées';
 
   @override
-  String get dailyRemindersEnabled => 'Daily reminders enabled';
+  String get dailyRemindersEnabled => 'Rappels quotidiens activés';
 
   @override
-  String get dailyRemindersDisabled => 'Daily reminders disabled';
+  String get dailyRemindersDisabled => 'Rappels quotidiens désactivés';
 
   @override
-  String get loggedOutSuccessfully => 'Logged out successfully';
+  String get loggedOutSuccessfully => 'Déconnexion réussie';
 
   @override
-  String get logoutFailed => 'Logout failed';
+  String get logoutFailed => 'Échec de la déconnexion';
 
   @override
   String get addTransaction => 'Ajouter une Transaction';
