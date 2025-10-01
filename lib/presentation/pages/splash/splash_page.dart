@@ -128,17 +128,28 @@ class _SplashPageState extends State<SplashPage>
     
     // Check if PIN authentication is enabled
     if (pinProvider.isEnabled) {
-      // Navigate to PIN verification page
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const PinVerificationPage(),
-        ),
-      );
+      // Show PIN verification popup
+      _showPinVerificationPopup();
     } else {
       // Navigate directly to home page
       Navigator.pushReplacementNamed(context, AppRoutes.home);
     }
+  }
+
+  void _showPinVerificationPopup() {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => _PinVerificationDialog(
+        onVerified: (pin) {
+          Navigator.pop(context); // Close dialog
+          Navigator.pushReplacementNamed(context, AppRoutes.home);
+        },
+        onCancel: () {
+          // Don't allow canceling - user must enter PIN
+        },
+      ),
+    );
   }
 
   @override
@@ -536,5 +547,363 @@ class RingPainter extends CustomPainter {
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) {
     return oldDelegate is RingPainter && oldDelegate.progress != progress;
+  }
+}
+
+class _PinVerificationDialog extends StatefulWidget {
+  final Function(String) onVerified;
+  final VoidCallback onCancel;
+
+  const _PinVerificationDialog({
+    required this.onVerified,
+    required this.onCancel,
+  });
+
+  @override
+  State<_PinVerificationDialog> createState() => _PinVerificationDialogState();
+}
+
+class _PinVerificationDialogState extends State<_PinVerificationDialog> {
+  final List<TextEditingController> _controllers = List.generate(
+    4,
+    (index) => TextEditingController(),
+  );
+  final List<FocusNode> _focusNodes = List.generate(
+    4,
+    (index) => FocusNode(),
+  );
+  
+  String _pin = '';
+  int _attempts = 0;
+  bool _isLoading = false;
+  String? _errorMessage;
+
+  @override
+  void initState() {
+    super.initState();
+    _focusNodes[0].requestFocus();
+  }
+
+  @override
+  void dispose() {
+    for (var controller in _controllers) {
+      controller.dispose();
+    }
+    for (var focusNode in _focusNodes) {
+      focusNode.dispose();
+    }
+    super.dispose();
+  }
+
+  void _onDigitEntered(String digit, int index) {
+    if (digit.isEmpty) return;
+    
+    setState(() {
+      _pin += digit;
+      _errorMessage = null;
+    });
+
+    if (index < 3) {
+      _focusNodes[index + 1].requestFocus();
+    } else {
+      _focusNodes[index].unfocus();
+      _verifyPin();
+    }
+  }
+
+  void _onDigitDeleted(int index) {
+    if (index > 0) {
+      _focusNodes[index - 1].requestFocus();
+    }
+    
+    setState(() {
+      if (_pin.isNotEmpty) {
+        _pin = _pin.substring(0, _pin.length - 1);
+      }
+      _errorMessage = null;
+    });
+  }
+
+  void _verifyPin() async {
+    if (_pin.length != 4) return;
+
+    setState(() {
+      _isLoading = true;
+    });
+
+    // Simulate network delay
+    await Future.delayed(const Duration(milliseconds: 500));
+
+    final pinProvider = context.read<PinAuthProvider>();
+    final isValid = pinProvider.verifyPin(_pin);
+
+    setState(() {
+      _isLoading = false;
+    });
+
+    if (isValid) {
+      // PIN is correct
+      widget.onVerified(_pin);
+    } else {
+      // PIN is incorrect
+      setState(() {
+        _attempts++;
+        _errorMessage = 'Incorrect PIN. Please try again.';
+        _pin = '';
+      });
+      
+      // Clear controllers and focus first one
+      for (var controller in _controllers) {
+        controller.clear();
+      }
+      _focusNodes[0].requestFocus();
+
+      // Show error message
+      if (_attempts >= 3) {
+        _showMaxAttemptsDialog();
+      }
+    }
+  }
+
+  void _showMaxAttemptsDialog() {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => AlertDialog(
+        title: const Text('Too Many Attempts'),
+        content: const Text(
+          'You have entered the wrong PIN too many times. Please restart the app and try again.',
+        ),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+              // Exit the app or restart
+              Navigator.pushNamedAndRemoveUntil(
+                context,
+                AppRoutes.splash,
+                (route) => false,
+              );
+            },
+            child: const Text('OK'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final themeProvider = context.read<ThemeProvider>();
+    final accentColor = ThemeColors.getAccentColor(context, themeProvider.accentColor);
+    
+    return Dialog(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: Container(
+        padding: const EdgeInsets.all(24),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            // App Logo/Icon
+            Container(
+              width: 80,
+              height: 80,
+              decoration: BoxDecoration(
+                color: accentColor.withOpacity(0.1),
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Icon(
+                Icons.account_balance_wallet,
+                size: 40,
+                color: accentColor,
+              ),
+            ),
+            
+            const SizedBox(height: 16),
+            
+            // App Name
+            Text(
+              'Money Maker',
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+                color: ThemeColors.getTextPrimary(context),
+              ),
+            ),
+            
+            const SizedBox(height: 8),
+            
+            // Title
+            Text(
+              'Enter your PIN',
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w600,
+                color: ThemeColors.getTextPrimary(context),
+              ),
+            ),
+            
+            const SizedBox(height: 8),
+            
+            // Subtitle
+            Text(
+              'Enter your 4-digit PIN to continue',
+              style: TextStyle(
+                fontSize: 14,
+                color: ThemeColors.getTextSecondary(context),
+              ),
+              textAlign: TextAlign.center,
+            ),
+            
+            const SizedBox(height: 24),
+            
+            // PIN Input Fields
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: List.generate(4, (index) {
+                final isFilled = index < _pin.length;
+                
+                return Container(
+                  width: 50,
+                  height: 50,
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: _errorMessage != null 
+                        ? AppColors.error
+                        : isFilled 
+                          ? accentColor 
+                          : ThemeColors.getTextSecondary(context),
+                      width: 2,
+                    ),
+                    borderRadius: BorderRadius.circular(10),
+                    color: isFilled 
+                      ? accentColor.withOpacity(0.1)
+                      : Colors.transparent,
+                  ),
+                  child: Center(
+                    child: _isLoading && index == 3
+                      ? SizedBox(
+                          width: 16,
+                          height: 16,
+                          child: CircularProgressIndicator(
+                            strokeWidth: 2,
+                            valueColor: AlwaysStoppedAnimation<Color>(accentColor),
+                          ),
+                        )
+                      : Text(
+                          isFilled ? '●' : '',
+                          style: TextStyle(
+                            fontSize: 20,
+                            color: _errorMessage != null 
+                              ? AppColors.error
+                              : accentColor,
+                          ),
+                        ),
+                  ),
+                );
+              }),
+            ),
+            
+            if (_errorMessage != null) ...[
+              const SizedBox(height: 16),
+              Text(
+                _errorMessage!,
+                style: TextStyle(
+                  color: AppColors.error,
+                  fontSize: 12,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ],
+            
+            const SizedBox(height: 24),
+            
+            // Number Pad
+            GridView.count(
+              shrinkWrap: true,
+              crossAxisCount: 3,
+              mainAxisSpacing: 12,
+              crossAxisSpacing: 12,
+              childAspectRatio: 1.2,
+              children: [
+                // Numbers 1-9
+                ...List.generate(9, (index) {
+                  final number = (index + 1).toString();
+                  return _buildNumberButton(number, accentColor);
+                }),
+                
+                // Empty space
+                const SizedBox(),
+                
+                // Number 0
+                _buildNumberButton('0', accentColor),
+                
+                // Delete button
+                _buildDeleteButton(accentColor),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildNumberButton(String number, Color accentColor) {
+    return GestureDetector(
+      onTap: _isLoading ? null : () {
+        if (_pin.length < 4) {
+          _onDigitEntered(number, _pin.length);
+        }
+      },
+      child: Container(
+        decoration: BoxDecoration(
+          color: ThemeColors.getCardBackground(context),
+          borderRadius: BorderRadius.circular(8),
+          border: Border.all(
+            color: ThemeColors.getBorderColor(context),
+            width: 1,
+          ),
+        ),
+        child: Center(
+          child: Text(
+            number,
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.w600,
+              color: ThemeColors.getTextPrimary(context),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildDeleteButton(Color accentColor) {
+    return GestureDetector(
+      onTap: _isLoading ? null : () {
+        if (_pin.isNotEmpty) {
+          _onDigitDeleted(_pin.length - 1);
+        }
+      },
+      child: Container(
+        decoration: BoxDecoration(
+          color: ThemeColors.getCardBackground(context),
+          borderRadius: BorderRadius.circular(8),
+          border: Border.all(
+            color: ThemeColors.getBorderColor(context),
+            width: 1,
+          ),
+        ),
+        child: Center(
+          child: Icon(
+            Icons.backspace_outlined,
+            size: 18,
+            color: ThemeColors.getTextPrimary(context),
+          ),
+        ),
+      ),
+    );
   }
 }
