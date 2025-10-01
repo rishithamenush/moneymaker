@@ -120,7 +120,7 @@ class TransactionListItem extends StatelessWidget {
                         borderRadius: BorderRadius.circular(8),
                       ),
                       child: Text(
-                        '${isIncome ? '+' : '-'}${Formatters.formatCurrency(amount, currencyCode: context.read<ThemeProvider>().currency)}',
+                        Formatters.formatCurrency(amount, currencyCode: context.read<ThemeProvider>().currency),
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: color,

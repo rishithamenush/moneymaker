@@ -15,6 +15,7 @@ import '../../providers/theme_provider.dart';
 import '../../widgets/common/custom_app_bar.dart';
 import '../../widgets/common/transaction_list_item.dart';
 import '../../widgets/common/monthly_selector.dart';
+import '../../widgets/common/delete_confirmation_dialog.dart';
 import '../../navigation/bottom_nav_bar.dart';
 import '../../../app/routes.dart';
 
@@ -102,9 +103,9 @@ class _HomePageState extends State<HomePage> {
                         height: 75, // Optimized height to reduce empty space
                         padding: const EdgeInsets.symmetric(horizontal: AppDimensions.paddingS, vertical: 8),
                         decoration: BoxDecoration(
-                          color: AppColors.success.withOpacity(0.1),
+                          color: ThemeColors.getAccentColor(context, context.read<ThemeProvider>().accentColor).withOpacity(0.1),
                           borderRadius: BorderRadius.circular(AppDimensions.radiusM),
-                          border: Border.all(color: AppColors.success.withOpacity(0.3)),
+                          border: Border.all(color: ThemeColors.getAccentColor(context, context.read<ThemeProvider>().accentColor).withOpacity(0.3)),
                         ),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -121,10 +122,10 @@ class _HomePageState extends State<HomePage> {
                             Flexible(
                               child: Text(
                                 Formatters.formatCurrency(totalIncome, currencyCode: context.read<ThemeProvider>().currency),
-                                style: const TextStyle(
+                                style: TextStyle(
                                   fontSize: 14, // Smaller font to fit more text
                                   fontWeight: FontWeight.bold,
-                                  color: AppColors.success,
+                                  color: ThemeColors.getAccentColor(context, context.read<ThemeProvider>().accentColor),
                                 ),
                                 textAlign: TextAlign.center,
                                 maxLines: 2, // Allow 2 lines for larger numbers
@@ -182,9 +183,9 @@ class _HomePageState extends State<HomePage> {
                         height: 75, // Optimized height to reduce empty space
                         padding: const EdgeInsets.symmetric(horizontal: AppDimensions.paddingS, vertical: 8),
                         decoration: BoxDecoration(
-                          color: (totalIncome - totalSpent >= 0 ? AppColors.success : AppColors.error).withOpacity(0.1),
+                          color: (totalIncome - totalSpent >= 0 ? ThemeColors.getAccentColor(context, context.read<ThemeProvider>().accentColor) : AppColors.error).withOpacity(0.1),
                           borderRadius: BorderRadius.circular(AppDimensions.radiusM),
-                          border: Border.all(color: (totalIncome - totalSpent >= 0 ? AppColors.success : AppColors.error).withOpacity(0.3)),
+                          border: Border.all(color: (totalIncome - totalSpent >= 0 ? ThemeColors.getAccentColor(context, context.read<ThemeProvider>().accentColor) : AppColors.error).withOpacity(0.3)),
                         ),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -204,7 +205,7 @@ class _HomePageState extends State<HomePage> {
                                 style: TextStyle(
                                   fontSize: 14, // Smaller font to fit more text
                                   fontWeight: FontWeight.bold,
-                                  color: totalIncome - totalSpent >= 0 ? AppColors.success : AppColors.error,
+                                  color: totalIncome - totalSpent >= 0 ? ThemeColors.getAccentColor(context, context.read<ThemeProvider>().accentColor) : AppColors.error,
                                 ),
                                 textAlign: TextAlign.center,
                                 maxLines: 2, // Allow 2 lines for larger numbers
@@ -322,7 +323,11 @@ class _HomePageState extends State<HomePage> {
               onTap: () {
                 // Navigate to transaction details
               },
-              onDelete: () => _showDeleteConfirmation(context, transaction),
+              onDelete: () => DeleteConfirmationDialog.show(
+                context,
+                transaction: transaction,
+                onConfirm: () => _deleteTransaction(transaction),
+              ),
             )),
             const SizedBox(height: AppDimensions.paddingM),
           ],
@@ -331,44 +336,6 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  void _showDeleteConfirmation(BuildContext context, dynamic transaction) {
-    final isIncome = transaction is Income;
-    final transactionType = isIncome ? 'Income' : 'Expense';
-    
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('Delete $transactionType?'),
-          content: Text(
-            'Are you sure you want to delete this $transactionType transaction?\n\n'
-            '${transaction.description}\n'
-            '${Formatters.formatCurrency(transaction.amount, currencyCode: context.read<ThemeProvider>().currency)}',
-          ),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.of(context).pop(),
-              child: Text(
-                'Cancel',
-                style: TextStyle(color: ThemeColors.getTextSecondary(context)),
-              ),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-                _deleteTransaction(transaction);
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors.error,
-                foregroundColor: Colors.white,
-              ),
-              child: const Text('Delete'),
-            ),
-          ],
-        );
-      },
-    );
-  }
 
   Future<void> _deleteTransaction(dynamic transaction) async {
     try {
