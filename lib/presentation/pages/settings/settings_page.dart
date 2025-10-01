@@ -39,8 +39,8 @@ class _SettingsPageState extends State<SettingsPage> {
           _buildSettingsCard([
             _buildSettingsItem(
               icon: Icons.category,
-              title: 'Customize Categories',
-              subtitle: 'Add, rename, or delete your own categories',
+              title: l10n.customizeCategories,
+              subtitle: l10n.addRenameDeleteCategories,
               onTap: () => _openCategoryManager(),
             ),
           ]),
@@ -78,7 +78,7 @@ class _SettingsPageState extends State<SettingsPage> {
           const SizedBox(height: AppDimensions.paddingL),
           
           // Currency & Formatting Section
-          _buildSectionHeader('Currency & Formatting'),
+          _buildSectionHeader(l10n.currencyFormatting),
           _buildSettingsCard([
             Consumer<ThemeProvider>(
               builder: (context, themeProvider, child) {
@@ -93,8 +93,8 @@ class _SettingsPageState extends State<SettingsPage> {
             _buildDivider(),
             _buildSettingsItem(
               icon: Icons.format_list_numbered,
-              title: 'Number Format',
-              subtitle: 'Decimal places and separators',
+              title: l10n.numberFormat,
+              subtitle: l10n.decimalPlacesSeparators,
               onTap: () => _showNumberFormatDialog(),
             ),
           ]),
@@ -102,26 +102,26 @@ class _SettingsPageState extends State<SettingsPage> {
           const SizedBox(height: AppDimensions.paddingL),
           
           // Data Management Section
-          _buildSectionHeader('Data Management'),
+          _buildSectionHeader(l10n.dataManagement),
           _buildSettingsCard([
             _buildSettingsItem(
               icon: Icons.download,
               title: l10n.exportData,
-              subtitle: 'Export your transactions to CSV',
+              subtitle: l10n.exportTransactionsCSV,
               onTap: () => _exportData(),
             ),
             _buildDivider(),
             _buildSettingsItem(
               icon: Icons.upload,
               title: l10n.importData,
-              subtitle: 'Import transactions from CSV',
+              subtitle: l10n.importTransactionsCSV,
               onTap: () => _importData(),
             ),
             _buildDivider(),
             _buildSettingsItem(
               icon: Icons.delete_forever,
-              title: 'Clear All Data',
-              subtitle: 'Permanently delete all transactions',
+              title: l10n.clearAllData,
+              subtitle: l10n.permanentlyDeleteTransactions,
               onTap: () => _showClearDataDialog(),
               isDestructive: true,
             ),
@@ -130,12 +130,12 @@ class _SettingsPageState extends State<SettingsPage> {
           const SizedBox(height: AppDimensions.paddingL),
           
           // Notifications Section
-          _buildSectionHeader('Notifications'),
+          _buildSectionHeader(l10n.notifications),
           _buildSettingsCard([
             _buildSettingsItem(
               icon: Icons.notifications,
-              title: 'Budget Alerts',
-              subtitle: 'Get notified when approaching budget limits',
+              title: l10n.budgetAlerts,
+              subtitle: l10n.notifiedApproachingBudget,
               trailing: Switch(
                 value: true,
                 onChanged: (value) => _toggleBudgetAlerts(value),
@@ -145,8 +145,8 @@ class _SettingsPageState extends State<SettingsPage> {
             _buildDivider(),
             _buildSettingsItem(
               icon: Icons.schedule,
-              title: 'Daily Reminders',
-              subtitle: 'Remind me to log daily expenses',
+              title: l10n.dailyReminders,
+              subtitle: l10n.remindLogDailyExpenses,
               trailing: Switch(
                 value: false,
                 onChanged: (value) => _toggleDailyReminders(value),
@@ -158,26 +158,26 @@ class _SettingsPageState extends State<SettingsPage> {
           const SizedBox(height: AppDimensions.paddingL),
           
           // About Section
-          _buildSectionHeader('About'),
+          _buildSectionHeader(l10n.about),
           _buildSettingsCard([
             _buildSettingsItem(
               icon: Icons.info,
-              title: 'App Version',
+              title: l10n.appVersion,
               subtitle: '1.0.0',
               onTap: () => _showAboutDialog(),
             ),
             _buildDivider(),
             _buildSettingsItem(
               icon: Icons.privacy_tip,
-              title: 'Privacy Policy',
-              subtitle: 'How we handle your data',
+              title: l10n.privacyPolicy,
+              subtitle: l10n.howWeHandleData,
               onTap: () => _showPrivacyPolicy(),
             ),
             _buildDivider(),
             _buildSettingsItem(
               icon: Icons.description,
-              title: 'Terms of Service',
-              subtitle: 'Terms and conditions',
+              title: l10n.termsOfService,
+              subtitle: l10n.termsAndConditions,
               onTap: () => _showTermsOfService(),
             ),
           ]),
@@ -190,7 +190,7 @@ class _SettingsPageState extends State<SettingsPage> {
             _buildSettingsItem(
               icon: Icons.logout,
               title: l10n.signOut,
-              subtitle: 'Sign out of your account',
+              subtitle: l10n.signOutAccount,
               onTap: () => _showLogoutDialog(),
               isDestructive: true,
             ),
@@ -290,7 +290,7 @@ class _SettingsPageState extends State<SettingsPage> {
             size: 24,
           ),
           title: Text(
-            'Theme',
+            l10n.theme,
             style: TextStyle(
               fontWeight: FontWeight.w600,
               color: ThemeColors.getTextPrimary(context),
@@ -298,10 +298,10 @@ class _SettingsPageState extends State<SettingsPage> {
           ),
           subtitle: Text(
             themeProvider.themeMode == ThemeMode.dark
-                ? 'Dark Mode'
+                ? l10n.darkMode
                 : themeProvider.themeMode == ThemeMode.light
-                    ? 'Light Mode'
-                    : 'System Default',
+                    ? l10n.lightMode
+                    : l10n.systemDefault,
             style: TextStyle(
               color: ThemeColors.getTextSecondary(context),
               fontSize: 12,
@@ -310,18 +310,18 @@ class _SettingsPageState extends State<SettingsPage> {
           trailing: DropdownButton<ThemeMode>(
             value: themeProvider.themeMode,
             underline: const SizedBox(),
-            items: const [
+            items: [
               DropdownMenuItem(
                 value: ThemeMode.light,
-                child: Text('Light'),
+                child: Text(l10n.light),
               ),
               DropdownMenuItem(
                 value: ThemeMode.dark,
-                child: Text('Dark'),
+                child: Text(l10n.dark),
               ),
               DropdownMenuItem(
                 value: ThemeMode.system,
-                child: Text('System'),
+                child: Text(l10n.system),
               ),
             ],
             onChanged: (ThemeMode? newValue) {
@@ -342,7 +342,7 @@ class _SettingsPageState extends State<SettingsPage> {
         builder: (context, themeProvider, child) {
           return AlertDialog(
             title: Text(
-              'Choose Accent Color',
+              l10n.chooseAccentColor,
               style: TextStyle(color: ThemeColors.getTextPrimary(context)),
             ),
             backgroundColor: ThemeColors.getSurface(context),
@@ -500,7 +500,7 @@ class _SettingsPageState extends State<SettingsPage> {
         builder: (context, themeProvider, child) {
           return AlertDialog(
             title: Text(
-              'Choose Currency',
+              l10n.chooseCurrency,
               style: TextStyle(color: ThemeColors.getTextPrimary(context)),
             ),
             backgroundColor: ThemeColors.getSurface(context),
@@ -572,12 +572,12 @@ class _SettingsPageState extends State<SettingsPage> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Number Format'),
-        content: const Text('Number formatting options coming soon!'),
+        title: Text(l10n.numberFormat),
+        content: Text(l10n.numberFormattingComingSoon),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('OK'),
+            child: Text(l10n.ok),
           ),
         ],
       ),
@@ -587,7 +587,7 @@ class _SettingsPageState extends State<SettingsPage> {
   void _exportData() {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: const Text('Export feature coming soon!'),
+        content: Text(l10n.exportFeatureComingSoon),
         backgroundColor: ThemeColors.getAccentColor(context, context.read<ThemeProvider>().accentColor),
       ),
     );
@@ -596,7 +596,7 @@ class _SettingsPageState extends State<SettingsPage> {
   void _importData() {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: const Text('Import feature coming soon!'),
+        content: Text(l10n.importFeatureComingSoon),
         backgroundColor: ThemeColors.getAccentColor(context, context.read<ThemeProvider>().accentColor),
       ),
     );
@@ -606,14 +606,14 @@ class _SettingsPageState extends State<SettingsPage> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Clear All Data'),
-        content: const Text(
+        title: Text(l10n.clearAllData),
+        content: Text(
           'This will permanently delete all your transactions, budgets, and categories. This action cannot be undone.',
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('Cancel'),
+            child: Text(l10n.cancel),
           ),
           TextButton(
             onPressed: () {
@@ -621,7 +621,7 @@ class _SettingsPageState extends State<SettingsPage> {
               _clearAllData();
             },
             style: TextButton.styleFrom(foregroundColor: AppColors.error),
-            child: const Text('Delete All'),
+            child: Text(l10n.deleteAll),
           ),
         ],
       ),
@@ -630,17 +630,17 @@ class _SettingsPageState extends State<SettingsPage> {
 
   void _clearAllData() {
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('Clear data feature coming soon!'),
-        backgroundColor: AppColors.warning,
-      ),
+        SnackBar(
+          content: Text(l10n.clearDataFeatureComingSoon),
+          backgroundColor: AppColors.warning,
+        ),
     );
   }
 
   void _toggleBudgetAlerts(bool value) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text('Budget alerts ${value ? 'enabled' : 'disabled'}'),
+        content: Text(value ? l10n.budgetAlertsEnabled : l10n.budgetAlertsDisabled),
         backgroundColor: ThemeColors.getAccentColor(context, context.read<ThemeProvider>().accentColor),
       ),
     );
@@ -649,7 +649,7 @@ class _SettingsPageState extends State<SettingsPage> {
   void _toggleDailyReminders(bool value) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text('Daily reminders ${value ? 'enabled' : 'disabled'}'),
+        content: Text(value ? l10n.dailyRemindersEnabled : l10n.dailyRemindersDisabled),
         backgroundColor: ThemeColors.getAccentColor(context, context.read<ThemeProvider>().accentColor),
       ),
     );
@@ -727,12 +727,12 @@ class _SettingsPageState extends State<SettingsPage> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Logout'),
-        content: const Text('Are you sure you want to logout?'),
+        title: Text(l10n.logout),
+        content: Text(l10n.sureWantLogout),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('Cancel'),
+            child: Text(l10n.cancel),
           ),
           TextButton(
             onPressed: () {
@@ -740,7 +740,7 @@ class _SettingsPageState extends State<SettingsPage> {
               _logout();
             },
             style: TextButton.styleFrom(foregroundColor: AppColors.error),
-            child: const Text('Logout'),
+            child: Text(l10n.logout),
           ),
         ],
       ),
@@ -761,8 +761,8 @@ class _SettingsPageState extends State<SettingsPage> {
         );
         
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Logged out successfully'),
+          SnackBar(
+            content: Text(l10n.loggedOutSuccessfully),
             backgroundColor: AppColors.success,
           ),
         );
@@ -771,7 +771,7 @@ class _SettingsPageState extends State<SettingsPage> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Logout failed: ${e.toString()}'),
+            content: Text('${l10n.logoutFailed}: ${e.toString()}'),
             backgroundColor: AppColors.error,
           ),
         );

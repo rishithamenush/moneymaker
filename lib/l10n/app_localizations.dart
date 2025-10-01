@@ -144,6 +144,336 @@ abstract class AppLocalizations {
   /// **'Trends'**
   String get trends;
 
+  /// Appearance section title
+  ///
+  /// In en, this message translates to:
+  /// **'Appearance'**
+  String get appearance;
+
+  /// Customize categories title
+  ///
+  /// In en, this message translates to:
+  /// **'Customize Categories'**
+  String get customizeCategories;
+
+  /// Customize categories subtitle
+  ///
+  /// In en, this message translates to:
+  /// **'Add, rename, or delete your own categories'**
+  String get addRenameDeleteCategories;
+
+  /// Theme setting label
+  ///
+  /// In en, this message translates to:
+  /// **'Theme'**
+  String get theme;
+
+  /// Dark mode option
+  ///
+  /// In en, this message translates to:
+  /// **'Dark Mode'**
+  String get darkMode;
+
+  /// Light mode option
+  ///
+  /// In en, this message translates to:
+  /// **'Light Mode'**
+  String get lightMode;
+
+  /// System default theme option
+  ///
+  /// In en, this message translates to:
+  /// **'System Default'**
+  String get systemDefault;
+
+  /// Light theme option
+  ///
+  /// In en, this message translates to:
+  /// **'Light'**
+  String get light;
+
+  /// Dark theme option
+  ///
+  /// In en, this message translates to:
+  /// **'Dark'**
+  String get dark;
+
+  /// System theme option
+  ///
+  /// In en, this message translates to:
+  /// **'System'**
+  String get system;
+
+  /// Accent color dialog title
+  ///
+  /// In en, this message translates to:
+  /// **'Choose Accent Color'**
+  String get chooseAccentColor;
+
+  /// Currency dialog title
+  ///
+  /// In en, this message translates to:
+  /// **'Choose Currency'**
+  String get chooseCurrency;
+
+  /// Currency formatting section title
+  ///
+  /// In en, this message translates to:
+  /// **'Currency & Formatting'**
+  String get currencyFormatting;
+
+  /// Number format setting title
+  ///
+  /// In en, this message translates to:
+  /// **'Number Format'**
+  String get numberFormat;
+
+  /// Number format subtitle
+  ///
+  /// In en, this message translates to:
+  /// **'Decimal places and separators'**
+  String get decimalPlacesSeparators;
+
+  /// Data management section title
+  ///
+  /// In en, this message translates to:
+  /// **'Data Management'**
+  String get dataManagement;
+
+  /// Export data subtitle
+  ///
+  /// In en, this message translates to:
+  /// **'Export your transactions to CSV'**
+  String get exportTransactionsCSV;
+
+  /// Import data subtitle
+  ///
+  /// In en, this message translates to:
+  /// **'Import transactions from CSV'**
+  String get importTransactionsCSV;
+
+  /// Clear all data title
+  ///
+  /// In en, this message translates to:
+  /// **'Clear All Data'**
+  String get clearAllData;
+
+  /// Clear all data subtitle
+  ///
+  /// In en, this message translates to:
+  /// **'Permanently delete all transactions'**
+  String get permanentlyDeleteTransactions;
+
+  /// Notifications section title
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications'**
+  String get notifications;
+
+  /// Budget alerts setting title
+  ///
+  /// In en, this message translates to:
+  /// **'Budget Alerts'**
+  String get budgetAlerts;
+
+  /// Budget alerts subtitle
+  ///
+  /// In en, this message translates to:
+  /// **'Get notified when approaching budget limits'**
+  String get notifiedApproachingBudget;
+
+  /// Daily reminders setting title
+  ///
+  /// In en, this message translates to:
+  /// **'Daily Reminders'**
+  String get dailyReminders;
+
+  /// Daily reminders subtitle
+  ///
+  /// In en, this message translates to:
+  /// **'Remind me to log daily expenses'**
+  String get remindLogDailyExpenses;
+
+  /// About section title
+  ///
+  /// In en, this message translates to:
+  /// **'About'**
+  String get about;
+
+  /// App version setting title
+  ///
+  /// In en, this message translates to:
+  /// **'App Version'**
+  String get appVersion;
+
+  /// Privacy policy title
+  ///
+  /// In en, this message translates to:
+  /// **'Privacy Policy'**
+  String get privacyPolicy;
+
+  /// Privacy policy subtitle
+  ///
+  /// In en, this message translates to:
+  /// **'How we handle your data'**
+  String get howWeHandleData;
+
+  /// Terms of service title
+  ///
+  /// In en, this message translates to:
+  /// **'Terms of Service'**
+  String get termsOfService;
+
+  /// Terms of service subtitle
+  ///
+  /// In en, this message translates to:
+  /// **'Terms and conditions'**
+  String get termsAndConditions;
+
+  /// Sign out subtitle
+  ///
+  /// In en, this message translates to:
+  /// **'Sign out of your account'**
+  String get signOutAccount;
+
+  /// Logout title
+  ///
+  /// In en, this message translates to:
+  /// **'Logout'**
+  String get logout;
+
+  /// Logout confirmation message
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to logout?'**
+  String get sureWantLogout;
+
+  /// Delete all button
+  ///
+  /// In en, this message translates to:
+  /// **'Delete All'**
+  String get deleteAll;
+
+  /// Close button
+  ///
+  /// In en, this message translates to:
+  /// **'Close'**
+  String get close;
+
+  /// OK button text
+  ///
+  /// In en, this message translates to:
+  /// **'OK'**
+  String get ok;
+
+  /// Select button
+  ///
+  /// In en, this message translates to:
+  /// **'Select'**
+  String get select;
+
+  /// Color picker title
+  ///
+  /// In en, this message translates to:
+  /// **'Pick a color'**
+  String get pickColor;
+
+  /// Create new category title
+  ///
+  /// In en, this message translates to:
+  /// **'Create new category'**
+  String get createNewCategory;
+
+  /// Category name field hint
+  ///
+  /// In en, this message translates to:
+  /// **'Category name'**
+  String get categoryName;
+
+  /// Pick color button
+  ///
+  /// In en, this message translates to:
+  /// **'Pick color'**
+  String get pickColorButton;
+
+  /// Add button
+  ///
+  /// In en, this message translates to:
+  /// **'Add'**
+  String get add;
+
+  /// Expense transaction type
+  ///
+  /// In en, this message translates to:
+  /// **'Expense'**
+  String get expense;
+
+  /// Income transaction type
+  ///
+  /// In en, this message translates to:
+  /// **'Income'**
+  String get income;
+
+  /// Export feature message
+  ///
+  /// In en, this message translates to:
+  /// **'Export feature coming soon!'**
+  String get exportFeatureComingSoon;
+
+  /// Import feature message
+  ///
+  /// In en, this message translates to:
+  /// **'Import feature coming soon!'**
+  String get importFeatureComingSoon;
+
+  /// Number formatting message
+  ///
+  /// In en, this message translates to:
+  /// **'Number formatting options coming soon!'**
+  String get numberFormattingComingSoon;
+
+  /// Clear data feature message
+  ///
+  /// In en, this message translates to:
+  /// **'Clear data feature coming soon!'**
+  String get clearDataFeatureComingSoon;
+
+  /// Budget alerts enabled message
+  ///
+  /// In en, this message translates to:
+  /// **'Budget alerts enabled'**
+  String get budgetAlertsEnabled;
+
+  /// Budget alerts disabled message
+  ///
+  /// In en, this message translates to:
+  /// **'Budget alerts disabled'**
+  String get budgetAlertsDisabled;
+
+  /// Daily reminders enabled message
+  ///
+  /// In en, this message translates to:
+  /// **'Daily reminders enabled'**
+  String get dailyRemindersEnabled;
+
+  /// Daily reminders disabled message
+  ///
+  /// In en, this message translates to:
+  /// **'Daily reminders disabled'**
+  String get dailyRemindersDisabled;
+
+  /// Logout success message
+  ///
+  /// In en, this message translates to:
+  /// **'Logged out successfully'**
+  String get loggedOutSuccessfully;
+
+  /// Logout failed message
+  ///
+  /// In en, this message translates to:
+  /// **'Logout failed'**
+  String get logoutFailed;
+
   /// Add transaction page title
   ///
   /// In en, this message translates to:
@@ -258,18 +588,6 @@ abstract class AppLocalizations {
   /// **'Type'**
   String get type;
 
-  /// Income transaction type
-  ///
-  /// In en, this message translates to:
-  /// **'Income'**
-  String get income;
-
-  /// Expense transaction type
-  ///
-  /// In en, this message translates to:
-  /// **'Expense'**
-  String get expense;
-
   /// Save button text
   ///
   /// In en, this message translates to:
@@ -324,36 +642,6 @@ abstract class AppLocalizations {
   /// **'No transactions found'**
   String get noTransactions;
 
-  /// Appearance section title
-  ///
-  /// In en, this message translates to:
-  /// **'Appearance'**
-  String get appearance;
-
-  /// Theme setting label
-  ///
-  /// In en, this message translates to:
-  /// **'Theme'**
-  String get theme;
-
-  /// Light theme option
-  ///
-  /// In en, this message translates to:
-  /// **'Light'**
-  String get light;
-
-  /// Dark theme option
-  ///
-  /// In en, this message translates to:
-  /// **'Dark'**
-  String get dark;
-
-  /// System theme option
-  ///
-  /// In en, this message translates to:
-  /// **'System'**
-  String get system;
-
   /// Accent color setting label
   ///
   /// In en, this message translates to:
@@ -383,12 +671,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Import Data'**
   String get importData;
-
-  /// About section title
-  ///
-  /// In en, this message translates to:
-  /// **'About'**
-  String get about;
 
   /// Version label
   ///
@@ -485,12 +767,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Success'**
   String get success;
-
-  /// OK button text
-  ///
-  /// In en, this message translates to:
-  /// **'OK'**
-  String get ok;
 
   /// Yes button text
   ///

@@ -30,6 +30,281 @@
     "description": "Trends tab title"
   },
   
+  "appearance": "Appearance",
+  "@appearance": {
+    "description": "Appearance section title"
+  },
+  
+  "customizeCategories": "Customize Categories",
+  "@customizeCategories": {
+    "description": "Customize categories title"
+  },
+  
+  "addRenameDeleteCategories": "Add, rename, or delete your own categories",
+  "@addRenameDeleteCategories": {
+    "description": "Customize categories subtitle"
+  },
+  
+  "theme": "Theme",
+  "@theme": {
+    "description": "Theme setting title"
+  },
+  
+  "darkMode": "Dark Mode",
+  "@darkMode": {
+    "description": "Dark mode option"
+  },
+  
+  "lightMode": "Light Mode",
+  "@lightMode": {
+    "description": "Light mode option"
+  },
+  
+  "systemDefault": "System Default",
+  "@systemDefault": {
+    "description": "System default theme option"
+  },
+  
+  "light": "Light",
+  "@light": {
+    "description": "Light theme option"
+  },
+  
+  "dark": "Dark",
+  "@dark": {
+    "description": "Dark theme option"
+  },
+  
+  "system": "System",
+  "@system": {
+    "description": "System theme option"
+  },
+  
+  "chooseAccentColor": "Choose Accent Color",
+  "@chooseAccentColor": {
+    "description": "Accent color dialog title"
+  },
+  
+  "chooseCurrency": "Choose Currency",
+  "@chooseCurrency": {
+    "description": "Currency dialog title"
+  },
+  
+  "currencyFormatting": "Currency & Formatting",
+  "@currencyFormatting": {
+    "description": "Currency formatting section title"
+  },
+  
+  "numberFormat": "Number Format",
+  "@numberFormat": {
+    "description": "Number format setting title"
+  },
+  
+  "decimalPlacesSeparators": "Decimal places and separators",
+  "@decimalPlacesSeparators": {
+    "description": "Number format subtitle"
+  },
+  
+  "dataManagement": "Data Management",
+  "@dataManagement": {
+    "description": "Data management section title"
+  },
+  
+  "exportTransactionsCSV": "Export your transactions to CSV",
+  "@exportTransactionsCSV": {
+    "description": "Export data subtitle"
+  },
+  
+  "importTransactionsCSV": "Import transactions from CSV",
+  "@importTransactionsCSV": {
+    "description": "Import data subtitle"
+  },
+  
+  "clearAllData": "Clear All Data",
+  "@clearAllData": {
+    "description": "Clear all data title"
+  },
+  
+  "permanentlyDeleteTransactions": "Permanently delete all transactions",
+  "@permanentlyDeleteTransactions": {
+    "description": "Clear all data subtitle"
+  },
+  
+  "notifications": "Notifications",
+  "@notifications": {
+    "description": "Notifications section title"
+  },
+  
+  "budgetAlerts": "Budget Alerts",
+  "@budgetAlerts": {
+    "description": "Budget alerts setting title"
+  },
+  
+  "notifiedApproachingBudget": "Get notified when approaching budget limits",
+  "@notifiedApproachingBudget": {
+    "description": "Budget alerts subtitle"
+  },
+  
+  "dailyReminders": "Daily Reminders",
+  "@dailyReminders": {
+    "description": "Daily reminders setting title"
+  },
+  
+  "remindLogDailyExpenses": "Remind me to log daily expenses",
+  "@remindLogDailyExpenses": {
+    "description": "Daily reminders subtitle"
+  },
+  
+  "about": "About",
+  "@about": {
+    "description": "About section title"
+  },
+  
+  "appVersion": "App Version",
+  "@appVersion": {
+    "description": "App version setting title"
+  },
+  
+  "privacyPolicy": "Privacy Policy",
+  "@privacyPolicy": {
+    "description": "Privacy policy title"
+  },
+  
+  "howWeHandleData": "How we handle your data",
+  "@howWeHandleData": {
+    "description": "Privacy policy subtitle"
+  },
+  
+  "termsOfService": "Terms of Service",
+  "@termsOfService": {
+    "description": "Terms of service title"
+  },
+  
+  "termsAndConditions": "Terms and conditions",
+  "@termsAndConditions": {
+    "description": "Terms of service subtitle"
+  },
+  
+  "signOutAccount": "Sign out of your account",
+  "@signOutAccount": {
+    "description": "Sign out subtitle"
+  },
+  
+  "logout": "Logout",
+  "@logout": {
+    "description": "Logout title"
+  },
+  
+  "sureWantLogout": "Are you sure you want to logout?",
+  "@sureWantLogout": {
+    "description": "Logout confirmation message"
+  },
+  
+  "deleteAll": "Delete All",
+  "@deleteAll": {
+    "description": "Delete all button"
+  },
+  
+  "close": "Close",
+  "@close": {
+    "description": "Close button"
+  },
+  
+  "ok": "OK",
+  "@ok": {
+    "description": "OK button"
+  },
+  
+  "select": "Select",
+  "@select": {
+    "description": "Select button"
+  },
+  
+  "pickColor": "Pick a color",
+  "@pickColor": {
+    "description": "Color picker title"
+  },
+  
+  "createNewCategory": "Create new category",
+  "@createNewCategory": {
+    "description": "Create new category title"
+  },
+  
+  "categoryName": "Category name",
+  "@categoryName": {
+    "description": "Category name field hint"
+  },
+  
+  "pickColorButton": "Pick color",
+  "@pickColorButton": {
+    "description": "Pick color button"
+  },
+  
+  "add": "Add",
+  "@add": {
+    "description": "Add button"
+  },
+  
+  "expense": "Expense",
+  "@expense": {
+    "description": "Expense type"
+  },
+  
+  "income": "Income",
+  "@income": {
+    "description": "Income type"
+  },
+  
+  "exportFeatureComingSoon": "Export feature coming soon!",
+  "@exportFeatureComingSoon": {
+    "description": "Export feature message"
+  },
+  
+  "importFeatureComingSoon": "Import feature coming soon!",
+  "@importFeatureComingSoon": {
+    "description": "Import feature message"
+  },
+  
+  "numberFormattingComingSoon": "Number formatting options coming soon!",
+  "@numberFormattingComingSoon": {
+    "description": "Number formatting message"
+  },
+  
+  "clearDataFeatureComingSoon": "Clear data feature coming soon!",
+  "@clearDataFeatureComingSoon": {
+    "description": "Clear data feature message"
+  },
+  
+  "budgetAlertsEnabled": "Budget alerts enabled",
+  "@budgetAlertsEnabled": {
+    "description": "Budget alerts enabled message"
+  },
+  
+  "budgetAlertsDisabled": "Budget alerts disabled",
+  "@budgetAlertsDisabled": {
+    "description": "Budget alerts disabled message"
+  },
+  
+  "dailyRemindersEnabled": "Daily reminders enabled",
+  "@dailyRemindersEnabled": {
+    "description": "Daily reminders enabled message"
+  },
+  
+  "dailyRemindersDisabled": "Daily reminders disabled",
+  "@dailyRemindersDisabled": {
+    "description": "Daily reminders disabled message"
+  },
+  
+  "loggedOutSuccessfully": "Logged out successfully",
+  "@loggedOutSuccessfully": {
+    "description": "Logout success message"
+  },
+  
+  "logoutFailed": "Logout failed",
+  "@logoutFailed": {
+    "description": "Logout failed message"
+  },
+  
   "addTransaction": "Add Transaction",
   "@addTransaction": {
     "description": "Add transaction page title"

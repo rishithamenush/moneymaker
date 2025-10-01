@@ -27,6 +27,175 @@ class AppLocalizationsJa extends AppLocalizations {
   String get trends => 'トレンド';
 
   @override
+  String get appearance => '外観';
+
+  @override
+  String get customizeCategories => 'Customize Categories';
+
+  @override
+  String get addRenameDeleteCategories =>
+      'Add, rename, or delete your own categories';
+
+  @override
+  String get theme => 'テーマ';
+
+  @override
+  String get darkMode => 'Dark Mode';
+
+  @override
+  String get lightMode => 'Light Mode';
+
+  @override
+  String get systemDefault => 'System Default';
+
+  @override
+  String get light => 'ライト';
+
+  @override
+  String get dark => 'ダーク';
+
+  @override
+  String get system => 'システム';
+
+  @override
+  String get chooseAccentColor => 'Choose Accent Color';
+
+  @override
+  String get chooseCurrency => 'Choose Currency';
+
+  @override
+  String get currencyFormatting => 'Currency & Formatting';
+
+  @override
+  String get numberFormat => 'Number Format';
+
+  @override
+  String get decimalPlacesSeparators => 'Decimal places and separators';
+
+  @override
+  String get dataManagement => 'Data Management';
+
+  @override
+  String get exportTransactionsCSV => 'Export your transactions to CSV';
+
+  @override
+  String get importTransactionsCSV => 'Import transactions from CSV';
+
+  @override
+  String get clearAllData => 'Clear All Data';
+
+  @override
+  String get permanentlyDeleteTransactions =>
+      'Permanently delete all transactions';
+
+  @override
+  String get notifications => 'Notifications';
+
+  @override
+  String get budgetAlerts => 'Budget Alerts';
+
+  @override
+  String get notifiedApproachingBudget =>
+      'Get notified when approaching budget limits';
+
+  @override
+  String get dailyReminders => 'Daily Reminders';
+
+  @override
+  String get remindLogDailyExpenses => 'Remind me to log daily expenses';
+
+  @override
+  String get about => 'について';
+
+  @override
+  String get appVersion => 'App Version';
+
+  @override
+  String get privacyPolicy => 'Privacy Policy';
+
+  @override
+  String get howWeHandleData => 'How we handle your data';
+
+  @override
+  String get termsOfService => 'Terms of Service';
+
+  @override
+  String get termsAndConditions => 'Terms and conditions';
+
+  @override
+  String get signOutAccount => 'Sign out of your account';
+
+  @override
+  String get logout => 'Logout';
+
+  @override
+  String get sureWantLogout => 'Are you sure you want to logout?';
+
+  @override
+  String get deleteAll => 'Delete All';
+
+  @override
+  String get close => 'Close';
+
+  @override
+  String get ok => 'OK';
+
+  @override
+  String get select => 'Select';
+
+  @override
+  String get pickColor => 'Pick a color';
+
+  @override
+  String get createNewCategory => 'Create new category';
+
+  @override
+  String get categoryName => 'Category name';
+
+  @override
+  String get pickColorButton => 'Pick color';
+
+  @override
+  String get add => 'Add';
+
+  @override
+  String get expense => '支出';
+
+  @override
+  String get income => '収入';
+
+  @override
+  String get exportFeatureComingSoon => 'Export feature coming soon!';
+
+  @override
+  String get importFeatureComingSoon => 'Import feature coming soon!';
+
+  @override
+  String get numberFormattingComingSoon =>
+      'Number formatting options coming soon!';
+
+  @override
+  String get clearDataFeatureComingSoon => 'Clear data feature coming soon!';
+
+  @override
+  String get budgetAlertsEnabled => 'Budget alerts enabled';
+
+  @override
+  String get budgetAlertsDisabled => 'Budget alerts disabled';
+
+  @override
+  String get dailyRemindersEnabled => 'Daily reminders enabled';
+
+  @override
+  String get dailyRemindersDisabled => 'Daily reminders disabled';
+
+  @override
+  String get loggedOutSuccessfully => 'Logged out successfully';
+
+  @override
+  String get logoutFailed => 'Logout failed';
+
+  @override
   String get addTransaction => '取引を追加';
 
   @override
@@ -84,12 +253,6 @@ class AppLocalizationsJa extends AppLocalizations {
   String get type => 'タイプ';
 
   @override
-  String get income => '収入';
-
-  @override
-  String get expense => '支出';
-
-  @override
   String get save => '保存';
 
   @override
@@ -117,21 +280,6 @@ class AppLocalizationsJa extends AppLocalizations {
   String get noTransactions => '取引が見つかりません';
 
   @override
-  String get appearance => '外観';
-
-  @override
-  String get theme => 'テーマ';
-
-  @override
-  String get light => 'ライト';
-
-  @override
-  String get dark => 'ダーク';
-
-  @override
-  String get system => 'システム';
-
-  @override
   String get accentColor => 'アクセントカラー';
 
   @override
@@ -145,9 +293,6 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get importData => 'データをインポート';
-
-  @override
-  String get about => 'について';
 
   @override
   String get version => 'バージョン';
@@ -196,9 +341,6 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get success => '成功';
-
-  @override
-  String get ok => 'OK';
 
   @override
   String get yes => 'はい';

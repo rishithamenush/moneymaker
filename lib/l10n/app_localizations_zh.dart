@@ -27,6 +27,175 @@ class AppLocalizationsZh extends AppLocalizations {
   String get trends => '趋势';
 
   @override
+  String get appearance => '外观';
+
+  @override
+  String get customizeCategories => 'Customize Categories';
+
+  @override
+  String get addRenameDeleteCategories =>
+      'Add, rename, or delete your own categories';
+
+  @override
+  String get theme => '主题';
+
+  @override
+  String get darkMode => 'Dark Mode';
+
+  @override
+  String get lightMode => 'Light Mode';
+
+  @override
+  String get systemDefault => 'System Default';
+
+  @override
+  String get light => '浅色';
+
+  @override
+  String get dark => '深色';
+
+  @override
+  String get system => '系统';
+
+  @override
+  String get chooseAccentColor => 'Choose Accent Color';
+
+  @override
+  String get chooseCurrency => 'Choose Currency';
+
+  @override
+  String get currencyFormatting => 'Currency & Formatting';
+
+  @override
+  String get numberFormat => 'Number Format';
+
+  @override
+  String get decimalPlacesSeparators => 'Decimal places and separators';
+
+  @override
+  String get dataManagement => 'Data Management';
+
+  @override
+  String get exportTransactionsCSV => 'Export your transactions to CSV';
+
+  @override
+  String get importTransactionsCSV => 'Import transactions from CSV';
+
+  @override
+  String get clearAllData => 'Clear All Data';
+
+  @override
+  String get permanentlyDeleteTransactions =>
+      'Permanently delete all transactions';
+
+  @override
+  String get notifications => 'Notifications';
+
+  @override
+  String get budgetAlerts => 'Budget Alerts';
+
+  @override
+  String get notifiedApproachingBudget =>
+      'Get notified when approaching budget limits';
+
+  @override
+  String get dailyReminders => 'Daily Reminders';
+
+  @override
+  String get remindLogDailyExpenses => 'Remind me to log daily expenses';
+
+  @override
+  String get about => '关于';
+
+  @override
+  String get appVersion => 'App Version';
+
+  @override
+  String get privacyPolicy => 'Privacy Policy';
+
+  @override
+  String get howWeHandleData => 'How we handle your data';
+
+  @override
+  String get termsOfService => 'Terms of Service';
+
+  @override
+  String get termsAndConditions => 'Terms and conditions';
+
+  @override
+  String get signOutAccount => 'Sign out of your account';
+
+  @override
+  String get logout => 'Logout';
+
+  @override
+  String get sureWantLogout => 'Are you sure you want to logout?';
+
+  @override
+  String get deleteAll => 'Delete All';
+
+  @override
+  String get close => 'Close';
+
+  @override
+  String get ok => '确定';
+
+  @override
+  String get select => 'Select';
+
+  @override
+  String get pickColor => 'Pick a color';
+
+  @override
+  String get createNewCategory => 'Create new category';
+
+  @override
+  String get categoryName => 'Category name';
+
+  @override
+  String get pickColorButton => 'Pick color';
+
+  @override
+  String get add => 'Add';
+
+  @override
+  String get expense => '支出';
+
+  @override
+  String get income => '收入';
+
+  @override
+  String get exportFeatureComingSoon => 'Export feature coming soon!';
+
+  @override
+  String get importFeatureComingSoon => 'Import feature coming soon!';
+
+  @override
+  String get numberFormattingComingSoon =>
+      'Number formatting options coming soon!';
+
+  @override
+  String get clearDataFeatureComingSoon => 'Clear data feature coming soon!';
+
+  @override
+  String get budgetAlertsEnabled => 'Budget alerts enabled';
+
+  @override
+  String get budgetAlertsDisabled => 'Budget alerts disabled';
+
+  @override
+  String get dailyRemindersEnabled => 'Daily reminders enabled';
+
+  @override
+  String get dailyRemindersDisabled => 'Daily reminders disabled';
+
+  @override
+  String get loggedOutSuccessfully => 'Logged out successfully';
+
+  @override
+  String get logoutFailed => 'Logout failed';
+
+  @override
   String get addTransaction => '添加交易';
 
   @override
@@ -84,12 +253,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get type => '类型';
 
   @override
-  String get income => '收入';
-
-  @override
-  String get expense => '支出';
-
-  @override
   String get save => '保存';
 
   @override
@@ -117,21 +280,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get noTransactions => '未找到交易';
 
   @override
-  String get appearance => '外观';
-
-  @override
-  String get theme => '主题';
-
-  @override
-  String get light => '浅色';
-
-  @override
-  String get dark => '深色';
-
-  @override
-  String get system => '系统';
-
-  @override
   String get accentColor => '强调色';
 
   @override
@@ -145,9 +293,6 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get importData => '导入数据';
-
-  @override
-  String get about => '关于';
 
   @override
   String get version => '版本';
@@ -196,9 +341,6 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get success => '成功';
-
-  @override
-  String get ok => '确定';
 
   @override
   String get yes => '是';
