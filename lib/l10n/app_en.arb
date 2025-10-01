@@ -305,6 +305,66 @@
     "description": "Logout failed message"
   },
   
+  "monthlySummary": "Monthly Summary",
+  "@monthlySummary": {
+    "description": "Monthly summary title"
+  },
+  
+  "totalSpent": "Total Spent",
+  "@totalSpent": {
+    "description": "Total spent label"
+  },
+  
+  "remaining": "Remaining",
+  "@remaining": {
+    "description": "Remaining amount label"
+  },
+  
+  "budgetProgress": "Budget Progress",
+  "@budgetProgress": {
+    "description": "Budget progress label"
+  },
+  
+  "budgetExceeded": "You've exceeded your budget by",
+  "@budgetExceeded": {
+    "description": "Budget exceeded message"
+  },
+  
+  "setBudget": "Set Budget",
+  "@setBudget": {
+    "description": "Set budget button text"
+  },
+  
+  "updateBudget": "Update Budget",
+  "@updateBudget": {
+    "description": "Update budget button text"
+  },
+  
+  "setMonthlyBudget": "Set Monthly Budget",
+  "@setMonthlyBudget": {
+    "description": "Set monthly budget dialog title"
+  },
+  
+  "setMonthlyBudgetDescription": "Set your monthly spending limit to track your expenses better.",
+  "@setMonthlyBudgetDescription": {
+    "description": "Set monthly budget dialog description"
+  },
+  
+  "budgetAmount": "Budget Amount",
+  "@budgetAmount": {
+    "description": "Budget amount input label"
+  },
+  
+  "budgetSetSuccessfully": "Budget set successfully!",
+  "@budgetSetSuccessfully": {
+    "description": "Budget set success message"
+  },
+  
+  "pleaseEnterValidAmount": "Please enter a valid amount",
+  "@pleaseEnterValidAmount": {
+    "description": "Invalid amount error message"
+  },
+  
   "addTransaction": "Add Transaction",
   "@addTransaction": {
     "description": "Add transaction page title"

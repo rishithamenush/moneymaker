@@ -197,6 +197,43 @@ class AppLocalizationsDe extends AppLocalizations {
   String get logoutFailed => 'Abmeldung fehlgeschlagen';
 
   @override
+  String get monthlySummary => 'Monatszusammenfassung';
+
+  @override
+  String get totalSpent => 'Total Spent';
+
+  @override
+  String get remaining => 'Verbleibend';
+
+  @override
+  String get budgetProgress => 'Budget Progress';
+
+  @override
+  String get budgetExceeded => 'You\'ve exceeded your budget by';
+
+  @override
+  String get setBudget => 'Set Budget';
+
+  @override
+  String get updateBudget => 'Update Budget';
+
+  @override
+  String get setMonthlyBudget => 'Set Monthly Budget';
+
+  @override
+  String get setMonthlyBudgetDescription =>
+      'Set your monthly spending limit to track your expenses better.';
+
+  @override
+  String get budgetAmount => 'Budget Amount';
+
+  @override
+  String get budgetSetSuccessfully => 'Budget set successfully!';
+
+  @override
+  String get pleaseEnterValidAmount => 'Please enter a valid amount';
+
+  @override
   String get addTransaction => 'Transaktion Hinzufügen';
 
   @override
@@ -398,13 +435,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get spent => 'Ausgegeben';
 
   @override
-  String get remaining => 'Verbleibend';
-
-  @override
   String get overBudget => 'Über Budget';
-
-  @override
-  String get monthlySummary => 'Monatszusammenfassung';
 
   @override
   String get spendingTrends => 'Ausgabentrends';

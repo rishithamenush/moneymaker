@@ -192,6 +192,43 @@ class AppLocalizationsJa extends AppLocalizations {
   String get logoutFailed => 'ログアウトに失敗しました';
 
   @override
+  String get monthlySummary => '月次サマリー';
+
+  @override
+  String get totalSpent => 'Total Spent';
+
+  @override
+  String get remaining => '残り';
+
+  @override
+  String get budgetProgress => 'Budget Progress';
+
+  @override
+  String get budgetExceeded => 'You\'ve exceeded your budget by';
+
+  @override
+  String get setBudget => 'Set Budget';
+
+  @override
+  String get updateBudget => 'Update Budget';
+
+  @override
+  String get setMonthlyBudget => 'Set Monthly Budget';
+
+  @override
+  String get setMonthlyBudgetDescription =>
+      'Set your monthly spending limit to track your expenses better.';
+
+  @override
+  String get budgetAmount => 'Budget Amount';
+
+  @override
+  String get budgetSetSuccessfully => 'Budget set successfully!';
+
+  @override
+  String get pleaseEnterValidAmount => 'Please enter a valid amount';
+
+  @override
   String get addTransaction => '取引を追加';
 
   @override
@@ -390,13 +427,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get spent => '支出済み';
 
   @override
-  String get remaining => '残り';
-
-  @override
   String get overBudget => '予算超過';
-
-  @override
-  String get monthlySummary => '月次サマリー';
 
   @override
   String get spendingTrends => '支出トレンド';

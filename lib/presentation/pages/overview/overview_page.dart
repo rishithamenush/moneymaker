@@ -178,6 +178,7 @@ class _OverviewPageState extends State<OverviewPage> with TickerProviderStateMix
             totalBudget: totalBudget,
             remainingAmount: totalBudget - totalSpent,
             spentPercentage: totalBudget > 0 ? totalSpent / totalBudget : 0.0,
+            selectedMonth: _selectedMonth,
           ),
           
           const SizedBox(height: AppDimensions.paddingL),

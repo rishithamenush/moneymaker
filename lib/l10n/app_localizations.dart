@@ -474,6 +474,78 @@ abstract class AppLocalizations {
   /// **'Logout failed'**
   String get logoutFailed;
 
+  /// Monthly summary title
+  ///
+  /// In en, this message translates to:
+  /// **'Monthly Summary'**
+  String get monthlySummary;
+
+  /// Total spent label
+  ///
+  /// In en, this message translates to:
+  /// **'Total Spent'**
+  String get totalSpent;
+
+  /// Remaining label
+  ///
+  /// In en, this message translates to:
+  /// **'Remaining'**
+  String get remaining;
+
+  /// Budget progress label
+  ///
+  /// In en, this message translates to:
+  /// **'Budget Progress'**
+  String get budgetProgress;
+
+  /// Budget exceeded message
+  ///
+  /// In en, this message translates to:
+  /// **'You\'ve exceeded your budget by'**
+  String get budgetExceeded;
+
+  /// Set budget button text
+  ///
+  /// In en, this message translates to:
+  /// **'Set Budget'**
+  String get setBudget;
+
+  /// Update budget button text
+  ///
+  /// In en, this message translates to:
+  /// **'Update Budget'**
+  String get updateBudget;
+
+  /// Set monthly budget dialog title
+  ///
+  /// In en, this message translates to:
+  /// **'Set Monthly Budget'**
+  String get setMonthlyBudget;
+
+  /// Set monthly budget dialog description
+  ///
+  /// In en, this message translates to:
+  /// **'Set your monthly spending limit to track your expenses better.'**
+  String get setMonthlyBudgetDescription;
+
+  /// Budget amount input label
+  ///
+  /// In en, this message translates to:
+  /// **'Budget Amount'**
+  String get budgetAmount;
+
+  /// Budget set success message
+  ///
+  /// In en, this message translates to:
+  /// **'Budget set successfully!'**
+  String get budgetSetSuccessfully;
+
+  /// Invalid amount error message
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a valid amount'**
+  String get pleaseEnterValidAmount;
+
   /// Add transaction page title
   ///
   /// In en, this message translates to:
@@ -870,23 +942,11 @@ abstract class AppLocalizations {
   /// **'Spent'**
   String get spent;
 
-  /// Remaining label
-  ///
-  /// In en, this message translates to:
-  /// **'Remaining'**
-  String get remaining;
-
   /// Over budget label
   ///
   /// In en, this message translates to:
   /// **'Over Budget'**
   String get overBudget;
-
-  /// Monthly summary title
-  ///
-  /// In en, this message translates to:
-  /// **'Monthly Summary'**
-  String get monthlySummary;
 
   /// Spending trends title
   ///
