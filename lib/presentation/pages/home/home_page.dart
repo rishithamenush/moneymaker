@@ -103,9 +103,9 @@ class _HomePageState extends State<HomePage> {
                         height: 75, // Optimized height to reduce empty space
                         padding: const EdgeInsets.symmetric(horizontal: AppDimensions.paddingS, vertical: 8),
                         decoration: BoxDecoration(
-                          color: ThemeColors.getAccentColor(context, context.read<ThemeProvider>().accentColor).withOpacity(0.1),
+                          color: AppColors.success.withOpacity(0.1),
                           borderRadius: BorderRadius.circular(AppDimensions.radiusM),
-                          border: Border.all(color: ThemeColors.getAccentColor(context, context.read<ThemeProvider>().accentColor).withOpacity(0.3)),
+                          border: Border.all(color: AppColors.success.withOpacity(0.3)),
                         ),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -122,10 +122,10 @@ class _HomePageState extends State<HomePage> {
                             Flexible(
                               child: Text(
                                 Formatters.formatCurrency(totalIncome, currencyCode: context.read<ThemeProvider>().currency),
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 14, // Smaller font to fit more text
                                   fontWeight: FontWeight.bold,
-                                  color: ThemeColors.getAccentColor(context, context.read<ThemeProvider>().accentColor),
+                                  color: AppColors.success,
                                 ),
                                 textAlign: TextAlign.center,
                                 maxLines: 2, // Allow 2 lines for larger numbers
@@ -183,9 +183,9 @@ class _HomePageState extends State<HomePage> {
                         height: 75, // Optimized height to reduce empty space
                         padding: const EdgeInsets.symmetric(horizontal: AppDimensions.paddingS, vertical: 8),
                         decoration: BoxDecoration(
-                          color: (totalIncome - totalSpent >= 0 ? ThemeColors.getAccentColor(context, context.read<ThemeProvider>().accentColor) : AppColors.error).withOpacity(0.1),
+                          color: (totalIncome - totalSpent >= 0 ? Colors.blue : AppColors.error).withOpacity(0.1),
                           borderRadius: BorderRadius.circular(AppDimensions.radiusM),
-                          border: Border.all(color: (totalIncome - totalSpent >= 0 ? ThemeColors.getAccentColor(context, context.read<ThemeProvider>().accentColor) : AppColors.error).withOpacity(0.3)),
+                          border: Border.all(color: (totalIncome - totalSpent >= 0 ? Colors.blue : AppColors.error).withOpacity(0.3)),
                         ),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -205,7 +205,7 @@ class _HomePageState extends State<HomePage> {
                                 style: TextStyle(
                                   fontSize: 14, // Smaller font to fit more text
                                   fontWeight: FontWeight.bold,
-                                  color: totalIncome - totalSpent >= 0 ? ThemeColors.getAccentColor(context, context.read<ThemeProvider>().accentColor) : AppColors.error,
+                                  color: totalIncome - totalSpent >= 0 ? Colors.blue : AppColors.error,
                                 ),
                                 textAlign: TextAlign.center,
                                 maxLines: 2, // Allow 2 lines for larger numbers
