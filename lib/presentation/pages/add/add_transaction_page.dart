@@ -51,12 +51,16 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: ThemeColors.getBackground(context),
-      appBar: AppBar(
-        title: const Text('Add Transaction'),
-        backgroundColor: ThemeColors.getAccentColor(context, context.read<ThemeProvider>().accentColor),
-        foregroundColor: Colors.white,
+    return GestureDetector(
+      onTap: () {
+        FocusScope.of(context).unfocus();
+      },
+      child: Scaffold(
+        backgroundColor: ThemeColors.getBackground(context),
+        appBar: AppBar(
+          title: const Text('Add Transaction'),
+          backgroundColor: ThemeColors.getAccentColor(context, context.read<ThemeProvider>().accentColor),
+          foregroundColor: Colors.white,
         elevation: 0,
       ),
       body: SingleChildScrollView(
@@ -91,6 +95,7 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
             ],
           ),
         ),
+      ),
       ),
     );
   }

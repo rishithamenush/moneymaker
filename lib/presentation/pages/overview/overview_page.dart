@@ -54,8 +54,12 @@ class _OverviewPageState extends State<OverviewPage> with TickerProviderStateMix
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     
-    return Scaffold(
-      backgroundColor: ThemeColors.getBackground(context),
+    return GestureDetector(
+      onTap: () {
+        FocusScope.of(context).unfocus();
+      },
+      child: Scaffold(
+        backgroundColor: ThemeColors.getBackground(context),
       appBar: CustomAppBar(
         title: l10n.overview,
         showBackButton: false,
@@ -158,6 +162,7 @@ class _OverviewPageState extends State<OverviewPage> with TickerProviderStateMix
         },
       ),
       bottomNavigationBar: const CustomBottomNavBar(currentIndex: 0),
+      ),
     );
   }
 

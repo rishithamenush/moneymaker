@@ -50,8 +50,12 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     
-    return Scaffold(
-      backgroundColor: ThemeColors.getBackground(context),
+    return GestureDetector(
+      onTap: () {
+        FocusScope.of(context).unfocus();
+      },
+      child: Scaffold(
+        backgroundColor: ThemeColors.getBackground(context),
       appBar: CustomAppBar(
         title: l10n.thisMonth,
         showBackButton: false,
@@ -240,6 +244,7 @@ class _HomePageState extends State<HomePage> {
         child: const Icon(Icons.add),
       ),
       bottomNavigationBar: const CustomBottomNavBar(currentIndex: 1),
+      ),
     );
   }
 
