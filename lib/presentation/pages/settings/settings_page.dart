@@ -11,6 +11,7 @@ import '../../providers/category_provider.dart';
 import '../../../domain/entities/category.dart';
 import '../../widgets/common/custom_app_bar.dart';
 import '../../widgets/common/settings_popup.dart';
+import '../../widgets/common/modern_popup.dart';
 import '../../navigation/bottom_nav_bar.dart';
 import '../../../app/routes.dart';
 
@@ -658,21 +659,19 @@ class _SettingsPageState extends State<SettingsPage> {
 
   void _exportData() {
     final l10n = AppLocalizations.of(context)!;
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(l10n.exportFeatureComingSoon),
-        backgroundColor: ThemeColors.getAccentColor(context, context.read<ThemeProvider>().accentColor),
-      ),
+    PopupUtils.showInfo(
+      context: context,
+      title: 'Coming Soon',
+      message: l10n.exportFeatureComingSoon,
     );
   }
 
   void _importData() {
     final l10n = AppLocalizations.of(context)!;
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(l10n.importFeatureComingSoon),
-        backgroundColor: ThemeColors.getAccentColor(context, context.read<ThemeProvider>().accentColor),
-      ),
+    PopupUtils.showInfo(
+      context: context,
+      title: 'Coming Soon',
+      message: l10n.importFeatureComingSoon,
     );
   }
 
@@ -700,31 +699,28 @@ class _SettingsPageState extends State<SettingsPage> {
 
   void _clearAllData() {
     final l10n = AppLocalizations.of(context)!;
-    ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(l10n.clearDataFeatureComingSoon),
-          backgroundColor: AppColors.warning,
-        ),
+    PopupUtils.showWarning(
+      context: context,
+      title: 'Coming Soon',
+      message: l10n.clearDataFeatureComingSoon,
     );
   }
 
   void _toggleBudgetAlerts(bool value) {
     final l10n = AppLocalizations.of(context)!;
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(value ? l10n.budgetAlertsEnabled : l10n.budgetAlertsDisabled),
-        backgroundColor: ThemeColors.getAccentColor(context, context.read<ThemeProvider>().accentColor),
-      ),
+    PopupUtils.showInfo(
+      context: context,
+      title: 'Settings Updated',
+      message: value ? l10n.budgetAlertsEnabled : l10n.budgetAlertsDisabled,
     );
   }
 
   void _toggleDailyReminders(bool value) {
     final l10n = AppLocalizations.of(context)!;
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(value ? l10n.dailyRemindersEnabled : l10n.dailyRemindersDisabled),
-        backgroundColor: ThemeColors.getAccentColor(context, context.read<ThemeProvider>().accentColor),
-      ),
+    PopupUtils.showInfo(
+      context: context,
+      title: 'Settings Updated',
+      message: value ? l10n.dailyRemindersEnabled : l10n.dailyRemindersDisabled,
     );
   }
 
@@ -957,20 +953,18 @@ class _SettingsPageState extends State<SettingsPage> {
           (route) => false,
         );
         
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(l10n.loggedOutSuccessfully),
-            backgroundColor: AppColors.success,
-          ),
+        PopupUtils.showSuccess(
+          context: context,
+          title: 'Success',
+          message: l10n.loggedOutSuccessfully,
         );
       }
     } catch (e) {
       if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('${l10n.logoutFailed}: ${e.toString()}'),
-            backgroundColor: AppColors.error,
-          ),
+        PopupUtils.showError(
+          context: context,
+          title: 'Error',
+          message: '${l10n.logoutFailed}: ${e.toString()}',
         );
       }
     }

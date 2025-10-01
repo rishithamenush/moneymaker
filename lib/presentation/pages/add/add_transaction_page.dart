@@ -13,6 +13,7 @@ import '../../providers/expense_provider.dart';
 import '../../providers/income_provider.dart';
 import '../../providers/category_provider.dart';
 import '../../providers/theme_provider.dart';
+import '../../widgets/common/modern_popup.dart';
 
 enum TransactionType { income, expense }
 
@@ -445,14 +446,14 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
 
         await context.read<IncomeProvider>().addIncome(income);
         
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Income added successfully!'),
-            backgroundColor: AppColors.success,
-          ),
+        PopupUtils.showSuccess(
+          context: context,
+          title: 'Success',
+          message: 'Income added successfully!',
+          onPressed: () {
+            Navigator.pop(context);
+          },
         );
-        
-        Navigator.pop(context);
       } else {
         // Save expense
         final expense = Expense(
@@ -468,21 +469,20 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
 
         await context.read<ExpenseProvider>().addExpense(expense);
         
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Expense added successfully!'),
-            backgroundColor: AppColors.success,
-          ),
+        PopupUtils.showSuccess(
+          context: context,
+          title: 'Success',
+          message: 'Expense added successfully!',
+          onPressed: () {
+            Navigator.pop(context);
+          },
         );
-        
-        Navigator.pop(context);
       }
     } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Error: $e'),
-          backgroundColor: AppColors.error,
-        ),
+      PopupUtils.showError(
+        context: context,
+        title: 'Error',
+        message: 'Error: $e',
       );
     } finally {
       setState(() {

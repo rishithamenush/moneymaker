@@ -16,6 +16,7 @@ import '../../widgets/common/custom_app_bar.dart';
 import '../../widgets/common/transaction_list_item.dart';
 import '../../widgets/common/monthly_selector.dart';
 import '../../widgets/common/delete_confirmation_dialog.dart';
+import '../../widgets/common/modern_popup.dart';
 import '../../navigation/bottom_nav_bar.dart';
 import '../../../app/routes.dart';
 
@@ -341,27 +342,24 @@ class _HomePageState extends State<HomePage> {
     try {
       if (transaction is Income) {
         await context.read<IncomeProvider>().deleteIncome(transaction.id);
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Income deleted successfully'),
-            backgroundColor: AppColors.success,
-          ),
+        PopupUtils.showSuccess(
+          context: context,
+          title: 'Success',
+          message: 'Income deleted successfully',
         );
       } else if (transaction is Expense) {
         await context.read<ExpenseProvider>().deleteExpense(transaction.id);
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Expense deleted successfully'),
-            backgroundColor: AppColors.success,
-          ),
+        PopupUtils.showSuccess(
+          context: context,
+          title: 'Success',
+          message: 'Expense deleted successfully',
         );
       }
     } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Failed to delete transaction: $e'),
-          backgroundColor: AppColors.error,
-        ),
+      PopupUtils.showError(
+        context: context,
+        title: 'Error',
+        message: 'Failed to delete transaction: $e',
       );
     }
   }

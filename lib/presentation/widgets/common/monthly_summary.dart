@@ -7,6 +7,7 @@ import '../../../core/utils/theme_colors.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../providers/theme_provider.dart';
 import '../../providers/budget_provider.dart';
+import '../../widgets/common/modern_popup.dart';
 import '../../../domain/entities/budget.dart';
 
 class MonthlySummary extends StatelessWidget {
@@ -446,11 +447,10 @@ class MonthlySummary extends StatelessWidget {
                                   await budgetProvider.updateBudget(updatedBudget);
                                   if (context.mounted) {
                                     Navigator.pop(context);
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(
-                                        content: Text(l10n.budgetUpdatedSuccessfully),
-                                        backgroundColor: accentColor,
-                                      ),
+                                    PopupUtils.showSuccess(
+                                      context: context,
+                                      title: 'Success',
+                                      message: l10n.budgetUpdatedSuccessfully,
                                     );
                                   }
                                 } else {
@@ -469,20 +469,18 @@ class MonthlySummary extends StatelessWidget {
                                   await budgetProvider.createBudget(budget);
                                   if (context.mounted) {
                                     Navigator.pop(context);
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(
-                                        content: Text(l10n.budgetSetSuccessfully),
-                                        backgroundColor: accentColor,
-                                      ),
+                                    PopupUtils.showSuccess(
+                                      context: context,
+                                      title: 'Success',
+                                      message: l10n.budgetSetSuccessfully,
                                     );
                                   }
                                 }
                               } else {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    content: Text(l10n.pleaseEnterValidAmount),
-                                    backgroundColor: AppColors.error,
-                                  ),
+                                PopupUtils.showError(
+                                  context: context,
+                                  title: 'Error',
+                                  message: l10n.pleaseEnterValidAmount,
                                 );
                               }
                             },
