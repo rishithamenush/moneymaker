@@ -188,13 +188,8 @@ class SettingsPopup extends StatelessWidget {
             if (actions != null && actions!.isNotEmpty) ...[
               const SizedBox(height: 24),
               Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: actions!.map((action) {
-                  return Padding(
-                    padding: const EdgeInsets.only(left: 8),
-                    child: action,
-                  );
-                }).toList(),
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: actions!,
               ),
             ],
           ],

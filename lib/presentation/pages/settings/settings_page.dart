@@ -729,24 +729,100 @@ class _SettingsPageState extends State<SettingsPage> {
   }
 
   void _showAboutDialog() {
-    showAboutDialog(
+    final l10n = AppLocalizations.of(context)!;
+    final themeProvider = context.read<ThemeProvider>();
+    final accentColor = ThemeColors.getAccentColor(context, themeProvider.accentColor);
+    
+    SettingsPopup.show(
       context: context,
-      applicationName: 'Money Maker',
-      applicationVersion: '1.0.0',
-      applicationIcon: const Icon(
-        Icons.account_balance_wallet,
-        size: 48,
-        color: AppColors.primary,
+      title: 'Money Maker',
+      subtitle: 'Version 1.0.0',
+      content: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // App Icon
+            Center(
+              child: Container(
+                width: 80,
+                height: 80,
+                margin: const EdgeInsets.only(bottom: 20),
+                decoration: BoxDecoration(
+                  color: accentColor.withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(20),
+                  border: Border.all(
+                    color: accentColor.withOpacity(0.3),
+                    width: 2,
+                  ),
+                ),
+                child: Icon(
+                  Icons.account_balance_wallet,
+                  size: 48,
+                  color: accentColor,
+                ),
+              ),
+            ),
+            
+            // Description
+            Text(
+              'A simple and elegant money management app to help you track your income and expenses.',
+              style: TextStyle(
+                fontSize: 14,
+                color: ThemeColors.getTextSecondary(context),
+                height: 1.5,
+              ),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 24),
+            
+            // Features
+            Text(
+              'Features:',
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                color: ThemeColors.getTextPrimary(context),
+              ),
+            ),
+            const SizedBox(height: 12),
+            _buildFeatureItem('Track income and expenses', Icons.trending_up, accentColor),
+            _buildFeatureItem('Monthly and daily views', Icons.calendar_month, accentColor),
+            _buildFeatureItem('Category management', Icons.category, accentColor),
+            _buildFeatureItem('Budget tracking', Icons.account_balance, accentColor),
+            _buildFeatureItem('Data visualization', Icons.bar_chart, accentColor),
+            _buildFeatureItem('Multi-currency support', Icons.attach_money, accentColor),
+            _buildFeatureItem('Dark/Light theme support', Icons.palette, accentColor),
+          ],
+        ),
       ),
-      children: [
-        const Text('A simple and elegant money management app to help you track your income and expenses.'),
-        const SizedBox(height: 16),
-        const Text('Features:'),
-        const Text('• Track income and expenses'),
-        const Text('• Monthly and daily views'),
-        const Text('• Category management'),
-        const Text('• Dark/Light theme support'),
+      actions: [
+        SettingsPopupActions.confirmButton(
+          context: context,
+          text: l10n.close,
+          onPressed: () => Navigator.pop(context),
+        ),
       ],
+    );
+  }
+
+  Widget _buildFeatureItem(String text, IconData icon, Color accentColor) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 8),
+      child: Row(
+        children: [
+          Icon(icon, size: 16, color: accentColor),
+          const SizedBox(width: 8),
+          Expanded(
+            child: Text(
+              text,
+              style: TextStyle(
+                fontSize: 14,
+                color: ThemeColors.getTextSecondary(context),
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 
@@ -796,19 +872,72 @@ class _SettingsPageState extends State<SettingsPage> {
 
   void _showLogoutDialog() {
     final l10n = AppLocalizations.of(context)!;
+    final themeProvider = context.read<ThemeProvider>();
+    final accentColor = ThemeColors.getAccentColor(context, themeProvider.accentColor);
+    
     SettingsPopup.show(
       context: context,
       title: l10n.logout,
-      content: Text(l10n.sureWantLogout),
+      subtitle: l10n.signOutAccount,
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          // Warning Icon
+          Container(
+            width: 64,
+            height: 64,
+            margin: const EdgeInsets.only(bottom: 20),
+            decoration: BoxDecoration(
+              color: AppColors.error.withOpacity(0.1),
+              borderRadius: BorderRadius.circular(16),
+              border: Border.all(
+                color: AppColors.error.withOpacity(0.2),
+                width: 1,
+              ),
+            ),
+            child: Icon(
+              Icons.logout_rounded,
+              color: AppColors.error,
+              size: 32,
+            ),
+          ),
+          
+          // Confirmation Message
+          Text(
+            l10n.sureWantLogout,
+            style: TextStyle(
+              fontSize: 16,
+              color: ThemeColors.getTextPrimary(context),
+              height: 1.5,
+            ),
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: 8),
+          Text(
+            'You will need to sign in again to access your data.',
+            style: TextStyle(
+              fontSize: 14,
+              color: ThemeColors.getTextSecondary(context),
+              height: 1.4,
+            ),
+            textAlign: TextAlign.center,
+          ),
+        ],
+      ),
       actions: [
-        SettingsPopupActions.cancelButton(context: context),
-        SettingsPopupActions.destructiveButton(
-          context: context,
-          text: l10n.logout,
-          onPressed: () {
-            Navigator.pop(context);
-            _logout();
-          },
+        Expanded(
+          child: SettingsPopupActions.cancelButton(context: context),
+        ),
+        const SizedBox(width: 12),
+        Expanded(
+          child: SettingsPopupActions.destructiveButton(
+            context: context,
+            text: l10n.logout,
+            onPressed: () {
+              Navigator.pop(context);
+              _logout();
+            },
+          ),
         ),
       ],
     );
