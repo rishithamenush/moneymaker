@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../../core/constants/strings.dart';
+import '../../../l10n/app_localizations.dart';
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/dimensions.dart';
 import '../../../core/utils/theme_colors.dart';
@@ -17,6 +17,8 @@ class CustomBottomNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    
     return Container(
       decoration: BoxDecoration(
         color: ThemeColors.getSurface(context),
@@ -37,21 +39,21 @@ class CustomBottomNavBar extends StatelessWidget {
               _buildNavItem(
                 icon: Icons.analytics_outlined,
                 activeIcon: Icons.analytics,
-                label: AppStrings.overview,
+                label: l10n.overview,
                 index: 0,
                 context: context,
               ),
               _buildNavItem(
                 icon: Icons.calendar_month_outlined,
                 activeIcon: Icons.calendar_month,
-                label: AppStrings.thisMonth,
+                label: l10n.thisMonth,
                 index: 1,
                 context: context,
               ),
               _buildNavItem(
                 icon: Icons.settings_outlined,
                 activeIcon: Icons.settings,
-                label: AppStrings.settings,
+                label: l10n.settings,
                 index: 2,
                 context: context,
               ),
