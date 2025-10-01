@@ -5,7 +5,6 @@ import '../../../core/constants/dimensions.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../core/utils/theme_colors.dart';
 import '../../../app/routes.dart';
-import '../../providers/auth_provider.dart';
 import '../../providers/theme_provider.dart';
 
 class SplashPage extends StatefulWidget {
@@ -123,13 +122,8 @@ class _SplashPageState extends State<SplashPage>
   }
 
   void _navigateToHome() {
-    final authProvider = context.read<AuthProvider>();
-    // Check if a user session exists (from Firebase or cached in provider)
-    if (authProvider.isLoggedIn) {
-      Navigator.pushReplacementNamed(context, AppRoutes.home);
-    } else {
-      Navigator.pushReplacementNamed(context, AppRoutes.login);
-    }
+    // Navigate directly to home page without authentication
+    Navigator.pushReplacementNamed(context, AppRoutes.home);
   }
 
   @override

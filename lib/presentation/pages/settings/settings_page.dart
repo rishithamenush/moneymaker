@@ -6,7 +6,6 @@ import '../../../core/constants/dimensions.dart';
 import '../../../core/utils/theme_colors.dart';
 import '../../providers/theme_provider.dart';
 import '../../providers/language_provider.dart';
-import '../../providers/auth_provider.dart';
 import '../../providers/category_provider.dart';
 import '../../../domain/entities/category.dart';
 import '../../widgets/common/custom_app_bar.dart';
@@ -947,21 +946,12 @@ class _SettingsPageState extends State<SettingsPage> {
   void _logout() async {
     final l10n = AppLocalizations.of(context)!;
     try {
-      final authProvider = context.read<AuthProvider>();
-      await authProvider.logout();
-      
+      // Since we're not using authentication, just show a message
       if (mounted) {
-        // Navigate to login screen and clear all previous routes
-        Navigator.pushNamedAndRemoveUntil(
-          context,
-          AppRoutes.login,
-          (route) => false,
-        );
-        
-        PopupUtils.showSuccess(
+        PopupUtils.showInfo(
           context: context,
-          title: 'Success',
-          message: l10n.loggedOutSuccessfully,
+          title: 'Info',
+          message: 'Logout functionality not available in this version',
         );
       }
     } catch (e) {
@@ -969,7 +959,7 @@ class _SettingsPageState extends State<SettingsPage> {
         PopupUtils.showError(
           context: context,
           title: 'Error',
-          message: '${l10n.logoutFailed}: ${e.toString()}',
+          message: '${e.toString()}',
         );
       }
     }

@@ -4,7 +4,6 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import '../l10n/app_localizations.dart';
 import '../presentation/providers/theme_provider.dart';
 import '../presentation/providers/language_provider.dart';
-import '../presentation/providers/auth_provider.dart';
 import '../presentation/providers/expense_provider.dart';
 import '../presentation/providers/budget_provider.dart';
 import '../presentation/providers/category_provider.dart';
@@ -38,7 +37,6 @@ class MoneyMakerApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => AuthProvider()),
               ChangeNotifierProvider(
                 create: (_) => ExpenseProvider(
                   getExpenses: GetExpenses(ExpenseRepositoryImpl()),
