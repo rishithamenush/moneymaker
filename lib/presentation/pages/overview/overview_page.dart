@@ -204,7 +204,7 @@ class _OverviewPageState extends State<OverviewPage> with TickerProviderStateMix
         children: [
           // Pie Chart
           Container(
-            height: 300,
+            height: 380,
             padding: const EdgeInsets.all(AppDimensions.paddingM),
             decoration: BoxDecoration(
               color: ThemeColors.getSurface(context),
