@@ -400,8 +400,12 @@ class _OverviewPageState extends State<OverviewPage> with TickerProviderStateMix
     return Container(
       padding: const EdgeInsets.all(AppDimensions.paddingM),
       decoration: BoxDecoration(
-        color: ThemeColors.getSurface(context),
+        color: color.withOpacity(0.1),
         borderRadius: BorderRadius.circular(AppDimensions.radiusM),
+        border: Border.all(
+          color: color.withOpacity(0.3),
+          width: 1,
+        ),
       ),
       child: Column(
         children: [
@@ -414,7 +418,7 @@ class _OverviewPageState extends State<OverviewPage> with TickerProviderStateMix
           Text(
             value,
             style: TextStyle(
-              color: ThemeColors.getTextPrimary(context),
+              color: color,
               fontSize: 20,
               fontWeight: FontWeight.bold,
             ),
