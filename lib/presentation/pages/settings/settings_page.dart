@@ -428,7 +428,6 @@ class _SettingsPageState extends State<SettingsPage> {
       items: accentColors.entries.map((entry) => ModernDropdownItem(
         value: entry.key,
         label: entry.key,
-        description: '${entry.key} theme',
         icon: Icons.circle,
         customIconWidget: Container(
           width: 16,
