@@ -249,7 +249,10 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               
-              const SizedBox(height: AppDimensions.paddingM),
+              const SizedBox(height: AppDimensions.paddingS),
+              
+              // Add extra vertical padding after the cards
+              const SizedBox(height: AppDimensions.paddingS),
               
               // Transactions List (Expenses + Income)
               Expanded(
@@ -277,7 +280,7 @@ class _HomePageState extends State<HomePage> {
   Widget _buildFilterSection(List<dynamic> categories) {
     return Container(
       height: 50, // Fixed compact height
-      margin: const EdgeInsets.symmetric(horizontal: AppDimensions.paddingM, vertical: 4),
+      margin: const EdgeInsets.symmetric(horizontal: AppDimensions.paddingM, vertical: AppDimensions.paddingS),
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
       decoration: BoxDecoration(
         color: ThemeColors.getSurface(context),
@@ -649,7 +652,7 @@ class _HomePageState extends State<HomePage> {
           children: [
             // Date header
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: AppDimensions.paddingS),
+              padding: const EdgeInsets.symmetric(vertical: AppDimensions.paddingM),
               child: Text(
                 dateKey,
                 style: TextStyle(
