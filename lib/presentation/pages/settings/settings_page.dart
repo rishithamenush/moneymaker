@@ -13,6 +13,7 @@ import '../../../domain/entities/category.dart';
 import '../../widgets/common/custom_app_bar.dart';
 import '../../widgets/common/settings_popup.dart';
 import '../../widgets/common/modern_popup.dart';
+import '../../widgets/common/modern_dropdown.dart';
 import '../../navigation/bottom_nav_bar.dart';
 import '../../../app/routes.dart';
 import '../auth/pin_setup_page.dart';
@@ -63,22 +64,54 @@ class _SettingsPageState extends State<SettingsPage> {
             _buildDivider(),
             Consumer<ThemeProvider>(
               builder: (context, themeProvider, child) {
-                return _buildSettingsItem(
-                  icon: Icons.palette,
-                  title: l10n.accentColor,
-                  subtitle: themeProvider.accentColor,
-                  onTap: () => _showAccentColorDialog(),
+                return ListTile(
+                  leading: Icon(
+                    Icons.palette,
+                    color: ThemeColors.getAccentColor(context, themeProvider.accentColor),
+                    size: 24,
+                  ),
+                  title: Text(
+                    l10n.accentColor,
+                    style: TextStyle(
+                      fontWeight: FontWeight.w600,
+                      color: ThemeColors.getTextPrimary(context),
+                    ),
+                  ),
+                  subtitle: Text(
+                    themeProvider.accentColor,
+                    style: TextStyle(
+                      color: ThemeColors.getTextSecondary(context),
+                      fontSize: 12,
+                    ),
+                  ),
+                  trailing: _buildAccentColorDropdown(themeProvider, l10n),
                 );
               },
             ),
             _buildDivider(),
             Consumer<LanguageProvider>(
               builder: (context, languageProvider, child) {
-                return _buildSettingsItem(
-                  icon: Icons.language,
-                  title: l10n.language,
-                  subtitle: languageProvider.currentLanguageName,
-                  onTap: () => _showLanguageDialog(),
+                return ListTile(
+                  leading: Icon(
+                    Icons.language,
+                    color: ThemeColors.getAccentColor(context, context.read<ThemeProvider>().accentColor),
+                    size: 24,
+                  ),
+                  title: Text(
+                    l10n.language,
+                    style: TextStyle(
+                      fontWeight: FontWeight.w600,
+                      color: ThemeColors.getTextPrimary(context),
+                    ),
+                  ),
+                  subtitle: Text(
+                    languageProvider.currentLanguageName,
+                    style: TextStyle(
+                      color: ThemeColors.getTextSecondary(context),
+                      fontSize: 12,
+                    ),
+                  ),
+                  trailing: _buildLanguageDropdown(languageProvider, l10n),
                 );
               },
             ),
@@ -350,108 +383,72 @@ class _SettingsPageState extends State<SettingsPage> {
   }
 
   Widget _buildThemeDropdown(ThemeProvider themeProvider, AppLocalizations l10n) {
-    final themeOptions = {
-      ThemeMode.light: {'label': l10n.light, 'icon': Icons.light_mode, 'desc': 'Light theme'},
-      ThemeMode.dark: {'label': l10n.dark, 'icon': Icons.dark_mode, 'desc': 'Dark theme'},
-      ThemeMode.system: {'label': l10n.system, 'icon': Icons.brightness_auto, 'desc': 'Follow system'},
-    };
+    return ModernDropdown<ThemeMode>(
+      value: themeProvider.themeMode,
+      width: 120,
+      items: [
+        ModernDropdownItem(
+          value: ThemeMode.light,
+          label: l10n.light,
+          description: 'Light theme',
+          icon: Icons.light_mode,
+        ),
+        ModernDropdownItem(
+          value: ThemeMode.dark,
+          label: l10n.dark,
+          description: 'Dark theme',
+          icon: Icons.dark_mode,
+        ),
+        ModernDropdownItem(
+          value: ThemeMode.system,
+          label: l10n.system,
+          description: 'Follow system',
+          icon: Icons.brightness_auto,
+        ),
+      ],
+      onChanged: (value) => themeProvider.setThemeMode(value),
+    );
+  }
 
-    String displayText = themeOptions[themeProvider.themeMode]?['label'] as String? ?? l10n.system;
+  Widget _buildAccentColorDropdown(ThemeProvider themeProvider, AppLocalizations l10n) {
+    final accentColors = [
+      'Orange', 'Blue', 'Green', 'Purple', 'Red', 'Teal', 'Pink', 'Indigo'
+    ];
+    
+    return ModernDropdown<String>(
+      value: themeProvider.accentColor,
+      width: 120,
+      items: accentColors.map((color) => ModernDropdownItem(
+        value: color,
+        label: color,
+        description: '$color theme',
+        icon: Icons.circle,
+      )).toList(),
+      onChanged: (value) => themeProvider.setAccentColor(value),
+    );
+  }
 
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        return PopupMenuButton<ThemeMode>(
-          initialValue: themeProvider.themeMode,
-          child: Container(
-            height: 38,
-            width: 120,
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-            decoration: BoxDecoration(
-              color: ThemeColors.getSurface(context),
-              border: Border.all(color: ThemeColors.getBorder(context).withOpacity(0.3)),
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: Row(
-              children: [
-                Expanded(
-                  child: Text(
-                    displayText,
-                    style: TextStyle(
-                      fontSize: 13,
-                      color: ThemeColors.getTextPrimary(context),
-                      fontWeight: FontWeight.w500,
-                    ),
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                ),
-                Icon(
-                  Icons.keyboard_arrow_down,
-                  color: ThemeColors.getTextSecondary(context),
-                  size: 20,
-                ),
-              ],
-            ),
-          ),
-          offset: const Offset(0, 42),
-          elevation: 8,
-          color: ThemeColors.getSurface(context),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8),
-          ),
-          constraints: BoxConstraints(
-            maxHeight: 300,
-            minWidth: 120,
-            maxWidth: 120,
-          ),
-          itemBuilder: (context) => themeOptions.entries.map((entry) => PopupMenuItem<ThemeMode>(
-            value: entry.key,
-            child: Row(
-              children: [
-                Container(
-                  width: 24,
-                  height: 24,
-                  decoration: BoxDecoration(
-                    color: ThemeColors.getAccentColor(context, themeProvider.accentColor).withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(6),
-                  ),
-                  child: Icon(
-                    entry.value['icon'] as IconData,
-                    size: 14,
-                    color: ThemeColors.getAccentColor(context, themeProvider.accentColor),
-                  ),
-                ),
-                const SizedBox(width: 10),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(
-                        entry.value['label'] as String,
-                        style: TextStyle(
-                          fontSize: 13,
-                          fontWeight: FontWeight.w500,
-                          color: ThemeColors.getTextPrimary(context),
-                        ),
-                      ),
-                      Text(
-                        entry.value['desc'] as String,
-                        style: TextStyle(
-                          fontSize: 11,
-                          color: ThemeColors.getTextSecondary(context),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          )).toList(),
-          onSelected: (value) {
-            themeProvider.setThemeMode(value);
-          },
-        );
-      },
+  Widget _buildLanguageDropdown(LanguageProvider languageProvider, AppLocalizations l10n) {
+    final languages = [
+      {'code': 'en', 'name': 'English', 'icon': Icons.language},
+      {'code': 'si', 'name': 'සිංහල', 'icon': Icons.language},
+      {'code': 'de', 'name': 'Deutsch', 'icon': Icons.language},
+      {'code': 'es', 'name': 'Español', 'icon': Icons.language},
+      {'code': 'fr', 'name': 'Français', 'icon': Icons.language},
+      {'code': 'ja', 'name': '日本語', 'icon': Icons.language},
+      {'code': 'zh', 'name': '中文', 'icon': Icons.language},
+    ];
+    
+    return ModernDropdown<String>(
+      value: languageProvider.currentLanguageCode,
+      width: 120,
+      items: languages.map((lang) => ModernDropdownItem(
+        value: lang['code'] as String,
+        label: lang['name'] as String,
+        description: lang['code'] as String,
+        icon: lang['icon'] as IconData,
+      )).toList(),
+      onChanged: (value) => languageProvider.setLanguage(value),
     );
   }
 
