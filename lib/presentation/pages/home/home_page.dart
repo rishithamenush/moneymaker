@@ -325,11 +325,21 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _buildCategoryDropdown(List<dynamic> categories) {
-    String displayText = _selectedCategoryFilter == null 
-        ? 'All Categories' 
-        : categories.firstWhere((cat) => cat.id == _selectedCategoryFilter, orElse: () => null)?.name ?? 'All Categories';
+    String displayText = 'All Categories';
+    if (_selectedCategoryFilter != null) {
+      try {
+        final selectedCategory = categories.firstWhere((cat) => cat.id == _selectedCategoryFilter);
+        displayText = selectedCategory.name;
+      } catch (e) {
+        displayText = 'All Categories';
+        // Reset filter if category not found
+        _selectedCategoryFilter = null;
+      }
+    }
     
-    return PopupMenuButton<String?>(
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        return PopupMenuButton<String?>(
       initialValue: _selectedCategoryFilter,
       child: Container(
         height: 38,
@@ -366,9 +376,10 @@ class _HomePageState extends State<HomePage> {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8),
       ),
-      constraints: const BoxConstraints(
+      constraints: BoxConstraints(
         maxHeight: 300,
-        minWidth: 150,
+        minWidth: constraints.maxWidth, // Exact field width
+        maxWidth: constraints.maxWidth, // Exact field width
       ),
       itemBuilder: (context) => [
         PopupMenuItem<String?>(
@@ -431,6 +442,8 @@ class _HomePageState extends State<HomePage> {
         });
       },
     );
+      },
+    );
   }
 
   Widget _buildSortDropdown() {
@@ -444,7 +457,9 @@ class _HomePageState extends State<HomePage> {
 
     String displayText = sortOptions[_selectedSort]?['label'] as String? ?? 'Date (Newest)';
 
-    return PopupMenuButton<SortOption>(
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        return PopupMenuButton<SortOption>(
       initialValue: _selectedSort,
       child: Container(
         height: 38,
@@ -481,9 +496,10 @@ class _HomePageState extends State<HomePage> {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8),
       ),
-      constraints: const BoxConstraints(
+      constraints: BoxConstraints(
         maxHeight: 300,
-        minWidth: 150,
+        minWidth: constraints.maxWidth, // Exact field width
+        maxWidth: constraints.maxWidth, // Exact field width
       ),
       itemBuilder: (context) => sortOptions.entries.map((entry) => PopupMenuItem<SortOption>(
         value: entry.key,
@@ -533,6 +549,8 @@ class _HomePageState extends State<HomePage> {
         setState(() {
           _selectedSort = value;
         });
+      },
+    );
       },
     );
   }
