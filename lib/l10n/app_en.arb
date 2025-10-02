@@ -923,5 +923,105 @@
   "deleteAllData": "Delete All Data",
   "@deleteAllData": {
     "description": "Delete all data button text"
+  },
+
+  "authentication": "Authentication",
+  "@authentication": {
+    "description": "Authentication settings title"
+  },
+
+  "pinProtectionEnabled": "PIN protection enabled",
+  "@pinProtectionEnabled": {
+    "description": "PIN protection enabled status"
+  },
+
+  "pinProtectionDisabled": "PIN protection disabled",
+  "@pinProtectionDisabled": {
+    "description": "PIN protection disabled status"
+  },
+
+  "changePin": "Change PIN",
+  "@changePin": {
+    "description": "Change PIN title"
+  },
+
+  "updateYourPin": "Update your PIN",
+  "@updateYourPin": {
+    "description": "Change PIN subtitle"
+  },
+
+  "setPin": "Set PIN",
+  "@setPin": {
+    "description": "Set PIN title"
+  },
+
+  "enterNewPin": "Enter your new 4-digit PIN",
+  "@enterNewPin": {
+    "description": "Enter new PIN instruction"
+  },
+
+  "confirmNewPin": "Confirm your new PIN",
+  "@confirmNewPin": {
+    "description": "Confirm new PIN instruction"
+  },
+
+  "enterCurrentPin": "Enter your current PIN",
+  "@enterCurrentPin": {
+    "description": "Enter current PIN instruction"
+  },
+
+  "pinsDoNotMatch": "PINs do not match. Please try again.",
+  "@pinsDoNotMatch": {
+    "description": "PIN mismatch error"
+  },
+
+  "pinMustBe4Digits": "PIN must be 4 digits.",
+  "@pinMustBe4Digits": {
+    "description": "PIN length error"
+  },
+
+  "incorrectPin": "Incorrect PIN. Please try again.",
+  "@incorrectPin": {
+    "description": "Incorrect PIN error"
+  },
+
+  "pinAuthenticationEnabled": "PIN authentication has been enabled",
+  "@pinAuthenticationEnabled": {
+    "description": "PIN enabled success message"
+  },
+
+  "pinAuthenticationDisabled": "PIN authentication has been disabled",
+  "@pinAuthenticationDisabled": {
+    "description": "PIN disabled success message"
+  },
+
+  "pinChangedSuccessfully": "PIN has been changed successfully",
+  "@pinChangedSuccessfully": {
+    "description": "PIN changed success message"
+  },
+
+  "disablePinAuth": "Disable PIN Authentication",
+  "@disablePinAuth": {
+    "description": "Disable PIN auth dialog title"
+  },
+
+  "disablePinAuthMessage": "Are you sure you want to disable PIN authentication? You will need to enter your current PIN to confirm.",
+  "@disablePinAuthMessage": {
+    "description": "Disable PIN auth confirmation message"
+  },
+
+  "enterPin": "Enter PIN",
+  "@enterPin": {
+    "description": "Enter PIN button text"
+  },
+
+  "tooManyAttempts": "Too Many Attempts",
+  "@tooManyAttempts": {
+    "description": "Too many PIN attempts title"
+  },
+
+  "tooManyAttemptsMessage": "You have entered the wrong PIN too many times. Please restart the app and try again.",
+  "@tooManyAttemptsMessage": {
+    "description": "Too many PIN attempts message"
   }
 }

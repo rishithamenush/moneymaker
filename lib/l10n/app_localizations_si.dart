@@ -542,4 +542,66 @@ class AppLocalizationsSi extends AppLocalizations {
 
   @override
   String get deleteAllData => 'සියලු දත්ත මකන්න';
+
+  @override
+  String get authentication => 'සත්‍යාපනය';
+
+  @override
+  String get pinProtectionEnabled => 'PIN ආරක්ෂාව සක්‍රියයි';
+
+  @override
+  String get pinProtectionDisabled => 'PIN ආරක්ෂාව අක්‍රියයි';
+
+  @override
+  String get changePin => 'PIN වෙනස් කරන්න';
+
+  @override
+  String get updateYourPin => 'ඔබේ PIN යාවත්කාලීන කරන්න';
+
+  @override
+  String get setPin => 'PIN සකසන්න';
+
+  @override
+  String get enterNewPin => 'ඔබේ නව 4-ඉලක්කම් PIN ඇතුළත් කරන්න';
+
+  @override
+  String get confirmNewPin => 'ඔබේ නව PIN තහවුරු කරන්න';
+
+  @override
+  String get enterCurrentPin => 'ඔබේ වර්තමාන PIN ඇතුළත් කරන්න';
+
+  @override
+  String get pinsDoNotMatch => 'PIN ගැලපෙන්නේ නැත. කරුණාකර නැවත උත්සාහ කරන්න.';
+
+  @override
+  String get pinMustBe4Digits => 'PIN ඉලක්කම් 4 ක් විය යුතුය.';
+
+  @override
+  String get incorrectPin => 'වැරදි PIN. කරුණාකර නැවත උත්සාහ කරන්න.';
+
+  @override
+  String get pinAuthenticationEnabled => 'PIN සත්‍යාපනය සක්‍රිය කර ඇත';
+
+  @override
+  String get pinAuthenticationDisabled => 'PIN සත්‍යාපනය අක්‍රිය කර ඇත';
+
+  @override
+  String get pinChangedSuccessfully => 'PIN සාර්ථකව වෙනස් කර ඇත';
+
+  @override
+  String get disablePinAuth => 'PIN සත්‍යාපනය අක්‍රිය කරන්න';
+
+  @override
+  String get disablePinAuthMessage =>
+      'ඔබට PIN සත්‍යාපනය අක්‍රිය කිරීමට අවශ්‍ය බවට විශ්වාසද? තහවුරු කිරීමට ඔබේ වර්තමාන PIN ඇතුළත් කළ යුතුය.';
+
+  @override
+  String get enterPin => 'PIN ඇතුළත් කරන්න';
+
+  @override
+  String get tooManyAttempts => 'ඕනෑවට වඩා උත්සාහයන්';
+
+  @override
+  String get tooManyAttemptsMessage =>
+      'ඔබ වැරදි PIN ඕනෑවට වඩා වාර ගණනක් ඇතුළත් කර ඇත. කරුණාකර යෙදුම නැවත ආරම්භ කර නැවත උත්සාහ කරන්න.';
 }

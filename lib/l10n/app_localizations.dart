@@ -1151,6 +1151,126 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Delete All Data'**
   String get deleteAllData;
+
+  /// Authentication settings title
+  ///
+  /// In en, this message translates to:
+  /// **'Authentication'**
+  String get authentication;
+
+  /// PIN protection enabled status
+  ///
+  /// In en, this message translates to:
+  /// **'PIN protection enabled'**
+  String get pinProtectionEnabled;
+
+  /// PIN protection disabled status
+  ///
+  /// In en, this message translates to:
+  /// **'PIN protection disabled'**
+  String get pinProtectionDisabled;
+
+  /// Change PIN title
+  ///
+  /// In en, this message translates to:
+  /// **'Change PIN'**
+  String get changePin;
+
+  /// Change PIN subtitle
+  ///
+  /// In en, this message translates to:
+  /// **'Update your PIN'**
+  String get updateYourPin;
+
+  /// Set PIN title
+  ///
+  /// In en, this message translates to:
+  /// **'Set PIN'**
+  String get setPin;
+
+  /// Enter new PIN instruction
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your new 4-digit PIN'**
+  String get enterNewPin;
+
+  /// Confirm new PIN instruction
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm your new PIN'**
+  String get confirmNewPin;
+
+  /// Enter current PIN instruction
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your current PIN'**
+  String get enterCurrentPin;
+
+  /// PIN mismatch error
+  ///
+  /// In en, this message translates to:
+  /// **'PINs do not match. Please try again.'**
+  String get pinsDoNotMatch;
+
+  /// PIN length error
+  ///
+  /// In en, this message translates to:
+  /// **'PIN must be 4 digits.'**
+  String get pinMustBe4Digits;
+
+  /// Incorrect PIN error
+  ///
+  /// In en, this message translates to:
+  /// **'Incorrect PIN. Please try again.'**
+  String get incorrectPin;
+
+  /// PIN enabled success message
+  ///
+  /// In en, this message translates to:
+  /// **'PIN authentication has been enabled'**
+  String get pinAuthenticationEnabled;
+
+  /// PIN disabled success message
+  ///
+  /// In en, this message translates to:
+  /// **'PIN authentication has been disabled'**
+  String get pinAuthenticationDisabled;
+
+  /// PIN changed success message
+  ///
+  /// In en, this message translates to:
+  /// **'PIN has been changed successfully'**
+  String get pinChangedSuccessfully;
+
+  /// Disable PIN auth dialog title
+  ///
+  /// In en, this message translates to:
+  /// **'Disable PIN Authentication'**
+  String get disablePinAuth;
+
+  /// Disable PIN auth confirmation message
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to disable PIN authentication? You will need to enter your current PIN to confirm.'**
+  String get disablePinAuthMessage;
+
+  /// Enter PIN button text
+  ///
+  /// In en, this message translates to:
+  /// **'Enter PIN'**
+  String get enterPin;
+
+  /// Too many PIN attempts title
+  ///
+  /// In en, this message translates to:
+  /// **'Too Many Attempts'**
+  String get tooManyAttempts;
+
+  /// Too many PIN attempts message
+  ///
+  /// In en, this message translates to:
+  /// **'You have entered the wrong PIN too many times. Please restart the app and try again.'**
+  String get tooManyAttemptsMessage;
 }
 
 class _AppLocalizationsDelegate

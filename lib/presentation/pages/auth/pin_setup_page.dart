@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../../l10n/app_localizations.dart';
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/dimensions.dart';
 import '../../../core/utils/theme_colors.dart';
@@ -31,7 +32,9 @@ class _PinSetupPageState extends State<PinSetupPage> {
   
   String _pin = '';
   String _confirmPin = '';
+  String _currentPin = '';
   bool _isConfirming = false;
+  bool _isVerifyingCurrent = false;
   bool _isLoading = false;
 
   @override
@@ -55,7 +58,9 @@ class _PinSetupPageState extends State<PinSetupPage> {
     if (digit.isEmpty) return;
     
     setState(() {
-      if (!_isConfirming) {
+      if (widget.isChangingPin && !_isVerifyingCurrent) {
+        _currentPin += digit;
+      } else if (!_isConfirming) {
         _pin += digit;
       } else {
         _confirmPin += digit;
@@ -66,7 +71,9 @@ class _PinSetupPageState extends State<PinSetupPage> {
       _focusNodes[index + 1].requestFocus();
     } else {
       _focusNodes[index].unfocus();
-      if (!_isConfirming) {
+      if (widget.isChangingPin && !_isVerifyingCurrent) {
+        _verifyCurrentPin();
+      } else if (!_isConfirming) {
         _startConfirming();
       } else {
         _completeSetup();
@@ -80,7 +87,11 @@ class _PinSetupPageState extends State<PinSetupPage> {
     }
     
     setState(() {
-      if (!_isConfirming) {
+      if (widget.isChangingPin && !_isVerifyingCurrent) {
+        if (_currentPin.isNotEmpty) {
+          _currentPin = _currentPin.substring(0, _currentPin.length - 1);
+        }
+      } else if (!_isConfirming) {
         if (_pin.isNotEmpty) {
           _pin = _pin.substring(0, _pin.length - 1);
         }
@@ -105,15 +116,39 @@ class _PinSetupPageState extends State<PinSetupPage> {
     _focusNodes[0].requestFocus();
   }
 
+  void _verifyCurrentPin() async {
+    final l10n = AppLocalizations.of(context)!;
+    final pinProvider = context.read<PinAuthProvider>();
+    
+    if (!pinProvider.verifyPin(_currentPin)) {
+      _showError(l10n.incorrectPin);
+      _resetPin();
+      return;
+    }
+    
+    // Current PIN is correct, now ask for new PIN
+    setState(() {
+      _isVerifyingCurrent = true;
+    });
+    
+    // Clear controllers and focus first one
+    for (var controller in _controllers) {
+      controller.clear();
+    }
+    _focusNodes[0].requestFocus();
+  }
+
   void _completeSetup() async {
+    final l10n = AppLocalizations.of(context)!;
+    
     if (_pin != _confirmPin) {
-      _showError('PINs do not match. Please try again.');
+      _showError(l10n.pinsDoNotMatch);
       _resetPin();
       return;
     }
 
     if (_pin.length != 4) {
-      _showError('PIN must be 4 digits.');
+      _showError(l10n.pinMustBe4Digits);
       _resetPin();
       return;
     }
@@ -123,7 +158,13 @@ class _PinSetupPageState extends State<PinSetupPage> {
     });
 
     final pinProvider = context.read<PinAuthProvider>();
-    final success = await pinProvider.enablePinAuth(_pin);
+    bool success;
+    
+    if (widget.isChangingPin) {
+      success = await pinProvider.changePin(_currentPin, _pin);
+    } else {
+      success = await pinProvider.enablePinAuth(_pin);
+    }
 
     setState(() {
       _isLoading = false;
@@ -132,6 +173,7 @@ class _PinSetupPageState extends State<PinSetupPage> {
     if (success && mounted) {
       Navigator.pop(context, true);
     } else {
+      final l10n = AppLocalizations.of(context)!;
       _showError('Failed to set PIN. Please try again.');
       _resetPin();
     }
@@ -141,7 +183,9 @@ class _PinSetupPageState extends State<PinSetupPage> {
     setState(() {
       _pin = '';
       _confirmPin = '';
+      _currentPin = '';
       _isConfirming = false;
+      _isVerifyingCurrent = widget.isChangingPin ? false : true;
     });
     
     for (var controller in _controllers) {
@@ -170,7 +214,7 @@ class _PinSetupPageState extends State<PinSetupPage> {
     return Scaffold(
       backgroundColor: ThemeColors.getBackground(context),
       appBar: CustomAppBar(
-        title: widget.isChangingPin ? 'Change PIN' : 'Set PIN',
+        title: widget.isChangingPin ? AppLocalizations.of(context)!.changePin : AppLocalizations.of(context)!.setPin,
         showBackButton: true,
       ),
       body: SafeArea(

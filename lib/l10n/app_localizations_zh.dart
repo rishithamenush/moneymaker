@@ -533,4 +533,67 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get deleteAllData => '删除所有数据';
+
+  @override
+  String get authentication => 'Authentication';
+
+  @override
+  String get pinProtectionEnabled => 'PIN protection enabled';
+
+  @override
+  String get pinProtectionDisabled => 'PIN protection disabled';
+
+  @override
+  String get changePin => 'Change PIN';
+
+  @override
+  String get updateYourPin => 'Update your PIN';
+
+  @override
+  String get setPin => 'Set PIN';
+
+  @override
+  String get enterNewPin => 'Enter your new 4-digit PIN';
+
+  @override
+  String get confirmNewPin => 'Confirm your new PIN';
+
+  @override
+  String get enterCurrentPin => 'Enter your current PIN';
+
+  @override
+  String get pinsDoNotMatch => 'PINs do not match. Please try again.';
+
+  @override
+  String get pinMustBe4Digits => 'PIN must be 4 digits.';
+
+  @override
+  String get incorrectPin => 'Incorrect PIN. Please try again.';
+
+  @override
+  String get pinAuthenticationEnabled => 'PIN authentication has been enabled';
+
+  @override
+  String get pinAuthenticationDisabled =>
+      'PIN authentication has been disabled';
+
+  @override
+  String get pinChangedSuccessfully => 'PIN has been changed successfully';
+
+  @override
+  String get disablePinAuth => 'Disable PIN Authentication';
+
+  @override
+  String get disablePinAuthMessage =>
+      'Are you sure you want to disable PIN authentication? You will need to enter your current PIN to confirm.';
+
+  @override
+  String get enterPin => 'Enter PIN';
+
+  @override
+  String get tooManyAttempts => 'Too Many Attempts';
+
+  @override
+  String get tooManyAttemptsMessage =>
+      'You have entered the wrong PIN too many times. Please restart the app and try again.';
 }

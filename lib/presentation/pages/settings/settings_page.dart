@@ -199,10 +199,10 @@ class _SettingsPageState extends State<SettingsPage> {
               builder: (context, pinProvider, child) {
                 return _buildSettingsItem(
                   icon: Icons.security,
-                  title: 'Authentication',
+                  title: l10n.authentication,
                   subtitle: pinProvider.isEnabled 
-                    ? 'PIN protection enabled' 
-                    : 'PIN protection disabled',
+                    ? l10n.pinProtectionEnabled 
+                    : l10n.pinProtectionDisabled,
                   trailing: Switch(
                     value: pinProvider.isEnabled,
                     onChanged: (value) => _togglePinAuth(value),
@@ -219,8 +219,8 @@ class _SettingsPageState extends State<SettingsPage> {
                     _buildDivider(),
                     _buildSettingsItem(
                       icon: Icons.lock_reset,
-                      title: 'Change PIN',
-                      subtitle: 'Update your PIN',
+                      title: l10n.changePin,
+                      subtitle: l10n.updateYourPin,
                       onTap: () => _changePin(),
                     ),
                   ],
@@ -988,10 +988,11 @@ class _SettingsPageState extends State<SettingsPage> {
       );
       
       if (result == true && mounted) {
+        final l10n = AppLocalizations.of(context)!;
         PopupUtils.showSuccess(
           context: context,
-          title: 'Success',
-          message: 'PIN authentication has been enabled',
+          title: l10n.success,
+          message: l10n.pinAuthenticationEnabled,
         );
       }
     } else {
@@ -1001,13 +1002,14 @@ class _SettingsPageState extends State<SettingsPage> {
   }
 
   void _showDisablePinDialog() {
+    final l10n = AppLocalizations.of(context)!;
     final themeProvider = context.read<ThemeProvider>();
     final accentColor = ThemeColors.getAccentColor(context, themeProvider.accentColor);
     
     SettingsPopup.show(
       context: context,
-      title: 'Disable PIN Authentication',
-      subtitle: 'Enter your PIN to disable authentication',
+      title: l10n.disablePinAuth,
+      subtitle: l10n.disablePinAuthMessage,
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -1057,7 +1059,7 @@ class _SettingsPageState extends State<SettingsPage> {
         Expanded(
           child: SettingsPopupActions.cancelButton(
             context: context,
-            text: 'Cancel',
+            text: l10n.cancel,
             onPressed: () => Navigator.pop(context),
           ),
         ),
@@ -1065,7 +1067,7 @@ class _SettingsPageState extends State<SettingsPage> {
         Expanded(
           child: SettingsPopupActions.confirmButton(
             context: context,
-            text: 'Enter PIN',
+            text: l10n.enterPin,
             onPressed: () {
               Navigator.pop(context);
               _showPinVerificationForDisable();
@@ -1086,17 +1088,19 @@ class _SettingsPageState extends State<SettingsPage> {
           final success = await pinProvider.disablePinAuth(pin);
           
           if (success && mounted) {
+            final l10n = AppLocalizations.of(context)!;
             Navigator.pop(context);
             PopupUtils.showSuccess(
               context: context,
-              title: 'Success',
-              message: 'PIN authentication has been disabled',
+              title: l10n.success,
+              message: l10n.pinAuthenticationDisabled,
             );
           } else {
+            final l10n = AppLocalizations.of(context)!;
             PopupUtils.showError(
               context: context,
-              title: 'Error',
-              message: 'Incorrect PIN. Please try again.',
+              title: l10n.error,
+              message: l10n.incorrectPin,
             );
           }
         },
@@ -1114,10 +1118,11 @@ class _SettingsPageState extends State<SettingsPage> {
     );
     
     if (result == true && mounted) {
+      final l10n = AppLocalizations.of(context)!;
       PopupUtils.showSuccess(
         context: context,
-        title: 'Success',
-        message: 'PIN has been changed successfully',
+        title: l10n.success,
+        message: l10n.pinChangedSuccessfully,
       );
     }
   }

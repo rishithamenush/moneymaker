@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../../l10n/app_localizations.dart';
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/dimensions.dart';
 import '../../../core/utils/theme_colors.dart';
@@ -101,7 +102,7 @@ class _PinVerificationPageState extends State<PinVerificationPage> {
       // PIN is incorrect
       setState(() {
         _attempts++;
-        _errorMessage = 'Incorrect PIN. Please try again.';
+        _errorMessage = AppLocalizations.of(context)!.incorrectPin;
         _pin = '';
       });
       
@@ -119,14 +120,13 @@ class _PinVerificationPageState extends State<PinVerificationPage> {
   }
 
   void _showMaxAttemptsDialog() {
+    final l10n = AppLocalizations.of(context)!;
     showDialog(
       context: context,
       barrierDismissible: false,
       builder: (context) => AlertDialog(
-        title: const Text('Too Many Attempts'),
-        content: const Text(
-          'You have entered the wrong PIN too many times. Please restart the app and try again.',
-        ),
+        title: Text(l10n.tooManyAttempts),
+        content: Text(l10n.tooManyAttemptsMessage),
         actions: [
           TextButton(
             onPressed: () {
@@ -138,7 +138,7 @@ class _PinVerificationPageState extends State<PinVerificationPage> {
                 (route) => false,
               );
             },
-            child: const Text('OK'),
+            child: Text(l10n.ok),
           ),
         ],
       ),
