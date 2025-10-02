@@ -503,4 +503,32 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get sinhala => 'සිංහල';
+
+  @override
+  String get appDescription =>
+      'Una aplicación simple y elegante de gestión de dinero para ayudarte a rastrear tus ingresos y gastos.';
+
+  @override
+  String get features => 'Características:';
+
+  @override
+  String get trackIncomeExpenses => 'Rastrear ingresos y gastos';
+
+  @override
+  String get monthlyDailyViews => 'Vistas mensuales y diarias';
+
+  @override
+  String get categoryManagement => 'Gestión de categorías';
+
+  @override
+  String get budgetTracking => 'Seguimiento de presupuesto';
+
+  @override
+  String get dataVisualization => 'Visualización de datos';
+
+  @override
+  String get multiCurrencySupport => 'Soporte multi-moneda';
+
+  @override
+  String get darkLightThemeSupport => 'Soporte de tema oscuro/claro';
 }

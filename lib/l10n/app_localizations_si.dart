@@ -499,4 +499,32 @@ class AppLocalizationsSi extends AppLocalizations {
 
   @override
   String get sinhala => 'සිංහල';
+
+  @override
+  String get appDescription =>
+      'ඔබේ ආදායම් සහ වියදම් ලුහුබැඳීමට උපකාර කරන සරල හා අලංකාර මුදල් කළමනාකරණ යෙදුමකි.';
+
+  @override
+  String get features => 'විශේෂාංග:';
+
+  @override
+  String get trackIncomeExpenses => 'ආදායම් සහ වියදම් ලුහුබැඳීම';
+
+  @override
+  String get monthlyDailyViews => 'මාසික සහ දෛනික දර්ශන';
+
+  @override
+  String get categoryManagement => 'ප්‍රවර්ග කළමනාකරණය';
+
+  @override
+  String get budgetTracking => 'අයවැය ලුහුබැඳීම';
+
+  @override
+  String get dataVisualization => 'දත්ත දෘශ්‍යකරණය';
+
+  @override
+  String get multiCurrencySupport => 'බහු මුදල් ඒකක සහාය';
+
+  @override
+  String get darkLightThemeSupport => 'අඳුරු/ලා තේමා සහාය';
 }

@@ -492,4 +492,31 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get sinhala => 'සිංහල';
+
+  @override
+  String get appDescription => '一个简单优雅的资金管理应用，帮助您跟踪收入和支出。';
+
+  @override
+  String get features => '功能:';
+
+  @override
+  String get trackIncomeExpenses => '跟踪收入和支出';
+
+  @override
+  String get monthlyDailyViews => '月度和日度视图';
+
+  @override
+  String get categoryManagement => '类别管理';
+
+  @override
+  String get budgetTracking => '预算跟踪';
+
+  @override
+  String get dataVisualization => '数据可视化';
+
+  @override
+  String get multiCurrencySupport => '多货币支持';
+
+  @override
+  String get darkLightThemeSupport => '深色/浅色主题支持';
 }

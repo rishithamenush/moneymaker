@@ -1073,6 +1073,60 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'සිංහල'**
   String get sinhala;
+
+  /// App description in about dialog
+  ///
+  /// In en, this message translates to:
+  /// **'A simple and elegant money management app to help you track your income and expenses.'**
+  String get appDescription;
+
+  /// Features section title in about dialog
+  ///
+  /// In en, this message translates to:
+  /// **'Features:'**
+  String get features;
+
+  /// Feature: Track income and expenses
+  ///
+  /// In en, this message translates to:
+  /// **'Track income and expenses'**
+  String get trackIncomeExpenses;
+
+  /// Feature: Monthly and daily views
+  ///
+  /// In en, this message translates to:
+  /// **'Monthly and daily views'**
+  String get monthlyDailyViews;
+
+  /// Feature: Category management
+  ///
+  /// In en, this message translates to:
+  /// **'Category management'**
+  String get categoryManagement;
+
+  /// Feature: Budget tracking
+  ///
+  /// In en, this message translates to:
+  /// **'Budget tracking'**
+  String get budgetTracking;
+
+  /// Feature: Data visualization
+  ///
+  /// In en, this message translates to:
+  /// **'Data visualization'**
+  String get dataVisualization;
+
+  /// Feature: Multi-currency support
+  ///
+  /// In en, this message translates to:
+  /// **'Multi-currency support'**
+  String get multiCurrencySupport;
+
+  /// Feature: Dark/Light theme support
+  ///
+  /// In en, this message translates to:
+  /// **'Dark/Light theme support'**
+  String get darkLightThemeSupport;
 }
 
 class _AppLocalizationsDelegate

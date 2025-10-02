@@ -492,4 +492,31 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get sinhala => 'සිංහල';
+
+  @override
+  String get appDescription => '収入と支出を追跡するのに役立つシンプルでエレガントな家計管理アプリです。';
+
+  @override
+  String get features => '機能:';
+
+  @override
+  String get trackIncomeExpenses => '収入と支出の追跡';
+
+  @override
+  String get monthlyDailyViews => '月次・日次ビュー';
+
+  @override
+  String get categoryManagement => 'カテゴリ管理';
+
+  @override
+  String get budgetTracking => '予算追跡';
+
+  @override
+  String get dataVisualization => 'データ可視化';
+
+  @override
+  String get multiCurrencySupport => '多通貨サポート';
+
+  @override
+  String get darkLightThemeSupport => 'ダーク/ライトテーマサポート';
 }

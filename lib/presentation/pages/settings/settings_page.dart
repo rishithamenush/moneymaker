@@ -793,7 +793,7 @@ class _SettingsPageState extends State<SettingsPage> {
             
             // Description
             Text(
-              'A simple and elegant money management app to help you track your income and expenses.',
+              l10n.appDescription,
               style: TextStyle(
                 fontSize: 14,
                 color: ThemeColors.getTextSecondary(context),
@@ -805,7 +805,7 @@ class _SettingsPageState extends State<SettingsPage> {
             
             // Features
             Text(
-              'Features:',
+              l10n.features,
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
@@ -813,13 +813,13 @@ class _SettingsPageState extends State<SettingsPage> {
               ),
             ),
             const SizedBox(height: 12),
-            _buildFeatureItem('Track income and expenses', Icons.trending_up, accentColor),
-            _buildFeatureItem('Monthly and daily views', Icons.calendar_month, accentColor),
-            _buildFeatureItem('Category management', Icons.category, accentColor),
-            _buildFeatureItem('Budget tracking', Icons.account_balance, accentColor),
-            _buildFeatureItem('Data visualization', Icons.bar_chart, accentColor),
-            _buildFeatureItem('Multi-currency support', Icons.attach_money, accentColor),
-            _buildFeatureItem('Dark/Light theme support', Icons.palette, accentColor),
+            _buildFeatureItem(l10n.trackIncomeExpenses, Icons.trending_up, accentColor),
+            _buildFeatureItem(l10n.monthlyDailyViews, Icons.calendar_month, accentColor),
+            _buildFeatureItem(l10n.categoryManagement, Icons.category, accentColor),
+            _buildFeatureItem(l10n.budgetTracking, Icons.account_balance, accentColor),
+            _buildFeatureItem(l10n.dataVisualization, Icons.bar_chart, accentColor),
+            _buildFeatureItem(l10n.multiCurrencySupport, Icons.attach_money, accentColor),
+            _buildFeatureItem(l10n.darkLightThemeSupport, Icons.palette, accentColor),
           ],
         ),
       ),

@@ -130,7 +130,7 @@
   "logout": "ඉවත් වන්න",
   "sureWantLogout": "ඔබට ඉවත් වීමට අවශ්‍ය බවට විශ්වාසද?",
   "deleteAll": "සියල්ල මකන්න",
-  "close": "වසන්න",
+  "close": "ඔබන්න",
   "select": "තෝරන්න",
   "pickColor": "වර්ණයක් තෝරන්න",
   "createNewCategory": "නව ප්‍රවර්ගයක් සාදන්න",
@@ -146,5 +146,14 @@
   "dailyRemindersEnabled": "දෛනික මතක් කිරීම් සක්‍රියයි",
   "dailyRemindersDisabled": "දෛනික මතක් කිරීම් අක්‍රියයි",
   "loggedOutSuccessfully": "සාර්ථකව ඉවත් විය",
-  "logoutFailed": "ඉවත් වීම අසාර්ථකයි"
+  "logoutFailed": "ඉවත් වීම අසාර්ථකයි",
+  "appDescription": "ඔබේ ආදායම් සහ වියදම් ලුහුබැඳීමට උපකාර කරන සරල හා අලංකාර මුදල් කළමනාකරණ යෙදුමකි.",
+  "features": "විශේෂාංග:",
+  "trackIncomeExpenses": "ආදායම් සහ වියදම් ලුහුබැඳීම",
+  "monthlyDailyViews": "මාසික සහ දෛනික දර්ශන",
+  "categoryManagement": "ප්‍රවර්ග කළමනාකරණය",
+  "budgetTracking": "අයවැය ලුහුබැඳීම",
+  "dataVisualization": "දත්ත දෘශ්‍යකරණය",
+  "multiCurrencySupport": "බහු මුදල් ඒකක සහාය",
+  "darkLightThemeSupport": "අඳුරු/ලා තේමා සහාය"
 }

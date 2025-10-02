@@ -146,5 +146,14 @@
   "dailyRemindersEnabled": "每日提醒已启用",
   "dailyRemindersDisabled": "每日提醒已禁用",
   "loggedOutSuccessfully": "成功退出登录",
-  "logoutFailed": "退出登录失败"
+  "logoutFailed": "退出登录失败",
+  "appDescription": "一个简单优雅的资金管理应用，帮助您跟踪收入和支出。",
+  "features": "功能:",
+  "trackIncomeExpenses": "跟踪收入和支出",
+  "monthlyDailyViews": "月度和日度视图",
+  "categoryManagement": "类别管理",
+  "budgetTracking": "预算跟踪",
+  "dataVisualization": "数据可视化",
+  "multiCurrencySupport": "多货币支持",
+  "darkLightThemeSupport": "深色/浅色主题支持"
 }

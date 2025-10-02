@@ -858,5 +858,50 @@
   "sinhala": "සිංහල",
   "@sinhala": {
     "description": "Sinhala language option"
+  },
+
+  "appDescription": "A simple and elegant money management app to help you track your income and expenses.",
+  "@appDescription": {
+    "description": "App description in about dialog"
+  },
+
+  "features": "Features:",
+  "@features": {
+    "description": "Features section title in about dialog"
+  },
+
+  "trackIncomeExpenses": "Track income and expenses",
+  "@trackIncomeExpenses": {
+    "description": "Feature: Track income and expenses"
+  },
+
+  "monthlyDailyViews": "Monthly and daily views",
+  "@monthlyDailyViews": {
+    "description": "Feature: Monthly and daily views"
+  },
+
+  "categoryManagement": "Category management",
+  "@categoryManagement": {
+    "description": "Feature: Category management"
+  },
+
+  "budgetTracking": "Budget tracking",
+  "@budgetTracking": {
+    "description": "Feature: Budget tracking"
+  },
+
+  "dataVisualization": "Data visualization",
+  "@dataVisualization": {
+    "description": "Feature: Data visualization"
+  },
+
+  "multiCurrencySupport": "Multi-currency support",
+  "@multiCurrencySupport": {
+    "description": "Feature: Multi-currency support"
+  },
+
+  "darkLightThemeSupport": "Dark/Light theme support",
+  "@darkLightThemeSupport": {
+    "description": "Feature: Dark/Light theme support"
   }
 }

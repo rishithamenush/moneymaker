@@ -146,5 +146,14 @@
   "dailyRemindersEnabled": "日次リマインダーが有効",
   "dailyRemindersDisabled": "日次リマインダーが無効",
   "loggedOutSuccessfully": "正常にログアウトしました",
-  "logoutFailed": "ログアウトに失敗しました"
+  "logoutFailed": "ログアウトに失敗しました",
+  "appDescription": "収入と支出を追跡するのに役立つシンプルでエレガントな家計管理アプリです。",
+  "features": "機能:",
+  "trackIncomeExpenses": "収入と支出の追跡",
+  "monthlyDailyViews": "月次・日次ビュー",
+  "categoryManagement": "カテゴリ管理",
+  "budgetTracking": "予算追跡",
+  "dataVisualization": "データ可視化",
+  "multiCurrencySupport": "多通貨サポート",
+  "darkLightThemeSupport": "ダーク/ライトテーマサポート"
 }

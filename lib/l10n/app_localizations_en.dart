@@ -497,4 +497,32 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get sinhala => 'සිංහල';
+
+  @override
+  String get appDescription =>
+      'A simple and elegant money management app to help you track your income and expenses.';
+
+  @override
+  String get features => 'Features:';
+
+  @override
+  String get trackIncomeExpenses => 'Track income and expenses';
+
+  @override
+  String get monthlyDailyViews => 'Monthly and daily views';
+
+  @override
+  String get categoryManagement => 'Category management';
+
+  @override
+  String get budgetTracking => 'Budget tracking';
+
+  @override
+  String get dataVisualization => 'Data visualization';
+
+  @override
+  String get multiCurrencySupport => 'Multi-currency support';
+
+  @override
+  String get darkLightThemeSupport => 'Dark/Light theme support';
 }

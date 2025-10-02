@@ -146,5 +146,14 @@
   "dailyRemindersEnabled": "Tägliche Erinnerungen aktiviert",
   "dailyRemindersDisabled": "Tägliche Erinnerungen deaktiviert",
   "loggedOutSuccessfully": "Erfolgreich abgemeldet",
-  "logoutFailed": "Abmeldung fehlgeschlagen"
+  "logoutFailed": "Abmeldung fehlgeschlagen",
+  "appDescription": "Eine einfache und elegante Geldverwaltungs-App, die Ihnen hilft, Ihre Einnahmen und Ausgaben zu verfolgen.",
+  "features": "Funktionen:",
+  "trackIncomeExpenses": "Einnahmen und Ausgaben verfolgen",
+  "monthlyDailyViews": "Monats- und Tagesansichten",
+  "categoryManagement": "Kategorienverwaltung",
+  "budgetTracking": "Budget-Verfolgung",
+  "dataVisualization": "Datenvisualisierung",
+  "multiCurrencySupport": "Multi-Währungsunterstützung",
+  "darkLightThemeSupport": "Dunkles/Helles Theme-Unterstützung"
 }

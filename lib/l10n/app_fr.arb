@@ -146,5 +146,14 @@
   "dailyRemindersEnabled": "Rappels quotidiens activés",
   "dailyRemindersDisabled": "Rappels quotidiens désactivés",
   "loggedOutSuccessfully": "Déconnexion réussie",
-  "logoutFailed": "Échec de la déconnexion"
+  "logoutFailed": "Échec de la déconnexion",
+  "appDescription": "Une application simple et élégante de gestion d'argent pour vous aider à suivre vos revenus et dépenses.",
+  "features": "Fonctionnalités:",
+  "trackIncomeExpenses": "Suivre les revenus et dépenses",
+  "monthlyDailyViews": "Vues mensuelles et quotidiennes",
+  "categoryManagement": "Gestion des catégories",
+  "budgetTracking": "Suivi du budget",
+  "dataVisualization": "Visualisation des données",
+  "multiCurrencySupport": "Support multi-devises",
+  "darkLightThemeSupport": "Support thème sombre/clair"
 }

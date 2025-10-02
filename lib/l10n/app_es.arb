@@ -146,5 +146,14 @@
   "dailyRemindersEnabled": "Recordatorios diarios habilitados",
   "dailyRemindersDisabled": "Recordatorios diarios deshabilitados",
   "loggedOutSuccessfully": "Sesión cerrada exitosamente",
-  "logoutFailed": "Error al cerrar sesión"
+  "logoutFailed": "Error al cerrar sesión",
+  "appDescription": "Una aplicación simple y elegante de gestión de dinero para ayudarte a rastrear tus ingresos y gastos.",
+  "features": "Características:",
+  "trackIncomeExpenses": "Rastrear ingresos y gastos",
+  "monthlyDailyViews": "Vistas mensuales y diarias",
+  "categoryManagement": "Gestión de categorías",
+  "budgetTracking": "Seguimiento de presupuesto",
+  "dataVisualization": "Visualización de datos",
+  "multiCurrencySupport": "Soporte multi-moneda",
+  "darkLightThemeSupport": "Soporte de tema oscuro/claro"
 }
