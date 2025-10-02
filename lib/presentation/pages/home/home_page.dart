@@ -641,7 +641,11 @@ class _HomePageState extends State<HomePage> {
     }
 
     return ListView.builder(
-      padding: const EdgeInsets.symmetric(horizontal: AppDimensions.paddingM),
+      padding: const EdgeInsets.only(
+        left: AppDimensions.paddingM,
+        right: AppDimensions.paddingM,
+        bottom: 30, // Add bottom padding to avoid FAB overlap
+      ),
       itemCount: groupedTransactions.length,
       itemBuilder: (context, index) {
         final dateKey = groupedTransactions.keys.elementAt(index);
