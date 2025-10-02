@@ -1,23 +1,25 @@
+/// App constants that should match pubspec.yaml
+/// 
+/// IMPORTANT: When you update the version in pubspec.yaml, 
+/// make sure to update the values here as well!
+/// 
+/// Example: If pubspec.yaml has "version: 1.0.12+68"
+/// Then: appVersion = '1.0.12' and buildNumber = '68'
 class AppConstants {
   // App Information
-  static const String appName = 'Money Maker';
-  static const String appVersion = '1.0.0';
+  static const String appName = 'MoneyMaker';
+  static const String appVersion = '1.0.12'; // Should match version in pubspec.yaml
+  static const String buildNumber = '68'; // Should match build number in pubspec.yaml
   
-  // Database
-  static const String databaseName = 'money_maker.db';
-  static const int databaseVersion = 1;
+  /// Full version string (e.g., "1.0.12 (68)")
+  static String get fullVersion => '$appVersion ($buildNumber)';
   
-  // Storage Keys
-  static const String themeKey = 'theme_mode';
-  static const String userKey = 'user_data';
-  static const String budgetKey = 'budget_data';
+  /// Version with build number (e.g., "1.0.12+68")
+  static String get versionWithBuild => '$appVersion+$buildNumber';
   
-  // Default Values
-  static const double defaultBudgetAmount = 50000.0; // LKR 50,000
-  static const int defaultCurrencyDecimal = 0;
+  // Package Information
+  static const String packageName = 'com.example.moneymaker';
   
-  // Animation Durations
-  static const Duration shortAnimation = Duration(milliseconds: 200);
-  static const Duration mediumAnimation = Duration(milliseconds: 300);
-  static const Duration longAnimation = Duration(milliseconds: 500);
+  // App Description
+  static const String appDescription = 'A simple and elegant money management app to help you track your income and expenses.';
 }

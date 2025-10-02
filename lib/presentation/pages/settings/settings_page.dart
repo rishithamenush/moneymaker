@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../l10n/app_localizations.dart';
+import '../../../core/constants/app_constants.dart';
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/dimensions.dart';
 import '../../../core/utils/theme_colors.dart';
@@ -171,7 +172,7 @@ class _SettingsPageState extends State<SettingsPage> {
             _buildSettingsItem(
               icon: Icons.info,
               title: l10n.appVersion,
-              subtitle: '1.0.0',
+              subtitle: AppConstants.fullVersion,
               onTap: () => _showAboutDialog(),
             ),
             _buildDivider(),
@@ -763,8 +764,8 @@ class _SettingsPageState extends State<SettingsPage> {
     
     SettingsPopup.show(
       context: context,
-      title: 'Money Maker',
-      subtitle: 'Version 1.0.0',
+      title: AppConstants.appName,
+      subtitle: 'Version ${AppConstants.fullVersion}',
       content: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
