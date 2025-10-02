@@ -123,7 +123,7 @@ class _HomePageState extends State<HomePage> {
               
               // Financial Summary - Compact Row Layout
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: AppDimensions.paddingM),
+                padding: const EdgeInsets.symmetric(horizontal: AppDimensions.paddingM,vertical: AppDimensions.paddingM),
                 child: Row(
                   children: [
                     // Total Income
@@ -280,7 +280,7 @@ class _HomePageState extends State<HomePage> {
   Widget _buildFilterSection(List<dynamic> categories) {
     return Container(
       height: 50, // Fixed compact height
-      margin: const EdgeInsets.symmetric(horizontal: AppDimensions.paddingM, vertical: AppDimensions.paddingS),
+      margin: const EdgeInsets.symmetric(horizontal: AppDimensions.paddingM),
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
       decoration: BoxDecoration(
         color: ThemeColors.getSurface(context),
