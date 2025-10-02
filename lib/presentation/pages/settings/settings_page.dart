@@ -343,29 +343,113 @@ class _SettingsPageState extends State<SettingsPage> {
               fontSize: 12,
             ),
           ),
-          trailing: DropdownButton<ThemeMode>(
-            value: themeProvider.themeMode,
-            underline: const SizedBox(),
-            items: [
-              DropdownMenuItem(
-                value: ThemeMode.light,
-                child: Text(l10n.light),
-              ),
-              DropdownMenuItem(
-                value: ThemeMode.dark,
-                child: Text(l10n.dark),
-              ),
-              DropdownMenuItem(
-                value: ThemeMode.system,
-                child: Text(l10n.system),
-              ),
-            ],
-            onChanged: (ThemeMode? newValue) {
-              if (newValue != null) {
-                themeProvider.setThemeMode(newValue);
-              }
-            },
+          trailing: _buildThemeDropdown(themeProvider, l10n),
+        );
+      },
+    );
+  }
+
+  Widget _buildThemeDropdown(ThemeProvider themeProvider, AppLocalizations l10n) {
+    final themeOptions = {
+      ThemeMode.light: {'label': l10n.light, 'icon': Icons.light_mode, 'desc': 'Light theme'},
+      ThemeMode.dark: {'label': l10n.dark, 'icon': Icons.dark_mode, 'desc': 'Dark theme'},
+      ThemeMode.system: {'label': l10n.system, 'icon': Icons.brightness_auto, 'desc': 'Follow system'},
+    };
+
+    String displayText = themeOptions[themeProvider.themeMode]?['label'] as String? ?? l10n.system;
+
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        return PopupMenuButton<ThemeMode>(
+          initialValue: themeProvider.themeMode,
+          child: Container(
+            height: 38,
+            width: 120,
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+            decoration: BoxDecoration(
+              color: ThemeColors.getSurface(context),
+              border: Border.all(color: ThemeColors.getBorder(context).withOpacity(0.3)),
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    displayText,
+                    style: TextStyle(
+                      fontSize: 13,
+                      color: ThemeColors.getTextPrimary(context),
+                      fontWeight: FontWeight.w500,
+                    ),
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+                Icon(
+                  Icons.keyboard_arrow_down,
+                  color: ThemeColors.getTextSecondary(context),
+                  size: 20,
+                ),
+              ],
+            ),
           ),
+          offset: const Offset(0, 42),
+          elevation: 8,
+          color: ThemeColors.getSurface(context),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(8),
+          ),
+          constraints: BoxConstraints(
+            maxHeight: 300,
+            minWidth: 120,
+            maxWidth: 120,
+          ),
+          itemBuilder: (context) => themeOptions.entries.map((entry) => PopupMenuItem<ThemeMode>(
+            value: entry.key,
+            child: Row(
+              children: [
+                Container(
+                  width: 24,
+                  height: 24,
+                  decoration: BoxDecoration(
+                    color: ThemeColors.getAccentColor(context, themeProvider.accentColor).withOpacity(0.1),
+                    borderRadius: BorderRadius.circular(6),
+                  ),
+                  child: Icon(
+                    entry.value['icon'] as IconData,
+                    size: 14,
+                    color: ThemeColors.getAccentColor(context, themeProvider.accentColor),
+                  ),
+                ),
+                const SizedBox(width: 10),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        entry.value['label'] as String,
+                        style: TextStyle(
+                          fontSize: 13,
+                          fontWeight: FontWeight.w500,
+                          color: ThemeColors.getTextPrimary(context),
+                        ),
+                      ),
+                      Text(
+                        entry.value['desc'] as String,
+                        style: TextStyle(
+                          fontSize: 11,
+                          color: ThemeColors.getTextSecondary(context),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          )).toList(),
+          onSelected: (value) {
+            themeProvider.setThemeMode(value);
+          },
         );
       },
     );
