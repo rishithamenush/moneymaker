@@ -76,7 +76,17 @@ class ModernDropdown<T> extends StatelessWidget {
             value: item.value,
             child: Row(
               children: [
-                if (item.icon != null) ...[
+                if (item.customIconWidget != null) ...[
+                  Container(
+                    width: 24,
+                    height: 24,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(6),
+                    ),
+                    child: Center(child: item.customIconWidget!),
+                  ),
+                  const SizedBox(width: 10),
+                ] else if (item.icon != null) ...[
                   Container(
                     width: 24,
                     height: 24,
@@ -132,11 +142,13 @@ class ModernDropdownItem<T> {
   final String label;
   final String? description;
   final IconData? icon;
+  final Widget? customIconWidget;
 
   const ModernDropdownItem({
     required this.value,
     required this.label,
     this.description,
     this.icon,
+    this.customIconWidget,
   });
 }
