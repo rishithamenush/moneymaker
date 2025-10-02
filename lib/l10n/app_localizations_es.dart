@@ -531,4 +531,12 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get darkLightThemeSupport => 'Soporte de tema oscuro/claro';
+
+  @override
+  String get privacyPolicyContent =>
+      'Su privacidad es importante para nosotros. Todos sus datos se almacenan localmente en su dispositivo y no se comparten con terceros.\n\nNo recopilamos, almacenamos ni transmitimos información personal. Sus datos financieros permanecen privados y seguros en su dispositivo.';
+
+  @override
+  String get termsOfServiceContent =>
+      'Al usar Money Maker, acepta los siguientes términos:\n\n1. Esta aplicación se proporciona \"tal como está\" sin garantías.\n2. Usted es responsable de hacer copias de seguridad de sus datos.\n3. No somos responsables de ninguna pérdida de datos.\n4. No puede realizar ingeniería inversa o redistribuir esta aplicación.\n\nEstos términos pueden actualizarse de vez en cuando.';
 }

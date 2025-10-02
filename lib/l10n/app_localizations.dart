@@ -1127,6 +1127,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Dark/Light theme support'**
   String get darkLightThemeSupport;
+
+  /// Privacy policy dialog content
+  ///
+  /// In en, this message translates to:
+  /// **'Your privacy is important to us. All your data is stored locally on your device and is not shared with any third parties.\n\nWe do not collect, store, or transmit any personal information. Your financial data remains private and secure on your device.'**
+  String get privacyPolicyContent;
+
+  /// Terms of service dialog content
+  ///
+  /// In en, this message translates to:
+  /// **'By using Money Maker, you agree to the following terms:\n\n1. This app is provided \"as is\" without warranties.\n2. You are responsible for backing up your data.\n3. We are not liable for any data loss.\n4. You may not reverse engineer or redistribute this app.\n\nThese terms may be updated from time to time.'**
+  String get termsOfServiceContent;
 }
 
 class _AppLocalizationsDelegate

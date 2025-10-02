@@ -134,7 +134,7 @@ class AppLocalizationsSi extends AppLocalizations {
   String get deleteAll => 'සියල්ල මකන්න';
 
   @override
-  String get close => 'වසන්න';
+  String get close => 'ඔබන්න';
 
   @override
   String get ok => 'හරි';
@@ -527,4 +527,12 @@ class AppLocalizationsSi extends AppLocalizations {
 
   @override
   String get darkLightThemeSupport => 'අඳුරු/ලා තේමා සහාය';
+
+  @override
+  String get privacyPolicyContent =>
+      'ඔබේ පෞද්ගලිකත්වය අපට වැදගත්ය. ඔබේ සියලු දත්ත ඔබේ උපාංගයේ ස්ථානිකව ගබඩා කර ඇති අතර කිසිදු තෙවන පාර්ශවයක් සමඟ බෙදා නොගනී.\n\nඅපි කිසිදු පුද්ගලික තොරතුරු එකතු, ගබඩා හෝ සම්ප්‍රේෂණය නොකරමු. ඔබේ මූල්‍ය දත්ත ඔබේ උපාංගයේ පුද්ගලික සහ ආරක්ෂිතව පවතී.';
+
+  @override
+  String get termsOfServiceContent =>
+      'Money Maker භාවිතා කිරීමෙන්, ඔබ පහත නියමයන්ට එකඟ වේ:\n\n1. මෙම යෙදුම වගකීම් නොමැතිව \"පවතින ආකාරයෙන්\" සපයනු ලැබේ.\n2. ඔබේ දත්ත උපස්ථ කිරීම ඔබේ වගකීමයි.\n3. කිසිදු දත්ත අහිමි වීමකට අපි වගකිව නොයුතුය.\n4. ඔබට මෙම යෙදුම ප්‍රතිලෝම ඉංජිනේරු කිරීමට හෝ නැවත බෙදා හැරීමට නොහැකිය.\n\nමෙම නියමයන් කාලයෙන් කාලයට යාවත්කාලීන කළ හැක.';
 }

@@ -859,10 +859,14 @@ class _SettingsPageState extends State<SettingsPage> {
     SettingsPopup.show(
       context: context,
       title: l10n.privacyPolicy,
-      content: const SingleChildScrollView(
+      content: SingleChildScrollView(
         child: Text(
-          'Your privacy is important to us. All your data is stored locally on your device and is not shared with any third parties.\n\n'
-          'We do not collect, store, or transmit any personal information. Your financial data remains private and secure on your device.',
+          l10n.privacyPolicyContent,
+          style: TextStyle(
+            fontSize: 14,
+            color: ThemeColors.getTextSecondary(context),
+            height: 1.5,
+          ),
         ),
       ),
       actions: [
@@ -879,14 +883,14 @@ class _SettingsPageState extends State<SettingsPage> {
     SettingsPopup.show(
       context: context,
       title: l10n.termsOfService,
-      content: const SingleChildScrollView(
+      content: SingleChildScrollView(
         child: Text(
-          'By using Money Maker, you agree to the following terms:\n\n'
-          '1. This app is provided "as is" without warranties.\n'
-          '2. You are responsible for backing up your data.\n'
-          '3. We are not liable for any data loss.\n'
-          '4. You may not reverse engineer or redistribute this app.\n\n'
-          'These terms may be updated from time to time.',
+          l10n.termsOfServiceContent,
+          style: TextStyle(
+            fontSize: 14,
+            color: ThemeColors.getTextSecondary(context),
+            height: 1.5,
+          ),
         ),
       ),
       actions: [

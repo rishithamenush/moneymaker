@@ -519,4 +519,12 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get darkLightThemeSupport => '深色/浅色主题支持';
+
+  @override
+  String get privacyPolicyContent =>
+      '您的隐私对我们很重要。您的所有数据都存储在您的设备本地，不会与任何第三方共享。\n\n我们不收集、存储或传输任何个人信息。您的财务数据在您的设备上保持私密和安全。';
+
+  @override
+  String get termsOfServiceContent =>
+      '使用Money Maker即表示您同意以下条款：\n\n1. 此应用程序按\"现状\"提供，不提供任何保证。\n2. 您有责任备份您的数据。\n3. 我们不对任何数据丢失承担责任。\n4. 您不得对此应用程序进行逆向工程或重新分发。\n\n这些条款可能会不时更新。';
 }
