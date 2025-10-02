@@ -8,8 +8,8 @@
 class AppConstants {
   // App Information
   static const String appName = 'MoneyMaker';
-  static const String appVersion = '1.0.12'; // Should match version in pubspec.yaml
-  static const String buildNumber = '68'; // Should match build number in pubspec.yaml
+  static const String appVersion = '1.0.1'; // Should match version in pubspec.yaml
+  static const String buildNumber = '6'; // Should match build number in pubspec.yaml
   
   /// Full version string (e.g., "1.0.12 (68)")
   static String get fullVersion => '$appVersion ($buildNumber)';
