@@ -12,6 +12,7 @@ import '../../providers/expense_provider.dart';
 import '../../providers/budget_provider.dart';
 import '../../providers/income_provider.dart';
 import '../../providers/theme_provider.dart';
+import '../../providers/category_provider.dart';
 import '../../widgets/common/custom_app_bar.dart';
 import '../../widgets/common/transaction_list_item.dart';
 import '../../widgets/common/monthly_selector.dart';
@@ -27,8 +28,13 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
+enum SortOption { dateNewest, dateOldest, amountHighest, amountLowest, category }
+
 class _HomePageState extends State<HomePage> {
   DateTime _selectedMonth = DateTime.now();
+  String? _selectedCategoryFilter; // null means "All Categories"
+  SortOption _selectedSort = SortOption.dateNewest;
+  bool _showFilters = false;
 
   @override
   void initState() {
@@ -43,6 +49,7 @@ class _HomePageState extends State<HomePage> {
       context.read<ExpenseProvider>().loadExpenses(),
       context.read<BudgetProvider>().loadBudgets(),
       context.read<IncomeProvider>().loadIncomes(),
+      context.read<CategoryProvider>().loadCategories(),
     ]);
   }
 
@@ -61,6 +68,18 @@ class _HomePageState extends State<HomePage> {
         showBackButton: false,
         actions: [
           IconButton(
+            onPressed: () {
+              setState(() {
+                _showFilters = !_showFilters;
+              });
+            },
+            icon: Icon(
+              _showFilters ? Icons.filter_list : Icons.filter_list_outlined,
+              color: ThemeColors.getTextPrimary(context),
+              size: AppDimensions.iconM,
+            ),
+          ),
+          IconButton(
             onPressed: _loadData,
             icon: Icon(
               Icons.refresh,
@@ -70,9 +89,9 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-      body: Consumer3<ExpenseProvider, BudgetProvider, IncomeProvider>(
-        builder: (context, expenseProvider, budgetProvider, incomeProvider, child) {
-          if (expenseProvider.isLoading || budgetProvider.isLoading || incomeProvider.isLoading) {
+      body: Consumer4<ExpenseProvider, BudgetProvider, IncomeProvider, CategoryProvider>(
+        builder: (context, expenseProvider, budgetProvider, incomeProvider, categoryProvider, child) {
+          if (expenseProvider.isLoading || budgetProvider.isLoading || incomeProvider.isLoading || categoryProvider.isLoading) {
             return Center(
               child: CircularProgressIndicator(
                 color: ThemeColors.getAccentColor(context, context.read<ThemeProvider>().accentColor),
@@ -96,6 +115,9 @@ class _HomePageState extends State<HomePage> {
                   });
                 },
               ),
+              
+              // Filter and Sort Section
+              if (_showFilters) _buildFilterSection(categoryProvider.categories),
               
               // Financial Summary - Compact Row Layout
               Padding(
@@ -229,7 +251,9 @@ class _HomePageState extends State<HomePage> {
               
               // Transactions List (Expenses + Income)
               Expanded(
-                child: _buildTransactionsList(monthlyExpenses, monthlyIncomes),
+                child: _buildTransactionsList(
+                  _filterAndSortTransactions(monthlyExpenses, monthlyIncomes),
+                ),
               ),
             ],
           );
@@ -248,17 +272,187 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget _buildTransactionsList(List<Expense> expenses, List<Income> incomes) {
-    final l10n = AppLocalizations.of(context)!;
-    
-    // Combine and sort transactions by date (newest first)
-    final allTransactions = <dynamic>[];
-    allTransactions.addAll(expenses);
-    allTransactions.addAll(incomes);
-    
-    allTransactions.sort((a, b) => b.date.compareTo(a.date));
+  Widget _buildFilterSection(List<dynamic> categories) {
+    return Container(
+      height: 50, // Fixed compact height
+      margin: const EdgeInsets.symmetric(horizontal: AppDimensions.paddingM, vertical: 4),
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+      decoration: BoxDecoration(
+        color: ThemeColors.getSurface(context),
+        borderRadius: BorderRadius.circular(AppDimensions.radiusM),
+        border: Border.all(
+          color: ThemeColors.getBorder(context).withOpacity(0.1),
+          width: 1,
+        ),
+      ),
+      child: Row(
+        children: [
+          // Category Dropdown
+          Expanded(
+            flex: 2,
+            child: _buildCategoryDropdown(categories),
+          ),
+          const SizedBox(width: 8),
+          // Sort Dropdown
+          Expanded(
+            flex: 2,
+            child: _buildSortDropdown(),
+          ),
+          const SizedBox(width: 4),
+          // Clear Filters Button
+          SizedBox(
+            width: 36,
+            height: 36,
+            child: IconButton(
+              onPressed: () {
+                setState(() {
+                  _selectedCategoryFilter = null;
+                  _selectedSort = SortOption.dateNewest;
+                });
+              },
+              icon: Icon(
+                Icons.clear_all,
+                color: ThemeColors.getTextSecondary(context),
+                size: 18,
+              ),
+              tooltip: 'Clear Filters',
+              padding: EdgeInsets.zero,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 
-    if (allTransactions.isEmpty) {
+  Widget _buildCategoryDropdown(List<dynamic> categories) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+      decoration: BoxDecoration(
+        border: Border.all(color: ThemeColors.getBorder(context).withOpacity(0.3)),
+        borderRadius: BorderRadius.circular(6),
+      ),
+      child: DropdownButtonHideUnderline(
+        child: DropdownButton<String?>(
+          value: _selectedCategoryFilter,
+          isExpanded: true,
+          hint: Text(
+            'Category',
+            style: TextStyle(
+              fontSize: 12,
+              color: ThemeColors.getTextSecondary(context),
+            ),
+          ),
+          style: TextStyle(
+            fontSize: 12,
+            color: ThemeColors.getTextPrimary(context),
+          ),
+          items: [
+            DropdownMenuItem<String?>(
+              value: null,
+              child: Text(
+                'All Categories',
+                style: TextStyle(fontSize: 12),
+              ),
+            ),
+            ...categories.map((category) => DropdownMenuItem<String?>(
+              value: category.id,
+              child: Text(
+                category.name,
+                style: TextStyle(fontSize: 12),
+                overflow: TextOverflow.ellipsis,
+              ),
+            )),
+          ],
+          onChanged: (value) {
+            setState(() {
+              _selectedCategoryFilter = value;
+            });
+          },
+        ),
+      ),
+    );
+  }
+
+  Widget _buildSortDropdown() {
+    final sortOptions = {
+      SortOption.dateNewest: 'Date ↓',
+      SortOption.dateOldest: 'Date ↑',
+      SortOption.amountHighest: 'Amount ↓',
+      SortOption.amountLowest: 'Amount ↑',
+      SortOption.category: 'Category',
+    };
+
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+      decoration: BoxDecoration(
+        border: Border.all(color: ThemeColors.getBorder(context).withOpacity(0.3)),
+        borderRadius: BorderRadius.circular(6),
+      ),
+      child: DropdownButtonHideUnderline(
+        child: DropdownButton<SortOption>(
+          value: _selectedSort,
+          isExpanded: true,
+          style: TextStyle(
+            fontSize: 12,
+            color: ThemeColors.getTextPrimary(context),
+          ),
+          items: sortOptions.entries.map((entry) => DropdownMenuItem<SortOption>(
+            value: entry.key,
+            child: Text(
+              entry.value,
+              style: TextStyle(fontSize: 12),
+            ),
+          )).toList(),
+          onChanged: (value) {
+            if (value != null) {
+              setState(() {
+                _selectedSort = value;
+              });
+            }
+          },
+        ),
+      ),
+    );
+  }
+
+
+  List<dynamic> _filterAndSortTransactions(List<Expense> expenses, List<Income> incomes) {
+    // Combine all transactions
+    List<dynamic> allTransactions = [...expenses, ...incomes];
+    
+    // Apply category filter
+    if (_selectedCategoryFilter != null) {
+      allTransactions = allTransactions.where((transaction) {
+        return transaction.categoryId == _selectedCategoryFilter;
+      }).toList();
+    }
+    
+    // Apply sorting
+    switch (_selectedSort) {
+      case SortOption.dateNewest:
+        allTransactions.sort((a, b) => b.date.compareTo(a.date));
+        break;
+      case SortOption.dateOldest:
+        allTransactions.sort((a, b) => a.date.compareTo(b.date));
+        break;
+      case SortOption.amountHighest:
+        allTransactions.sort((a, b) => b.amount.compareTo(a.amount));
+        break;
+      case SortOption.amountLowest:
+        allTransactions.sort((a, b) => a.amount.compareTo(b.amount));
+        break;
+      case SortOption.category:
+        allTransactions.sort((a, b) => a.categoryName.compareTo(b.categoryName));
+        break;
+    }
+    
+    return allTransactions;
+  }
+
+  Widget _buildTransactionsList(List<dynamic> transactions) {
+    final l10n = AppLocalizations.of(context)!;
+
+    if (transactions.isEmpty) {
       return Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -293,7 +487,7 @@ class _HomePageState extends State<HomePage> {
 
     // Group transactions by date
     final Map<String, List<dynamic>> groupedTransactions = {};
-    for (final transaction in allTransactions) {
+    for (final transaction in transactions) {
       final dateKey = Formatters.formatDate(transaction.date);
       if (!groupedTransactions.containsKey(dateKey)) {
         groupedTransactions[dateKey] = [];
