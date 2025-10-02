@@ -325,93 +325,215 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _buildCategoryDropdown(List<dynamic> categories) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-      decoration: BoxDecoration(
-        border: Border.all(color: ThemeColors.getBorder(context).withOpacity(0.3)),
-        borderRadius: BorderRadius.circular(6),
-      ),
-      child: DropdownButtonHideUnderline(
-        child: DropdownButton<String?>(
-          value: _selectedCategoryFilter,
-          isExpanded: true,
-          hint: Text(
-            'Category',
-            style: TextStyle(
-              fontSize: 12,
-              color: ThemeColors.getTextSecondary(context),
-            ),
-          ),
-          style: TextStyle(
-            fontSize: 12,
-            color: ThemeColors.getTextPrimary(context),
-          ),
-          items: [
-            DropdownMenuItem<String?>(
-              value: null,
+    String displayText = _selectedCategoryFilter == null 
+        ? 'All Categories' 
+        : categories.firstWhere((cat) => cat.id == _selectedCategoryFilter, orElse: () => null)?.name ?? 'All Categories';
+    
+    return PopupMenuButton<String?>(
+      initialValue: _selectedCategoryFilter,
+      child: Container(
+        height: 38,
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+        decoration: BoxDecoration(
+          color: ThemeColors.getSurface(context),
+          border: Border.all(color: ThemeColors.getBorder(context).withOpacity(0.3)),
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: Row(
+          children: [
+            Expanded(
               child: Text(
-                'All Categories',
-                style: TextStyle(fontSize: 12),
-              ),
-            ),
-            ...categories.map((category) => DropdownMenuItem<String?>(
-              value: category.id,
-              child: Text(
-                category.name,
-                style: TextStyle(fontSize: 12),
+                displayText,
+                style: TextStyle(
+                  fontSize: 13,
+                  color: ThemeColors.getTextPrimary(context),
+                  fontWeight: FontWeight.w500,
+                ),
                 overflow: TextOverflow.ellipsis,
               ),
-            )),
+            ),
+            Icon(
+              Icons.keyboard_arrow_down,
+              color: ThemeColors.getTextSecondary(context),
+              size: 20,
+            ),
           ],
-          onChanged: (value) {
-            setState(() {
-              _selectedCategoryFilter = value;
-            });
-          },
         ),
       ),
+      offset: const Offset(0, 42),
+      elevation: 8,
+      color: ThemeColors.getSurface(context),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(8),
+      ),
+      constraints: const BoxConstraints(
+        maxHeight: 300,
+        minWidth: 150,
+      ),
+      itemBuilder: (context) => [
+        PopupMenuItem<String?>(
+          value: null,
+          child: Row(
+            children: [
+              Icon(
+                Icons.all_inclusive,
+                size: 16,
+                color: ThemeColors.getTextSecondary(context),
+              ),
+              const SizedBox(width: 8),
+              Text(
+                'All Categories',
+                style: TextStyle(
+                  fontSize: 13,
+                  fontWeight: FontWeight.w500,
+                  color: ThemeColors.getTextPrimary(context),
+                ),
+              ),
+            ],
+          ),
+        ),
+        ...categories.map((category) => PopupMenuItem<String?>(
+          value: category.id,
+          child: Row(
+            children: [
+              Container(
+                width: 16,
+                height: 16,
+                decoration: BoxDecoration(
+                  color: ThemeColors.getAccentColor(context, context.read<ThemeProvider>().accentColor).withOpacity(0.2),
+                  borderRadius: BorderRadius.circular(4),
+                ),
+                child: Icon(
+                  Icons.category,
+                  size: 12,
+                  color: ThemeColors.getAccentColor(context, context.read<ThemeProvider>().accentColor),
+                ),
+              ),
+              const SizedBox(width: 8),
+              Expanded(
+                child: Text(
+                  category.name,
+                  style: TextStyle(
+                    fontSize: 13,
+                    fontWeight: FontWeight.w500,
+                    color: ThemeColors.getTextPrimary(context),
+                  ),
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+            ],
+          ),
+        )),
+      ],
+      onSelected: (value) {
+        setState(() {
+          _selectedCategoryFilter = value;
+        });
+      },
     );
   }
 
   Widget _buildSortDropdown() {
     final sortOptions = {
-      SortOption.dateNewest: 'Date ↓',
-      SortOption.dateOldest: 'Date ↑',
-      SortOption.amountHighest: 'Amount ↓',
-      SortOption.amountLowest: 'Amount ↑',
-      SortOption.category: 'Category',
+      SortOption.dateNewest: {'label': 'Date (Newest)', 'icon': Icons.arrow_downward, 'desc': 'Recent first'},
+      SortOption.dateOldest: {'label': 'Date (Oldest)', 'icon': Icons.arrow_upward, 'desc': 'Oldest first'},
+      SortOption.amountHighest: {'label': 'Amount (High)', 'icon': Icons.trending_up, 'desc': 'Highest first'},
+      SortOption.amountLowest: {'label': 'Amount (Low)', 'icon': Icons.trending_down, 'desc': 'Lowest first'},
+      SortOption.category: {'label': 'Category', 'icon': Icons.sort_by_alpha, 'desc': 'A to Z'},
     };
 
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-      decoration: BoxDecoration(
-        border: Border.all(color: ThemeColors.getBorder(context).withOpacity(0.3)),
-        borderRadius: BorderRadius.circular(6),
-      ),
-      child: DropdownButtonHideUnderline(
-        child: DropdownButton<SortOption>(
-          value: _selectedSort,
-          isExpanded: true,
-          style: TextStyle(
-            fontSize: 12,
-            color: ThemeColors.getTextPrimary(context),
-          ),
-          items: sortOptions.entries.map((entry) => DropdownMenuItem<SortOption>(
-            value: entry.key,
-            child: Text(
-              entry.value,
-              style: TextStyle(fontSize: 12),
+    String displayText = sortOptions[_selectedSort]?['label'] as String? ?? 'Date (Newest)';
+
+    return PopupMenuButton<SortOption>(
+      initialValue: _selectedSort,
+      child: Container(
+        height: 38,
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+        decoration: BoxDecoration(
+          color: ThemeColors.getSurface(context),
+          border: Border.all(color: ThemeColors.getBorder(context).withOpacity(0.3)),
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: Row(
+          children: [
+            Expanded(
+              child: Text(
+                displayText,
+                style: TextStyle(
+                  fontSize: 13,
+                  color: ThemeColors.getTextPrimary(context),
+                  fontWeight: FontWeight.w500,
+                ),
+                overflow: TextOverflow.ellipsis,
+              ),
             ),
-          )).toList(),
-          onChanged: (value) {
-            if (value != null) {
-              setState(() {
-                _selectedSort = value;
-              });
-            }
-          },
+            Icon(
+              Icons.keyboard_arrow_down,
+              color: ThemeColors.getTextSecondary(context),
+              size: 20,
+            ),
+          ],
         ),
       ),
+      offset: const Offset(0, 42),
+      elevation: 8,
+      color: ThemeColors.getSurface(context),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(8),
+      ),
+      constraints: const BoxConstraints(
+        maxHeight: 300,
+        minWidth: 150,
+      ),
+      itemBuilder: (context) => sortOptions.entries.map((entry) => PopupMenuItem<SortOption>(
+        value: entry.key,
+        child: Row(
+          children: [
+            Container(
+              width: 24,
+              height: 24,
+              decoration: BoxDecoration(
+                color: ThemeColors.getAccentColor(context, context.read<ThemeProvider>().accentColor).withOpacity(0.1),
+                borderRadius: BorderRadius.circular(6),
+              ),
+              child: Icon(
+                entry.value['icon'] as IconData,
+                size: 14,
+                color: ThemeColors.getAccentColor(context, context.read<ThemeProvider>().accentColor),
+              ),
+            ),
+            const SizedBox(width: 10),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    entry.value['label'] as String,
+                    style: TextStyle(
+                      fontSize: 13,
+                      fontWeight: FontWeight.w500,
+                      color: ThemeColors.getTextPrimary(context),
+                    ),
+                  ),
+                  Text(
+                    entry.value['desc'] as String,
+                    style: TextStyle(
+                      fontSize: 11,
+                      color: ThemeColors.getTextSecondary(context),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      )).toList(),
+      onSelected: (value) {
+        setState(() {
+          _selectedSort = value;
+        });
+      },
     );
   }
 
