@@ -449,13 +449,13 @@ class _SettingsPageState extends State<SettingsPage> {
 
   Widget _buildLanguageDropdown(LanguageProvider languageProvider, AppLocalizations l10n) {
     final languages = [
-      {'code': 'en', 'name': 'English', 'icon': Icons.language},
-      {'code': 'si', 'name': 'සිංහල', 'icon': Icons.language},
-      {'code': 'de', 'name': 'Deutsch', 'icon': Icons.language},
-      {'code': 'es', 'name': 'Español', 'icon': Icons.language},
-      {'code': 'fr', 'name': 'Français', 'icon': Icons.language},
-      {'code': 'ja', 'name': '日本語', 'icon': Icons.language},
-      {'code': 'zh', 'name': '中文', 'icon': Icons.language},
+      {'code': 'en', 'name': 'English', 'flag': '🇺🇸', 'country': 'USA'},
+      {'code': 'si', 'name': 'සිංහල', 'flag': '🇱🇰', 'country': 'Sri Lanka'},
+      {'code': 'de', 'name': 'Deutsch', 'flag': '🇩🇪', 'country': 'Germany'},
+      {'code': 'es', 'name': 'Español', 'flag': '🇪🇸', 'country': 'Spain'},
+      {'code': 'fr', 'name': 'Français', 'flag': '🇫🇷', 'country': 'France'},
+      {'code': 'ja', 'name': '日本語', 'flag': '🇯🇵', 'country': 'Japan'},
+      {'code': 'zh', 'name': '中文', 'flag': '🇨🇳', 'country': 'China'},
     ];
     
     return ModernDropdown<String>(
@@ -464,8 +464,24 @@ class _SettingsPageState extends State<SettingsPage> {
       items: languages.map((lang) => ModernDropdownItem(
         value: lang['code'] as String,
         label: lang['name'] as String,
-        description: lang['code'] as String,
-        icon: lang['icon'] as IconData,
+        description: lang['country'] as String,
+        customIconWidget: Container(
+          width: 20,
+          height: 20,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(4),
+            border: Border.all(
+              color: Colors.grey.withOpacity(0.3),
+              width: 0.5,
+            ),
+          ),
+          child: Center(
+            child: Text(
+              lang['flag'] as String,
+              style: const TextStyle(fontSize: 14),
+            ),
+          ),
+        ),
       )).toList(),
       onChanged: (value) => languageProvider.setLanguage(value),
     );
