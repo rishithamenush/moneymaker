@@ -283,7 +283,7 @@ class _HomePageState extends State<HomePage> {
       margin: const EdgeInsets.symmetric(horizontal: AppDimensions.paddingM),
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
       decoration: BoxDecoration(
-        color: ThemeColors.getSurface(context),
+        color: ThemeColors.getSurface(context).withOpacity(0.3),
         borderRadius: BorderRadius.circular(AppDimensions.radiusM),
         border: Border.all(
           color: ThemeColors.getBorder(context).withOpacity(0.1),
@@ -350,7 +350,7 @@ class _HomePageState extends State<HomePage> {
         height: 38,
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
         decoration: BoxDecoration(
-          color: ThemeColors.getSurface(context),
+          color: ThemeColors.getSurface(context).withOpacity(0.5),
           border: Border.all(color: ThemeColors.getBorder(context).withOpacity(0.3)),
           borderRadius: BorderRadius.circular(8),
         ),
@@ -470,7 +470,7 @@ class _HomePageState extends State<HomePage> {
         height: 38,
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
         decoration: BoxDecoration(
-          color: ThemeColors.getSurface(context),
+          color: ThemeColors.getSurface(context).withOpacity(0.5),
           border: Border.all(color: ThemeColors.getBorder(context).withOpacity(0.3)),
           borderRadius: BorderRadius.circular(8),
         ),
