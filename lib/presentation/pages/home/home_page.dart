@@ -235,14 +235,14 @@ class _HomePageState extends State<HomePage> {
           );
         },
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.pushNamed(context, AppRoutes.addTransaction);
-        },
-        backgroundColor: ThemeColors.getAccentColor(context, context.read<ThemeProvider>().accentColor),
-        foregroundColor: Colors.white,
-        child: const Icon(Icons.add),
-      ),
+       floatingActionButton: FloatingActionButton(
+         onPressed: () {
+           Navigator.pushNamed(context, AppRoutes.addTransaction);
+         },
+         backgroundColor: ThemeColors.getAccentColor(context, context.read<ThemeProvider>().accentColor),
+         foregroundColor: Colors.white,
+         child: const Icon(Icons.account_balance_wallet_outlined),
+       ),
       bottomNavigationBar: const CustomBottomNavBar(currentIndex: 1),
       ),
     );
