@@ -411,18 +411,37 @@ class _SettingsPageState extends State<SettingsPage> {
   }
 
   Widget _buildAccentColorDropdown(ThemeProvider themeProvider, AppLocalizations l10n) {
-    final accentColors = [
-      'Orange', 'Blue', 'Green', 'Purple', 'Red', 'Teal', 'Pink', 'Indigo'
-    ];
+    final accentColors = {
+      'Orange': Colors.orange,
+      'Blue': Colors.blue,
+      'Green': Colors.green,
+      'Purple': Colors.purple,
+      'Red': Colors.red,
+      'Teal': Colors.teal,
+      'Pink': Colors.pink,
+      'Indigo': Colors.indigo,
+    };
     
     return ModernDropdown<String>(
       value: themeProvider.accentColor,
       width: 120,
-      items: accentColors.map((color) => ModernDropdownItem(
-        value: color,
-        label: color,
-        description: '$color theme',
+      items: accentColors.entries.map((entry) => ModernDropdownItem(
+        value: entry.key,
+        label: entry.key,
+        description: '${entry.key} theme',
         icon: Icons.circle,
+        customIconWidget: Container(
+          width: 16,
+          height: 16,
+          decoration: BoxDecoration(
+            color: entry.value,
+            shape: BoxShape.circle,
+            border: Border.all(
+              color: Colors.white.withOpacity(0.3),
+              width: 1,
+            ),
+          ),
+        ),
       )).toList(),
       onChanged: (value) => themeProvider.setAccentColor(value),
     );
