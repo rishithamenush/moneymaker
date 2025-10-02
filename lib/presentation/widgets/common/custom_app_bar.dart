@@ -22,26 +22,37 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       backgroundColor: ThemeColors.getBackground(context),
       elevation: 0,
+      toolbarHeight: AppDimensions.appBarHeight,
+      titleSpacing: 0,
       leading: showBackButton
           ? IconButton(
               icon: Icon(
                 Icons.arrow_back_ios,
                 color: ThemeColors.getTextPrimary(context),
-                size: AppDimensions.iconM,
+                size: AppDimensions.iconS, // Reduced from iconM to iconS
               ),
               onPressed: onBackPressed ?? () => Navigator.of(context).pop(),
+              padding: const EdgeInsets.all(8), // Reduced padding
             )
           : null,
       title: Text(
         title,
         style: TextStyle(
           color: ThemeColors.getTextPrimary(context),
-          fontSize: 20,
+          fontSize: 18, // Reduced from 20 to 18
           fontWeight: FontWeight.w600,
         ),
       ),
       centerTitle: true,
-      actions: actions,
+      actions: actions?.map((action) {
+        if (action is IconButton) {
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 4), // Reduced padding
+            child: action,
+          );
+        }
+        return action;
+      }).toList(),
     );
   }
 

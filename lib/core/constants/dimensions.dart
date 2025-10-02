@@ -40,7 +40,7 @@ class AppDimensions {
   static const double cardHeightL = 120.0;
   
   // App Bar
-  static const double appBarHeight = 56.0;
+  static const double appBarHeight = 48.0;
   static const double bottomNavHeight = 60.0;
   
   // Screen Breakpoints

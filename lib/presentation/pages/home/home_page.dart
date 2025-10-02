@@ -76,16 +76,18 @@ class _HomePageState extends State<HomePage> {
             icon: Icon(
               _showFilters ? Icons.filter_list : Icons.filter_list_outlined,
               color: ThemeColors.getTextPrimary(context),
-              size: AppDimensions.iconM,
+              size: AppDimensions.iconS, // Reduced from iconM to iconS
             ),
+            padding: const EdgeInsets.all(8), // Reduced padding
           ),
           IconButton(
             onPressed: _loadData,
             icon: Icon(
               Icons.refresh,
               color: ThemeColors.getTextPrimary(context),
-              size: AppDimensions.iconM,
+              size: AppDimensions.iconS, // Reduced from iconM to iconS
             ),
+            padding: const EdgeInsets.all(8), // Reduced padding
           ),
         ],
       ),
