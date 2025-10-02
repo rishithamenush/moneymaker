@@ -527,4 +527,10 @@ class AppLocalizationsZh extends AppLocalizations {
   @override
   String get termsOfServiceContent =>
       '使用Money Maker即表示您同意以下条款：\n\n1. 此应用程序按\"现状\"提供，不提供任何保证。\n2. 您有责任备份您的数据。\n3. 我们不对任何数据丢失承担责任。\n4. 您不得对此应用程序进行逆向工程或重新分发。\n\n这些条款可能会不时更新。';
+
+  @override
+  String get clearAllDataConfirmation => '这将永久删除您的所有交易、预算和类别。此操作无法撤销。';
+
+  @override
+  String get deleteAllData => '删除所有数据';
 }

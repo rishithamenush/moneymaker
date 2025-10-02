@@ -535,4 +535,11 @@ class AppLocalizationsSi extends AppLocalizations {
   @override
   String get termsOfServiceContent =>
       'Money Maker භාවිතා කිරීමෙන්, ඔබ පහත නියමයන්ට එකඟ වේ:\n\n1. මෙම යෙදුම වගකීම් නොමැතිව \"පවතින ආකාරයෙන්\" සපයනු ලැබේ.\n2. ඔබේ දත්ත උපස්ථ කිරීම ඔබේ වගකීමයි.\n3. කිසිදු දත්ත අහිමි වීමකට අපි වගකිව නොයුතුය.\n4. ඔබට මෙම යෙදුම ප්‍රතිලෝම ඉංජිනේරු කිරීමට හෝ නැවත බෙදා හැරීමට නොහැකිය.\n\nමෙම නියමයන් කාලයෙන් කාලයට යාවත්කාලීන කළ හැක.';
+
+  @override
+  String get clearAllDataConfirmation =>
+      'මෙය ඔබේ සියලු ගනුදෙනු, අයවැය සහ ප්‍රවර්ග ස්ථිරව මකා දමනු ඇත. මෙම ක්‍රියාව අහෝසි කළ නොහැක.';
+
+  @override
+  String get deleteAllData => 'සියලු දත්ත මකන්න';
 }

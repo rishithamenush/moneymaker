@@ -540,4 +540,11 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get termsOfServiceContent =>
       'En utilisant Money Maker, vous acceptez les conditions suivantes:\n\n1. Cette application est fournie \"en l\'état\" sans garanties.\n2. Vous êtes responsable de la sauvegarde de vos données.\n3. Nous ne sommes pas responsables de toute perte de données.\n4. Vous ne pouvez pas faire de l\'ingénierie inverse ou redistribuer cette application.\n\nCes conditions peuvent être mises à jour de temps en temps.';
+
+  @override
+  String get clearAllDataConfirmation =>
+      'Cela supprimera définitivement toutes vos transactions, budgets et catégories. Cette action ne peut pas être annulée.';
+
+  @override
+  String get deleteAllData => 'Supprimer toutes les données';
 }

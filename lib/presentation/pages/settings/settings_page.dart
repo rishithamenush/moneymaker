@@ -713,7 +713,7 @@ class _SettingsPageState extends State<SettingsPage> {
       context: context,
       title: l10n.clearAllData,
       content: Text(
-        'This will permanently delete all your transactions, budgets, and categories. This action cannot be undone.',
+        l10n.clearAllDataConfirmation,
       ),
       actions: [
         SettingsPopupActions.cancelButton(context: context),

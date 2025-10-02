@@ -1139,6 +1139,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'By using Money Maker, you agree to the following terms:\n\n1. This app is provided \"as is\" without warranties.\n2. You are responsible for backing up your data.\n3. We are not liable for any data loss.\n4. You may not reverse engineer or redistribute this app.\n\nThese terms may be updated from time to time.'**
   String get termsOfServiceContent;
+
+  /// Clear all data confirmation message
+  ///
+  /// In en, this message translates to:
+  /// **'This will permanently delete all your transactions, budgets, and categories. This action cannot be undone.'**
+  String get clearAllDataConfirmation;
+
+  /// Delete all data button text
+  ///
+  /// In en, this message translates to:
+  /// **'Delete All Data'**
+  String get deleteAllData;
 }
 
 class _AppLocalizationsDelegate
