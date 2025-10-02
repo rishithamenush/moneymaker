@@ -382,20 +382,27 @@ class PopupUtils {
     if (_isShowing) return;
     _isShowing = true;
     
-    ErrorPopup.show(
+    showDialog(
       context: context,
-      title: title,
-      message: message,
-      buttonText: buttonText,
-      onPressed: () {
-        _isShowing = false;
-        if (onPressed != null) {
-          onPressed();
-        } else {
-          Navigator.of(context).pop();
-        }
+      barrierDismissible: true,
+      builder: (BuildContext context) {
+        return ErrorPopup(
+          title: title,
+          message: message,
+          buttonText: buttonText,
+          onPressed: () {
+            _isShowing = false;
+            Navigator.of(context).pop();
+            if (onPressed != null) {
+              onPressed();
+            }
+          },
+        );
       },
-    );
+    ).then((_) {
+      // Ensure _isShowing is reset when dialog is dismissed by any means
+      _isShowing = false;
+    });
   }
 
   static void showSuccess({
@@ -408,20 +415,27 @@ class PopupUtils {
     if (_isShowing) return;
     _isShowing = true;
     
-    SuccessPopup.show(
+    showDialog(
       context: context,
-      title: title,
-      message: message,
-      buttonText: buttonText,
-      onPressed: () {
-        _isShowing = false;
-        if (onPressed != null) {
-          onPressed();
-        } else {
-          Navigator.of(context).pop();
-        }
+      barrierDismissible: true,
+      builder: (BuildContext context) {
+        return SuccessPopup(
+          title: title,
+          message: message,
+          buttonText: buttonText,
+          onPressed: () {
+            _isShowing = false;
+            Navigator.of(context).pop();
+            if (onPressed != null) {
+              onPressed();
+            }
+          },
+        );
       },
-    );
+    ).then((_) {
+      // Ensure _isShowing is reset when dialog is dismissed by any means
+      _isShowing = false;
+    });
   }
 
   static void showInfo({
@@ -434,20 +448,27 @@ class PopupUtils {
     if (_isShowing) return;
     _isShowing = true;
     
-    InfoPopup.show(
+    showDialog(
       context: context,
-      title: title,
-      message: message,
-      buttonText: buttonText,
-      onPressed: () {
-        _isShowing = false;
-        if (onPressed != null) {
-          onPressed();
-        } else {
-          Navigator.of(context).pop();
-        }
+      barrierDismissible: true,
+      builder: (BuildContext context) {
+        return InfoPopup(
+          title: title,
+          message: message,
+          buttonText: buttonText,
+          onPressed: () {
+            _isShowing = false;
+            Navigator.of(context).pop();
+            if (onPressed != null) {
+              onPressed();
+            }
+          },
+        );
       },
-    );
+    ).then((_) {
+      // Ensure _isShowing is reset when dialog is dismissed by any means
+      _isShowing = false;
+    });
   }
 
   static void showWarning({
@@ -460,20 +481,27 @@ class PopupUtils {
     if (_isShowing) return;
     _isShowing = true;
     
-    WarningPopup.show(
+    showDialog(
       context: context,
-      title: title,
-      message: message,
-      buttonText: buttonText,
-      onPressed: () {
-        _isShowing = false;
-        if (onPressed != null) {
-          onPressed();
-        } else {
-          Navigator.of(context).pop();
-        }
+      barrierDismissible: true,
+      builder: (BuildContext context) {
+        return WarningPopup(
+          title: title,
+          message: message,
+          buttonText: buttonText,
+          onPressed: () {
+            _isShowing = false;
+            Navigator.of(context).pop();
+            if (onPressed != null) {
+              onPressed();
+            }
+          },
+        );
       },
-    );
+    ).then((_) {
+      // Ensure _isShowing is reset when dialog is dismissed by any means
+      _isShowing = false;
+    });
   }
 
   static void reset() {
