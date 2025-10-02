@@ -30,7 +30,7 @@ class TransactionListItem extends StatelessWidget {
     final icon = isIncome ? Icons.trending_up_rounded : Icons.trending_down_rounded;
 
     return Container(
-      margin: const EdgeInsets.only(bottom: 12),
+      margin: const EdgeInsets.only(bottom: 8),
       decoration: BoxDecoration(
         color: ThemeColors.getSurface(context),
         borderRadius: BorderRadius.circular(16),
@@ -52,13 +52,13 @@ class TransactionListItem extends StatelessWidget {
           onTap: onTap,
           borderRadius: BorderRadius.circular(16),
           child: Padding(
-            padding: const EdgeInsets.all(16),
+            padding: const EdgeInsets.all(12),
             child: Row(
               children: [
                 // Modern Icon Container
                 Container(
-                  width: 48,
-                  height: 48,
+                  width: 40,
+                  height: 40,
                   decoration: BoxDecoration(
                     color: color.withOpacity(0.15),
                     borderRadius: BorderRadius.circular(12),
@@ -89,16 +89,16 @@ class TransactionListItem extends StatelessWidget {
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
-                      const SizedBox(height: 4),
+                      const SizedBox(height: 2),
                       Text(
                         Formatters.formatDate(date),
                         style: TextStyle(
                           color: ThemeColors.getTextSecondary(context),
-                          fontSize: 13,
+                          fontSize: 12,
                           fontWeight: FontWeight.w500,
                         ),
                       ),
-                      const SizedBox(height: 2),
+                      const SizedBox(height: 1),
                       Text(
                         description,
                         style: TextStyle(
@@ -128,15 +128,6 @@ class TransactionListItem extends StatelessWidget {
                           color: color,
                           fontSize: 15,
                         ),
-                      ),
-                    ),
-                    const SizedBox(height: 4),
-                    Text(
-                      isIncome ? 'Income' : 'Expense',
-                      style: TextStyle(
-                        color: color,
-                        fontSize: 11,
-                        fontWeight: FontWeight.w600,
                       ),
                     ),
                   ],
