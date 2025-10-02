@@ -80,7 +80,7 @@ class TransactionListItem extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        description,
+                        categoryName,
                         style: TextStyle(
                           fontWeight: FontWeight.w600,
                           color: ThemeColors.getTextPrimary(context),
@@ -91,7 +91,7 @@ class TransactionListItem extends StatelessWidget {
                       ),
                       const SizedBox(height: 4),
                       Text(
-                        categoryName,
+                        Formatters.formatDate(date),
                         style: TextStyle(
                           color: ThemeColors.getTextSecondary(context),
                           fontSize: 13,
@@ -100,11 +100,13 @@ class TransactionListItem extends StatelessWidget {
                       ),
                       const SizedBox(height: 2),
                       Text(
-                        Formatters.formatDate(date),
+                        description,
                         style: TextStyle(
                           color: ThemeColors.getTextSecondary(context),
                           fontSize: 12,
                         ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
                       ),
                     ],
                   ),

@@ -359,6 +359,7 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
         TextFormField(
           controller: _descriptionController,
           maxLines: 3,
+          maxLength: 20,
           decoration: InputDecoration(
             hintText: 'Enter transaction details',
             border: OutlineInputBorder(
@@ -368,10 +369,18 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
               borderRadius: BorderRadius.circular(AppDimensions.radiusM),
               borderSide: BorderSide(color: ThemeColors.getAccentColor(context, context.read<ThemeProvider>().accentColor)),
             ),
+            counterText: '', // Hide the default counter
+            helperText: '${_descriptionController.text.length}/20 characters',
           ),
+          onChanged: (value) {
+            setState(() {}); // Refresh to update character count
+          },
           validator: (value) {
             if (value == null || value.isEmpty) {
               return 'Please enter transaction details';
+            }
+            if (value.length > 20) {
+              return 'Description must be 20 characters or less';
             }
             return null;
           },
