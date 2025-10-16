@@ -372,14 +372,14 @@ class _OverviewPageState extends State<OverviewPage> with TickerProviderStateMix
           icon: Icons.trending_up,
           color: AppColors.success,
         ),
-        const SizedBox(height: AppDimensions.paddingL),
+        const SizedBox(height: AppDimensions.paddingS),
         _buildStatCard(
           title: 'Transactions',
           value: totalTransactions.toString(),
           icon: Icons.receipt,
           color: AppColors.info,
         ),
-        const SizedBox(height: AppDimensions.paddingL),
+        const SizedBox(height: AppDimensions.paddingS),
         _buildStatCard(
           title: 'Over Budget',
           value: overBudgetCategories.toString(),
@@ -397,21 +397,15 @@ class _OverviewPageState extends State<OverviewPage> with TickerProviderStateMix
     required Color color,
   }) {
     return Container(
-      padding: const EdgeInsets.all(AppDimensions.paddingM),
+      padding: const EdgeInsets.all(AppDimensions.paddingS),
       decoration: BoxDecoration(
         color: ThemeColors.getSurface(context),
-        borderRadius: BorderRadius.circular(AppDimensions.radiusL),
+        borderRadius: BorderRadius.circular(AppDimensions.radiusM),
         boxShadow: [
           BoxShadow(
             color: ThemeColors.getTextPrimary(context).withOpacity(0.05),
-            blurRadius: 10,
-            offset: const Offset(0, 4),
-            spreadRadius: 0,
-          ),
-          BoxShadow(
-            color: ThemeColors.getTextPrimary(context).withOpacity(0.02),
-            blurRadius: 20,
-            offset: const Offset(0, 8),
+            blurRadius: 8,
+            offset: const Offset(0, 2),
             spreadRadius: 0,
           ),
         ],
@@ -423,18 +417,18 @@ class _OverviewPageState extends State<OverviewPage> with TickerProviderStateMix
       child: Row(
         children: [
           Container(
-            padding: const EdgeInsets.all(AppDimensions.paddingS),
+            padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
               color: color.withOpacity(0.1),
-              borderRadius: BorderRadius.circular(AppDimensions.radiusM),
+              borderRadius: BorderRadius.circular(AppDimensions.radiusS),
             ),
             child: Icon(
               icon,
               color: color,
-              size: 24,
+              size: 18,
             ),
           ),
-          const SizedBox(width: AppDimensions.paddingM),
+          const SizedBox(width: AppDimensions.paddingS),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -444,17 +438,17 @@ class _OverviewPageState extends State<OverviewPage> with TickerProviderStateMix
                   value,
                   style: TextStyle(
                     color: ThemeColors.getTextPrimary(context),
-                    fontSize: 22,
+                    fontSize: 14,
                     fontWeight: FontWeight.w600,
-                    letterSpacing: -0.3,
+                    letterSpacing: -0.2,
                   ),
                 ),
-                const SizedBox(height: AppDimensions.paddingXS),
+                const SizedBox(height: 2),
                 Text(
                   title,
                   style: TextStyle(
                     color: ThemeColors.getTextSecondary(context),
-                    fontSize: 14,
+                    fontSize: 12,
                     fontWeight: FontWeight.w500,
                     letterSpacing: 0.1,
                   ),
