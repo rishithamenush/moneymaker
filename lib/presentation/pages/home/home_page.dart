@@ -142,7 +142,7 @@ class _HomePageState extends State<HomePage> {
                             Text(
                               l10n.income,
                               style: TextStyle(
-                                fontSize: 12,
+                                fontSize: AppDimensions.fontSizeM,
                                 color: ThemeColors.getTextSecondary(context),
                                 fontWeight: FontWeight.w500,
                               ),
@@ -152,7 +152,7 @@ class _HomePageState extends State<HomePage> {
                               child: Text(
                                 Formatters.formatCurrency(totalIncome, currencyCode: context.read<ThemeProvider>().currency),
                                 style: const TextStyle(
-                                  fontSize: 14, // Smaller font to fit more text
+                                  fontSize: AppDimensions.fontSizeM, // Smaller font to fit more text
                                   fontWeight: FontWeight.bold,
                                   color: AppColors.success,
                                 ),
@@ -182,7 +182,7 @@ class _HomePageState extends State<HomePage> {
                             Text(
                               l10n.expense,
                               style: TextStyle(
-                                fontSize: 12,
+                                fontSize: AppDimensions.fontSizeM,
                                 color: ThemeColors.getTextSecondary(context),
                                 fontWeight: FontWeight.w500,
                               ),
@@ -192,7 +192,7 @@ class _HomePageState extends State<HomePage> {
                               child: Text(
                                 Formatters.formatCurrency(totalSpent, currencyCode: context.read<ThemeProvider>().currency),
                                 style: const TextStyle(
-                                  fontSize: 14, // Smaller font to fit more text
+                                  fontSize: AppDimensions.fontSizeM, // Smaller font to fit more text
                                   fontWeight: FontWeight.bold,
                                   color: AppColors.error,
                                 ),
@@ -222,7 +222,7 @@ class _HomePageState extends State<HomePage> {
                             Text(
                               l10n.netAmount,
                               style: TextStyle(
-                                fontSize: 12,
+                                fontSize: AppDimensions.fontSizeM,
                                 color: ThemeColors.getTextSecondary(context),
                                 fontWeight: FontWeight.w500,
                               ),
@@ -232,7 +232,7 @@ class _HomePageState extends State<HomePage> {
                               child: Text(
                                 Formatters.formatCurrency(totalIncome - totalSpent, currencyCode: context.read<ThemeProvider>().currency),
                                 style: TextStyle(
-                                  fontSize: 14, // Smaller font to fit more text
+                                  fontSize: AppDimensions.fontSizeM, // Smaller font to fit more text
                                   fontWeight: FontWeight.bold,
                                   color: totalIncome - totalSpent >= 0 ? Colors.blue : AppColors.error,
                                 ),
@@ -360,7 +360,7 @@ class _HomePageState extends State<HomePage> {
               child: Text(
                 displayText,
                 style: TextStyle(
-                  fontSize: 13,
+                  fontSize: AppDimensions.fontSizeM,
                   color: ThemeColors.getTextPrimary(context),
                   fontWeight: FontWeight.w500,
                 ),
@@ -400,7 +400,7 @@ class _HomePageState extends State<HomePage> {
               Text(
                 'All Categories',
                 style: TextStyle(
-                  fontSize: 13,
+                  fontSize: AppDimensions.fontSizeM,
                   fontWeight: FontWeight.w500,
                   color: ThemeColors.getTextPrimary(context),
                 ),
@@ -430,7 +430,7 @@ class _HomePageState extends State<HomePage> {
                 child: Text(
                   category.name,
                   style: TextStyle(
-                    fontSize: 13,
+                    fontSize: AppDimensions.fontSizeM,
                     fontWeight: FontWeight.w500,
                     color: ThemeColors.getTextPrimary(context),
                   ),
@@ -480,7 +480,7 @@ class _HomePageState extends State<HomePage> {
               child: Text(
                 displayText,
                 style: TextStyle(
-                  fontSize: 13,
+                  fontSize: AppDimensions.fontSizeM,
                   color: ThemeColors.getTextPrimary(context),
                   fontWeight: FontWeight.w500,
                 ),
@@ -532,7 +532,7 @@ class _HomePageState extends State<HomePage> {
                   Text(
                     entry.value['label'] as String,
                     style: TextStyle(
-                      fontSize: 13,
+                      fontSize: AppDimensions.fontSizeM,
                       fontWeight: FontWeight.w500,
                       color: ThemeColors.getTextPrimary(context),
                     ),

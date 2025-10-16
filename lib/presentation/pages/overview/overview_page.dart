@@ -115,11 +115,11 @@ class _OverviewPageState extends State<OverviewPage> with TickerProviderStateMix
                   unselectedLabelColor: ThemeColors.getTextSecondary(context),
                   labelStyle: const TextStyle(
                     fontWeight: FontWeight.w600,
-                    fontSize: 14,
+                    fontSize: AppDimensions.fontSizeM,
                   ),
                   unselectedLabelStyle: const TextStyle(
                     fontWeight: FontWeight.normal,
-                    fontSize: 14,
+                    fontSize: AppDimensions.fontSizeM,
                   ),
                   tabs: [
                     Tab(text: l10n.summary),
@@ -298,7 +298,7 @@ class _OverviewPageState extends State<OverviewPage> with TickerProviderStateMix
             'Category Breakdown',
             style: TextStyle(
               color: ThemeColors.getTextPrimary(context),
-              fontSize: 18,
+              fontSize: AppDimensions.fontSizeXL,
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -328,7 +328,7 @@ class _OverviewPageState extends State<OverviewPage> with TickerProviderStateMix
                       category.name,
                       style: TextStyle(
                         color: ThemeColors.getTextPrimary(context),
-                        fontSize: 14,
+                        fontSize: AppDimensions.fontSizeM,
                       ),
                     ),
                   ),
@@ -336,7 +336,7 @@ class _OverviewPageState extends State<OverviewPage> with TickerProviderStateMix
                     Formatters.formatCurrency(categoryTotal, currencyCode: context.read<ThemeProvider>().currency),
                     style: TextStyle(
                       color: ThemeColors.getTextPrimary(context),
-                      fontSize: 14,
+                      fontSize: AppDimensions.fontSizeM,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
@@ -345,7 +345,7 @@ class _OverviewPageState extends State<OverviewPage> with TickerProviderStateMix
                     '${(percentage * 100).toStringAsFixed(0)}%',
                     style: TextStyle(
                       color: ThemeColors.getTextSecondary(context),
-                      fontSize: 12,
+                      fontSize: AppDimensions.fontSizeM,
                     ),
                   ),
                 ],
@@ -438,7 +438,7 @@ class _OverviewPageState extends State<OverviewPage> with TickerProviderStateMix
                   value,
                   style: TextStyle(
                     color: ThemeColors.getTextPrimary(context),
-                    fontSize: 14,
+                    fontSize: AppDimensions.fontSizeM,
                     fontWeight: FontWeight.w600,
                     letterSpacing: -0.2,
                   ),
@@ -448,7 +448,7 @@ class _OverviewPageState extends State<OverviewPage> with TickerProviderStateMix
                   title,
                   style: TextStyle(
                     color: ThemeColors.getTextSecondary(context),
-                    fontSize: 12,
+                    fontSize: AppDimensions.fontSizeM,
                     fontWeight: FontWeight.w500,
                     letterSpacing: 0.1,
                   ),

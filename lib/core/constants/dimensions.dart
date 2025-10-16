@@ -22,6 +22,16 @@ class AppDimensions {
   static const double radiusXL = 16.0;
   static const double radiusXXL = 24.0;
   
+  // Font Sizes
+  static const double fontSizeXS = 10.0;
+  static const double fontSizeS = 12.0;
+  static const double fontSizeM = 14.0;
+  static const double fontSizeL = 16.0;
+  static const double fontSizeXL = 18.0;
+  static const double fontSizeXXL = 20.0;
+  static const double fontSizeTitle = 24.0;
+  static const double fontSizeHeading = 28.0;
+  
   // Icon Sizes
   static const double iconXS = 16.0;
   static const double iconS = 20.0;

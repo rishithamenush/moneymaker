@@ -81,7 +81,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     themeProvider.accentColor,
                     style: TextStyle(
                       color: ThemeColors.getTextSecondary(context),
-                      fontSize: 12,
+                      fontSize: AppDimensions.fontSizeM,
                     ),
                   ),
                   trailing: _buildAccentColorDropdown(themeProvider, l10n),
@@ -108,7 +108,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     languageProvider.currentLanguageName,
                     style: TextStyle(
                       color: ThemeColors.getTextSecondary(context),
-                      fontSize: 12,
+                      fontSize: AppDimensions.fontSizeM,
                     ),
                   ),
                   trailing: _buildLanguageDropdown(languageProvider, l10n),
@@ -282,7 +282,7 @@ class _SettingsPageState extends State<SettingsPage> {
       child: Text(
         title,
         style: TextStyle(
-          fontSize: 18,
+          fontSize: AppDimensions.fontSizeXL,
           fontWeight: FontWeight.bold,
           color: ThemeColors.getTextPrimary(context),
         ),
@@ -325,7 +325,7 @@ class _SettingsPageState extends State<SettingsPage> {
         subtitle,
         style: TextStyle(
           color: ThemeColors.getTextSecondary(context),
-          fontSize: 12,
+          fontSize: AppDimensions.fontSizeM,
         ),
       ),
       trailing: trailing ?? Icon(
@@ -373,7 +373,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     : l10n.systemDefault,
             style: TextStyle(
               color: ThemeColors.getTextSecondary(context),
-              fontSize: 12,
+              fontSize: AppDimensions.fontSizeM,
             ),
           ),
           trailing: _buildThemeDropdown(themeProvider, l10n),
@@ -477,7 +477,7 @@ class _SettingsPageState extends State<SettingsPage> {
           child: Center(
             child: Text(
               lang['flag'] as String,
-              style: const TextStyle(fontSize: 14),
+              style: const TextStyle(fontSize: AppDimensions.fontSizeM),
             ),
           ),
         ),
@@ -556,7 +556,7 @@ class _SettingsPageState extends State<SettingsPage> {
                             child: Text(
                               colorName,
                               style: TextStyle(
-                                fontSize: 16,
+                                fontSize: AppDimensions.fontSizeL,
                                 fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,
                                 color: ThemeColors.getTextPrimary(context),
                               ),
@@ -653,7 +653,7 @@ class _SettingsPageState extends State<SettingsPage> {
                                 Text(
                                   languageName,
                                   style: TextStyle(
-                                    fontSize: 16,
+                                    fontSize: AppDimensions.fontSizeL,
                                     fontWeight: FontWeight.w600,
                                     color: ThemeColors.getTextPrimary(context),
                                   ),
@@ -662,7 +662,7 @@ class _SettingsPageState extends State<SettingsPage> {
                                 Text(
                                   locale.languageCode.toUpperCase(),
                                   style: TextStyle(
-                                    fontSize: 12,
+                                    fontSize: AppDimensions.fontSizeM,
                                     color: ThemeColors.getTextSecondary(context),
                                   ),
                                 ),
@@ -740,7 +740,7 @@ class _SettingsPageState extends State<SettingsPage> {
                               child: Text(
                                 currencySymbol,
                                 style: TextStyle(
-                                  fontSize: 18,
+                                  fontSize: AppDimensions.fontSizeXL,
                                   fontWeight: FontWeight.bold,
                                   color: ThemeColors.getAccentColor(context, themeProvider.accentColor),
                                 ),
@@ -755,7 +755,7 @@ class _SettingsPageState extends State<SettingsPage> {
                                 Text(
                                   currencyCode,
                                   style: TextStyle(
-                                    fontSize: 16,
+                                    fontSize: AppDimensions.fontSizeL,
                                     fontWeight: FontWeight.w600,
                                     color: ThemeColors.getTextPrimary(context),
                                   ),
@@ -764,7 +764,7 @@ class _SettingsPageState extends State<SettingsPage> {
                                 Text(
                                   currencyName,
                                   style: TextStyle(
-                                    fontSize: 12,
+                                    fontSize: AppDimensions.fontSizeM,
                                     color: ThemeColors.getTextSecondary(context),
                                   ),
                                 ),
@@ -1462,7 +1462,7 @@ class _PinVerificationDialogState extends State<_PinVerificationDialog> {
           child: Text(
             number,
             style: TextStyle(
-              fontSize: 18,
+              fontSize: AppDimensions.fontSizeXL,
               fontWeight: FontWeight.w600,
               color: ThemeColors.getTextPrimary(context),
             ),

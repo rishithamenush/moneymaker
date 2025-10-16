@@ -31,7 +31,7 @@ class _LineChartWidgetState extends State<LineChartWidget> {
           AppLocalizations.of(context)!.noData,
           style: TextStyle(
             color: ThemeColors.getTextSecondary(context),
-            fontSize: 16,
+            fontSize: AppDimensions.fontSizeL,
           ),
         ),
       );
@@ -61,7 +61,7 @@ class _LineChartWidgetState extends State<LineChartWidget> {
                 isWeeklyView ? AppLocalizations.of(context)!.weeklySpendingTrend : AppLocalizations.of(context)!.dailySpendingTrend,
                 style: TextStyle(
                   color: ThemeColors.getTextPrimary(context),
-                  fontSize: 16,
+                  fontSize: AppDimensions.fontSizeXL,
                   fontWeight: FontWeight.w600,
                 ),
               ),
@@ -128,7 +128,7 @@ class _LineChartWidgetState extends State<LineChartWidget> {
                           isWeeklyView ? '${AppLocalizations.of(context)!.week} ${data.week}' : '${AppLocalizations.of(context)!.day} ${data.day}',
                           style: TextStyle(
                             color: ThemeColors.getTextSecondary(context),
-                            fontSize: 10,
+                            fontSize: AppDimensions.fontSizeS,
                           ),
                         );
                       }
@@ -146,7 +146,7 @@ class _LineChartWidgetState extends State<LineChartWidget> {
                         _formatCurrency(value),
                         style: TextStyle(
                           color: ThemeColors.getTextSecondary(context),
-                          fontSize: 10,
+                          fontSize: AppDimensions.fontSizeS,
                         ),
                       );
                     },
@@ -176,7 +176,7 @@ class _LineChartWidgetState extends State<LineChartWidget> {
                           '$label\n${_formatCurrency(data.amount)}',
                           TextStyle(
                             color: ThemeColors.getTextPrimary(context),
-                            fontSize: 12,
+                            fontSize: AppDimensions.fontSizeM,
                             fontWeight: FontWeight.w600,
                           ),
                         );
@@ -255,16 +255,16 @@ class _LineChartWidgetState extends State<LineChartWidget> {
               : ThemeColors.getSurfaceLight(context),
           borderRadius: BorderRadius.circular(16),
         ),
-        child: Text(
-          label,
-          style: TextStyle(
-            color: isSelected 
-                ? Colors.white 
-                : ThemeColors.getTextSecondary(context),
-            fontSize: 12,
-            fontWeight: FontWeight.w500,
-          ),
-        ),
+            child: Text(
+              label,
+              style: TextStyle(
+                color: isSelected 
+                    ? Colors.white 
+                    : ThemeColors.getTextSecondary(context),
+                fontSize: AppDimensions.fontSizeM,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
       ),
     );
   }
