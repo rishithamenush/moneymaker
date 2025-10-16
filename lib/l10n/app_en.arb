@@ -1023,5 +1023,35 @@
   "tooManyAttemptsMessage": "You have entered the wrong PIN too many times. Please restart the app and try again.",
   "@tooManyAttemptsMessage": {
     "description": "Too many PIN attempts message"
+  },
+
+  "dailySpendingTrend": "Daily Spending Trend",
+  "@dailySpendingTrend": {
+    "description": "Daily spending trend chart title"
+  },
+
+  "weeklySpendingTrend": "Weekly Spending Trend",
+  "@weeklySpendingTrend": {
+    "description": "Weekly spending trend chart title"
+  },
+
+  "daily": "Daily",
+  "@daily": {
+    "description": "Daily view toggle button"
+  },
+
+  "weekly": "Weekly",
+  "@weekly": {
+    "description": "Weekly view toggle button"
+  },
+
+  "day": "Day",
+  "@day": {
+    "description": "Day label for chart"
+  },
+
+  "week": "Week",
+  "@week": {
+    "description": "Week label for chart"
   }
 }

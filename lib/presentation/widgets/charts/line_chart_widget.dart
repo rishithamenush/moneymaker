@@ -6,6 +6,7 @@ import '../../../core/constants/dimensions.dart';
 import '../../../core/utils/theme_colors.dart';
 import '../../../domain/entities/expense.dart';
 import '../../providers/theme_provider.dart';
+import '../../../l10n/app_localizations.dart';
 
 class LineChartWidget extends StatefulWidget {
   final List<Expense> expenses;
@@ -27,7 +28,7 @@ class _LineChartWidgetState extends State<LineChartWidget> {
     if (widget.expenses.isEmpty) {
       return Center(
         child: Text(
-          'No data to display',
+          AppLocalizations.of(context)!.noData,
           style: TextStyle(
             color: ThemeColors.getTextSecondary(context),
             fontSize: 16,
@@ -45,40 +46,48 @@ class _LineChartWidgetState extends State<LineChartWidget> {
     final yInterval = _calculateYInterval(maxAmount);
     final yMax = (maxAmount / yInterval).ceil() * yInterval;
 
-    return Column(
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              isWeeklyView ? 'Weekly Spending Trend' : 'Daily Spending Trend',
-              style: TextStyle(
-                color: ThemeColors.getTextPrimary(context),
-                fontSize: 16,
-                fontWeight: FontWeight.w600,
+    return Align(
+      alignment: Alignment.centerLeft,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          // Left-aligned header layout
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                isWeeklyView ? AppLocalizations.of(context)!.weeklySpendingTrend : AppLocalizations.of(context)!.dailySpendingTrend,
+                style: TextStyle(
+                  color: ThemeColors.getTextPrimary(context),
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
-            ),
-            Row(
-              children: [
-                _buildToggleButton(
-                  context,
-                  'Daily',
-                  !isWeeklyView,
-                  () => setState(() => isWeeklyView = false),
-                ),
-                const SizedBox(width: 8),
-                _buildToggleButton(
-                  context,
-                  'Weekly',
-                  isWeeklyView,
-                  () => setState(() => isWeeklyView = true),
-                ),
-              ],
-            ),
-          ],
-        ),
-        const SizedBox(height: AppDimensions.paddingM),
-        Expanded(
+              const SizedBox(height: 8),
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  _buildToggleButton(
+                    context,
+                    AppLocalizations.of(context)!.daily,
+                    !isWeeklyView,
+                    () => setState(() => isWeeklyView = false),
+                  ),
+                  const SizedBox(width: 8),
+                  _buildToggleButton(
+                    context,
+                    AppLocalizations.of(context)!.weekly,
+                    isWeeklyView,
+                    () => setState(() => isWeeklyView = true),
+                  ),
+                ],
+              ),
+            ],
+          ),
+          const SizedBox(height: AppDimensions.paddingM),
+          Expanded(
           child: LineChart(
             LineChartData(
               gridData: FlGridData(
@@ -116,7 +125,7 @@ class _LineChartWidgetState extends State<LineChartWidget> {
                       if (value.toInt() < chartData.length) {
                         final data = chartData[value.toInt()];
                         return Text(
-                          isWeeklyView ? 'Week ${data.week}' : 'Day ${data.day}',
+                          isWeeklyView ? '${AppLocalizations.of(context)!.week} ${data.week}' : '${AppLocalizations.of(context)!.day} ${data.day}',
                           style: TextStyle(
                             color: ThemeColors.getTextSecondary(context),
                             fontSize: 10,
@@ -162,7 +171,7 @@ class _LineChartWidgetState extends State<LineChartWidget> {
                       final index = touchedSpot.x.toInt();
                       if (index < chartData.length) {
                         final data = chartData[index];
-                        final label = isWeeklyView ? 'Week ${data.week}' : 'Day ${data.day}';
+                        final label = isWeeklyView ? '${AppLocalizations.of(context)!.week} ${data.week}' : '${AppLocalizations.of(context)!.day} ${data.day}';
                         return LineTooltipItem(
                           '$label\n${_formatCurrency(data.amount)}',
                           TextStyle(
@@ -230,7 +239,8 @@ class _LineChartWidgetState extends State<LineChartWidget> {
             ),
           ),
         ),
-      ],
+        ],
+      ),
     );
   }
 

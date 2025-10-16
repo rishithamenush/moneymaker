@@ -596,4 +596,22 @@ class AppLocalizationsZh extends AppLocalizations {
   @override
   String get tooManyAttemptsMessage =>
       'You have entered the wrong PIN too many times. Please restart the app and try again.';
+
+  @override
+  String get dailySpendingTrend => '每日支出趋势';
+
+  @override
+  String get weeklySpendingTrend => '每周支出趋势';
+
+  @override
+  String get daily => '每日';
+
+  @override
+  String get weekly => '每周';
+
+  @override
+  String get day => '日';
+
+  @override
+  String get week => '周';
 }

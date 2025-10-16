@@ -1271,6 +1271,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'You have entered the wrong PIN too many times. Please restart the app and try again.'**
   String get tooManyAttemptsMessage;
+
+  /// Daily spending trend chart title
+  ///
+  /// In en, this message translates to:
+  /// **'Daily Spending Trend'**
+  String get dailySpendingTrend;
+
+  /// Weekly spending trend chart title
+  ///
+  /// In en, this message translates to:
+  /// **'Weekly Spending Trend'**
+  String get weeklySpendingTrend;
+
+  /// Daily view toggle button
+  ///
+  /// In en, this message translates to:
+  /// **'Daily'**
+  String get daily;
+
+  /// Weekly view toggle button
+  ///
+  /// In en, this message translates to:
+  /// **'Weekly'**
+  String get weekly;
+
+  /// Day label for chart
+  ///
+  /// In en, this message translates to:
+  /// **'Day'**
+  String get day;
+
+  /// Week label for chart
+  ///
+  /// In en, this message translates to:
+  /// **'Week'**
+  String get week;
 }
 
 class _AppLocalizationsDelegate

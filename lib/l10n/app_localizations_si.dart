@@ -604,4 +604,22 @@ class AppLocalizationsSi extends AppLocalizations {
   @override
   String get tooManyAttemptsMessage =>
       'ඔබ වැරදි PIN ඕනෑවට වඩා වාර ගණනක් ඇතුළත් කර ඇත. කරුණාකර යෙදුම නැවත ආරම්භ කර නැවත උත්සාහ කරන්න.';
+
+  @override
+  String get dailySpendingTrend => 'දෛනික වියදම් ප්‍රවණතාව';
+
+  @override
+  String get weeklySpendingTrend => 'සතිපතා වියදම් ප්‍රවණතාව';
+
+  @override
+  String get daily => 'දෛනික';
+
+  @override
+  String get weekly => 'සතිපතා';
+
+  @override
+  String get day => 'දිනය';
+
+  @override
+  String get week => 'සතිය';
 }

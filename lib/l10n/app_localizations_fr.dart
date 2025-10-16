@@ -610,4 +610,22 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get tooManyAttemptsMessage =>
       'You have entered the wrong PIN too many times. Please restart the app and try again.';
+
+  @override
+  String get dailySpendingTrend => 'Tendance des Dépenses Quotidiennes';
+
+  @override
+  String get weeklySpendingTrend => 'Tendance des Dépenses Hebdomadaires';
+
+  @override
+  String get daily => 'Quotidien';
+
+  @override
+  String get weekly => 'Hebdomadaire';
+
+  @override
+  String get day => 'Jour';
+
+  @override
+  String get week => 'Semaine';
 }
