@@ -364,33 +364,27 @@ class _OverviewPageState extends State<OverviewPage> with TickerProviderStateMix
     final totalTransactions = expenses.length;
     final overBudgetCategories = budgets.where((b) => b.isOverBudget).length;
     
-    return Row(
+    return Column(
       children: [
-        Expanded(
-          child: _buildStatCard(
-            title: 'Daily Average',
-            value: Formatters.formatCurrency(avgDailySpending, currencyCode: context.read<ThemeProvider>().currency),
-            icon: Icons.trending_up,
-            color: AppColors.success,
-          ),
+        _buildStatCard(
+          title: 'Daily Average',
+          value: Formatters.formatCurrency(avgDailySpending, currencyCode: context.read<ThemeProvider>().currency),
+          icon: Icons.trending_up,
+          color: AppColors.success,
         ),
-        const SizedBox(width: AppDimensions.paddingM),
-        Expanded(
-          child: _buildStatCard(
-            title: 'Transactions',
-            value: totalTransactions.toString(),
-            icon: Icons.receipt,
-            color: AppColors.info,
-          ),
+        const SizedBox(height: AppDimensions.paddingL),
+        _buildStatCard(
+          title: 'Transactions',
+          value: totalTransactions.toString(),
+          icon: Icons.receipt,
+          color: AppColors.info,
         ),
-        const SizedBox(width: AppDimensions.paddingM),
-        Expanded(
-          child: _buildStatCard(
-            title: 'Over Budget',
-            value: overBudgetCategories.toString(),
-            icon: Icons.warning,
-            color: AppColors.error,
-          ),
+        const SizedBox(height: AppDimensions.paddingL),
+        _buildStatCard(
+          title: 'Over Budget',
+          value: overBudgetCategories.toString(),
+          icon: Icons.warning,
+          color: AppColors.error,
         ),
       ],
     );
@@ -405,37 +399,68 @@ class _OverviewPageState extends State<OverviewPage> with TickerProviderStateMix
     return Container(
       padding: const EdgeInsets.all(AppDimensions.paddingM),
       decoration: BoxDecoration(
-        color: color.withOpacity(0.1),
-        borderRadius: BorderRadius.circular(AppDimensions.radiusM),
+        color: ThemeColors.getSurface(context),
+        borderRadius: BorderRadius.circular(AppDimensions.radiusL),
+        boxShadow: [
+          BoxShadow(
+            color: ThemeColors.getTextPrimary(context).withOpacity(0.05),
+            blurRadius: 10,
+            offset: const Offset(0, 4),
+            spreadRadius: 0,
+          ),
+          BoxShadow(
+            color: ThemeColors.getTextPrimary(context).withOpacity(0.02),
+            blurRadius: 20,
+            offset: const Offset(0, 8),
+            spreadRadius: 0,
+          ),
+        ],
         border: Border.all(
-          color: color.withOpacity(0.3),
+          color: ThemeColors.getBorderLight(context),
           width: 1,
         ),
       ),
-      child: Column(
+      child: Row(
         children: [
-          Icon(
-            icon,
-            color: color,
-            size: AppDimensions.iconL,
-          ),
-          const SizedBox(height: AppDimensions.paddingS),
-          Text(
-            value,
-            style: TextStyle(
+          Container(
+            padding: const EdgeInsets.all(AppDimensions.paddingS),
+            decoration: BoxDecoration(
+              color: color.withOpacity(0.1),
+              borderRadius: BorderRadius.circular(AppDimensions.radiusM),
+            ),
+            child: Icon(
+              icon,
               color: color,
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
+              size: 24,
             ),
           ),
-          const SizedBox(height: AppDimensions.paddingXS),
-          Text(
-            title,
-            style: TextStyle(
-              color: ThemeColors.getTextSecondary(context),
-              fontSize: 12,
+          const SizedBox(width: AppDimensions.paddingM),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  value,
+                  style: TextStyle(
+                    color: ThemeColors.getTextPrimary(context),
+                    fontSize: 22,
+                    fontWeight: FontWeight.w600,
+                    letterSpacing: -0.3,
+                  ),
+                ),
+                const SizedBox(height: AppDimensions.paddingXS),
+                Text(
+                  title,
+                  style: TextStyle(
+                    color: ThemeColors.getTextSecondary(context),
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                    letterSpacing: 0.1,
+                  ),
+                ),
+              ],
             ),
-            textAlign: TextAlign.center,
           ),
         ],
       ),

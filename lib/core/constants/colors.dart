@@ -11,11 +11,11 @@ class AppColors {
   static const Color secondaryDark = Color(0xFFF57C00);
   static const Color secondaryLight = Color(0xFFFFB74D);
   
-  // Status Colors (same for both themes)
-  static const Color success = Color(0xFF00B894);
-  static const Color warning = Color(0xFFFDCB6E);
-  static const Color error = Color(0xFFE17055);
-  static const Color info = Color(0xFF74B9FF);
+  // Status Colors (improved for better UX)
+  static const Color success = Color(0xFF10B981);  // Better green for success
+  static const Color warning = Color(0xFFF59E0B);  // Better amber for warnings
+  static const Color error = Color(0xFFEF4444);    // Better red for errors
+  static const Color info = Color(0xFF3B82F6);    // Better blue for info
   
   // Category Colors - Orange Theme (same for both themes)
   static const Color autoTransport = Color(0xFFFF6B35);
