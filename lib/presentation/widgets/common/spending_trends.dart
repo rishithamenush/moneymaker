@@ -78,7 +78,7 @@ class SpendingTrends extends StatelessWidget {
             child: Row(
               children: [
                 SizedBox(
-                  width: 80,
+                  width: 40,
                   child: Text(
                     data.day,
                     style: TextStyle(
@@ -106,13 +106,17 @@ class SpendingTrends extends StatelessWidget {
                     ),
                   ),
                 ),
-                const SizedBox(width: AppDimensions.paddingS),
-                Text(
-                  Formatters.formatCurrency(data.amount, currencyCode: context.read<ThemeProvider>().currency),
-                  style: TextStyle(
-                    color: ThemeColors.getTextPrimary(context),
-                    fontSize: 12,
-                    fontWeight: FontWeight.w600,
+                const SizedBox(width: AppDimensions.paddingM),
+                SizedBox(
+                  width: 80,
+                  child: Text(
+                    Formatters.formatCurrency(data.amount, currencyCode: context.read<ThemeProvider>().currency),
+                    style: TextStyle(
+                      color: ThemeColors.getTextPrimary(context),
+                      fontSize: 12,
+                      fontWeight: FontWeight.w600,
+                    ),
+                    textAlign: TextAlign.right,
                   ),
                 ),
               ],
